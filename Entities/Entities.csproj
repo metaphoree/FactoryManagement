@@ -11,6 +11,7 @@
 
   <ItemGroup>
     <Folder Include="DataTransferObjects\" />
+    <Folder Include="ViewModels\" />
   </ItemGroup>
 
 </Project>
