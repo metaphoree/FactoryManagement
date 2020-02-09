@@ -1,0 +1,49 @@
+﻿using Contracts.EntitywiseContracts;
+using System;
+using System.Collections.Generic;
+using System.Text;
+
+namespace Contracts
+{
+    public interface IRepositoryWrapper
+    {
+        #region Variable Declaration
+
+        IAddressRepository Address { get; }
+        ICustomerRepository Customer { get; }
+        IDepartmentRepository Department { get; }
+        IEquipmentRepository Equipment { get; }
+        IEquipmentCategoryRepository EquipmentCategory { get; }
+        IExpenseRepository Expense { get; }
+        IExpenseTypeRepository ExpenseType { get; }
+        IFactoryRepository Factory { get; }
+        IIncomeTypeRepository IncomeType { get; }
+        IInvoiceRepository Invoice { get; }
+        IInvoiceTypeRepository InvoiceType { get; }
+        IItemRepository Item { get; }
+        IItemCategoryRepository ItemCategory { get; }
+        IItemStatusRepository ItemStatus { get; }
+        IPayableRepository Payable { get; }
+        IPaymentStatusRepository PaymentStatus { get; }
+        IPhoneRepository Phone { get; }
+        IProductionRepository Production { get; }
+        IPurchaseRepository Purchase { get; }
+        IPurchaseTypeRepository PurchaseType { get; }
+        IRecievableRepository Recievable { get; }
+        IRoleRepository Role { get; }
+        ISalesRepository Sales { get; }
+        IStaffRepository Staff { get; }
+        IStockRepository Stock { get; }
+        IStockInRepository StockIn { get; }
+        IStockOutRepository StockOut { get; }
+        ISupplierRepository Supplier { get; }
+        ITransactionRepository Transaction { get; }
+        ITransactionTypeRepository TransactionType { get; }
+        IUserAuthInfoRepository UserAuthInfo { get; }
+        IUserRoleRepository UserRole { get; }
+        #endregion
+
+        void Save();
+
+    }
+}

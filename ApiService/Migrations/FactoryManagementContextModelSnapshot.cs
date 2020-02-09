@@ -4,16 +4,14 @@ using Entities.DbModels;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
-namespace Entities.Migrations
+namespace ApiService.Migrations
 {
     [DbContext(typeof(FactoryManagementContext))]
-    [Migration("20200205180439_InitialMigration")]
-    partial class InitialMigration
+    partial class FactoryManagementContextModelSnapshot : ModelSnapshot
     {
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -40,8 +38,8 @@ namespace Entities.Migrations
                         .HasMaxLength(100);
 
                     b.Property<string>("PresentAddress")
-                        .HasColumnType("nvarchar(50)")
-                        .HasMaxLength(50);
+                        .HasColumnType("nvarchar(150)")
+                        .HasMaxLength(150);
 
                     b.Property<string>("RelatedId")
                         .IsRequired()

@@ -19,7 +19,7 @@ namespace Entities.DbModels.EntityWiseConfiguration
 
             builder.Property(e => e.PermanentAddress).HasMaxLength(100);
 
-            builder.Property(e => e.PresentAddress).HasMaxLength(50);
+            builder.Property(e => e.PresentAddress).HasMaxLength(150);
 
             builder.Property(e => e.RelatedId)
                 .IsRequired()

@@ -1,4 +1,5 @@
 ﻿using System;
+using Entities.DbModels;
 using Entities.DbModels.EntityWiseConfiguration;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
@@ -8,10 +9,6 @@ namespace Entities.DbModels
     public partial class FactoryManagementContext : DbContext
     {
         public FactoryManagementContext()
-        {
-        }
-        public FactoryManagementContext(DbContextOptions options)
-          : base(options)
         {
         }
         public FactoryManagementContext(DbContextOptions<FactoryManagementContext> options)
@@ -63,12 +60,13 @@ namespace Entities.DbModels
                 #it out of source code.
                 See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
                 */
-                optionsBuilder.UseSqlServer("Server=DESKTOP-VBDPK1F\\SQLEXPRESS;Database=FactoryManagementDB;Trusted_Connection=True;");
+               // optionsBuilder.UseSqlServer("Server=DESKTOP-VBDPK1F\\SQLEXPRESS;Database=FactoryManagementDB;Trusted_Connection=True;");
             }
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            #region Entity Wise Configuration
 
             modelBuilder.ApplyConfiguration(new AddressConfiguration());
             modelBuilder.ApplyConfiguration(new CustomerConfiguration());
@@ -101,7 +99,8 @@ namespace Entities.DbModels
             modelBuilder.ApplyConfiguration(new TransactionConfiguration());
             modelBuilder.ApplyConfiguration(new TransactionTypeConfiguration());
             modelBuilder.ApplyConfiguration(new UserAuthInfoConfiguration());
-            modelBuilder.ApplyConfiguration(new UserRoleConfiguration());
+            modelBuilder.ApplyConfiguration(new UserRoleConfiguration()); 
+            #endregion
 
             OnModelCreatingPartial(modelBuilder);
         }

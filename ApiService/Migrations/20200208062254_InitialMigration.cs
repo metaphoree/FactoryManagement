@@ -1,7 +1,7 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace Entities.Migrations
+namespace ApiService.Migrations
 {
     public partial class InitialMigration : Migration
     {
@@ -19,7 +19,7 @@ namespace Entities.Migrations
                     UniqueId = table.Column<string>(maxLength: 50, nullable: false),
                     RelatedId = table.Column<string>(maxLength: 50, nullable: false),
                     PermanentAddress = table.Column<string>(maxLength: 100, nullable: true),
-                    PresentAddress = table.Column<string>(maxLength: 50, nullable: true)
+                    PresentAddress = table.Column<string>(maxLength: 150, nullable: true)
                 },
                 constraints: table =>
                 {
@@ -149,6 +149,7 @@ namespace Entities.Migrations
                     CreatedDateTime = table.Column<DateTime>(nullable: false),
                     UpdatedDateTime = table.Column<DateTime>(nullable: false),
                     FactoryId = table.Column<string>(nullable: true),
+                    RowStatus = table.Column<string>(maxLength: 50, nullable: false),
                     UniqueId = table.Column<string>(maxLength: 50, nullable: true),
                     SubscriptionStart = table.Column<DateTime>(nullable: true),
                     SubscriptionEnd = table.Column<DateTime>(nullable: true),
@@ -156,8 +157,7 @@ namespace Entities.Migrations
                     RegNo = table.Column<string>(maxLength: 50, nullable: true),
                     VatRegNo = table.Column<string>(maxLength: 50, nullable: true),
                     Name = table.Column<string>(maxLength: 150, nullable: true),
-                    ImageUrl = table.Column<string>(maxLength: 250, nullable: true),
-                    RowStatus = table.Column<string>(maxLength: 50, nullable: false)
+                    ImageUrl = table.Column<string>(maxLength: 250, nullable: true)
                 },
                 constraints: table =>
                 {

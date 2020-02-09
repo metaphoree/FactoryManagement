@@ -31,8 +31,9 @@ namespace ApiService
         public void ConfigureServices(IServiceCollection services)
         {
             services.ConfigureCors();
-          //  services.ConfigureDBContext(Configuration);
+            services.ConfigureDBContext(Configuration);
             services.ConfigureLoggerService();
+            services.ConfigureRepositoryWrapper();
             services.AddControllers().AddNewtonsoftJson(o => o.SerializerSettings.ReferenceLoopHandling =
                 Newtonsoft.Json.ReferenceLoopHandling.Ignore);
         }

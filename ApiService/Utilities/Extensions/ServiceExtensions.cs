@@ -3,8 +3,10 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Contracts;
-using Entities.DbModels;
+
 using LoggerService;
+using Entities.DbModels;
+using Repository;
 
 namespace ApiService.Utilities.Extensions
 {
@@ -30,12 +32,16 @@ namespace ApiService.Utilities.Extensions
         public static void ConfigureDBContext(this IServiceCollection services, IConfiguration config) {
 
             services.AddDbContext<FactoryManagementContext>(opts =>     
-            opts.UseSqlServer(config.GetConnectionString("SqlConnection"),opts => opts.MigrationsAssembly("ApiService")));
+            opts.UseSqlServer(config.GetConnectionString("SqlConnection"),optionss => optionss.MigrationsAssembly("ApiService")));
 
         }
         public static void ConfigureLoggerService(this IServiceCollection services)
         {
             services.AddSingleton<ILoggerManager, LoggerManager>();
+        }
+        public static void ConfigureRepositoryWrapper(this IServiceCollection services)
+        {
+            services.AddScoped<IRepositoryWrapper, RepositoryWrapper>();
         }
     }
 }

@@ -19,7 +19,6 @@ namespace Entities.DbModels
         public string Name { get; set; }
 
         public string ImageUrl { get; set; }
-        public string RowStatus { get; set; }
 
         public virtual ICollection<UserRole> UserRole { get; set; }
     }
