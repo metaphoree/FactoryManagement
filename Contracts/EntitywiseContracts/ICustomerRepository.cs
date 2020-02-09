@@ -4,7 +4,7 @@ using System.Text;
 using Entities.DbModels;
 namespace Contracts.EntitywiseContracts
 {
-    public interface ICustomerRepository : IRepositoryBase<Customer>
+    public interface ICustomerRepository //: IRepositoryBase<Customer>
     {
     }
 }

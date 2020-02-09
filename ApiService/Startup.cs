@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using ApiService.Utilities.Extensions;
+using AutoMapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpOverrides;
@@ -33,6 +34,7 @@ namespace ApiService
             services.ConfigureCors();
             services.ConfigureDBContext(Configuration);
             services.ConfigureLoggerService();
+            services.ConfigureAutoMapper();
             services.ConfigureRepositoryWrapper();
             services.AddControllers().AddNewtonsoftJson(o => o.SerializerSettings.ReferenceLoopHandling =
                 Newtonsoft.Json.ReferenceLoopHandling.Ignore);

@@ -7,6 +7,7 @@ using Contracts;
 using LoggerService;
 using Entities.DbModels;
 using Repository;
+using AutoMapper;
 
 namespace ApiService.Utilities.Extensions
 {
@@ -43,5 +44,10 @@ namespace ApiService.Utilities.Extensions
         {
             services.AddScoped<IRepositoryWrapper, RepositoryWrapper>();
         }
+
+        public static void ConfigureAutoMapper(this IServiceCollection services) {
+            services.AddAutoMapper(typeof(Startup));
+        }
+    
     }
 }

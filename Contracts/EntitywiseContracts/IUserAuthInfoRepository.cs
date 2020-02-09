@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Contracts.EntitywiseContracts
 {
-    public interface IUserAuthInfoRepository : IRepositoryBase<UserAuthInfo>
+    public interface IUserAuthInfoRepository //: IRepositoryBase<UserAuthInfo>
     {
     }
 }

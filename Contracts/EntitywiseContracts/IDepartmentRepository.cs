@@ -4,7 +4,7 @@ using System.Text;
 using Entities.DbModels;
 namespace Contracts.EntitywiseContracts
 {
-    public interface IDepartmentRepository : IRepositoryBase<Department>
+    public interface IDepartmentRepository //: IRepositoryBase<Department>
     {
     }
 }

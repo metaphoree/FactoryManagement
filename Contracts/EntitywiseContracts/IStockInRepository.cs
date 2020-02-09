@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Contracts.EntitywiseContracts
 {
-    public interface IStockInRepository : IRepositoryBase<StockIn>
+    public interface IStockInRepository //: IRepositoryBase<StockIn>
     {
     }
 }
