@@ -7,7 +7,7 @@ namespace Entities.DbModels
     {
         public Factory()
         {
-            UserRole = new HashSet<UserRole>();
+           
         }
 
 
@@ -20,6 +20,6 @@ namespace Entities.DbModels
 
         public string ImageUrl { get; set; }
 
-        public virtual ICollection<UserRole> UserRole { get; set; }
+       
     }
 }

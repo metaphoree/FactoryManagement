@@ -4,14 +4,16 @@ using Entities.DbModels;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace ApiService.Migrations
 {
     [DbContext(typeof(FactoryManagementContext))]
-    partial class FactoryManagementContextModelSnapshot : ModelSnapshot
+    [Migration("20200215120408_RemoveUserRolerelationFromFactory")]
+    partial class RemoveUserRolerelationFromFactory
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -383,24 +385,6 @@ namespace ApiService.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Factory");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = "3cd4dbc2-d0f7-443d-89b0-c8b4e8b3fd42",
-                            CreatedDateTime = new DateTime(2020, 2, 15, 18, 6, 6, 62, DateTimeKind.Local).AddTicks(2241),
-                            FactoryId = "44ebd3d4-b045-45cd-a966-b3ef95a0f951",
-                            ImageUrl = "",
-                            LicenseNo = "",
-                            Name = "Fazlu Loom Factory",
-                            RegNo = "",
-                            RowStatus = "ADDED",
-                            SubscriptionEnd = new DateTime(2022, 11, 11, 18, 6, 6, 62, DateTimeKind.Local).AddTicks(7176),
-                            SubscriptionStart = new DateTime(2020, 2, 15, 18, 6, 6, 62, DateTimeKind.Local).AddTicks(6276),
-                            UniqueId = "FL00001",
-                            UpdatedDateTime = new DateTime(2020, 2, 15, 18, 6, 6, 62, DateTimeKind.Local).AddTicks(8641),
-                            VatRegNo = ""
-                        });
                 });
 
             modelBuilder.Entity("Entities.DbModels.IncomeType", b =>
