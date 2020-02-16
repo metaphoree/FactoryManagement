@@ -4,7 +4,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Contracts;
 
-using LoggerService;
+using Service;
 using Entities.DbModels;
 using Repository;
 using AutoMapper;
