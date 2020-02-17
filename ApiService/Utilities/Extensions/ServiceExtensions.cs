@@ -44,7 +44,10 @@ namespace ApiService.Utilities.Extensions
         {
             services.AddScoped<IRepositoryWrapper, RepositoryWrapper>();
         }
-
+        public static void ConfigureServiceWrapper(this IServiceCollection services)
+        {
+            services.AddScoped<IServiceWrapper, ServiceWrapper>();
+        }
         public static void ConfigureAutoMapper(this IServiceCollection services) {
             services.AddAutoMapper(typeof(Startup));
         }

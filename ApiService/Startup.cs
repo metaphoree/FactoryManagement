@@ -36,6 +36,7 @@ namespace ApiService
             services.ConfigureLoggerService();
             services.ConfigureAutoMapper();
             services.ConfigureRepositoryWrapper();
+            services.ConfigureServiceWrapper();
             services.AddControllers().AddNewtonsoftJson(o => o.SerializerSettings.ReferenceLoopHandling =
                 Newtonsoft.Json.ReferenceLoopHandling.Ignore);
         }
