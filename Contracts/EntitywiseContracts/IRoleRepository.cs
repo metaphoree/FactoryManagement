@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Contracts.EntitywiseContracts
 {
-    public interface IRoleRepository //: IRepositoryBase<Role>
+    public interface IRoleRepository : IRepositoryBase<Role>
     {
     }
 }

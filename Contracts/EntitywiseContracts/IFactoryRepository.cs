@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Contracts.EntitywiseContracts
 {
-    public interface IFactoryRepository //: IRepositoryBase<Factory>
+    public interface IFactoryRepository : IRepositoryBase<Factory>
     {
     }
 }

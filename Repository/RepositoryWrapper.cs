@@ -53,20 +53,15 @@ namespace Repository
 
         public IAddressRepository Address
         {
-
             get
             {
-
                 if (_Address == null)
                 {
                     //return new AddressRepository(dbContext);
                     _Address = new AddressRepository(dbContext);
                 }
-
                 return Address;
-
             }
-
         }
         public ICustomerRepository Customer
         {

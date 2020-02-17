@@ -13,5 +13,9 @@ namespace Repository.EntitywiseRepository
         
         
         }
+        public void prit()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

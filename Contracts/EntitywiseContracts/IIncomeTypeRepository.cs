@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Contracts.EntitywiseContracts
 {
-    public interface IIncomeTypeRepository //: IRepositoryBase<IncomeType>
+    public interface IIncomeTypeRepository : IRepositoryBase<IncomeType>
     {
     }
 }

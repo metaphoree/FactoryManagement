@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Contracts.EntitywiseContracts
 {
-    public interface IUserRoleRepository //: IRepositoryBase<UserRole>
+    public interface IUserRoleRepository : IRepositoryBase<UserRole>
     {
     }
 }

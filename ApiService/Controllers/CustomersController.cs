@@ -1,4 +1,5 @@
-﻿using Entities.DbModels;
+﻿using Contracts;
+using Entities.DbModels;
 using Entities.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -13,10 +14,11 @@ namespace ApiService.Controllers
     public class CustomersController : ControllerBase
     {
         private readonly FactoryManagementContext _context;
-
-        public CustomersController(FactoryManagementContext context)
+        private readonly IRepositoryWrapper _repositoryWrapper;
+        public CustomersController(FactoryManagementContext context,IRepositoryWrapper repositoryWrapper)
         {
             _context = context;
+            _repositoryWrapper = repositoryWrapper;
         }
 
         // GET: api/Customers
@@ -78,8 +80,11 @@ namespace ApiService.Controllers
         [HttpPost]
         public async Task<ActionResult<Customer>> PostCustomer([FromBody]AddCustomerViewModel customer)
         {
+           
+           
+
             _context.Customer.Add(customer);
-            try
+            try    
             {
                 await _context.SaveChangesAsync();
             }
@@ -94,7 +99,6 @@ namespace ApiService.Controllers
                     throw;
                 }
             }
-
             return CreatedAtAction("GetCustomer", new { id = customer.Id }, customer);
         }
 

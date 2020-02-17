@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Contracts.EntitywiseContracts
 {
-    public interface IPhoneRepository //: IRepositoryBase<Phone>
+    public interface IPhoneRepository : IRepositoryBase<Phone>
     {
     }
 }
