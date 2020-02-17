@@ -6,5 +6,6 @@ namespace Contracts.EntitywiseContracts
 {
     public interface ICustomerRepository : IRepositoryBase<Customer>
     {
+
     }
 }

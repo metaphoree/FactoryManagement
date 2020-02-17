@@ -7,7 +7,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Reflection;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace Repository
 {
@@ -24,33 +26,59 @@ namespace Repository
         {
             return this.RepositoryContext.Set<T>().AsNoTracking();
         }
+        public async Task<IEnumerable<T>> FindAllAsync()
+        {
+            return await this.FindAll().ToListAsync();
+        }
 
         public IQueryable<T> FindByCondition(Expression<Func<T, bool>> expression)
         {
             return this.RepositoryContext.Set<T>().Where(expression).AsNoTracking();
         }
 
-        public void Create(T entity)
+        public async Task<IEnumerable<T>> FindByConditionAsync(Expression<Func<T, bool>> expression)
+        {
+            return await this.FindByCondition(expression).ToListAsync();
+        }
+
+
+
+
+        public T Create(T entity)
         {
 
             Type type = entity.GetType();
-            type.GetProperty("CreatedDateTime").SetValue(typeof(DateTime), DateTime.Now);
-            type.GetProperty("UpdatedDateTime").SetValue(typeof(DateTime), DateTime.Now);
-            type.GetProperty("Id").SetValue(typeof(string), Guid.NewGuid().ToString());
-            type.GetProperty("FactoryId").SetValue(typeof(string), type.GetProperty("Id").GetValue(typeof(string)));
-            type.GetProperty("RowStatus").SetValue(typeof(string), DB_ROW_STATUS.ADDED.ToString());
-            type.GetProperty("UniqueId").SetValue(typeof(string), Guid.NewGuid().ToString());
+
+             PropertyInfo?  prop =  type.GetProperty("CreatedDateTime");
+            PropertyInfo? prop8 = type.GetProperty("CreatedDateTime");
+
+           //type.GetProperty()
+            type.GetProperty("CreatedDateTime").SetValue(entity, DateTime.Now);
+            type.GetProperty("UpdatedDateTime").SetValue(entity, DateTime.Now);
+            type.GetProperty("Id").SetValue(entity, Guid.NewGuid().ToString());
+       //     type.GetProperty("FactoryId").SetValue(entity, type.GetProperty("Id").GetValue();
+            type.GetProperty("RowStatus").SetValue(entity, DB_ROW_STATUS.ADDED.ToString());
+            type.GetProperty("UniqueId").SetValue(entity, Guid.NewGuid().ToString());
             this.RepositoryContext.Set<T>().Add(entity);
+            return entity;
         }
 
-        public void Update(T entity)
+        public T Update(T entity)
         {
+            Type type = entity.GetType();
+            type.GetProperty("UpdatedDateTime").SetValue(typeof(DateTime), DateTime.Now);
+            type.GetProperty("RowStatus").SetValue(entity, DB_ROW_STATUS.UPDATED.ToString());
             this.RepositoryContext.Set<T>().Update(entity);
+            return entity;
         }
 
-        public void Delete(T entity)
+        public T Delete(T entity)
         {
-            this.RepositoryContext.Set<T>().Remove(entity);
+            Type type = entity.GetType();
+            type.GetProperty("UpdatedDateTime").SetValue(entity, DateTime.Now);
+            type.GetProperty("RowStatus").SetValue(entity, DB_ROW_STATUS.DELETED.ToString());
+            this.RepositoryContext.Set<T>().Update(entity);
+            return entity;
         }
     }
 }

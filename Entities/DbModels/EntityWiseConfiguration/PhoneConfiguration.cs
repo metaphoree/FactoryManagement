@@ -30,7 +30,6 @@ namespace Entities.DbModels.EntityWiseConfiguration
                     .HasMaxLength(50);
 
                 builder.Property(e => e.Type)
-                    .IsRequired()
                     .HasMaxLength(50);
 
                 builder.Property(e => e.UniqueId)

@@ -15,10 +15,12 @@ namespace ApiService.Controllers
     {
         private readonly FactoryManagementContext _context;
         private readonly IRepositoryWrapper _repositoryWrapper;
-        public CustomersController(FactoryManagementContext context,IRepositoryWrapper repositoryWrapper)
+        private readonly IServiceWrapper _serviceWrapper;
+        public CustomersController(FactoryManagementContext context,IRepositoryWrapper repositoryWrapper, IServiceWrapper serviceWrapper)
         {
             _context = context;
             _repositoryWrapper = repositoryWrapper;
+            _serviceWrapper = serviceWrapper;
         }
 
         // GET: api/Customers
@@ -78,28 +80,29 @@ namespace ApiService.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see https://aka.ms/RazorPagesCRUD.
         [HttpPost]
-        public async Task<ActionResult<Customer>> PostCustomer([FromBody]AddCustomerViewModel customer)
+        public async Task<ActionResult<Customer>> PostCustomer([FromBody]AddCustomerViewModel customerVM)
         {
-           
-           
 
-            _context.Customer.Add(customer);
-            try    
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateException)
-            {
-                if (CustomerExists(customer.Id))
-                {
-                    return Conflict();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-            return CreatedAtAction("GetCustomer", new { id = customer.Id }, customer);
+           await _serviceWrapper.CustomerService.AddCustomer(customerVM);
+
+            //_context.Customer.Add(customer);
+            //try    
+            //{
+            //    await _context.SaveChangesAsync();
+            //}
+            //catch (DbUpdateException)
+            //{
+            //    if (CustomerExists(customer.Id))
+            //    {
+            //        return Conflict();
+            //    }
+            //    else
+            //    {
+            //        throw;
+            //    }
+            //}
+            // return CreatedAtAction("GetCustomer", new { id = customer.Id }, customer);
+            return Ok();
         }
 
         // DELETE: api/Customers/5

@@ -5,6 +5,7 @@ using Repository.EntitywiseRepository;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace Repository
 {
@@ -60,7 +61,7 @@ namespace Repository
                     //return new AddressRepository(dbContext);
                     _Address = new AddressRepository(dbContext);
                 }
-                return Address;
+                return _Address;
             }
         }
         public ICustomerRepository Customer
@@ -75,7 +76,7 @@ namespace Repository
                     _Customer = new CustomerRepository(dbContext);
                 }
 
-                return Customer;
+                return _Customer;
 
             }
 
@@ -330,7 +331,7 @@ namespace Repository
                     _Phone = new PhoneRepository(dbContext);
                 }
 
-                return Phone;
+                return _Phone;
 
             }
 
@@ -593,6 +594,11 @@ namespace Repository
         public void Save()
         {
             dbContext.SaveChanges();
+        }
+
+        public async Task SaveAsync()
+        {
+           await dbContext.SaveChangesAsync();
         }
     }
 }
