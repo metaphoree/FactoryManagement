@@ -3,6 +3,7 @@ using Entities.DbModels;
 using Entities.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using NLog;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -16,11 +17,13 @@ namespace ApiService.Controllers
         private readonly FactoryManagementContext _context;
         private readonly IRepositoryWrapper _repositoryWrapper;
         private readonly IServiceWrapper _serviceWrapper;
-        public CustomersController(FactoryManagementContext context,IRepositoryWrapper repositoryWrapper, IServiceWrapper serviceWrapper)
+        private readonly ILoggerManager _logger;
+        public CustomersController(FactoryManagementContext context,IRepositoryWrapper repositoryWrapper, IServiceWrapper serviceWrapper, ILoggerManager logger)
         {
             _context = context;
             _repositoryWrapper = repositoryWrapper;
             _serviceWrapper = serviceWrapper;
+            _logger = logger;
         }
 
         // GET: api/Customers
@@ -84,7 +87,7 @@ namespace ApiService.Controllers
         {
 
            await _serviceWrapper.CustomerService.AddCustomer(customerVM);
-
+            _logger.LogInfo("Customer Successfully Added");
             //_context.Customer.Add(customer);
             //try    
             //{
