@@ -37,7 +37,9 @@ namespace ApiService
             services.ConfigureAutoMapper();
             services.ConfigureRepositoryWrapper();
             services.ConfigureServiceWrapper();
-            services.AddControllers().AddNewtonsoftJson(o => o.SerializerSettings.ReferenceLoopHandling =
+            // Register the Swagger generator, defining 1 or more Swagger documents
+            services.ConfigureSwagger();
+           services.AddControllers().AddNewtonsoftJson(o => o.SerializerSettings.ReferenceLoopHandling =
                 Newtonsoft.Json.ReferenceLoopHandling.Ignore);
         }
 
@@ -53,9 +55,20 @@ namespace ApiService
             //app.UseStaticFiles() enables using static files for the request. 
             //    If we don’t set a path to the static files, it will use a wwwroot folder in our solution explorer by default.
             app.UseStaticFiles();
-
             app.UseCors("CorsPolicy");
 
+            app.UseExceptionMiddleware();
+          
+            // Enable middleware to serve generated Swagger as a JSON endpoint.
+            app.UseSwagger();
+
+            // Enable middleware to serve swagger-ui (HTML, JS, CSS, etc.),
+            // specifying the Swagger JSON endpoint.
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
+            });
+            
             //app.UseForwardedHeaders will forward proxy headers to the current request.
             //This will help us during the Linux deployment.
             app.UseForwardedHeaders(new ForwardedHeadersOptions

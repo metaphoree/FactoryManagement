@@ -93,7 +93,7 @@ namespace Repository
                     _Department = new DepartmentRepository(dbContext);
                 }
 
-                return Department;
+                return _Department;
 
             }
 
@@ -110,7 +110,7 @@ namespace Repository
                     _Equipment = new EquipmentRepository(dbContext);
                 }
 
-                return Equipment;
+                return _Equipment;
 
             }
 
@@ -127,7 +127,7 @@ namespace Repository
                     _EquipmentCategory = new EquipmentCategoryRepository(dbContext);
                 }
 
-                return EquipmentCategory;
+                return _EquipmentCategory;
 
             }
 
@@ -144,7 +144,7 @@ namespace Repository
                     _Expense = new ExpenseRepository(dbContext);
                 }
 
-                return Expense;
+                return _Expense;
 
             }
 
@@ -161,7 +161,7 @@ namespace Repository
                     _ExpenseType = new ExpenseTypeRepository(dbContext);
                 }
 
-                return ExpenseType;
+                return _ExpenseType;
 
             }
 
@@ -178,7 +178,7 @@ namespace Repository
                     _Factory = new FactoryRepository(dbContext);
                 }
 
-                return Factory;
+                return _Factory;
 
             }
 
@@ -195,7 +195,7 @@ namespace Repository
                     _IncomeType = new IncomeTypeRepository(dbContext);
                 }
 
-                return IncomeType;
+                return _IncomeType;
 
             }
 
@@ -212,7 +212,7 @@ namespace Repository
                     _Invoice = new InvoiceRepository(dbContext);
                 }
 
-                return Invoice;
+                return _Invoice;
 
             }
 
@@ -229,7 +229,7 @@ namespace Repository
                     _InvoiceType = new InvoiceTypeRepository(dbContext);
                 }
 
-                return InvoiceType;
+                return _InvoiceType;
 
             }
 
@@ -246,7 +246,7 @@ namespace Repository
                     _Item = new ItemRepository(dbContext);
                 }
 
-                return Item;
+                return _Item;
 
             }
 
@@ -263,7 +263,7 @@ namespace Repository
                     _ItemCategory = new ItemCategoryRepository(dbContext);
                 }
 
-                return ItemCategory;
+                return _ItemCategory;
 
             }
 
@@ -280,7 +280,7 @@ namespace Repository
                     _ItemStatus = new ItemStatusRepository(dbContext);
                 }
 
-                return ItemStatus;
+                return _ItemStatus;
 
             }
 
@@ -297,7 +297,7 @@ namespace Repository
                     _Payable = new PayableRepository(dbContext);
                 }
 
-                return Payable;
+                return _Payable;
 
             }
 
@@ -314,7 +314,7 @@ namespace Repository
                     _PaymentStatus = new PaymentStatusRepository(dbContext);
                 }
 
-                return PaymentStatus;
+                return _PaymentStatus;
 
             }
 
@@ -348,7 +348,7 @@ namespace Repository
                     _Production = new ProductionRepository(dbContext);
                 }
 
-                return Production;
+                return _Production;
 
             }
 
@@ -365,7 +365,7 @@ namespace Repository
                     _Purchase = new PurchaseRepository(dbContext);
                 }
 
-                return Purchase;
+                return _Purchase;
 
             }
 
@@ -382,7 +382,7 @@ namespace Repository
                     _PurchaseType = new PurchaseTypeRepository(dbContext);
                 }
 
-                return PurchaseType;
+                return _PurchaseType;
 
             }
 
@@ -399,7 +399,7 @@ namespace Repository
                     _Recievable = new RecievableRepository(dbContext);
                 }
 
-                return Recievable;
+                return _Recievable;
 
             }
 
@@ -416,7 +416,7 @@ namespace Repository
                     _Role = new RoleRepository(dbContext);
                 }
 
-                return Role;
+                return _Role;
 
             }
 
@@ -433,7 +433,7 @@ namespace Repository
                     _Sales = new SalesRepository(dbContext);
                 }
 
-                return Sales;
+                return _Sales;
 
             }
 
@@ -450,7 +450,7 @@ namespace Repository
                     _Staff = new StaffRepository(dbContext);
                 }
 
-                return Staff;
+                return _Staff;
 
             }
 
@@ -467,7 +467,7 @@ namespace Repository
                     _Stock = new StockRepository(dbContext);
                 }
 
-                return Stock;
+                return _Stock;
 
             }
 
@@ -484,7 +484,7 @@ namespace Repository
                     _StockIn = new StockInRepository(dbContext);
                 }
 
-                return StockIn;
+                return _StockIn;
 
             }
 
@@ -501,7 +501,7 @@ namespace Repository
                     _StockOut = new StockOutRepository(dbContext);
                 }
 
-                return StockOut;
+                return _StockOut;
 
             }
 
@@ -518,7 +518,7 @@ namespace Repository
                     _Supplier = new SupplierRepository(dbContext);
                 }
 
-                return Supplier;
+                return _Supplier;
 
             }
 
@@ -535,7 +535,7 @@ namespace Repository
                     _Transaction = new TransactionRepository(dbContext);
                 }
 
-                return Transaction;
+                return _Transaction;
 
             }
 
@@ -552,7 +552,7 @@ namespace Repository
                     _TransactionType = new TransactionTypeRepository(dbContext);
                 }
 
-                return TransactionType;
+                return _TransactionType;
 
             }
 
@@ -569,7 +569,7 @@ namespace Repository
                     _UserAuthInfo = new UserAuthInfoRepository(dbContext);
                 }
 
-                return UserAuthInfo;
+                return _UserAuthInfo;
 
             }
 
@@ -586,7 +586,7 @@ namespace Repository
                     _UserRole = new UserRoleRepository(dbContext);
                 }
 
-                return UserRole;
+                return _UserRole;
 
             }
 

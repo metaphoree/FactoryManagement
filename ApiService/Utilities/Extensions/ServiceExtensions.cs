@@ -8,6 +8,11 @@ using Service;
 using Entities.DbModels;
 using Repository;
 using AutoMapper;
+using ApiService.Utilities.ExceptionHandler;
+using Microsoft.OpenApi.Models;
+using System;
+using System.Reflection;
+using System.IO;
 
 namespace ApiService.Utilities.Extensions
 {
@@ -30,11 +35,10 @@ namespace ApiService.Utilities.Extensions
 
             });
         }
-        public static void ConfigureDBContext(this IServiceCollection services, IConfiguration config) {
-
-            services.AddDbContext<FactoryManagementContext>(opts =>     
-            opts.UseSqlServer(config.GetConnectionString("SqlConnection"),optionss => optionss.MigrationsAssembly("ApiService")));
-
+        public static void ConfigureDBContext(this IServiceCollection services, IConfiguration config)
+        {
+            services.AddDbContext<FactoryManagementContext>(opts =>
+            opts.UseSqlServer(config.GetConnectionString("SqlConnection"), optionss => optionss.MigrationsAssembly("ApiService")));
         }
         public static void ConfigureLoggerService(this IServiceCollection services)
         {
@@ -48,9 +52,53 @@ namespace ApiService.Utilities.Extensions
         {
             services.AddScoped<IServiceWrapper, ServiceWrapper>();
         }
-        public static void ConfigureAutoMapper(this IServiceCollection services) {
+        public static void ConfigureAutoMapper(this IServiceCollection services)
+        {
             services.AddAutoMapper(typeof(Startup));
         }
-    
+        public static void ConfigureSwagger(this IServiceCollection services)
+        {
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "My API", Version = "v1" });
+                
+                // Set the comments path for the Swagger JSON and UI.
+                var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+                var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+                c.IncludeXmlComments(xmlPath);
+            });
+        }
+
+        public static void ConfigureCustomSwaggerGenerator(this IServiceCollection services) {
+            // Register the Swagger generator, defining 1 or more Swagger documents
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new OpenApiInfo
+                {
+                    Title = "Employee API",
+                    Version = "v1",
+                    Description = "An API to perform Employee operations",
+                    TermsOfService = new Uri("https://example.com/terms"),
+                    Contact = new OpenApiContact
+                    {
+                        Name = "John Walkner",
+                        Email = "John.Walkner@gmail.com",
+                        Url = new Uri("https://twitter.com/jwalkner"),
+                    },
+                    License = new OpenApiLicense
+                    {
+                        Name = "Employee API LICX",
+                        Url = new Uri("https://example.com/license"),
+                    }
+                });
+            });
+
+        }
+    }
+    public static class MiddlewareExtension {
+        public static void UseExceptionMiddleware(this IApplicationBuilder app)
+        {
+            app.UseMiddleware<ExceptionMiddleware>();
+        }
     }
 }
