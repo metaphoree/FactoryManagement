@@ -68,7 +68,6 @@ namespace ApiService.Utilities.Extensions
                 c.IncludeXmlComments(xmlPath);
             });
         }
-
         public static void ConfigureCustomSwaggerGenerator(this IServiceCollection services) {
             // Register the Swagger generator, defining 1 or more Swagger documents
             services.AddSwaggerGen(c =>
