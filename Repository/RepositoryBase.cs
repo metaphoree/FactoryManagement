@@ -58,7 +58,7 @@ namespace Repository
             type.GetProperty("Id").SetValue(entity, Guid.NewGuid().ToString());
        //     type.GetProperty("FactoryId").SetValue(entity, type.GetProperty("Id").GetValue();
             type.GetProperty("RowStatus").SetValue(entity, DB_ROW_STATUS.ADDED.ToString());
-            type.GetProperty("UniqueId").SetValue(entity, Guid.NewGuid().ToString());
+       //    type.GetProperty("UniqueId").SetValue(entity, Guid.NewGuid().ToString());
             this.RepositoryContext.Set<T>().Add(entity);
             return entity;
         }

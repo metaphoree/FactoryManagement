@@ -10,32 +10,44 @@ namespace Entities.DbModels.EntityWiseConfiguration
     {
         public void Configure(EntityTypeBuilder<Phone> builder)
         {
-        
-                builder.Property(e => e.Id).HasMaxLength(50);
 
-                builder.Property(e => e.FactoryId)
+            builder.Property(e => e.Id).HasMaxLength(50);
+
+            builder.Property(e => e.FactoryId)
+                .IsRequired()
+                .HasMaxLength(50);
+
+            builder.Property(e => e.Number)
+                .IsRequired()
+                .HasMaxLength(50);
+
+            builder.Property(e => e.AlternateNumber_1)
+                .HasMaxLength(50);
+
+            builder.Property(e => e.AlternateNumber_2)
+              .HasMaxLength(50);
+
+            builder.Property(e => e.AlternateNumber_3)
+              .HasMaxLength(50);
+
+            builder.Property(e => e.LandPhone)
+              .HasMaxLength(50);
+
+            builder.Property(e => e.RelatedId)
                     .IsRequired()
                     .HasMaxLength(50);
 
-                builder.Property(e => e.Number)
-                    .IsRequired()
-                    .HasMaxLength(50);
+            builder.Property(e => e.RowStatus)
+                .IsRequired()
+                .HasMaxLength(50);
 
-                builder.Property(e => e.RelatedId)
-                    .IsRequired()
-                    .HasMaxLength(50);
+            builder.Property(e => e.Type)
+                .HasMaxLength(50);
 
-                builder.Property(e => e.RowStatus)
-                    .IsRequired()
-                    .HasMaxLength(50);
+            builder.Property(e => e.UniqueId)
+                .IsRequired()
+                .HasMaxLength(50);
 
-                builder.Property(e => e.Type)
-                    .HasMaxLength(50);
-
-                builder.Property(e => e.UniqueId)
-                    .IsRequired()
-                    .HasMaxLength(50);
-           
         }
     }
 }

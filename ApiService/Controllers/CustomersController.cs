@@ -1,9 +1,11 @@
 ﻿using Contracts;
 using Entities.DbModels;
 using Entities.ViewModels;
+using Entities.ViewModels.CustomerView;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using NLog;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -28,17 +30,20 @@ namespace ApiService.Controllers
 
         // GET: api/Customers
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Customer>>> GetCustomer()
+        public async Task<ActionResult<IEnumerable<ListCustomerVM>>> GetCustomer(string factoryId)
         {
-            return await _context.Customer.ToListAsync();
+            var enumerables = await _serviceWrapper.CustomerService.GetCustomerList(factoryId);
+            return enumerables;
+            // return await _context.Customer.ToListAsync();
+            //return await _repositoryWrapper.Customer.FindAllAsync();
         }
 
         // GET: api/Customers/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Customer>> GetCustomer(string id)
+        public async Task<ActionResult<UpdateCustomerViewModel>> GetCustomer(string id,string factoryId)
         {
-            var customer = await _context.Customer.FindAsync(id);
-
+            //var customer = await _context.Customer.FindAsync(id);
+            var customer = await _serviceWrapper.CustomerService.GetCustomer(id, factoryId);
             if (customer == null)
             {
                 return NotFound();
@@ -51,22 +56,21 @@ namespace ApiService.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see https://aka.ms/RazorPagesCRUD.
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutCustomer(string id, Customer customer)
+        public async Task<IActionResult> PutCustomer(string id, [FromBody]UpdateCustomerViewModel customer)
         {
-            if (id != customer.Id)
+            if (id != customer.CustomerId)
             {
                 return BadRequest();
             }
 
-            _context.Entry(customer).State = EntityState.Modified;
-
+            //_context.Entry(customer).State = EntityState.Modified;
             try
             {
-                await _context.SaveChangesAsync();
+                await _serviceWrapper.CustomerService.UpdateCustomer(id, customer);                           
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!CustomerExists(id))
+                if (!CustomerExists(customer.Name,customer.Email))
                 {
                     return NotFound();
                 }
@@ -78,55 +82,53 @@ namespace ApiService.Controllers
 
             return NoContent();
         }
-
         // POST: api/Customers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see https://aka.ms/RazorPagesCRUD.
         [HttpPost]
         public async Task<ActionResult<Customer>> PostCustomer([FromBody]AddCustomerViewModel customerVM)
         {
-
-           await _serviceWrapper.CustomerService.AddCustomer(customerVM);
-            _logger.LogInfo("Customer Successfully Added");
-            //_context.Customer.Add(customer);
-            //try    
-            //{
-            //    await _context.SaveChangesAsync();
-            //}
-            //catch (DbUpdateException)
-            //{
-            //    if (CustomerExists(customer.Id))
-            //    {
-            //        return Conflict();
-            //    }
-            //    else
-            //    {
-            //        throw;
-            //    }
-            //}
-            // return CreatedAtAction("GetCustomer", new { id = customer.Id }, customer);
-            return Ok();
+            try
+            {
+                await _serviceWrapper.CustomerService.AddCustomer(customerVM);
+                _logger.LogInfo("Customer Successfully Added");
+            }
+            catch (DbUpdateException ex)
+            {
+                _logger.LogInfo(ex.Message);
+                if (CustomerExists(customerVM.Name, customerVM.Email))
+                {
+                    _logger.LogInfo("Entity already exist");
+                    return Conflict();
+                }
+                else
+                {
+                    throw new Exception("Error Saving");
+                }
+            }
+            catch (Exception es) {
+               
+            }
+            return Ok(true);
         }
-
         // DELETE: api/Customers/5
         [HttpDelete("{id}")]
         public async Task<ActionResult<Customer>> DeleteCustomer(string id)
         {
-            var customer = await _context.Customer.FindAsync(id);
+            var customerTask =  await _repositoryWrapper.Customer.FindByConditionAsync(x => x.Id == id);
+            var customer = customerTask.ToList().FirstOrDefault();
             if (customer == null)
             {
                 return NotFound();
             }
-
-            _context.Customer.Remove(customer);
-            await _context.SaveChangesAsync();
-
+                _repositoryWrapper.Customer.Delete(customer);
+                await _repositoryWrapper.SaveAsync();
             return customer;
         }
 
-        private bool CustomerExists(string id)
+        private bool CustomerExists(string Name, string Email)
         {
-            return _context.Customer.Any(e => e.Id == id);
+            return _context.Customer.Any(e => e.Email == Email && e.Name == Name);
         }
     }
 }

@@ -2,13 +2,13 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Entities.ViewModels
+namespace Entities.ViewModels.CustomerView
 {
-   public  class AddCustomerViewModel
+   public class ListCustomerVM
     {
         public string Name { get; set; }
-        public string Email { get; set; }
         public string ImageUrl { get; set; }
+        public string Email { get; set; }
 
         public string PermanentAddress { get; set; }
         public string PresentAddress { get; set; }
@@ -17,6 +17,7 @@ namespace Entities.ViewModels
         public string AlternateCellNo { get; set; }
 
 
+        public string CustomerId { get; set; }
         public string FactoryId { get; set; }
     }
 }
