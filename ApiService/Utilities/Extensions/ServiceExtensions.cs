@@ -50,6 +50,7 @@ namespace ApiService.Utilities.Extensions
         }
         public static void ConfigureServiceWrapper(this IServiceCollection services)
         {
+            services.AddScoped<IUtilService, UtilService>();
             services.AddScoped<IServiceWrapper, ServiceWrapper>();
         }
         public static void ConfigureAutoMapper(this IServiceCollection services)

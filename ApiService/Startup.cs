@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using ApiService.Utilities.Extensions;
 using AutoMapper;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.DataProtection;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -14,6 +15,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Newtonsoft.Json.Serialization;
 using NLog;
 
 namespace ApiService
@@ -39,8 +41,20 @@ namespace ApiService
             services.ConfigureServiceWrapper();
             // Register the Swagger generator, defining 1 or more Swagger documents
             services.ConfigureSwagger();
-           services.AddControllers().AddNewtonsoftJson(o => o.SerializerSettings.ReferenceLoopHandling =
-                Newtonsoft.Json.ReferenceLoopHandling.Ignore);
+            services.AddDistributedMemoryCache();
+
+            services.AddSession(options =>
+            {
+                // Set a short timeout for easy testing.
+                options.IdleTimeout = TimeSpan.FromSeconds(10);
+                options.Cookie.HttpOnly = true;
+            });
+
+            services.AddControllers()
+               // .AddJsonOptions(s => s.JsonSerializerOptions.PropertyNamingPolicy =);
+                .AddNewtonsoftJson(o => o.SerializerSettings.ContractResolver = new DefaultContractResolver())
+                .AddNewtonsoftJson(s => s.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
+              
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -79,7 +93,7 @@ namespace ApiService
             app.UseRouting();
 
             app.UseAuthorization();
-
+            app.UseSession();
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();

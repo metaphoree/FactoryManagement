@@ -28,22 +28,25 @@ namespace ApiService.Controllers
             _logger = logger;
         }
 
-        // GET: api/Customers
-        [HttpGet]
-        public async Task<ActionResult<IEnumerable<ListCustomerVM>>> GetCustomer(string factoryId)
+        // GET: api/Customers/ii
+        [HttpPost]
+        [Route("getAllCustomer")]
+        public async Task<ActionResult<IEnumerable<ListCustomerVM>>> GetCustomer(Customer customer)
         {
-            var enumerables = await _serviceWrapper.CustomerService.GetCustomerList(factoryId);
-            return enumerables;
+            var enumerables = await _serviceWrapper.CustomerService.GetCustomerList(customer.FactoryId);
+            //return JsonResult(enumerables);
+            return Ok(enumerables);
             // return await _context.Customer.ToListAsync();
             //return await _repositoryWrapper.Customer.FindAllAsync();
         }
 
         // GET: api/Customers/5
-        [HttpGet("{id}")]
-        public async Task<ActionResult<UpdateCustomerViewModel>> GetCustomer(string id,string factoryId)
+        [HttpPost]
+        [Route("getCustomerById")]
+        public async Task<ActionResult<UpdateCustomerViewModel>> GetSingleCustomer(Customer customerTemp)
         {
             //var customer = await _context.Customer.FindAsync(id);
-            var customer = await _serviceWrapper.CustomerService.GetCustomer(id, factoryId);
+            var customer = await _serviceWrapper.CustomerService.GetCustomer(customerTemp.Id, customerTemp.FactoryId);
             if (customer == null)
             {
                 return NotFound();
@@ -91,6 +94,7 @@ namespace ApiService.Controllers
             try
             {
                 await _serviceWrapper.CustomerService.AddCustomer(customerVM);
+                _logger.LogInfo("Customer Successfully Added");
                 _logger.LogInfo("Customer Successfully Added");
             }
             catch (DbUpdateException ex)

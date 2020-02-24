@@ -45,10 +45,14 @@ namespace Service
         IUserRoleService _UserRoleService;
         IRepositoryWrapper _repositoryWrapper;
         IMapper _mapper;
-        public ServiceWrapper(IRepositoryWrapper repositoryWrapper,IMapper mapper)
+        ILoggerManager _loggerManager;
+        IUtilService _utilService;
+        public ServiceWrapper(IRepositoryWrapper repositoryWrapper,IMapper mapper,ILoggerManager loggerManager, IUtilService utilService)
         {
             this._repositoryWrapper = repositoryWrapper; 
             this._mapper = mapper;
+            this._loggerManager = loggerManager;
+            this._utilService = utilService;
         }
 
 
@@ -59,7 +63,7 @@ namespace Service
                 if (_CustomerService == null)
                 {
                     //return new AddressRepository(dbContext);
-                    _CustomerService = new CustomerService(_repositoryWrapper, _mapper);
+                    _CustomerService = new CustomerService(_repositoryWrapper, _mapper,_loggerManager,_utilService);
                 }
                 return _CustomerService;
             }

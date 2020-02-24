@@ -16,22 +16,40 @@ namespace Service.BusinessServices
     {
         private readonly IRepositoryWrapper _repositoryWrapper;
         private readonly IMapper _mapper;
-        public CustomerService(IRepositoryWrapper repositoryWrapper,IMapper mapper) {
+        private readonly ILoggerManager _logger;
+        private readonly IUtilService _utilService;
+        public CustomerService(IRepositoryWrapper repositoryWrapper,IMapper mapper,ILoggerManager loggerManager,IUtilService utilService) {
             this._repositoryWrapper = repositoryWrapper;
             this._mapper = mapper;
+            this._logger = loggerManager;
+            this._utilService = utilService;
         }
 
-        public async Task AddCustomer(AddCustomerViewModel addCustomerViewModel)
+        public async Task<bool> AddCustomer(AddCustomerViewModel addCustomerViewModel)
         {
             var CustomerDT = _mapper.Map<AddCustomerViewModel, Customer>(addCustomerViewModel);
             var AddressDT  = _mapper.Map<AddCustomerViewModel, Address>(addCustomerViewModel);
             var PhoneDT = _mapper.Map<AddCustomerViewModel, Phone>(addCustomerViewModel);
+            CustomerDT.UniqueId = await _utilService.GetUniqueId("Customer");
+            AddressDT.UniqueId = await _utilService.GetUniqueId("Address");
+            PhoneDT.UniqueId = await _utilService.GetUniqueId("Phone");
+
+
             CustomerDT = _repositoryWrapper.Customer.Create(CustomerDT);
             AddressDT.RelatedId = CustomerDT.Id;
             AddressDT =  _repositoryWrapper.Address.Create(AddressDT);
             PhoneDT.RelatedId = CustomerDT.Id;
             PhoneDT = _repositoryWrapper.Phone.Create(PhoneDT);
+            try
+            {
             await _repositoryWrapper.SaveAsync();
+                this._logger.LogInfo("Successful In saving");
+            }
+            catch (Exception ex) {
+                this._logger.LogInfo(ex.ToString());
+                return false;
+            }
+            return true;
         }
         public async Task UpdateCustomer(string id, UpdateCustomerViewModel updateCustomerViewModel)
         {
@@ -70,7 +88,6 @@ namespace Service.BusinessServices
 
            return  outputList;
         }
-
         public async Task<UpdateCustomerViewModel> GetCustomer(string cusId,string FactoryId) {
             IEnumerable<Customer> CustomersDB = await _repositoryWrapper.Customer.FindByConditionAsync(x => x.Id == cusId && x.FactoryId == FactoryId);
             IEnumerable<Address> AddressesDB = await _repositoryWrapper.Address.FindByConditionAsync(x => x.Id == cusId && x.FactoryId == FactoryId);
@@ -89,7 +106,6 @@ namespace Service.BusinessServices
             return _mapper.Map<ListCustomerVM, UpdateCustomerViewModel>(output);
 
         }
-
 
     }
 }
