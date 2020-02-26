@@ -31,13 +31,13 @@ namespace ApiService.Controllers
         // GET: api/Customers/ii
         [HttpPost]
         [Route("getAllCustomer")]
-        public async Task<ActionResult<IEnumerable<ListCustomerVM>>> GetCustomer(Customer customer)
+        public async Task<ActionResult<IEnumerable<ListCustomerVM>>> GetCustomer(GetDataListVM customer)
         {
             var enumerables = await _serviceWrapper.CustomerService.GetCustomerList(customer.FactoryId);
-            //return JsonResult(enumerables);
-            return Ok(enumerables);
-            // return await _context.Customer.ToListAsync();
-            //return await _repositoryWrapper.Customer.FindAllAsync();
+            var data = new WrapperListCustomerVM();
+            data.CustomerList = enumerables;
+            data.TotalRecoreds = await _context.Customer.AsQueryable().CountAsync();
+            return Ok(data);
         }
 
         // GET: api/Customers/5

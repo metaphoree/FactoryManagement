@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Entities.ViewModels
+namespace Entities.ViewModels.CustomerView
 {
    public  class AddCustomerViewModel
     {

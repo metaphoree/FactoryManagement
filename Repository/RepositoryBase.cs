@@ -21,11 +21,14 @@ namespace Repository
         {
             this.RepositoryContext = repositoryContext;
         }
-
+        public async Task<long>  NumOfRecord() {
+        return await RepositoryContext.Set<T>().AsQueryable().CountAsync(); 
+        }
         public IQueryable<T> FindAll()
         {
             return this.RepositoryContext.Set<T>().AsNoTracking();
         }
+              
         public async Task<IEnumerable<T>> FindAllAsync()
         {
             return await this.FindAll().ToListAsync();
@@ -40,9 +43,6 @@ namespace Repository
         {
             return await this.FindByCondition(expression).ToListAsync();
         }
-
-
-
 
         public T Create(T entity)
         {
