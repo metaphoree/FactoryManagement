@@ -53,7 +53,6 @@ namespace ApiService.Utilities.Extensions
             services.AddScoped<IPhoneRepository, PhoneRepository>();
         }
         
-        
         public static void ConfigureRepositoryWrapper(this IServiceCollection services)
         {
             services.AddScoped<IRepositoryWrapper, RepositoryWrapper>();

@@ -65,11 +65,11 @@ namespace Service.BusinessServices
             }
             return true;
         }
-        public async Task UpdateCustomer(string id, UpdateCustomerViewModel updateCustomerViewModel)
+        public async Task<bool> UpdateCustomer(string id, UpdateCustomerViewModel updateCustomerViewModel)
         {
             Task<IEnumerable<Customer>> CustomersDB =  _repositoryWrapper.Customer.FindByConditionAsync(x => x.Id == id && x.FactoryId == updateCustomerViewModel.FactoryId);
-            Task<IEnumerable<Address>> AddressesDB =  _repositoryWrapper.Address.FindByConditionAsync(x => x.Id == id && x.FactoryId == updateCustomerViewModel.FactoryId);
-            Task<IEnumerable<Phone>> PhonesDB =  _repositoryWrapper.Phone.FindByConditionAsync(x => x.Id == id && x.FactoryId == updateCustomerViewModel.FactoryId);
+            Task<IEnumerable<Address>> AddressesDB =  _repositoryWrapper.Address.FindByConditionAsync(x => x.RelatedId == id && x.FactoryId == updateCustomerViewModel.FactoryId);
+            Task<IEnumerable<Phone>> PhonesDB =  _repositoryWrapper.Phone.FindByConditionAsync(x => x.RelatedId == id && x.FactoryId == updateCustomerViewModel.FactoryId);
      
             await Task.WhenAll(CustomersDB, AddressesDB, PhonesDB);
        
@@ -79,7 +79,22 @@ namespace Service.BusinessServices
             _repositoryWrapper.Customer.Update(CustomerUpdated);
             _repositoryWrapper.Address.Update(AddressUpdated);
             _repositoryWrapper.Phone.Update(PhoneUpdated);
-            await _repositoryWrapper.SaveAsync();
+            try
+            {
+                Task<int> t1 = _repositoryWrapper.Customer.SaveChangesAsync();
+                Task<int> t2 = _repositoryWrapper.Address.SaveChangesAsync();
+                Task<int> t3 = _repositoryWrapper.Phone.SaveChangesAsync();
+                await Task.WhenAll(t1, t2, t3);
+                this._logger.LogInfo("Successful In saving");
+            }
+            catch (Exception ex)
+            {
+                this._logger.LogInfo(ex.ToString());
+                _logger.LogInfo("-----------------------------------------------------------------");
+                _logger.LogInfo("-----------------------------------------------------------------");
+                return false;
+            }
+            return true;
         }
         public async Task<List<ListCustomerVM>> GetCustomerList(string FactoryId) {
 
@@ -117,7 +132,7 @@ namespace Service.BusinessServices
             await Task.WhenAll(custListTask, addressListTask, phoneListTask, noOfRecordTask);
 
 
-            List<Customer> custList = custListTask.Result.ToList().OrderByDescending(x => x.CreatedDateTime).ToList();//.Skip((dataListVM.PageNumber - 1) * dataListVM.PageSize).Take(dataListVM.PageSize).OrderByDescending(x => x.CreatedDateTime).ToList();
+            List<Customer> custList = custListTask.Result.ToList().OrderByDescending(x => x.UpdatedDateTime).ToList();//.Skip((dataListVM.PageNumber - 1) * dataListVM.PageSize).Take(dataListVM.PageSize).OrderByDescending(x => x.CreatedDateTime).ToList();
             List<Address> addressList = addressListTask.Result.ToList();
             List<Phone> phoneList = phoneListTask.Result.ToList();
 
@@ -156,6 +171,11 @@ namespace Service.BusinessServices
 
             return data;
         }
+     
+
+
+
+
         public async Task<UpdateCustomerViewModel> GetCustomer(string cusId,string FactoryId) {
             Task<IEnumerable<Customer>> CustomersDB =  _repositoryWrapper.Customer.FindByConditionAsync(x => x.Id == cusId && x.FactoryId == FactoryId);
             Task <IEnumerable<Address>> AddressesDB =  _repositoryWrapper.Address.FindByConditionAsync(x => x.Id == cusId && x.FactoryId == FactoryId);

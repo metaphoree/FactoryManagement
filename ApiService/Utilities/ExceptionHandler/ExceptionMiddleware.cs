@@ -28,6 +28,8 @@ namespace ApiService.Utilities.ExceptionHandler
             catch (Exception ex)
             {
                 _logger.LogError($"Something went wrong: {ex}");
+                _logger.LogError("-------------------------------------------------------------------------------");
+                _logger.LogError("-------------------------------------------------------------------------------");
                 await HandleExceptionAsync(httpContext, ex);
             }
         }

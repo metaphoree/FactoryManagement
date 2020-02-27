@@ -27,7 +27,7 @@ namespace Entities.DbModels.EntityWiseConfiguration
                 .HasMaxLength(50);
 
             builder.Property(e => e.UniqueId).HasMaxLength(50);
-
+            builder.HasQueryFilter(s => s.RowStatus != DB_ROW_STATUS.DELETED.ToString());
             builder.Property(e => e.VatRegNo).HasMaxLength(50);
             builder.HasData(
     new Factory

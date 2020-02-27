@@ -30,7 +30,7 @@ namespace ApiService.Controllers
 
         // GET: api/Customers/ii
         [HttpPost]
-        [Route("getAllCustomer")]
+        [Route("getAll")]
         public async Task<ActionResult<IEnumerable<ListCustomerVM>>> GetCustomer(GetDataListVM customer)
         {
             var data = await _serviceWrapper.CustomerService.GetCustomerListPaged(customer);
@@ -38,7 +38,7 @@ namespace ApiService.Controllers
         }
         // GET: api/Customers/5
         [HttpPost]
-        [Route("getCustomerById")]
+        [Route("getById")]
         public async Task<ActionResult<UpdateCustomerViewModel>> GetSingleCustomer(Customer customerTemp)
         {
             //var customer = await _context.Customer.FindAsync(id);
@@ -54,21 +54,25 @@ namespace ApiService.Controllers
         // PUT: api/Customers/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see https://aka.ms/RazorPagesCRUD.
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutCustomer(string id, [FromBody]UpdateCustomerViewModel customer)
+        [Route("update/{id}")]
+        [HttpPost]        
+        public async Task<ActionResult<WrapperListCustomerVM>> PutCustomer(string id, [FromBody]UpdateCustomerViewModel customer)
         {
             if (id != customer.CustomerId)
             {
                 return BadRequest();
             }
-
+            bool result = false;
             //_context.Entry(customer).State = EntityState.Modified;
             try
             {
-                await _serviceWrapper.CustomerService.UpdateCustomer(id, customer);                           
+                result =   await _serviceWrapper.CustomerService.UpdateCustomer(id, customer);                           
             }
-            catch (DbUpdateConcurrencyException)
+            catch (DbUpdateConcurrencyException exc)
             {
+                _logger.LogError(exc.ToString());
+                _logger.LogInfo("-----------------------------------------------------------------");
+                _logger.LogInfo("-----------------------------------------------------------------");
                 if (!CustomerExists(customer.Name,customer.Email))
                 {
                     return NotFound();
@@ -77,9 +81,17 @@ namespace ApiService.Controllers
                 {
                     throw;
                 }
+                 
             }
-
-            return NoContent();
+            var dataParam = new GetDataListVM()
+            {
+                FactoryId = customer.FactoryId,
+                PageNumber = 1,
+                PageSize = 10,
+                TotalRows = 0
+            };
+            WrapperListCustomerVM data = await _serviceWrapper.CustomerService.GetCustomerListPaged(dataParam);
+            return data;
         }
         // POST: api/Customers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for
@@ -91,7 +103,7 @@ namespace ApiService.Controllers
             {
                 await _serviceWrapper.CustomerService.AddCustomer(customerVM);
                 _logger.LogInfo("Customer Successfully Added");
-                _logger.LogInfo("Customer Successfully Added");
+              
             }
             catch (DbUpdateException ex)
             {
@@ -114,18 +126,27 @@ namespace ApiService.Controllers
             return Ok(true);
         }
         // DELETE: api/Customers/5
-        [HttpDelete("{id}")]
-        public async Task<ActionResult<Customer>> DeleteCustomer(string id)
+       [HttpPost]
+       [Route("delete")]
+        public async Task<ActionResult<WrapperListCustomerVM>> DeleteCustomer([FromBody]UpdateCustomerViewModel customerTemp)
         {
-            var customerTask =  await _repositoryWrapper.Customer.FindByConditionAsync(x => x.Id == id);
+            var customerTask =  await _repositoryWrapper.Customer.FindByConditionAsync(x => x.Id == customerTemp.CustomerId && x.FactoryId == customerTemp.FactoryId);
             var customer = customerTask.ToList().FirstOrDefault();
             if (customer == null)
             {
                 return NotFound();
             }
                 _repositoryWrapper.Customer.Delete(customer);
-                await _repositoryWrapper.SaveAsync();
-            return customer;
+                await _repositoryWrapper.Customer.SaveChangesAsync();
+            var dataParam = new GetDataListVM()
+            {
+                FactoryId = customerTemp.FactoryId,
+                PageNumber = 1,
+                PageSize = 10,
+                TotalRows = 0
+            };
+            WrapperListCustomerVM data = await _serviceWrapper.CustomerService.GetCustomerListPaged(dataParam);
+            return data;
         }
         private bool CustomerExists(string Name, string Email)
         {

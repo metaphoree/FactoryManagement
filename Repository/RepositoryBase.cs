@@ -28,7 +28,7 @@ namespace Repository
         public async Task<string> GetUniqueId()
         {
             int countOfRows =  await RepositoryContext.Set<T>().AsQueryable().CountAsync();
-            return typeof(T).Name + countOfRows;
+            return typeof(T).Name.ToUpper() + countOfRows;
         }
         public IQueryable<T> FindAll()
         {
@@ -72,7 +72,7 @@ namespace Repository
         public T Update(T entity)
         {
             Type type = entity.GetType();
-            type.GetProperty("UpdatedDateTime").SetValue(typeof(DateTime), DateTime.Now);
+            type.GetProperty("UpdatedDateTime").SetValue(entity, DateTime.Now);
             type.GetProperty("RowStatus").SetValue(entity, DB_ROW_STATUS.UPDATED.ToString());
             this.RepositoryContext.Set<T>().Update(entity);
             return entity;
