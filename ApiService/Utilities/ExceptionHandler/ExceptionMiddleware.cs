@@ -40,7 +40,10 @@ namespace ApiService.Utilities.ExceptionHandler
             return context.Response.WriteAsync(new ErrorDetails()
             {
                 StatusCode = context.Response.StatusCode,
-                Message = "Internal Server Error from the custom middleware."
+                Message =
+                exception.ToString() + 
+                "--------------Exception Middleware------------------------------------------------------------------"+
+                "--------------Exception Middleware------------------------------------------------------------------"
             }.ToString());
         }
     }

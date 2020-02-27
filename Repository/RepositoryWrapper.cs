@@ -12,7 +12,7 @@ namespace Repository
     public class RepositoryWrapper : IRepositoryWrapper
     {
         #region Var Declaration
-        FactoryManagementContext dbContext;
+       public FactoryManagementContext dbContext;
         public IAddressRepository _Address;
         ICustomerRepository _Customer;
         IDepartmentRepository _Department;
@@ -46,9 +46,16 @@ namespace Repository
         IUserAuthInfoRepository _UserAuthInfo;
         IUserRoleRepository _UserRole;
         #endregion
-        public RepositoryWrapper(FactoryManagementContext context)
+        public RepositoryWrapper(
+            FactoryManagementContext context,
+            ICustomerRepository customerRepository,
+            IAddressRepository addressRepository,
+            IPhoneRepository phoneRepository)
         {
             this.dbContext = context;
+            this._Address = addressRepository;
+            this._Customer = customerRepository;
+            this._Phone = phoneRepository;
         }
 
 

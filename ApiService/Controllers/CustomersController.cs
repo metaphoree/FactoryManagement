@@ -33,13 +33,9 @@ namespace ApiService.Controllers
         [Route("getAllCustomer")]
         public async Task<ActionResult<IEnumerable<ListCustomerVM>>> GetCustomer(GetDataListVM customer)
         {
-            var enumerables = await _serviceWrapper.CustomerService.GetCustomerList(customer.FactoryId);
-            var data = new WrapperListCustomerVM();
-            data.CustomerList = enumerables;
-            data.TotalRecoreds = await _context.Customer.AsQueryable().CountAsync();
+            var data = await _serviceWrapper.CustomerService.GetCustomerListPaged(customer);
             return Ok(data);
         }
-
         // GET: api/Customers/5
         [HttpPost]
         [Route("getCustomerById")]
@@ -99,7 +95,9 @@ namespace ApiService.Controllers
             }
             catch (DbUpdateException ex)
             {
-                _logger.LogInfo(ex.Message);
+                _logger.LogInfo(ex.ToString());
+                _logger.LogInfo("-----------------------------------------------------------------");
+                _logger.LogInfo("-----------------------------------------------------------------");
                 if (CustomerExists(customerVM.Name, customerVM.Email))
                 {
                     _logger.LogInfo("Entity already exist");
@@ -129,7 +127,6 @@ namespace ApiService.Controllers
                 await _repositoryWrapper.SaveAsync();
             return customer;
         }
-
         private bool CustomerExists(string Name, string Email)
         {
             return _context.Customer.Any(e => e.Email == Email && e.Name == Name);

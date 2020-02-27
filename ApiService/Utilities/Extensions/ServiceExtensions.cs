@@ -13,6 +13,8 @@ using Microsoft.OpenApi.Models;
 using System;
 using System.Reflection;
 using System.IO;
+using Repository.EntitywiseRepository;
+using Contracts.EntitywiseContracts;
 
 namespace ApiService.Utilities.Extensions
 {
@@ -38,12 +40,20 @@ namespace ApiService.Utilities.Extensions
         public static void ConfigureDBContext(this IServiceCollection services, IConfiguration config)
         {
             services.AddDbContext<FactoryManagementContext>(opts =>
-            opts.UseSqlServer(config.GetConnectionString("SqlConnection"), optionss => optionss.MigrationsAssembly("ApiService")));
+            opts.UseSqlServer(config.GetConnectionString("SqlConnection"), optionss => optionss.MigrationsAssembly("ApiService")), ServiceLifetime.Transient);
         }
         public static void ConfigureLoggerService(this IServiceCollection services)
         {
             services.AddSingleton<ILoggerManager, LoggerManager>();
         }
+
+        public static void ConfigureRepository(this IServiceCollection services) {
+            services.AddScoped<ICustomerRepository,CustomerRepository>();
+            services.AddScoped<IAddressRepository, AddressRepository>();
+            services.AddScoped<IPhoneRepository, PhoneRepository>();
+        }
+        
+        
         public static void ConfigureRepositoryWrapper(this IServiceCollection services)
         {
             services.AddScoped<IRepositoryWrapper, RepositoryWrapper>();

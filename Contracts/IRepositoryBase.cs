@@ -17,5 +17,7 @@ namespace Contracts
         T Update(T entity);
         T Delete(T entity);
         Task<long> NumOfRecord();
+        Task<string> GetUniqueId();
+        Task<int> SaveChangesAsync();
     }
 }

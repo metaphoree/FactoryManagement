@@ -13,5 +13,6 @@ namespace Contracts.ServiceContracts
         Task UpdateCustomer(string id, UpdateCustomerViewModel updateCustomerViewModel);
         Task<List<ListCustomerVM>> GetCustomerList(string FactoryId);
         Task<UpdateCustomerViewModel> GetCustomer(string cusId, string FactoryId);
+        Task<WrapperListCustomerVM> GetCustomerListPaged(GetDataListVM dataListVM);
     }
 }

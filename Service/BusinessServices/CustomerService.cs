@@ -31,9 +31,10 @@ namespace Service.BusinessServices
             var CustomerDT = _mapper.Map<AddCustomerViewModel, Customer>(addCustomerViewModel);
             var AddressDT  = _mapper.Map<AddCustomerViewModel, Address>(addCustomerViewModel);
             var PhoneDT = _mapper.Map<AddCustomerViewModel, Phone>(addCustomerViewModel);
-            Task<string> cusUnique =  _utilService.GetUniqueId("Customer");
-            Task<string> addressUnique =  _utilService.GetUniqueId("Address");
-            Task<string> phoneUnique =  _utilService.GetUniqueId("Phone");
+            
+            Task<string> cusUnique = _repositoryWrapper.Customer.GetUniqueId();
+            Task<string> addressUnique = _repositoryWrapper.Address.GetUniqueId();
+            Task<string> phoneUnique = _repositoryWrapper.Phone.GetUniqueId();
 
             await Task.WhenAll(cusUnique, addressUnique, phoneUnique);
 
@@ -49,11 +50,17 @@ namespace Service.BusinessServices
             PhoneDT = _repositoryWrapper.Phone.Create(PhoneDT);
             try
             {
-            await _repositoryWrapper.SaveAsync();
+               Task<int> t1 =  _repositoryWrapper.Customer.SaveChangesAsync();
+                Task<int> t2 = _repositoryWrapper.Address.SaveChangesAsync();
+                Task<int> t3 = _repositoryWrapper.Phone.SaveChangesAsync();
+                // await _repositoryWrapper.SaveAsync();
+                await Task.WhenAll(t1, t2, t3);
                 this._logger.LogInfo("Successful In saving");
             }
             catch (Exception ex) {
                 this._logger.LogInfo(ex.ToString());
+                _logger.LogInfo("-----------------------------------------------------------------");
+                _logger.LogInfo("-----------------------------------------------------------------");
                 return false;
             }
             return true;
@@ -101,16 +108,16 @@ namespace Service.BusinessServices
 
            return  outputList;
         }
-        public async Task<List<ListCustomerVM>> GetCustomerListPaged(GetDataListVM dataListVM)
+        public async Task<WrapperListCustomerVM> GetCustomerListPaged(GetDataListVM dataListVM)
         {
             Task<IEnumerable<Customer>> custListTask =   _repositoryWrapper.Customer.FindByConditionAsync(x => x.FactoryId == dataListVM.FactoryId);
             Task<IEnumerable<Address>> addressListTask =  _repositoryWrapper.Address.FindByConditionAsync(x => x.FactoryId == dataListVM.FactoryId);
             Task<IEnumerable<Phone>> phoneListTask  =  _repositoryWrapper.Phone.FindByConditionAsync(x => x.FactoryId == dataListVM.FactoryId);
+            Task<long> noOfRecordTask = _repositoryWrapper.Customer.NumOfRecord();
+            await Task.WhenAll(custListTask, addressListTask, phoneListTask, noOfRecordTask);
 
 
-            await Task.WhenAll(custListTask, addressListTask, phoneListTask);
-
-            List<Customer> custList = custListTask.Result.ToList();
+            List<Customer> custList = custListTask.Result.ToList().OrderByDescending(x => x.CreatedDateTime).ToList();//.Skip((dataListVM.PageNumber - 1) * dataListVM.PageSize).Take(dataListVM.PageSize).OrderByDescending(x => x.CreatedDateTime).ToList();
             List<Address> addressList = addressListTask.Result.ToList();
             List<Phone> phoneList = phoneListTask.Result.ToList();
 
@@ -125,10 +132,29 @@ namespace Service.BusinessServices
                 output = _mapper.Map<Customer, ListCustomerVM>(tempCustomer, output);
                 output = _mapper.Map<Address, ListCustomerVM>(tempAddress, output);
                 output = _mapper.Map<Phone, ListCustomerVM>(tempPhone, output);
-                outputList.Add(output);
+                if (dataListVM.GlobalFilter != null)
+                {
+                    if (output.AlternateCellNo.Contains(dataListVM.GlobalFilter,StringComparison.OrdinalIgnoreCase)
+                        || output.CellNo.Contains(dataListVM.GlobalFilter, StringComparison.OrdinalIgnoreCase)
+                        || output.Email.Contains(dataListVM.GlobalFilter, StringComparison.OrdinalIgnoreCase)
+                        || output.Name.Contains(dataListVM.GlobalFilter, StringComparison.OrdinalIgnoreCase)
+                         || output.PermanentAddress.Contains(dataListVM.GlobalFilter, StringComparison.OrdinalIgnoreCase)
+                          || output.PresentAddress.Contains(dataListVM.GlobalFilter, StringComparison.OrdinalIgnoreCase))
+                    {
+                        outputList.Add(output);
+                    }
+                }
+                else {
+                    outputList.Add(output);
+                }
+               
             }
+            outputList = outputList.Skip((dataListVM.PageNumber - 1) * dataListVM.PageSize).Take(dataListVM.PageSize).ToList();
+            var data = new WrapperListCustomerVM();
+            data.CustomerList = outputList;
+            data.TotalRecoreds = noOfRecordTask.Result;
 
-            return outputList;
+            return data;
         }
         public async Task<UpdateCustomerViewModel> GetCustomer(string cusId,string FactoryId) {
             Task<IEnumerable<Customer>> CustomersDB =  _repositoryWrapper.Customer.FindByConditionAsync(x => x.Id == cusId && x.FactoryId == FactoryId);
