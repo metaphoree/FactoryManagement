@@ -48,9 +48,39 @@ namespace ApiService.Utilities.Extensions
         }
 
         public static void ConfigureRepository(this IServiceCollection services) {
-            services.AddScoped<ICustomerRepository,CustomerRepository>();
+                                
             services.AddScoped<IAddressRepository, AddressRepository>();
+            services.AddScoped<ICustomerRepository,CustomerRepository>();
+            services.AddScoped<IDepartmentRepository, DepartmentRepository>();
+            services.AddScoped<IEquipmentRepository, EquipmentRepository>();
+            services.AddScoped<IEquipmentCategoryRepository, EquipmentCategoryRepository>();
+            services.AddScoped<IExpenseRepository, ExpenseRepository>();
+            services.AddScoped<IExpenseTypeRepository, ExpenseTypeRepository>();
+            services.AddScoped<IFactoryRepository, FactoryRepository>();
+            services.AddScoped<IIncomeTypeRepository, IncomeTypeRepository>();
+            services.AddScoped<IInvoiceRepository, InvoiceRepository>();
+            services.AddScoped<IInvoiceTypeRepository, InvoiceTypeRepository>();
+            services.AddScoped<IItemRepository, ItemRepository>();
+            services.AddScoped<IItemCategoryRepository, ItemCategoryRepository>();
+            services.AddScoped<IItemStatusRepository, ItemStatusRepository>();
+            services.AddScoped<IPayableRepository, PayableRepository>();
+            services.AddScoped<IPaymentStatusRepository, PaymentStatusRepository>();
             services.AddScoped<IPhoneRepository, PhoneRepository>();
+            services.AddScoped<IProductionRepository, ProductionRepository>();
+            services.AddScoped<IPurchaseRepository, PurchaseRepository>();
+            services.AddScoped<IPurchaseTypeRepository, PurchaseTypeRepository>();
+            services.AddScoped<IRecievableRepository, RecievableRepository>();
+            services.AddScoped<IRoleRepository, RoleRepository>();
+            services.AddScoped<ISalesRepository, SalesRepository>();
+            services.AddScoped<IStaffRepository, StaffRepository>();
+            services.AddScoped<IStockRepository, StockRepository>();
+            services.AddScoped<IStockInRepository, StockInRepository>();
+            services.AddScoped<IStockOutRepository, StockOutRepository>();
+            services.AddScoped<ISupplierRepository, SupplierRepository>();
+            services.AddScoped<ITransactionRepository, TransactionRepository>();
+            services.AddScoped<ITransactionTypeRepository, TransactionTypeRepository>();
+            services.AddScoped<IUserAuthInfoRepository, UserAuthInfoRepository>();
+            services.AddScoped<IUserRoleRepository, UserRoleRepository>();
         }
         
         public static void ConfigureRepositoryWrapper(this IServiceCollection services)
