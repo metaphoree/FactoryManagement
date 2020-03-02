@@ -8,10 +8,11 @@ using Microsoft.EntityFrameworkCore;
 using Entities.DbModels;
 using Contracts;
 using Entities.ViewModels.Item;
+using Entities.ViewModels;
 
 namespace ApiService.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/Item")]
     [ApiController]
     public class ItemsController : ControllerBase
     {
@@ -29,17 +30,17 @@ namespace ApiService.Controllers
         }
 
         // GET: api/Items
-        [HttpGet]
-        public async Task<ActionResult<IEnumerable<Item>>> GetItem()
+        [HttpPost]
+        [Route("getAll")]
+        public async Task<ActionResult<WrapperItemListVM>> GetCustomer(GetDataListVM dataParam)
         {
-
-            var enumerables = await _repositoryWrapper.Item.FindAllAsync();
-            return enumerables.ToList();
-            //  return await _context.Item.ToListAsync();
+            var data = await _serviceWrapper.ItemService.GetListPaged(dataParam);
+            return Ok(data);
         }
 
         // GET: api/Items/5
-        [HttpGet("{id}")]
+        [HttpPost]
+        [Route("getById")]
         public async Task<ActionResult<Item>> GetItem(string id)
         {
             // var item = await _context.Item.FindAsync(id);
@@ -56,8 +57,9 @@ namespace ApiService.Controllers
         // PUT: api/Items/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see https://aka.ms/RazorPagesCRUD.
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutItem(string id, [FromBody]UpdateItemVM item)
+        [Route("update/{id}")]
+        [HttpPost]
+        public async Task<IActionResult> PutItem(string id, [FromBody]ItemVM item)
         {
             if (id != item.Id)
             {
@@ -69,7 +71,7 @@ namespace ApiService.Controllers
             try
             {
                 //   await _context.SaveChangesAsync();
-                await _serviceWrapper.ItemService.UpdateItem(id, item);
+                await _serviceWrapper.ItemService.Update(id, item);
             }
             catch (DbUpdateConcurrencyException)
             {
@@ -90,13 +92,14 @@ namespace ApiService.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see https://aka.ms/RazorPagesCRUD.
         [HttpPost]
-        public async Task<ActionResult<Item>> PostItem([FromBody]AddItemVM item)
+        [Route("add")]
+        public async Task<ActionResult<Item>> PostItem([FromBody]ItemVM item)
         {
            // _context.Item.Add(item);
             try
             {
                 //   await _context.SaveChangesAsync();
-                await _serviceWrapper.ItemService.AddItem(item);
+                await _serviceWrapper.ItemService.Add(item);
             }
             catch (DbUpdateException)
             {
@@ -115,20 +118,11 @@ namespace ApiService.Controllers
         }
 
         // DELETE: api/Items/5
-        [HttpDelete("{id}")]
-        public async Task<ActionResult<Item>> DeleteItem(string id)
+        [HttpPost]
+        [Route("delete")]
+        public async Task<ActionResult<WrapperItemListVM>> DeleteItem([FromBody]ItemVM itemVM)
         {
-            var itemList = await _repositoryWrapper.Item.FindByConditionAsync(x => x.Id ==  id);
-            var item = itemList.ToList().FirstOrDefault();
-            if (item == null)
-            {
-                return NotFound();
-            }
-
-            _repositoryWrapper.Item.Delete(item);
-            await _repositoryWrapper.SaveAsync();
-
-            return item;
+            return await _serviceWrapper.ItemService.Delete(itemVM);
         }
 
         private bool ItemExists(string CategoryId,decimal? UnitPrice,string Name)

@@ -195,7 +195,7 @@ namespace Service
             {
                 if (_ItemService == null)
                 {
-                    _ItemService = new ItemService(_repositoryWrapper, _mapper);
+                    _ItemService = new ItemService(_repositoryWrapper, _mapper, _loggerManager);
                 }
                 return _ItemService;
             }
@@ -207,7 +207,7 @@ namespace Service
             {
                 if (_ItemCategoryService == null)
                 {
-                    _ItemCategoryService = new ItemCategoryService(_repositoryWrapper, _mapper);
+                    _ItemCategoryService = new ItemCategoryService(_repositoryWrapper, _mapper, _loggerManager);
                 }
                 return _ItemCategoryService;
             }

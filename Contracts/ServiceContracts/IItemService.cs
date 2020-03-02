@@ -1,4 +1,5 @@
-﻿using Entities.ViewModels.Item;
+﻿using Entities.ViewModels;
+using Entities.ViewModels.Item;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -8,7 +9,11 @@ namespace Contracts.ServiceContracts
 {
     public interface IItemService
     {
-        Task AddItem(AddItemVM addItemModel);
-        Task UpdateItem(string id, UpdateItemVM updateItemModel);
+        Task<WrapperItemListVM> GetListPaged(GetDataListVM dataListVM);
+        Task<bool> Add(ItemVM vm);
+        Task<bool> Update(string id, ItemVM vm);
+        Task<WrapperItemListVM> Delete(ItemVM itemTemp);
+
+
     }
 }

@@ -1,4 +1,5 @@
-﻿using Entities.ViewModels.ItemCategoryView;
+﻿using Entities.ViewModels;
+using Entities.ViewModels.ItemCategoryView;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -8,7 +9,10 @@ namespace Contracts.ServiceContracts
 {
     public interface IItemCategoryService
     {
-        Task AddItemCategory(AddItemCategoryViewModel addItemCategoryModel);
-        Task UpdateItemCategory(string id, UpdateItemCategoryViewModel updateItemCategoryModel);
+
+        Task<WrapperItemCategoryListVM> GetListPaged(GetDataListVM dataListVM);
+        Task<bool> Add(ItemCategoryVM vm);
+        Task<bool> Update(string id, ItemCategoryVM vm);
+        Task<WrapperItemCategoryListVM> Delete(ItemCategoryVM itemTemp);
     }
 }

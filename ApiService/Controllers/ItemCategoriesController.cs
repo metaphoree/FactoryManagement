@@ -8,10 +8,11 @@ using Microsoft.EntityFrameworkCore;
 using Entities.DbModels;
 using Contracts;
 using Entities.ViewModels.ItemCategoryView;
+using Entities.ViewModels;
 
 namespace ApiService.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/ItemCategory")]
     [ApiController]
     public class ItemCategoriesController : ControllerBase
     {
@@ -28,16 +29,17 @@ namespace ApiService.Controllers
         }
 
         // GET: api/ItemCategories
-        [HttpGet]
-        public async Task<ActionResult<IEnumerable<ItemCategory>>> GetItemCategory()
+        [HttpPost]
+        [Route("getAll")]
+        public async Task<ActionResult<WrapperItemCategoryListVM>> GetCustomer(GetDataListVM customer)
         {
-            var enumerables = await _repositoryWrapper.ItemCategory.FindAllAsync();
-            return enumerables.ToList();
-            // return await _context.ItemCategory.ToListAsync();
+            var data = await _serviceWrapper.ItemCategoryService.GetListPaged(customer);
+            return Ok(data);
         }
 
         // GET: api/ItemCategories/5
-        [HttpGet("{id}")]
+        [HttpPost]
+        [Route("getById")]
         public async Task<ActionResult<ItemCategory>> GetItemCategory(string id)
         {
             //var itemCategory = await _context.ItemCategory.FindAsync(id);
@@ -54,8 +56,9 @@ namespace ApiService.Controllers
         // PUT: api/ItemCategories/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see https://aka.ms/RazorPagesCRUD.
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutItemCategory(string id, UpdateItemCategoryViewModel itemCategory)
+        [Route("update/{id}")]
+        [HttpPost]
+        public async Task<IActionResult> PutItemCategory(string id, ItemCategoryVM itemCategory)
         {
             if (id != itemCategory.Id)
             {
@@ -65,7 +68,7 @@ namespace ApiService.Controllers
             // _context.Entry(itemCategory).State = EntityState.Modified;
             try
             {
-                await _serviceWrapper.ItemCategoryService.UpdateItemCategory(id, itemCategory);
+                await _serviceWrapper.ItemCategoryService.Update(id, itemCategory);
             }
             catch (DbUpdateConcurrencyException)
             {
@@ -86,11 +89,12 @@ namespace ApiService.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see https://aka.ms/RazorPagesCRUD.
         [HttpPost]
-        public async Task<ActionResult<ItemCategory>> PostItemCategory([FromBody]AddItemCategoryViewModel itemCategory)
+        [Route("add")]
+        public async Task<ActionResult<ItemCategory>> PostItemCategory([FromBody]ItemCategoryVM itemCategory)
         {
             try
             {
-                await _serviceWrapper.ItemCategoryService.AddItemCategory(itemCategory);
+                await _serviceWrapper.ItemCategoryService.Add(itemCategory);
             }
             catch (DbUpdateException)
             {
@@ -108,20 +112,11 @@ namespace ApiService.Controllers
         }
 
         // DELETE: api/ItemCategories/5
-        [HttpDelete("{id}")]
-        public async Task<ActionResult<ItemCategory>> DeleteItemCategory(string id)
+        [HttpPost]
+        [Route("delete")]
+        public async Task<ActionResult<WrapperItemCategoryListVM>> DeleteItemCategory([FromBody]ItemCategoryVM itemVM)
         {
-            var itemCategoryIen = await _repositoryWrapper.ItemCategory.FindByConditionAsync(x => x.Id == id);
-            var itemCategory = itemCategoryIen.ToList().FirstOrDefault();
-            if (itemCategory == null)
-            {
-                return NotFound();
-            }
-
-            _repositoryWrapper.ItemCategory.Delete(itemCategory);
-            await _repositoryWrapper.SaveAsync();
-
-            return itemCategory;
+            return await _serviceWrapper.ItemCategoryService.Delete(itemVM);
         }
 
         private bool ItemCategoryExists(string name)

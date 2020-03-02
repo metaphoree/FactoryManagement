@@ -26,7 +26,7 @@ namespace Service.BusinessServices
             this._utilService = utilService;
         }
 
-        public async Task<bool> AddCustomer(AddCustomerViewModel addCustomerViewModel)
+        public async Task<bool> Add(AddCustomerViewModel addCustomerViewModel)
         {
             var CustomerDT = _mapper.Map<AddCustomerViewModel, Customer>(addCustomerViewModel);
             var AddressDT  = _mapper.Map<AddCustomerViewModel, Address>(addCustomerViewModel);
@@ -65,7 +65,7 @@ namespace Service.BusinessServices
             }
             return true;
         }
-        public async Task<bool> UpdateCustomer(string id, UpdateCustomerViewModel updateCustomerViewModel)
+        public async Task<bool> Update(string id, UpdateCustomerViewModel updateCustomerViewModel)
         {
             Task<IEnumerable<Customer>> CustomersDB =  _repositoryWrapper.Customer.FindByConditionAsync(x => x.Id == id && x.FactoryId == updateCustomerViewModel.FactoryId);
             Task<IEnumerable<Address>> AddressesDB =  _repositoryWrapper.Address.FindByConditionAsync(x => x.RelatedId == id && x.FactoryId == updateCustomerViewModel.FactoryId);
@@ -96,7 +96,7 @@ namespace Service.BusinessServices
             }
             return true;
         }
-        public async Task<List<ListCustomerVM>> GetCustomerList(string FactoryId) {
+        public async Task<List<ListCustomerVM>> GetList(string FactoryId) {
 
             Task<IEnumerable<Customer>> custListTask =  _repositoryWrapper.Customer.FindByConditionAsync(x => x.FactoryId == FactoryId);
             Task<IEnumerable<Address>> addressListTask =  _repositoryWrapper.Address.FindByConditionAsync(x => x.FactoryId == FactoryId);
@@ -123,7 +123,7 @@ namespace Service.BusinessServices
 
            return  outputList;
         }
-        public async Task<WrapperListCustomerVM> GetCustomerListPaged(GetDataListVM dataListVM)
+        public async Task<WrapperListCustomerVM> GetListPaged(GetDataListVM dataListVM)
         {
             Task<IEnumerable<Customer>> custListTask =   _repositoryWrapper.Customer.FindByConditionAsync(x => x.FactoryId == dataListVM.FactoryId);
             Task<IEnumerable<Address>> addressListTask =  _repositoryWrapper.Address.FindByConditionAsync(x => x.FactoryId == dataListVM.FactoryId);
@@ -171,12 +171,30 @@ namespace Service.BusinessServices
 
             return data;
         }
-     
 
 
+        public async Task<WrapperListCustomerVM> Delete(UpdateCustomerViewModel customerTemp) {
+            var customerTask = await _repositoryWrapper.Customer.FindByConditionAsync(x => x.Id == customerTemp.CustomerId && x.FactoryId == customerTemp.FactoryId);
+            var customer = customerTask.ToList().FirstOrDefault();
+            if (customer == null)
+            {
+                return new WrapperListCustomerVM();
+            }
+            _repositoryWrapper.Customer.Delete(customer);
+            await _repositoryWrapper.Customer.SaveChangesAsync();
+            var dataParam = new GetDataListVM()
+            {
+                FactoryId = customerTemp.FactoryId,
+                PageNumber = 1,
+                PageSize = 10,
+                TotalRows = 0
+            };
+            WrapperListCustomerVM data = await GetListPaged(dataParam);
+            return data;
+        }
 
 
-        public async Task<UpdateCustomerViewModel> GetCustomer(string cusId,string FactoryId) {
+        public async Task<UpdateCustomerViewModel> GetSingle(string cusId,string FactoryId) {
             Task<IEnumerable<Customer>> CustomersDB =  _repositoryWrapper.Customer.FindByConditionAsync(x => x.Id == cusId && x.FactoryId == FactoryId);
             Task <IEnumerable<Address>> AddressesDB =  _repositoryWrapper.Address.FindByConditionAsync(x => x.Id == cusId && x.FactoryId == FactoryId);
             Task <IEnumerable<Phone>> PhonesDB =  _repositoryWrapper.Phone.FindByConditionAsync(x => x.Id == cusId && x.FactoryId == FactoryId);

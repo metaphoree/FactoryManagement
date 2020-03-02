@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace ApiService.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/Customer")]
     [ApiController]
     public class CustomersController : ControllerBase
     {
@@ -31,9 +31,9 @@ namespace ApiService.Controllers
         // GET: api/Customers/ii
         [HttpPost]
         [Route("getAll")]
-        public async Task<ActionResult<IEnumerable<ListCustomerVM>>> GetCustomer(GetDataListVM customer)
+        public async Task<ActionResult<WrapperListCustomerVM>> GetCustomer(GetDataListVM customer)
         {
-            var data = await _serviceWrapper.CustomerService.GetCustomerListPaged(customer);
+            var data = await _serviceWrapper.CustomerService.GetListPaged(customer);
             return Ok(data);
         }
         // GET: api/Customers/5
@@ -42,7 +42,7 @@ namespace ApiService.Controllers
         public async Task<ActionResult<UpdateCustomerViewModel>> GetSingleCustomer(Customer customerTemp)
         {
             //var customer = await _context.Customer.FindAsync(id);
-            var customer = await _serviceWrapper.CustomerService.GetCustomer(customerTemp.Id, customerTemp.FactoryId);
+            var customer = await _serviceWrapper.CustomerService.GetSingle(customerTemp.Id, customerTemp.FactoryId);
             if (customer == null)
             {
                 return NotFound();
@@ -66,7 +66,7 @@ namespace ApiService.Controllers
             //_context.Entry(customer).State = EntityState.Modified;
             try
             {
-                result =   await _serviceWrapper.CustomerService.UpdateCustomer(id, customer);                           
+                result =   await _serviceWrapper.CustomerService.Update(id, customer);                           
             }
             catch (DbUpdateConcurrencyException exc)
             {
@@ -90,18 +90,19 @@ namespace ApiService.Controllers
                 PageSize = 10,
                 TotalRows = 0
             };
-            WrapperListCustomerVM data = await _serviceWrapper.CustomerService.GetCustomerListPaged(dataParam);
+            WrapperListCustomerVM data = await _serviceWrapper.CustomerService.GetListPaged(dataParam);
             return data;
         }
         // POST: api/Customers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see https://aka.ms/RazorPagesCRUD.
+        [Route("add")]
         [HttpPost]
         public async Task<ActionResult<Customer>> PostCustomer([FromBody]AddCustomerViewModel customerVM)
         {
             try
             {
-                await _serviceWrapper.CustomerService.AddCustomer(customerVM);
+                await _serviceWrapper.CustomerService.Add(customerVM);
                 _logger.LogInfo("Customer Successfully Added");
               
             }
@@ -130,23 +131,7 @@ namespace ApiService.Controllers
        [Route("delete")]
         public async Task<ActionResult<WrapperListCustomerVM>> DeleteCustomer([FromBody]UpdateCustomerViewModel customerTemp)
         {
-            var customerTask =  await _repositoryWrapper.Customer.FindByConditionAsync(x => x.Id == customerTemp.CustomerId && x.FactoryId == customerTemp.FactoryId);
-            var customer = customerTask.ToList().FirstOrDefault();
-            if (customer == null)
-            {
-                return NotFound();
-            }
-                _repositoryWrapper.Customer.Delete(customer);
-                await _repositoryWrapper.Customer.SaveChangesAsync();
-            var dataParam = new GetDataListVM()
-            {
-                FactoryId = customerTemp.FactoryId,
-                PageNumber = 1,
-                PageSize = 10,
-                TotalRows = 0
-            };
-            WrapperListCustomerVM data = await _serviceWrapper.CustomerService.GetCustomerListPaged(dataParam);
-            return data;
+            return await _serviceWrapper.CustomerService.Delete(customerTemp);
         }
         private bool CustomerExists(string Name, string Email)
         {

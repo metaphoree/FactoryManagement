@@ -4,10 +4,10 @@ using System.Text;
 
 namespace Entities.ViewModels.ItemCategoryView
 {
-  public  class WrapperListVM
+  public  class WrapperItemCategoryListVM
     {
       
-            public int TotalRecoreds { get; set; }
+            public long TotalRecoreds { get; set; }
             public List<ItemCategoryVM> ListOfData { get; set; }        
     }
 }
