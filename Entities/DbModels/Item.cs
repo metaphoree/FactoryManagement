@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Entities.DbModels
 {
@@ -10,6 +11,7 @@ namespace Entities.DbModels
         public string CategoryId { get; set; }
         public decimal? UnitPrice { get; set; }
 
-        public ItemCategory ItemCategory { get; set; }
+        [ForeignKey("CategoryId")]
+        public virtual ItemCategory ItemCategory { get; set; }
     }
 }

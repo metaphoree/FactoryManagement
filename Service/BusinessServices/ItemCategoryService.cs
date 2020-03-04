@@ -46,38 +46,56 @@ namespace Service.BusinessServices
                 ListOfData = itemCategoryVMLists,
                 TotalRecoreds = dataRowCount
             };
+            this._logger.LogInfo("Successful In Getting  Item Category");
+            _logger.LogInfo("----------------------" + DateTime.UtcNow.ToLongDateString() + "-------------------------------------------");
+            _logger.LogInfo("-----------------------------------------------------------------");
             return wrapper;
         }
-        public async Task<bool> Add(ItemCategoryVM vm)
+        public async Task<WrapperItemCategoryListVM> Add(ItemCategoryVM vm)
         {
             var entityToAdd = _mapper.Map<ItemCategoryVM, ItemCategory>(vm);
-            string uniqueIdTask =await _repositoryWrapper.ItemCategory.GetUniqueId();
-          
-            // Todo  need to aandle unique id from db
-            entityToAdd.UniqueId = uniqueIdTask;
+            //string uniqueIdTask =await _repositoryWrapper.ItemCategory.GetUniqueId();
+
+            //// Todo  need to aandle unique id from db
+            //entityToAdd.UniqueId = uniqueIdTask;
             entityToAdd = _repositoryWrapper.ItemCategory.Create(entityToAdd);
             await _repositoryWrapper.ItemCategory.SaveChangesAsync();
             this._logger.LogInfo("Successful In saving  Item Category");
+            _logger.LogInfo("-----------------------" + DateTime.UtcNow.ToLongDateString() + "-----------------");
             _logger.LogInfo("-----------------------------------------------------------------");
-            _logger.LogInfo("-----------------------------------------------------------------");
-
-            return true;
+            var dataParam = new GetDataListVM()
+            {
+                FactoryId = vm.FactoryId,
+                PageNumber = 1,
+                PageSize = 10,
+                TotalRows = 0
+            };
+            WrapperItemCategoryListVM data = await GetListPaged(dataParam);
+            return data;
         }
-        public async Task<bool> Update(string id, ItemCategoryVM vm)
+        public async Task<WrapperItemCategoryListVM> Update(string id, ItemCategoryVM vm)
         {
             IEnumerable<ItemCategory> ItemDB = await _repositoryWrapper.ItemCategory.FindByConditionAsync(x => x.Id == id && x.FactoryId == vm.FactoryId);
             var ItemUpdated = _mapper.Map<ItemCategoryVM, ItemCategory>(vm, ItemDB.ToList().FirstOrDefault());
             _repositoryWrapper.ItemCategory.Update(ItemUpdated);
             await _repositoryWrapper.ItemCategory.SaveChangesAsync();
             this._logger.LogInfo("Successful In Updating Item Cateory");
-            _logger.LogInfo("-----------------------------------------------------------------");
+            _logger.LogInfo("---------------------" + DateTime.UtcNow.ToLongDateString() + "-------------------");
             _logger.LogInfo("-----------------------------------------------------------------");
 
-            return true;
+            var dataParam = new GetDataListVM()
+            {
+                FactoryId = vm.FactoryId,
+                PageNumber = 1,
+                PageSize = 10,
+                TotalRows = 0
+            };
+            WrapperItemCategoryListVM data = await GetListPaged(dataParam);
+            return data;
         }
         public async Task<WrapperItemCategoryListVM> Delete(ItemCategoryVM itemTemp)
         {
-            var itemTask = await _repositoryWrapper.ItemCategory.FindByConditionAsync(x => x.Id == itemTemp.Id && x.FactoryId == itemTemp.FactoryId);
+            IEnumerable<ItemCategory> itemTask = await _repositoryWrapper.ItemCategory.FindByConditionAsync(x => x.Id == itemTemp.Id && x.FactoryId == itemTemp.FactoryId);
             var item = itemTask.ToList().FirstOrDefault();
             if (item == null)
             {
@@ -85,6 +103,9 @@ namespace Service.BusinessServices
             }
             _repositoryWrapper.ItemCategory.Delete(item);
             await _repositoryWrapper.ItemCategory.SaveChangesAsync();
+            this._logger.LogInfo("Successful In Deleting Item Cateory");
+            _logger.LogInfo("--------------------------" + DateTime.UtcNow.ToLongDateString() + "---------------------------------------");
+            _logger.LogInfo("-----------------------------------------------------------------");
             var dataParam = new GetDataListVM()
             {
                 FactoryId = itemTemp.FactoryId,
@@ -95,7 +116,7 @@ namespace Service.BusinessServices
             WrapperItemCategoryListVM data = await GetListPaged(dataParam);
             return data;
         }
-    
-    
+
+
     }
 }

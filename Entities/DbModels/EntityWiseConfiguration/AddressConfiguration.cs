@@ -1,5 +1,6 @@
 ﻿using Entities.Enums;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using System;
 using System.Collections.Generic;
@@ -30,10 +31,12 @@ namespace Entities.DbModels.EntityWiseConfiguration
                 .IsRequired()
                 .HasMaxLength(50);
 
-            builder.Property(e => e.UniqueId)
-                .IsRequired()
-                .HasMaxLength(50);
-
+            //builder.Property(e => e.UniqueId)
+            //    .IsRequired();
+            builder.Property(p => p.UniqueId)
+                .Metadata.SetAfterSaveBehavior(PropertySaveBehavior.Ignore);
+            //builder.Property(p => p.Id)
+            //    .Metadata.AfterSaveBehavior = PropertySaveBehavior.Ignore;
             builder.HasQueryFilter(s => s.RowStatus != DB_ROW_STATUS.DELETED.ToString());
         }
     }

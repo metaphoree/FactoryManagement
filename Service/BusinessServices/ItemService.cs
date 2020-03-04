@@ -27,9 +27,9 @@ namespace Service.BusinessServices
         public async Task<WrapperItemListVM> GetListPaged(GetDataListVM dataListVM)
         {
             var itemList = await _repositoryWrapper.Item
-                .FindAll()
-                .Include(x => x.ItemCategory)
+                .FindAll() 
                 .Where(x => x.FactoryId == dataListVM.FactoryId)
+                 .Include(x => x.ItemCategory)
                 .Skip(dataListVM.PageNumber - 1)
                 .Take(dataListVM.PageSize)
                 .OrderByDescending(x => x.UpdatedDateTime)
@@ -45,20 +45,28 @@ namespace Service.BusinessServices
             };
             return wrapper;
         }
-        public async Task<bool> Add(ItemVM vm)
+        public async Task<WrapperItemListVM> Add(ItemVM vm)
         {
             var entityToAdd = _mapper.Map<ItemVM, Item>(vm);
-            string uniqueIdTask = await _repositoryWrapper.Item.GetUniqueId();
-            entityToAdd.UniqueId = uniqueIdTask;
+            //string uniqueIdTask = await _repositoryWrapper.Item.GetUniqueId();
+            //entityToAdd.UniqueId = uniqueIdTask;
             entityToAdd = _repositoryWrapper.Item.Create(entityToAdd);
             await _repositoryWrapper.Item.SaveChangesAsync();
             this._logger.LogInfo("Successful In saving  Item");
             _logger.LogInfo("-----------------------------------------------------------------");
             _logger.LogInfo("-----------------------------------------------------------------");
 
-            return true;
+            var dataParam = new GetDataListVM()
+            {
+                FactoryId = vm.FactoryId,
+                PageNumber = 1,
+                PageSize = 10,
+                TotalRows = 0
+            };
+            WrapperItemListVM data = await GetListPaged(dataParam);
+            return data;
         }
-        public async Task<bool> Update(string id, ItemVM vm)
+        public async Task<WrapperItemListVM> Update(string id, ItemVM vm)
         {
             IEnumerable<Item> ItemDB =await _repositoryWrapper.Item.FindByConditionAsync(x => x.Id == id && x.FactoryId == vm.FactoryId);
             var ItemUpdated = _mapper.Map<ItemVM, Item>(vm, ItemDB.ToList().FirstOrDefault());
@@ -67,7 +75,15 @@ namespace Service.BusinessServices
             this._logger.LogInfo("Successful In Updating Item");
             _logger.LogInfo("-----------------------------------------------------------------");
             _logger.LogInfo("-----------------------------------------------------------------");
-            return true;
+            var dataParam = new GetDataListVM()
+            {
+                FactoryId = vm.FactoryId,
+                PageNumber = 1,
+                PageSize = 10,
+                TotalRows = 0
+            };
+            WrapperItemListVM data = await GetListPaged(dataParam);
+            return data;
         }
         public async Task<WrapperItemListVM> Delete(ItemVM itemTemp)
         {
@@ -89,7 +105,6 @@ namespace Service.BusinessServices
             WrapperItemListVM data = await GetListPaged(dataParam);
             return data;
         }
-
     }
 }
 

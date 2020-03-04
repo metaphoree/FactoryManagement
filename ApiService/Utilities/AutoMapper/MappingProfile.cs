@@ -65,18 +65,24 @@ namespace ApiService.Utilities.AutoMapper
         }
         public void Mapping_ItemCategoryVM()
         {
-
+            // GET
             CreateMap<ItemCategory, ItemCategoryVM>()
             .ForMember(dest => dest.Name, act => act.MapFrom(src => src.Name))
             .ForMember(dest => dest.FactoryId, act => act.MapFrom(src => src.FactoryId))
             .ForMember(dest => dest.Id, act => act.MapFrom(src => src.Id))
-            .ReverseMap()
              .ForAllOtherMembers(act => act.Ignore());
 
-            CreateMap<List<ItemCategory>, List<ItemCategoryVM>>();
+            // ADDITION + UPDATE 
+            CreateMap<ItemCategoryVM, ItemCategory>()
+            .ForMember(dest => dest.Name, act => act.MapFrom(src => src.Name))
+            .ForMember(dest => dest.FactoryId, act => act.MapFrom(src => src.FactoryId))
+            .ForAllOtherMembers(act => act.Ignore());
+
+            //  CreateMap<List<ItemCategory>, List<ItemCategoryVM>>();
         }
         public void Mapping_ItemVM()
         {
+            // GET 
             CreateMap<Item, ItemVM>()
                   .ForMember(dest => dest.Name, act => act.MapFrom(src => src.Name))
                   .ForMember(dest => dest.FactoryId, act => act.MapFrom(src => src.FactoryId))
@@ -84,16 +90,17 @@ namespace ApiService.Utilities.AutoMapper
                   .ForMember(dest => dest.UnitPrice, act => act.MapFrom(src => src.UnitPrice))
                   .ForMember(dest => dest.CategoryId, act => act.MapFrom(src => src.CategoryId))
                   .ForMember(dest => dest.CategoryName, act => act.MapFrom(src => src.ItemCategory.Name))
-                  .ReverseMap()
                   .ForAllOtherMembers(act => act.Ignore());
-            CreateMap<List<Item>, List<ItemVM>>();
+
+
+            // ADDITION + UPDATE 
+            CreateMap<ItemVM, Item>()
+                  .ForMember(dest => dest.Name, act => act.MapFrom(src => src.Name))
+                  .ForMember(dest => dest.FactoryId, act => act.MapFrom(src => src.FactoryId))
+                  .ForMember(dest => dest.UnitPrice, act => act.MapFrom(src => src.UnitPrice))
+                  .ForMember(dest => dest.CategoryId, act => act.MapFrom(src => src.CategoryId))
+                  .ForAllOtherMembers(act => act.Ignore());
         }
-
-
-
-
-
-
         public void Mapping_CustomerListView()
         {
 
@@ -118,12 +125,6 @@ namespace ApiService.Utilities.AutoMapper
 
 
         }
-
-
-
-
-
-
 
     }
 }

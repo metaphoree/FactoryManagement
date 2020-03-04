@@ -29,16 +29,16 @@ namespace ApiService.Controllers
             _logger = logger;
         }
 
-        // GET: api/Items
+
         [HttpPost]
         [Route("getAll")]
-        public async Task<ActionResult<WrapperItemListVM>> GetCustomer(GetDataListVM dataParam)
+        public async Task<ActionResult<WrapperItemListVM>> GetCustomer([FromBody]GetDataListVM dataParam)
         {
             var data = await _serviceWrapper.ItemService.GetListPaged(dataParam);
             return Ok(data);
         }
 
-        // GET: api/Items/5
+
         [HttpPost]
         [Route("getById")]
         public async Task<ActionResult<Item>> GetItem(string id)
@@ -54,75 +54,32 @@ namespace ApiService.Controllers
             return item;
         }
 
-        // PUT: api/Items/5
+
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see https://aka.ms/RazorPagesCRUD.
         [Route("update/{id}")]
         [HttpPost]
-        public async Task<IActionResult> PutItem(string id, [FromBody]ItemVM item)
+        public async Task<ActionResult<WrapperItemListVM>> PutItem(string id, [FromBody]ItemVM item)
         {
-            if (id != item.Id)
-            {
-                return BadRequest();
-            }
-
-           // _context.Entry(item).State = EntityState.Modified;
-
-            try
-            {
-                //   await _context.SaveChangesAsync();
-                await _serviceWrapper.ItemService.Update(id, item);
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!ItemExists(item.CategoryId, item.UnitPrice, item.Name))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return NoContent();
+           return Ok(await _serviceWrapper.ItemService.Update(id, item));            
         }
 
-        // POST: api/Items
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see https://aka.ms/RazorPagesCRUD.
         [HttpPost]
         [Route("add")]
-        public async Task<ActionResult<Item>> PostItem([FromBody]ItemVM item)
+        public async Task<ActionResult<WrapperItemListVM>> PostItem([FromBody]ItemVM item)
         {
-           // _context.Item.Add(item);
-            try
-            {
-                //   await _context.SaveChangesAsync();
-                await _serviceWrapper.ItemService.Add(item);
-            }
-            catch (DbUpdateException)
-            {
-                if (ItemExists(item.CategoryId,item.UnitPrice,item.Name))
-                {
-                    return Conflict();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            // return CreatedAtAction("GetItem", new { id = item.Id }, item);
-            return Ok(true);
+            
+            return Ok(await _serviceWrapper.ItemService.Add(item));
         }
 
-        // DELETE: api/Items/5
+
         [HttpPost]
         [Route("delete")]
         public async Task<ActionResult<WrapperItemListVM>> DeleteItem([FromBody]ItemVM itemVM)
         {
-            return await _serviceWrapper.ItemService.Delete(itemVM);
+            return Ok(await _serviceWrapper.ItemService.Delete(itemVM));
         }
 
         private bool ItemExists(string CategoryId,decimal? UnitPrice,string Name)

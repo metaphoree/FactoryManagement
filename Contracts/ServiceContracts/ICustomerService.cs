@@ -9,8 +9,8 @@ namespace Contracts.ServiceContracts
 {
    public interface ICustomerService
     {
-        Task<bool> Add(AddCustomerViewModel addCustomerViewModel);
-        Task<bool> Update(string id, UpdateCustomerViewModel updateCustomerViewModel);
+        Task<WrapperListCustomerVM> Add(AddCustomerViewModel addCustomerViewModel);
+        Task<WrapperListCustomerVM> Update(string id, UpdateCustomerViewModel updateCustomerViewModel);
         Task<List<ListCustomerVM>> GetList(string FactoryId);
         Task<UpdateCustomerViewModel> GetSingle(string cusId, string FactoryId);
         Task<WrapperListCustomerVM> GetListPaged(GetDataListVM dataListVM);

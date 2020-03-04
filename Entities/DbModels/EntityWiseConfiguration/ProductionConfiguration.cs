@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Entities.Enums;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 namespace Entities.DbModels.EntityWiseConfiguration
 {
@@ -37,10 +38,10 @@ namespace Entities.DbModels.EntityWiseConfiguration
                     .HasMaxLength(50);
 
                 builder.Property(e => e.TotalAmount).HasColumnType("decimal(18, 0)");
-
-                builder.Property(e => e.UniqueId)
-                    .IsRequired()
-                    .HasMaxLength(50);
+            builder.Property(p => p.UniqueId)
+              .Metadata.SetAfterSaveBehavior(PropertySaveBehavior.Ignore);
+            //builder.Property(e => e.UniqueId)
+            //    .IsRequired();
             builder.HasQueryFilter(s => s.RowStatus != DB_ROW_STATUS.DELETED.ToString());
         }
     }

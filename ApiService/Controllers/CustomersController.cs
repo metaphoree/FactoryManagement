@@ -20,7 +20,7 @@ namespace ApiService.Controllers
         private readonly IRepositoryWrapper _repositoryWrapper;
         private readonly IServiceWrapper _serviceWrapper;
         private readonly ILoggerManager _logger;
-        public CustomersController(FactoryManagementContext context,IRepositoryWrapper repositoryWrapper, IServiceWrapper serviceWrapper, ILoggerManager logger)
+        public CustomersController(FactoryManagementContext context, IRepositoryWrapper repositoryWrapper, IServiceWrapper serviceWrapper, ILoggerManager logger)
         {
             _context = context;
             _repositoryWrapper = repositoryWrapper;
@@ -55,80 +55,29 @@ namespace ApiService.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see https://aka.ms/RazorPagesCRUD.
         [Route("update/{id}")]
-        [HttpPost]        
+        [HttpPost]
         public async Task<ActionResult<WrapperListCustomerVM>> PutCustomer(string id, [FromBody]UpdateCustomerViewModel customer)
         {
-            if (id != customer.CustomerId)
-            {
-                return BadRequest();
-            }
-            bool result = false;
-            //_context.Entry(customer).State = EntityState.Modified;
-            try
-            {
-                result =   await _serviceWrapper.CustomerService.Update(id, customer);                           
-            }
-            catch (DbUpdateConcurrencyException exc)
-            {
-                _logger.LogError(exc.ToString());
-                _logger.LogInfo("-----------------------------------------------------------------");
-                _logger.LogInfo("-----------------------------------------------------------------");
-                if (!CustomerExists(customer.Name,customer.Email))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-                 
-            }
-            var dataParam = new GetDataListVM()
-            {
-                FactoryId = customer.FactoryId,
-                PageNumber = 1,
-                PageSize = 10,
-                TotalRows = 0
-            };
-            WrapperListCustomerVM data = await _serviceWrapper.CustomerService.GetListPaged(dataParam);
-            return data;
+            WrapperListCustomerVM result = new WrapperListCustomerVM();
+            result = await _serviceWrapper.CustomerService.Update(id, customer);
+            _logger.LogInfo("Customer Successfully Updated");
+            return Ok(result);
         }
         // POST: api/Customers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see https://aka.ms/RazorPagesCRUD.
         [Route("add")]
         [HttpPost]
-        public async Task<ActionResult<Customer>> PostCustomer([FromBody]AddCustomerViewModel customerVM)
+        public async Task<ActionResult<WrapperListCustomerVM>> PostCustomer([FromBody]AddCustomerViewModel customerVM)
         {
-            try
-            {
-                await _serviceWrapper.CustomerService.Add(customerVM);
-                _logger.LogInfo("Customer Successfully Added");
-              
-            }
-            catch (DbUpdateException ex)
-            {
-                _logger.LogInfo(ex.ToString());
-                _logger.LogInfo("-----------------------------------------------------------------");
-                _logger.LogInfo("-----------------------------------------------------------------");
-                if (CustomerExists(customerVM.Name, customerVM.Email))
-                {
-                    _logger.LogInfo("Entity already exist");
-                    return Conflict();
-                }
-                else
-                {
-                    throw new Exception("Error Saving");
-                }
-            }
-            catch (Exception es) {
-               
-            }
-            return Ok(true);
+            WrapperListCustomerVM result = new WrapperListCustomerVM();
+            result = await _serviceWrapper.CustomerService.Add(customerVM);
+            _logger.LogInfo("Customer Successfully Added");
+            return Ok(result);
         }
         // DELETE: api/Customers/5
-       [HttpPost]
-       [Route("delete")]
+        [HttpPost]
+        [Route("delete")]
         public async Task<ActionResult<WrapperListCustomerVM>> DeleteCustomer([FromBody]UpdateCustomerViewModel customerTemp)
         {
             return await _serviceWrapper.CustomerService.Delete(customerTemp);

@@ -10,8 +10,8 @@ namespace Contracts.ServiceContracts
     public interface IItemService
     {
         Task<WrapperItemListVM> GetListPaged(GetDataListVM dataListVM);
-        Task<bool> Add(ItemVM vm);
-        Task<bool> Update(string id, ItemVM vm);
+        Task<WrapperItemListVM> Add(ItemVM vm);
+        Task<WrapperItemListVM> Update(string id, ItemVM vm);
         Task<WrapperItemListVM> Delete(ItemVM itemTemp);
 
 

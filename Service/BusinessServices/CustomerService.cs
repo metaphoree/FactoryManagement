@@ -13,94 +13,105 @@ using System.Threading.Tasks;
 
 namespace Service.BusinessServices
 {
-  public  class CustomerService : ICustomerService
+    public class CustomerService : ICustomerService
     {
         private readonly IRepositoryWrapper _repositoryWrapper;
         private readonly IMapper _mapper;
         private readonly ILoggerManager _logger;
         private readonly IUtilService _utilService;
-        public CustomerService(IRepositoryWrapper repositoryWrapper,IMapper mapper,ILoggerManager loggerManager,IUtilService utilService) {
+        public CustomerService(IRepositoryWrapper repositoryWrapper, IMapper mapper, ILoggerManager loggerManager, IUtilService utilService)
+        {
             this._repositoryWrapper = repositoryWrapper;
             this._mapper = mapper;
             this._logger = loggerManager;
             this._utilService = utilService;
         }
 
-        public async Task<bool> Add(AddCustomerViewModel addCustomerViewModel)
+        public async Task<WrapperListCustomerVM> Add(AddCustomerViewModel addCustomerViewModel)
         {
             var CustomerDT = _mapper.Map<AddCustomerViewModel, Customer>(addCustomerViewModel);
-            var AddressDT  = _mapper.Map<AddCustomerViewModel, Address>(addCustomerViewModel);
+            var AddressDT = _mapper.Map<AddCustomerViewModel, Address>(addCustomerViewModel);
             var PhoneDT = _mapper.Map<AddCustomerViewModel, Phone>(addCustomerViewModel);
-            
-            Task<string> cusUnique = _repositoryWrapper.Customer.GetUniqueId();
-            Task<string> addressUnique = _repositoryWrapper.Address.GetUniqueId();
-            Task<string> phoneUnique = _repositoryWrapper.Phone.GetUniqueId();
 
-            await Task.WhenAll(cusUnique, addressUnique, phoneUnique);
+            //Task<string> cusUnique = _repositoryWrapper.Customer.GetUniqueId();
+            //Task<string> addressUnique = _repositoryWrapper.Address.GetUniqueId();
+            //Task<string> phoneUnique = _repositoryWrapper.Phone.GetUniqueId();
 
-            CustomerDT.UniqueId = cusUnique.Result;
-            AddressDT.UniqueId = addressUnique.Result;
-            PhoneDT.UniqueId = phoneUnique.Result;
+            //await Task.WhenAll(cusUnique, addressUnique, phoneUnique);
+
+            //CustomerDT.UniqueId = cusUnique.Result;
+            //AddressDT.UniqueId = addressUnique.Result;
+            //PhoneDT.UniqueId = phoneUnique.Result;
 
 
             CustomerDT = _repositoryWrapper.Customer.Create(CustomerDT);
             AddressDT.RelatedId = CustomerDT.Id;
-            AddressDT =  _repositoryWrapper.Address.Create(AddressDT);
+            AddressDT = _repositoryWrapper.Address.Create(AddressDT);
             PhoneDT.RelatedId = CustomerDT.Id;
             PhoneDT = _repositoryWrapper.Phone.Create(PhoneDT);
-            try
+            Task<int> t1 = _repositoryWrapper.Customer.SaveChangesAsync();
+            Task<int> t2 = _repositoryWrapper.Address.SaveChangesAsync();
+            Task<int> t3 = _repositoryWrapper.Phone.SaveChangesAsync();
+            // await _repositoryWrapper.SaveAsync();
+            await Task.WhenAll(t1, t2, t3);
+            this._logger.LogInfo("Successful In saving");
+           
+            var dataParam = new GetDataListVM()
             {
-               Task<int> t1 =  _repositoryWrapper.Customer.SaveChangesAsync();
-                Task<int> t2 = _repositoryWrapper.Address.SaveChangesAsync();
-                Task<int> t3 = _repositoryWrapper.Phone.SaveChangesAsync();
-                // await _repositoryWrapper.SaveAsync();
-                await Task.WhenAll(t1, t2, t3);
-                this._logger.LogInfo("Successful In saving");
-            }
-            catch (Exception ex) {
-                this._logger.LogInfo(ex.ToString());
-                _logger.LogInfo("-----------------------------------------------------------------");
-                _logger.LogInfo("-----------------------------------------------------------------");
-                return false;
-            }
-            return true;
+                FactoryId = addCustomerViewModel.FactoryId,
+                PageNumber = 1,
+                PageSize = 10,
+                TotalRows = 0
+            };
+            WrapperListCustomerVM data = await GetListPaged(dataParam);
+            return data;
+
         }
-        public async Task<bool> Update(string id, UpdateCustomerViewModel updateCustomerViewModel)
+        public async Task<WrapperListCustomerVM> Update(string id, UpdateCustomerViewModel updateCustomerViewModel)
         {
-            Task<IEnumerable<Customer>> CustomersDB =  _repositoryWrapper.Customer.FindByConditionAsync(x => x.Id == id && x.FactoryId == updateCustomerViewModel.FactoryId);
-            Task<IEnumerable<Address>> AddressesDB =  _repositoryWrapper.Address.FindByConditionAsync(x => x.RelatedId == id && x.FactoryId == updateCustomerViewModel.FactoryId);
-            Task<IEnumerable<Phone>> PhonesDB =  _repositoryWrapper.Phone.FindByConditionAsync(x => x.RelatedId == id && x.FactoryId == updateCustomerViewModel.FactoryId);
-     
+            if (id != updateCustomerViewModel.CustomerId)
+            {
+                new WrapperListCustomerVM();
+            }
+
+            Task<IEnumerable<Customer>> CustomersDB = _repositoryWrapper.Customer.FindByConditionAsync(x => x.Id == id && x.FactoryId == updateCustomerViewModel.FactoryId);
+            Task<IEnumerable<Address>> AddressesDB = _repositoryWrapper.Address.FindByConditionAsync(x => x.RelatedId == id && x.FactoryId == updateCustomerViewModel.FactoryId);
+            Task<IEnumerable<Phone>> PhonesDB = _repositoryWrapper.Phone.FindByConditionAsync(x => x.RelatedId == id && x.FactoryId == updateCustomerViewModel.FactoryId);
+
             await Task.WhenAll(CustomersDB, AddressesDB, PhonesDB);
-       
+
             var CustomerUpdated = _mapper.Map<UpdateCustomerViewModel, Customer>(updateCustomerViewModel, CustomersDB.Result.ToList().FirstOrDefault());
             var AddressUpdated = _mapper.Map<UpdateCustomerViewModel, Address>(updateCustomerViewModel, AddressesDB.Result.ToList().FirstOrDefault());
             var PhoneUpdated = _mapper.Map<UpdateCustomerViewModel, Phone>(updateCustomerViewModel, PhonesDB.Result.ToList().FirstOrDefault());
             _repositoryWrapper.Customer.Update(CustomerUpdated);
             _repositoryWrapper.Address.Update(AddressUpdated);
             _repositoryWrapper.Phone.Update(PhoneUpdated);
-            try
-            {
-                Task<int> t1 = _repositoryWrapper.Customer.SaveChangesAsync();
-                Task<int> t2 = _repositoryWrapper.Address.SaveChangesAsync();
-                Task<int> t3 = _repositoryWrapper.Phone.SaveChangesAsync();
-                await Task.WhenAll(t1, t2, t3);
-                this._logger.LogInfo("Successful In saving");
-            }
-            catch (Exception ex)
-            {
-                this._logger.LogInfo(ex.ToString());
-                _logger.LogInfo("-----------------------------------------------------------------");
-                _logger.LogInfo("-----------------------------------------------------------------");
-                return false;
-            }
-            return true;
-        }
-        public async Task<List<ListCustomerVM>> GetList(string FactoryId) {
 
-            Task<IEnumerable<Customer>> custListTask =  _repositoryWrapper.Customer.FindByConditionAsync(x => x.FactoryId == FactoryId);
-            Task<IEnumerable<Address>> addressListTask =  _repositoryWrapper.Address.FindByConditionAsync(x => x.FactoryId == FactoryId);
-            Task<IEnumerable<Phone>> phoneListTask =  _repositoryWrapper.Phone.FindByConditionAsync(x => x.FactoryId == FactoryId);
+
+            Task<int> t1 = _repositoryWrapper.Customer.SaveChangesAsync();
+            Task<int> t2 = _repositoryWrapper.Address.SaveChangesAsync();
+            Task<int> t3 = _repositoryWrapper.Phone.SaveChangesAsync();
+            await Task.WhenAll(t1, t2, t3);
+            this._logger.LogInfo("Successful In saving");
+
+
+
+            var dataParam = new GetDataListVM()
+            {
+                FactoryId = updateCustomerViewModel.FactoryId,
+                PageNumber = 1,
+                PageSize = 10,
+                TotalRows = 0
+            };
+            WrapperListCustomerVM data = await GetListPaged(dataParam);
+            return data;
+        }
+        public async Task<List<ListCustomerVM>> GetList(string FactoryId)
+        {
+
+            Task<IEnumerable<Customer>> custListTask = _repositoryWrapper.Customer.FindByConditionAsync(x => x.FactoryId == FactoryId);
+            Task<IEnumerable<Address>> addressListTask = _repositoryWrapper.Address.FindByConditionAsync(x => x.FactoryId == FactoryId);
+            Task<IEnumerable<Phone>> phoneListTask = _repositoryWrapper.Phone.FindByConditionAsync(x => x.FactoryId == FactoryId);
 
             await Task.WhenAll(custListTask, addressListTask, phoneListTask);
 
@@ -121,13 +132,13 @@ namespace Service.BusinessServices
                 outputList.Add(output);
             }
 
-           return  outputList;
+            return outputList;
         }
         public async Task<WrapperListCustomerVM> GetListPaged(GetDataListVM dataListVM)
         {
-            Task<IEnumerable<Customer>> custListTask =   _repositoryWrapper.Customer.FindByConditionAsync(x => x.FactoryId == dataListVM.FactoryId);
-            Task<IEnumerable<Address>> addressListTask =  _repositoryWrapper.Address.FindByConditionAsync(x => x.FactoryId == dataListVM.FactoryId);
-            Task<IEnumerable<Phone>> phoneListTask  =  _repositoryWrapper.Phone.FindByConditionAsync(x => x.FactoryId == dataListVM.FactoryId);
+            Task<IEnumerable<Customer>> custListTask = _repositoryWrapper.Customer.FindByConditionAsync(x => x.FactoryId == dataListVM.FactoryId);
+            Task<IEnumerable<Address>> addressListTask = _repositoryWrapper.Address.FindByConditionAsync(x => x.FactoryId == dataListVM.FactoryId);
+            Task<IEnumerable<Phone>> phoneListTask = _repositoryWrapper.Phone.FindByConditionAsync(x => x.FactoryId == dataListVM.FactoryId);
             Task<long> noOfRecordTask = _repositoryWrapper.Customer.NumOfRecord();
             await Task.WhenAll(custListTask, addressListTask, phoneListTask, noOfRecordTask);
 
@@ -149,7 +160,7 @@ namespace Service.BusinessServices
                 output = _mapper.Map<Phone, ListCustomerVM>(tempPhone, output);
                 if (dataListVM.GlobalFilter != null)
                 {
-                    if (output.AlternateCellNo.Contains(dataListVM.GlobalFilter,StringComparison.OrdinalIgnoreCase)
+                    if (output.AlternateCellNo.Contains(dataListVM.GlobalFilter, StringComparison.OrdinalIgnoreCase)
                         || output.CellNo.Contains(dataListVM.GlobalFilter, StringComparison.OrdinalIgnoreCase)
                         || output.Email.Contains(dataListVM.GlobalFilter, StringComparison.OrdinalIgnoreCase)
                         || output.Name.Contains(dataListVM.GlobalFilter, StringComparison.OrdinalIgnoreCase)
@@ -159,10 +170,11 @@ namespace Service.BusinessServices
                         outputList.Add(output);
                     }
                 }
-                else {
+                else
+                {
                     outputList.Add(output);
                 }
-               
+
             }
             outputList = outputList.Skip((dataListVM.PageNumber - 1) * dataListVM.PageSize).Take(dataListVM.PageSize).ToList();
             var data = new WrapperListCustomerVM();
@@ -173,7 +185,8 @@ namespace Service.BusinessServices
         }
 
 
-        public async Task<WrapperListCustomerVM> Delete(UpdateCustomerViewModel customerTemp) {
+        public async Task<WrapperListCustomerVM> Delete(UpdateCustomerViewModel customerTemp)
+        {
             var customerTask = await _repositoryWrapper.Customer.FindByConditionAsync(x => x.Id == customerTemp.CustomerId && x.FactoryId == customerTemp.FactoryId);
             var customer = customerTask.ToList().FirstOrDefault();
             if (customer == null)
@@ -194,10 +207,11 @@ namespace Service.BusinessServices
         }
 
 
-        public async Task<UpdateCustomerViewModel> GetSingle(string cusId,string FactoryId) {
-            Task<IEnumerable<Customer>> CustomersDB =  _repositoryWrapper.Customer.FindByConditionAsync(x => x.Id == cusId && x.FactoryId == FactoryId);
-            Task <IEnumerable<Address>> AddressesDB =  _repositoryWrapper.Address.FindByConditionAsync(x => x.Id == cusId && x.FactoryId == FactoryId);
-            Task <IEnumerable<Phone>> PhonesDB =  _repositoryWrapper.Phone.FindByConditionAsync(x => x.Id == cusId && x.FactoryId == FactoryId);
+        public async Task<UpdateCustomerViewModel> GetSingle(string cusId, string FactoryId)
+        {
+            Task<IEnumerable<Customer>> CustomersDB = _repositoryWrapper.Customer.FindByConditionAsync(x => x.Id == cusId && x.FactoryId == FactoryId);
+            Task<IEnumerable<Address>> AddressesDB = _repositoryWrapper.Address.FindByConditionAsync(x => x.Id == cusId && x.FactoryId == FactoryId);
+            Task<IEnumerable<Phone>> PhonesDB = _repositoryWrapper.Phone.FindByConditionAsync(x => x.Id == cusId && x.FactoryId == FactoryId);
 
             await Task.WhenAll(CustomersDB, AddressesDB, PhonesDB);
 
@@ -207,7 +221,7 @@ namespace Service.BusinessServices
 
 
 
-            ListCustomerVM output= new ListCustomerVM();                      
+            ListCustomerVM output = new ListCustomerVM();
             output = _mapper.Map<Customer, ListCustomerVM>(cust, output);
             output = _mapper.Map<Address, ListCustomerVM>(address, output);
             output = _mapper.Map<Phone, ListCustomerVM>(phone, output);

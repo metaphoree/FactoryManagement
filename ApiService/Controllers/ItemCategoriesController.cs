@@ -31,10 +31,9 @@ namespace ApiService.Controllers
         // GET: api/ItemCategories
         [HttpPost]
         [Route("getAll")]
-        public async Task<ActionResult<WrapperItemCategoryListVM>> GetCustomer(GetDataListVM customer)
+        public async Task<ActionResult<WrapperItemCategoryListVM>> GetCustomer([FromBody]GetDataListVM customer)
         {
-            var data = await _serviceWrapper.ItemCategoryService.GetListPaged(customer);
-            return Ok(data);
+            return await _serviceWrapper.ItemCategoryService.GetListPaged(customer);           
         }
 
         // GET: api/ItemCategories/5
@@ -58,31 +57,9 @@ namespace ApiService.Controllers
         // more details see https://aka.ms/RazorPagesCRUD.
         [Route("update/{id}")]
         [HttpPost]
-        public async Task<IActionResult> PutItemCategory(string id, ItemCategoryVM itemCategory)
+        public async Task<ActionResult<WrapperItemCategoryListVM>> PutItemCategory(string id, [FromBody]ItemCategoryVM itemCategory)
         {
-            if (id != itemCategory.Id)
-            {
-                return BadRequest();
-            }
-           
-            // _context.Entry(itemCategory).State = EntityState.Modified;
-            try
-            {
-                await _serviceWrapper.ItemCategoryService.Update(id, itemCategory);
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!ItemCategoryExists(itemCategory.Name))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-            return Ok(true);
-            //return NoContent();
+            return await _serviceWrapper.ItemCategoryService.Update(id, itemCategory);
         }
 
         // POST: api/ItemCategories
@@ -90,25 +67,9 @@ namespace ApiService.Controllers
         // more details see https://aka.ms/RazorPagesCRUD.
         [HttpPost]
         [Route("add")]
-        public async Task<ActionResult<ItemCategory>> PostItemCategory([FromBody]ItemCategoryVM itemCategory)
+        public async Task<ActionResult<WrapperItemCategoryListVM>> PostItemCategory([FromBody]ItemCategoryVM itemCategory)
         {
-            try
-            {
-                await _serviceWrapper.ItemCategoryService.Add(itemCategory);
-            }
-            catch (DbUpdateException)
-            {
-                if (ItemCategoryExists(itemCategory.Name))
-                {
-                    return Conflict();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-            // return CreatedAtAction("GetItemCategory", new { id = itemCategory.Id }, itemCategory);
-            return Ok(true);
+             return  await _serviceWrapper.ItemCategoryService.Add(itemCategory);
         }
 
         // DELETE: api/ItemCategories/5

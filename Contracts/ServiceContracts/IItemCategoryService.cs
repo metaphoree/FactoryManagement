@@ -11,8 +11,8 @@ namespace Contracts.ServiceContracts
     {
 
         Task<WrapperItemCategoryListVM> GetListPaged(GetDataListVM dataListVM);
-        Task<bool> Add(ItemCategoryVM vm);
-        Task<bool> Update(string id, ItemCategoryVM vm);
+        Task<WrapperItemCategoryListVM> Add(ItemCategoryVM vm);
+        Task<WrapperItemCategoryListVM> Update(string id, ItemCategoryVM vm);
         Task<WrapperItemCategoryListVM> Delete(ItemCategoryVM itemTemp);
     }
 }
