@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Entities.ViewModels.CustomerView
 {
-   public  class AddCustomerViewModel
+   public  class CustomerVM
     {
         public string Name { get; set; }
         public string Email { get; set; }
@@ -18,5 +18,6 @@ namespace Entities.ViewModels.CustomerView
 
 
         public string FactoryId { get; set; }
+        public string CustomerId { get; set; }
     }
 }

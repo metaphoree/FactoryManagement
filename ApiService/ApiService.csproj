@@ -14,6 +14,10 @@
   <ItemGroup>
     <Compile Remove="Migrations\20200220080202_PhoneDBModelChange.cs" />
     <Compile Remove="Migrations\20200220080202_PhoneDBModelChange.Designer.cs" />
+    <Compile Remove="Migrations\20200310115557_AddPhoneAddressFieldInStaffCustomerEmployeeTable.cs" />
+    <Compile Remove="Migrations\20200310115557_AddPhoneAddressFieldInStaffCustomerEmployeeTable.Designer.cs" />
+    <Compile Remove="Migrations\20200310120632_RelationChange.cs" />
+    <Compile Remove="Migrations\20200310120632_RelationChange.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

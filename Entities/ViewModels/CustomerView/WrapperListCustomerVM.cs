@@ -7,7 +7,7 @@ namespace Entities.ViewModels.CustomerView
    public  class WrapperListCustomerVM
     {
         public long TotalRecoreds { get; set; }
-        public List<ListCustomerVM> CustomerList { get; set; }
+        public List<CustomerVM> ListOfData { get; set; }
 
     }
 }

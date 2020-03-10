@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+
 using System.Text;
 using System.Threading.Tasks;
 
@@ -26,13 +27,27 @@ namespace Service.BusinessServices
         }
         public async Task<WrapperItemListVM> GetListPaged(GetDataListVM dataListVM)
         {
+            System.Linq.Expressions.Expression<Func<Item, bool>> globalFilterExpression = (x) => true;
+            if (string.IsNullOrEmpty(dataListVM.GlobalFilter) || string.IsNullOrWhiteSpace(dataListVM.GlobalFilter))
+            {
+                globalFilterExpression = (x) => true;
+            }
+            else {
+                globalFilterExpression = (x) =>
+                x.Name.Contains(dataListVM.GlobalFilter)
+                || x.ItemCategory.Name.Contains(dataListVM.GlobalFilter)
+                || x.UnitPrice.ToString().Contains(dataListVM.GlobalFilter);
+            }
+            
+            
             var itemList = await _repositoryWrapper.Item
                 .FindAll() 
                 .Where(x => x.FactoryId == dataListVM.FactoryId)
-                 .Include(x => x.ItemCategory)
-                .Skip(dataListVM.PageNumber - 1)
-                .Take(dataListVM.PageSize)
+                .Include(x => x.ItemCategory)
+                .Where(globalFilterExpression)
                 .OrderByDescending(x => x.UpdatedDateTime)
+                .Skip((dataListVM.PageNumber - 1) * dataListVM.PageSize)
+                .Take(dataListVM.PageSize)  
                 .ToListAsync();
 
             var dataRowCount = await _repositoryWrapper.Item.NumOfRecord();

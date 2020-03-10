@@ -15,53 +15,74 @@ namespace ApiService.Utilities.AutoMapper
     {
         public MappingProfile()
         {
-            Mapping_AddCustomerViewModel();
-            Mapping_UpdateCustomerViewModel();
-
-            Mapping_CustomerListView();
+            Mapping_CustomerVM();
             Mapping_ItemCategoryVM();
             Mapping_ItemVM();
         }
-        public void Mapping_AddCustomerViewModel()
+        public void Mapping_CustomerVM()
         {
-            CreateMap<AddCustomerViewModel, Customer>()
+            // GET
+            CreateMap<Customer, CustomerVM>()
                    .ForMember(dest => dest.Email, act => act.MapFrom(src => src.Email))
                     .ForMember(dest => dest.ImageUrl, act => act.MapFrom(src => src.ImageUrl))
                      .ForMember(dest => dest.FactoryId, act => act.MapFrom(src => src.FactoryId))
                      .ForMember(dest => dest.Name, act => act.MapFrom(src => src.Name))
+                         .ForMember(dest => dest.PresentAddress, act => act.MapFrom(src => src.PresentAddress))
+                         .ForMember(dest => dest.PermanentAddress, act => act.MapFrom(src => src.PermanentAddress))
+                         .ForMember(dest => dest.CellNo, act => act.MapFrom(src => src.Number))
+                         .ForMember(dest => dest.AlternateCellNo, act => act.MapFrom(src => src.AlternateNumber_1))
+                          .ForMember(dest => dest.CustomerId, act => act.MapFrom(src => src.Id))
+                     .ForAllOtherMembers(act => act.Ignore());
+            // UPDATE + ADDITION
+            CreateMap<CustomerVM, Customer>()
+                   .ForMember(dest => dest.Email, act => act.MapFrom(src => src.Email))
+                    .ForMember(dest => dest.ImageUrl, act => act.MapFrom(src => src.ImageUrl))
+                     .ForMember(dest => dest.FactoryId, act => act.MapFrom(src => src.FactoryId))
+                     .ForMember(dest => dest.Name, act => act.MapFrom(src => src.Name))
+                         .ForMember(dest => dest.PresentAddress, act => act.MapFrom(src => src.PresentAddress))
+                         .ForMember(dest => dest.PermanentAddress, act => act.MapFrom(src => src.PermanentAddress))
+                         .ForMember(dest => dest.Number, act => act.MapFrom(src => src.CellNo))
+                         .ForMember(dest => dest.AlternateNumber_1, act => act.MapFrom(src => src.AlternateCellNo))                         
                      .ForAllOtherMembers(act => act.Ignore());
 
-            CreateMap<AddCustomerViewModel, Address>()
-                .ForMember(dest => dest.PresentAddress, act => act.MapFrom(src => src.PresentAddress))
-                .ForMember(dest => dest.PermanentAddress, act => act.MapFrom(src => src.PermanentAddress))
-                .ForMember(dest => dest.FactoryId, act => act.MapFrom(src => src.FactoryId))
-                .ForAllOtherMembers(act => act.Ignore());
+            //            CreateMap<UpdateCustomerViewModel, Customer>()
+            //.ForMember(dest => dest.Email, act => act.MapFrom(src => src.Email))
+            //.ForMember(dest => dest.ImageUrl, act => act.MapFrom(src => src.ImageUrl))
+            //.ForMember(dest => dest.Name, act => act.MapFrom(src => src.Name))
+            //    .ForMember(dest => dest.PresentAddress, act => act.MapFrom(src => src.PresentAddress))
+            //    .ForMember(dest => dest.PermanentAddress, act => act.MapFrom(src => src.PermanentAddress))
+            //        .ForMember(dest => dest.Number, act => act.MapFrom(src => src.CellNo))
+            //    .ForMember(dest => dest.AlternateNumber_1, act => act.MapFrom(src => src.AlternateCellNo))
+            //.ForAllOtherMembers(act => act.Ignore());
 
 
-            CreateMap<AddCustomerViewModel, Phone>()
-                .ForMember(dest => dest.Number, act => act.MapFrom(src => src.CellNo))
-                .ForMember(dest => dest.AlternateNumber_1, act => act.MapFrom(src => src.AlternateCellNo))
-                .ForMember(dest => dest.FactoryId, act => act.MapFrom(src => src.FactoryId))
-                .ForAllOtherMembers(act => act.Ignore());
+
+
+            //CreateMap<AddCustomerViewModel, Address>()
+            //    .ForMember(dest => dest.PresentAddress, act => act.MapFrom(src => src.PresentAddress))
+            //    .ForMember(dest => dest.PermanentAddress, act => act.MapFrom(src => src.PermanentAddress))
+            //    .ForMember(dest => dest.FactoryId, act => act.MapFrom(src => src.FactoryId))
+            //    .ForAllOtherMembers(act => act.Ignore());
+
+
+            //CreateMap<AddCustomerViewModel, Phone>()
+            //    .ForMember(dest => dest.Number, act => act.MapFrom(src => src.CellNo))
+            //    .ForMember(dest => dest.AlternateNumber_1, act => act.MapFrom(src => src.AlternateCellNo))
+            //    .ForMember(dest => dest.FactoryId, act => act.MapFrom(src => src.FactoryId))
+            //    .ForAllOtherMembers(act => act.Ignore());
         }
-        public void Mapping_UpdateCustomerViewModel()
+        public void Mapping_UpdateCustomerViewModelmm()
         {
-            CreateMap<UpdateCustomerViewModel, Customer>()
-            .ForMember(dest => dest.Email, act => act.MapFrom(src => src.Email))
-            .ForMember(dest => dest.ImageUrl, act => act.MapFrom(src => src.ImageUrl))
-            .ForMember(dest => dest.Name, act => act.MapFrom(src => src.Name))
-            .ForAllOtherMembers(act => act.Ignore());
-
-            CreateMap<UpdateCustomerViewModel, Address>()
-                .ForMember(dest => dest.PresentAddress, act => act.MapFrom(src => src.PresentAddress))
-                .ForMember(dest => dest.PermanentAddress, act => act.MapFrom(src => src.PermanentAddress))
-                .ForAllOtherMembers(act => act.Ignore());
+            //CreateMap<UpdateCustomerViewModel, Address>()
+            //    .ForMember(dest => dest.PresentAddress, act => act.MapFrom(src => src.PresentAddress))
+            //    .ForMember(dest => dest.PermanentAddress, act => act.MapFrom(src => src.PermanentAddress))
+            //    .ForAllOtherMembers(act => act.Ignore());
 
 
-            CreateMap<UpdateCustomerViewModel, Phone>()
-                .ForMember(dest => dest.Number, act => act.MapFrom(src => src.CellNo))
-                .ForMember(dest => dest.AlternateNumber_1, act => act.MapFrom(src => src.AlternateCellNo))
-                .ForAllOtherMembers(act => act.Ignore());
+            //CreateMap<UpdateCustomerViewModel, Phone>()
+            //    .ForMember(dest => dest.Number, act => act.MapFrom(src => src.CellNo))
+            //    .ForMember(dest => dest.AlternateNumber_1, act => act.MapFrom(src => src.AlternateCellNo))
+            //    .ForAllOtherMembers(act => act.Ignore());
         }
         public void Mapping_ItemCategoryVM()
         {
@@ -104,26 +125,28 @@ namespace ApiService.Utilities.AutoMapper
         public void Mapping_CustomerListView()
         {
 
-            CreateMap<Customer, ListCustomerVM>()
-                     .ForMember(dest => dest.Name, act => act.MapFrom(src => src.Name))
-                      .ForMember(dest => dest.Email, act => act.MapFrom(src => src.Email))
-                     .ForMember(dest => dest.ImageUrl, act => act.MapFrom(src => src.ImageUrl))
-                      .ForMember(dest => dest.FactoryId, act => act.MapFrom(src => src.FactoryId))
-                       .ForMember(dest => dest.CustomerId, act => act.MapFrom(src => src.Id))
-                        .ForAllOtherMembers(act => act.Ignore());
+ //           CreateMap<Customer, ListCustomerVM>()
+ //                    .ForMember(dest => dest.Name, act => act.MapFrom(src => src.Name))
+ //                     .ForMember(dest => dest.Email, act => act.MapFrom(src => src.Email))
+ //                    .ForMember(dest => dest.ImageUrl, act => act.MapFrom(src => src.ImageUrl))
+ //                     .ForMember(dest => dest.FactoryId, act => act.MapFrom(src => src.FactoryId))
+ //                      .ForMember(dest => dest.CustomerId, act => act.MapFrom(src => src.Id))
+ //                       .ForMember(dest => dest.PermanentAddress, act => act.MapFrom(src => src.PermanentAddress))
+ //         .ForMember(dest => dest.PresentAddress, act => act.MapFrom(src => src.PresentAddress))
+ //         .ForMember(dest => dest.CellNo, act => act.MapFrom(src => src.Number))
+ //.ForMember(dest => dest.AlternateCellNo, act => act.MapFrom(src => src.AlternateNumber_1))
+ //                       .ForAllOtherMembers(act => act.Ignore());
 
-            CreateMap<Address, ListCustomerVM>()
-         .ForMember(dest => dest.PermanentAddress, act => act.MapFrom(src => src.PermanentAddress))
-          .ForMember(dest => dest.PresentAddress, act => act.MapFrom(src => src.PresentAddress))
-            .ForAllOtherMembers(act => act.Ignore());
-
-
-            CreateMap<Phone, ListCustomerVM>()
-.ForMember(dest => dest.CellNo, act => act.MapFrom(src => src.Number))
- .ForMember(dest => dest.AlternateCellNo, act => act.MapFrom(src => src.AlternateNumber_1))
-   .ForAllOtherMembers(act => act.Ignore());
+            //            CreateMap<Address, ListCustomerVM>()
+            //         .ForMember(dest => dest.PermanentAddress, act => act.MapFrom(src => src.PermanentAddress))
+            //          .ForMember(dest => dest.PresentAddress, act => act.MapFrom(src => src.PresentAddress))
+            //            .ForAllOtherMembers(act => act.Ignore());
 
 
+            //            CreateMap<Phone, ListCustomerVM>()
+            //.ForMember(dest => dest.CellNo, act => act.MapFrom(src => src.Number))
+            // .ForMember(dest => dest.AlternateCellNo, act => act.MapFrom(src => src.AlternateNumber_1))
+            //   .ForAllOtherMembers(act => act.Ignore());
         }
 
     }

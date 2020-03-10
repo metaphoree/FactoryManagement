@@ -30,12 +30,25 @@ namespace Service.BusinessServices
 
         public async Task<WrapperItemCategoryListVM> GetListPaged(GetDataListVM dataListVM)
         {
+            System.Linq.Expressions.Expression<Func<ItemCategory, bool>> globalFilterExpression = (x) => true;
+            if (string.IsNullOrEmpty(dataListVM.GlobalFilter) || string.IsNullOrWhiteSpace(dataListVM.GlobalFilter))
+            {
+                globalFilterExpression = (x) => true;
+            }
+            else
+            {
+                globalFilterExpression = (x) =>
+                x.Name.Contains(dataListVM.GlobalFilter);
+            }
+
+
             var itemCatagoryList = await _repositoryWrapper.ItemCategory
                 .FindAll()
                 .Where(x => x.FactoryId == dataListVM.FactoryId)
-                .Skip(dataListVM.PageNumber - 1)
-                .Take(dataListVM.PageSize)
+                .Where(globalFilterExpression)
                 .OrderByDescending(x => x.UpdatedDateTime)
+                .Skip((dataListVM.PageNumber - 1) * (dataListVM.PageSize))
+                .Take(dataListVM.PageSize) 
                 .ToListAsync();
 
             var dataRowCount = await _repositoryWrapper.ItemCategory.NumOfRecord();

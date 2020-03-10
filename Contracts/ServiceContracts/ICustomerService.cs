@@ -9,11 +9,11 @@ namespace Contracts.ServiceContracts
 {
    public interface ICustomerService
     {
-        Task<WrapperListCustomerVM> Add(AddCustomerViewModel addCustomerViewModel);
-        Task<WrapperListCustomerVM> Update(string id, UpdateCustomerViewModel updateCustomerViewModel);
-        Task<List<ListCustomerVM>> GetList(string FactoryId);
-        Task<UpdateCustomerViewModel> GetSingle(string cusId, string FactoryId);
+        Task<WrapperListCustomerVM> Add(CustomerVM addCustomerViewModel);
+        Task<WrapperListCustomerVM> Update(string id, CustomerVM updateCustomerViewModel);
+        //Task<List<CustomerVM>> GetList(string FactoryId);
+        //Task<CustomerVM> GetSingle(string cusId, string FactoryId);
         Task<WrapperListCustomerVM> GetListPaged(GetDataListVM dataListVM);
-        Task<WrapperListCustomerVM> Delete(UpdateCustomerViewModel customerTemp);
+        Task<WrapperListCustomerVM> Delete(CustomerVM customerTemp);
     }
 }

@@ -37,26 +37,26 @@ namespace ApiService.Controllers
             return Ok(data);
         }
         // GET: api/Customers/5
-        [HttpPost]
-        [Route("getById")]
-        public async Task<ActionResult<UpdateCustomerViewModel>> GetSingleCustomer(Customer customerTemp)
-        {
-            //var customer = await _context.Customer.FindAsync(id);
-            var customer = await _serviceWrapper.CustomerService.GetSingle(customerTemp.Id, customerTemp.FactoryId);
-            if (customer == null)
-            {
-                return NotFound();
-            }
+        //[HttpPost]
+        //[Route("getById")]
+        //public async Task<ActionResult<CustomerVM>> GetSingleCustomer(Customer customerTemp)
+        //{
+        //    //var customer = await _context.Customer.FindAsync(id);
+        //    var customer = await _serviceWrapper.CustomerService.GetSingle(customerTemp.Id, customerTemp.FactoryId);
+        //    if (customer == null)
+        //    {
+        //        return NotFound();
+        //    }
 
-            return customer;
-        }
+        //    return customer;
+        //}
 
         // PUT: api/Customers/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see https://aka.ms/RazorPagesCRUD.
         [Route("update/{id}")]
         [HttpPost]
-        public async Task<ActionResult<WrapperListCustomerVM>> PutCustomer(string id, [FromBody]UpdateCustomerViewModel customer)
+        public async Task<ActionResult<WrapperListCustomerVM>> PutCustomer(string id, [FromBody]CustomerVM customer)
         {
             WrapperListCustomerVM result = new WrapperListCustomerVM();
             result = await _serviceWrapper.CustomerService.Update(id, customer);
@@ -68,7 +68,7 @@ namespace ApiService.Controllers
         // more details see https://aka.ms/RazorPagesCRUD.
         [Route("add")]
         [HttpPost]
-        public async Task<ActionResult<WrapperListCustomerVM>> PostCustomer([FromBody]AddCustomerViewModel customerVM)
+        public async Task<ActionResult<WrapperListCustomerVM>> PostCustomer([FromBody]CustomerVM customerVM)
         {
             WrapperListCustomerVM result = new WrapperListCustomerVM();
             result = await _serviceWrapper.CustomerService.Add(customerVM);
@@ -78,7 +78,7 @@ namespace ApiService.Controllers
         // DELETE: api/Customers/5
         [HttpPost]
         [Route("delete")]
-        public async Task<ActionResult<WrapperListCustomerVM>> DeleteCustomer([FromBody]UpdateCustomerViewModel customerTemp)
+        public async Task<ActionResult<WrapperListCustomerVM>> DeleteCustomer([FromBody]CustomerVM customerTemp)
         {
             return await _serviceWrapper.CustomerService.Delete(customerTemp);
         }

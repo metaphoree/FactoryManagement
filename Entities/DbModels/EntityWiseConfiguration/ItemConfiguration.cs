@@ -17,7 +17,7 @@ namespace Entities.DbModels.EntityWiseConfiguration
 
                 builder.Property(e => e.CategoryId)
                     .IsRequired()
-                    .HasMaxLength(150);
+                    .HasMaxLength(50);
 
                 builder.Property(e => e.FactoryId)
                     .IsRequired()
