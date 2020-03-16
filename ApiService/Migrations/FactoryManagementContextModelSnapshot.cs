@@ -406,18 +406,18 @@ namespace ApiService.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "b1e1eea3-3106-4879-af5c-a68a4224d0c9",
-                            CreatedDateTime = new DateTime(2020, 3, 10, 19, 52, 8, 805, DateTimeKind.Local).AddTicks(8559),
-                            FactoryId = "7c0401e4-1efa-42f8-8fbc-72dcd784cb4d",
+                            Id = "29f8d57f-743b-45a3-b3a4-197bc9099026",
+                            CreatedDateTime = new DateTime(2020, 3, 13, 20, 23, 53, 885, DateTimeKind.Local).AddTicks(4822),
+                            FactoryId = "11cfdf58-b660-4ff5-b3e3-2cbd6e2f1557",
                             ImageUrl = "",
                             LicenseNo = "",
                             Name = "Fazlu Loom Factory",
                             RegNo = "",
                             RowStatus = "ADDED",
-                            SubscriptionEnd = new DateTime(2022, 12, 5, 19, 52, 8, 806, DateTimeKind.Local).AddTicks(3937),
-                            SubscriptionStart = new DateTime(2020, 3, 10, 19, 52, 8, 806, DateTimeKind.Local).AddTicks(2960),
+                            SubscriptionEnd = new DateTime(2022, 12, 8, 20, 23, 53, 886, DateTimeKind.Local).AddTicks(4186),
+                            SubscriptionStart = new DateTime(2020, 3, 13, 20, 23, 53, 886, DateTimeKind.Local).AddTicks(2450),
                             UniqueId = 0L,
-                            UpdatedDateTime = new DateTime(2020, 3, 10, 19, 52, 8, 806, DateTimeKind.Local).AddTicks(4894),
+                            UpdatedDateTime = new DateTime(2020, 3, 13, 20, 23, 53, 886, DateTimeKind.Local).AddTicks(5832),
                             VatRegNo = ""
                         });
                 });
@@ -701,6 +701,28 @@ namespace ApiService.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("ItemStatus");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "aa0362cd-6aa2-4321-8b6d-a5288b06f7df",
+                            CreatedDateTime = new DateTime(2020, 3, 13, 14, 23, 53, 921, DateTimeKind.Utc).AddTicks(8676),
+                            FactoryId = "c90a9cdf-ca6b-4f74-b9f6-d00cd37b1b30",
+                            Name = "GOOD",
+                            RowStatus = "ADDED",
+                            UniqueId = 0L,
+                            UpdatedDateTime = new DateTime(2020, 3, 13, 14, 23, 53, 922, DateTimeKind.Utc).AddTicks(1274)
+                        },
+                        new
+                        {
+                            Id = "1b5cd05d-654e-4db9-994b-df51befe163f",
+                            CreatedDateTime = new DateTime(2020, 3, 13, 14, 23, 53, 922, DateTimeKind.Utc).AddTicks(1332),
+                            FactoryId = "c90a9cdf-ca6b-4f74-b9f6-d00cd37b1b30",
+                            Name = "BAD",
+                            RowStatus = "ADDED",
+                            UniqueId = 0L,
+                            UpdatedDateTime = new DateTime(2020, 3, 13, 14, 23, 53, 922, DateTimeKind.Utc).AddTicks(1385)
+                        });
                 });
 
             modelBuilder.Entity("Entities.DbModels.Payable", b =>
@@ -795,6 +817,48 @@ namespace ApiService.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("PaymentStatus");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "50b34297-6166-48ef-a33e-c2bb1fd24abd",
+                            CreatedDateTime = new DateTime(2020, 3, 13, 14, 23, 53, 930, DateTimeKind.Utc).AddTicks(7091),
+                            FactoryId = "c90a9cdf-ca6b-4f74-b9f6-d00cd37b1b30",
+                            RowStatus = "ADDED",
+                            Status = "CASH_RECIEVED",
+                            UniqueId = 0L,
+                            UpdatedDateTime = new DateTime(2020, 3, 13, 20, 23, 53, 930, DateTimeKind.Local).AddTicks(8384)
+                        },
+                        new
+                        {
+                            Id = "1e4f30f3-18af-4918-9c2a-577455190343",
+                            CreatedDateTime = new DateTime(2020, 3, 13, 14, 23, 53, 930, DateTimeKind.Utc).AddTicks(8446),
+                            FactoryId = "c90a9cdf-ca6b-4f74-b9f6-d00cd37b1b30",
+                            RowStatus = "ADDED",
+                            Status = "CASH_PAYABLE",
+                            UniqueId = 0L,
+                            UpdatedDateTime = new DateTime(2020, 3, 13, 20, 23, 53, 930, DateTimeKind.Local).AddTicks(8507)
+                        },
+                        new
+                        {
+                            Id = "c5435783-833d-410d-a86d-aa3872d08f9c",
+                            CreatedDateTime = new DateTime(2020, 3, 13, 14, 23, 53, 930, DateTimeKind.Utc).AddTicks(8512),
+                            FactoryId = "c90a9cdf-ca6b-4f74-b9f6-d00cd37b1b30",
+                            RowStatus = "ADDED",
+                            Status = "CASH_RECIEVABLE",
+                            UniqueId = 0L,
+                            UpdatedDateTime = new DateTime(2020, 3, 13, 20, 23, 53, 930, DateTimeKind.Local).AddTicks(8524)
+                        },
+                        new
+                        {
+                            Id = "c277c643-4fcb-4c04-8b8c-419feddf6024",
+                            CreatedDateTime = new DateTime(2020, 3, 13, 14, 23, 53, 930, DateTimeKind.Utc).AddTicks(8524),
+                            FactoryId = "c90a9cdf-ca6b-4f74-b9f6-d00cd37b1b30",
+                            RowStatus = "ADDED",
+                            Status = "CASH_PAID",
+                            UniqueId = 0L,
+                            UpdatedDateTime = new DateTime(2020, 3, 13, 20, 23, 53, 930, DateTimeKind.Local).AddTicks(8532)
+                        });
                 });
 
             modelBuilder.Entity("Entities.DbModels.Phone", b =>
@@ -1371,6 +1435,10 @@ namespace ApiService.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("ItemId");
+
+                    b.HasIndex("ItemStatusId");
+
                     b.ToTable("Stock");
                 });
 
@@ -1776,6 +1844,21 @@ namespace ApiService.Migrations
                     b.HasOne("Entities.DbModels.ItemCategory", "ItemCategory")
                         .WithMany("Items")
                         .HasForeignKey("CategoryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Entities.DbModels.Stock", b =>
+                {
+                    b.HasOne("Entities.DbModels.Item", "Item")
+                        .WithMany()
+                        .HasForeignKey("ItemId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Entities.DbModels.ItemStatus", "ItemStatus")
+                        .WithMany()
+                        .HasForeignKey("ItemStatusId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

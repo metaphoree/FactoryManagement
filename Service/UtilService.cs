@@ -1,4 +1,5 @@
-﻿using Contracts;
+﻿using AutoMapper;
+using Contracts;
 using Entities.DbModels;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -10,12 +11,17 @@ namespace Service
 {
     public class UtilService : IUtilService
     {
-       
-        private readonly FactoryManagementContext _context;
 
-        public UtilService(FactoryManagementContext context)
+        private readonly FactoryManagementContext _context;
+        private readonly ILoggerManager _loggerManager;
+        private readonly IMapper _mapper;
+
+
+        public UtilService(FactoryManagementContext context, ILoggerManager loggerManager, IMapper mapper)
         {
             _context = context;
+            _loggerManager = loggerManager;
+            _mapper = mapper;
 
         }
         public async Task<string> GetUniqueId(string TableName)
@@ -46,5 +52,23 @@ namespace Service
             return output;
 
         }
+
+        public IMapper GetMapper()
+        {
+            return _mapper;
+        }
+        public ILoggerManager GetLogger()
+        {
+            return _loggerManager;
+        }
+        public void Log(string message)
+        {
+            _loggerManager.LogInfo("---------------------------------------------------------------------------------------------------------");
+            _loggerManager.LogInfo("--------------------------" + DateTime.Now.ToString() + "------------------------------------------------");
+            _loggerManager.LogInfo(message);
+        }
+
+
+
     }
 }

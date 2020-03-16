@@ -9,6 +9,7 @@ using Entities.DbModels;
 using Contracts;
 using Entities.ViewModels.Item;
 using Entities.ViewModels;
+using Entities.ViewModels.ItemStatus;
 
 namespace ApiService.Controllers
 {
@@ -86,5 +87,28 @@ namespace ApiService.Controllers
         {
             return _context.Item.Any(e => e.CategoryId == CategoryId && e.UnitPrice == UnitPrice && e.Name == Name);
         }
+
+
+
+
+
+        #region ItemStatus
+
+        [HttpPost]
+        [Route("status/getAll")]
+        public async Task<ActionResult<WrapperItemStatusListVM>> GetItemStatus([FromBody]GetDataListVM dataParam)
+        {
+            var data = await _serviceWrapper.ItemStatusService.GetListPaged(dataParam);
+            return Ok(data);
+        }
+
+        #endregion
+
+
+
+
+
+
+
     }
 }

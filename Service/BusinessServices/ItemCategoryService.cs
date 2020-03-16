@@ -20,11 +20,15 @@ namespace Service.BusinessServices
         private readonly IRepositoryWrapper _repositoryWrapper;
         private readonly IMapper _mapper;
         private readonly ILoggerManager _logger;
-        public ItemCategoryService(IRepositoryWrapper repositoryWrapper, IMapper mapper, ILoggerManager logger)
+        private readonly IUtilService _utilService;
+
+        public ItemCategoryService(IRepositoryWrapper repositoryWrapper, IMapper mapper, ILoggerManager logger, IUtilService utilService)
         {
             this._repositoryWrapper = repositoryWrapper;
             this._mapper = mapper;
             this._logger = logger;
+            this._utilService = utilService;
+
         }
 
 
@@ -53,7 +57,7 @@ namespace Service.BusinessServices
 
             var dataRowCount = await _repositoryWrapper.ItemCategory.NumOfRecord();
             List<ItemCategoryVM> itemCategoryVMLists = new List<ItemCategoryVM>();
-            itemCategoryVMLists = _mapper.Map<List<ItemCategory>, List<ItemCategoryVM>>(itemCatagoryList);
+            itemCategoryVMLists = _utilService.GetMapper().Map<List<ItemCategory>, List<ItemCategoryVM>>(itemCatagoryList);
             var wrapper = new WrapperItemCategoryListVM()
             {
                 ListOfData = itemCategoryVMLists,
@@ -66,7 +70,7 @@ namespace Service.BusinessServices
         }
         public async Task<WrapperItemCategoryListVM> Add(ItemCategoryVM vm)
         {
-            var entityToAdd = _mapper.Map<ItemCategoryVM, ItemCategory>(vm);
+            var entityToAdd = _utilService.GetMapper().Map<ItemCategoryVM, ItemCategory>(vm);
             //string uniqueIdTask =await _repositoryWrapper.ItemCategory.GetUniqueId();
 
             //// Todo  need to aandle unique id from db
@@ -89,7 +93,7 @@ namespace Service.BusinessServices
         public async Task<WrapperItemCategoryListVM> Update(string id, ItemCategoryVM vm)
         {
             IEnumerable<ItemCategory> ItemDB = await _repositoryWrapper.ItemCategory.FindByConditionAsync(x => x.Id == id && x.FactoryId == vm.FactoryId);
-            var ItemUpdated = _mapper.Map<ItemCategoryVM, ItemCategory>(vm, ItemDB.ToList().FirstOrDefault());
+            var ItemUpdated = _utilService.GetMapper().Map<ItemCategoryVM, ItemCategory>(vm, ItemDB.ToList().FirstOrDefault());
             _repositoryWrapper.ItemCategory.Update(ItemUpdated);
             await _repositoryWrapper.ItemCategory.SaveChangesAsync();
             this._logger.LogInfo("Successful In Updating Item Cateory");

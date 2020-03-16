@@ -19,11 +19,15 @@ namespace Service.BusinessServices
         private readonly IRepositoryWrapper _repositoryWrapper;
         private readonly IMapper _mapper;
         private readonly ILoggerManager _logger;
-        public ItemService(IRepositoryWrapper repositoryWrapper, IMapper mapper, ILoggerManager logger)
+        private readonly IUtilService _utilService;
+
+        public ItemService(IRepositoryWrapper repositoryWrapper, IMapper mapper, ILoggerManager logger, IUtilService utilService)
         {
             this._repositoryWrapper = repositoryWrapper;
             this._mapper = mapper;
             this._logger = logger;
+            this._utilService = utilService;
+
         }
         public async Task<WrapperItemListVM> GetListPaged(GetDataListVM dataListVM)
         {
@@ -52,7 +56,7 @@ namespace Service.BusinessServices
 
             var dataRowCount = await _repositoryWrapper.Item.NumOfRecord();
             List<ItemVM> itemVMList = new List<ItemVM>();
-            itemVMList = _mapper.Map<List<Item>, List<ItemVM>>(itemList);
+            itemVMList = _utilService.GetMapper().Map<List<Item>, List<ItemVM>>(itemList);
             var wrapper = new WrapperItemListVM()
             {
                 ListOfData = itemVMList,
@@ -62,7 +66,7 @@ namespace Service.BusinessServices
         }
         public async Task<WrapperItemListVM> Add(ItemVM vm)
         {
-            var entityToAdd = _mapper.Map<ItemVM, Item>(vm);
+            var entityToAdd = _utilService.GetMapper().Map<ItemVM, Item>(vm);
             //string uniqueIdTask = await _repositoryWrapper.Item.GetUniqueId();
             //entityToAdd.UniqueId = uniqueIdTask;
             entityToAdd = _repositoryWrapper.Item.Create(entityToAdd);
@@ -84,7 +88,7 @@ namespace Service.BusinessServices
         public async Task<WrapperItemListVM> Update(string id, ItemVM vm)
         {
             IEnumerable<Item> ItemDB =await _repositoryWrapper.Item.FindByConditionAsync(x => x.Id == id && x.FactoryId == vm.FactoryId);
-            var ItemUpdated = _mapper.Map<ItemVM, Item>(vm, ItemDB.ToList().FirstOrDefault());
+            var ItemUpdated = _utilService.GetMapper().Map<ItemVM, Item>(vm, ItemDB.ToList().FirstOrDefault());
             _repositoryWrapper.Item.Update(ItemUpdated);
             await _repositoryWrapper.Item.SaveChangesAsync();
             this._logger.LogInfo("Successful In Updating Item");

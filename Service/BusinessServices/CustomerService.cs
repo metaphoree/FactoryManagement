@@ -29,7 +29,7 @@ namespace Service.BusinessServices
 
         public async Task<WrapperListCustomerVM> Add(CustomerVM addCustomerViewModel)
         {
-            var CustomerDT = _mapper.Map<CustomerVM, Customer>(addCustomerViewModel);
+            var CustomerDT = _utilService.GetMapper().Map<CustomerVM, Customer>(addCustomerViewModel);
          //   var AddressDT = _mapper.Map<AddCustomerViewModel, Address>(addCustomerViewModel);
           //  var PhoneDT = _mapper.Map<AddCustomerViewModel, Phone>(addCustomerViewModel);
 
@@ -79,7 +79,7 @@ namespace Service.BusinessServices
 
             await Task.WhenAll(CustomersDB);
 
-            var CustomerUpdated = _mapper.Map<CustomerVM, Customer>(updateCustomerViewModel, CustomersDB.Result.ToList().FirstOrDefault());
+            var CustomerUpdated = _utilService.GetMapper().Map<CustomerVM, Customer>(updateCustomerViewModel, CustomersDB.Result.ToList().FirstOrDefault());
             //var AddressUpdated = _mapper.Map<UpdateCustomerViewModel, Address>(updateCustomerViewModel, AddressesDB.Result.ToList().FirstOrDefault());
             //var PhoneUpdated = _mapper.Map<UpdateCustomerViewModel, Phone>(updateCustomerViewModel, PhonesDB.Result.ToList().FirstOrDefault());
             _repositoryWrapper.Customer.Update(CustomerUpdated);
@@ -120,7 +120,7 @@ namespace Service.BusinessServices
 
             List<CustomerVM> outputList = new List<CustomerVM>();
 
-            outputList = _mapper.Map<List<Customer>, List<CustomerVM>>(custList);
+            outputList = _utilService.GetMapper().Map<List<Customer>, List<CustomerVM>>(custList);
             if (!string.IsNullOrEmpty(dataListVM.GlobalFilter) && !string.IsNullOrWhiteSpace(dataListVM.GlobalFilter)) {
                 outputList = outputList.Where(output =>
                 output.AlternateCellNo != null ? output.AlternateCellNo.Contains(dataListVM.GlobalFilter, StringComparison.OrdinalIgnoreCase) : false

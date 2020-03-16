@@ -49,7 +49,6 @@ namespace ApiService
                 options.IdleTimeout = TimeSpan.FromSeconds(10);
                 options.Cookie.HttpOnly = true;
             });
-
             services.AddControllers()
                // .AddJsonOptions(s => s.JsonSerializerOptions.PropertyNamingPolicy =);
                 .AddNewtonsoftJson(o => o.SerializerSettings.ContractResolver = new DefaultContractResolver())
