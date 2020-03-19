@@ -10,13 +10,13 @@ namespace Service.BusinessServices
     public class SalesService : ISalesService
     {
         private readonly IRepositoryWrapper _repositoryWrapper;
-        private readonly IMapper _mapper;
+
         private readonly IUtilService _utilService;
 
-        public SalesService(IRepositoryWrapper repositoryWrapper, IMapper mapper, IUtilService utilService)
+        public SalesService(IRepositoryWrapper repositoryWrapper, IUtilService utilService)
         {
             this._repositoryWrapper = repositoryWrapper;
-            this._mapper = mapper;
+
             this._utilService = utilService;
 
         }

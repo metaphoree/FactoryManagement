@@ -4,8 +4,7 @@ using System.Collections.Generic;
 namespace Entities.DbModels
 {
     public  class Transaction : BaseEntity
-    {
-      
+    {      
         public string InvoiceId { get; set; }
         public string Amount { get; set; }
         public string ExecutorId { get; set; }

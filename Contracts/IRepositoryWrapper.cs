@@ -18,6 +18,7 @@ namespace Contracts
         IExpenseRepository Expense { get; }
         IExpenseTypeRepository ExpenseType { get; }
         IFactoryRepository Factory { get; }
+        IIncomeRepository Income { get; }
         IIncomeTypeRepository IncomeType { get; }
         IInvoiceRepository Invoice { get; }
         IInvoiceTypeRepository InvoiceType { get; }

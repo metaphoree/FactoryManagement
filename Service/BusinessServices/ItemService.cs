@@ -17,15 +17,14 @@ namespace Service.BusinessServices
     public class ItemService : IItemService
     {
         private readonly IRepositoryWrapper _repositoryWrapper;
-        private readonly IMapper _mapper;
-        private readonly ILoggerManager _logger;
+
+
         private readonly IUtilService _utilService;
 
-        public ItemService(IRepositoryWrapper repositoryWrapper, IMapper mapper, ILoggerManager logger, IUtilService utilService)
+        public ItemService(IRepositoryWrapper repositoryWrapper,  IUtilService utilService)
         {
             this._repositoryWrapper = repositoryWrapper;
-            this._mapper = mapper;
-            this._logger = logger;
+
             this._utilService = utilService;
 
         }
@@ -71,9 +70,9 @@ namespace Service.BusinessServices
             //entityToAdd.UniqueId = uniqueIdTask;
             entityToAdd = _repositoryWrapper.Item.Create(entityToAdd);
             await _repositoryWrapper.Item.SaveChangesAsync();
-            this._logger.LogInfo("Successful In saving  Item");
-            _logger.LogInfo("-----------------------------------------------------------------");
-            _logger.LogInfo("-----------------------------------------------------------------");
+            this._utilService.LogInfo("Successful In saving  Item");
+            _utilService.LogInfo("-----------------------------------------------------------------");
+            _utilService.LogInfo("-----------------------------------------------------------------");
 
             var dataParam = new GetDataListVM()
             {
@@ -91,9 +90,9 @@ namespace Service.BusinessServices
             var ItemUpdated = _utilService.GetMapper().Map<ItemVM, Item>(vm, ItemDB.ToList().FirstOrDefault());
             _repositoryWrapper.Item.Update(ItemUpdated);
             await _repositoryWrapper.Item.SaveChangesAsync();
-            this._logger.LogInfo("Successful In Updating Item");
-            _logger.LogInfo("-----------------------------------------------------------------");
-            _logger.LogInfo("-----------------------------------------------------------------");
+            this._utilService.LogInfo("Successful In Updating Item");
+            _utilService.LogInfo("-----------------------------------------------------------------");
+            _utilService.LogInfo("-----------------------------------------------------------------");
             var dataParam = new GetDataListVM()
             {
                 FactoryId = vm.FactoryId,

@@ -19,6 +19,7 @@ namespace Service
         IExpenseService _ExpenseService;
         IExpenseTypeService _ExpenseTypeService;
         IFactoryService _FactoryService;
+        IIncomeService _IncomeService;
         IIncomeTypeService _IncomeTypeService;
         IInvoiceService _InvoiceService;
         IInvoiceTypeService _InvoiceTypeService;
@@ -63,7 +64,7 @@ namespace Service
                 if (_CustomerService == null)
                 {
                     //return new AddressRepository(dbContext);
-                    _CustomerService = new CustomerService(_repositoryWrapper, _mapper,_loggerManager,_utilService);
+                    _CustomerService = new CustomerService(_repositoryWrapper, _utilService);
                 }
                 return _CustomerService;
             }
@@ -75,7 +76,7 @@ namespace Service
             {
                 if (_AddressService == null)
                 {
-                    _AddressService = new AddressService(_repositoryWrapper, _mapper, _utilService);
+                    _AddressService = new AddressService(_repositoryWrapper,  _utilService);
                 }
                 return _AddressService;
             }
@@ -87,7 +88,7 @@ namespace Service
             {
                 if (_DepartmentService == null)
                 {
-                    _DepartmentService = new DepartmentService(_repositoryWrapper, _mapper, _utilService);
+                    _DepartmentService = new DepartmentService(_repositoryWrapper,  _utilService);
                 }
                 return _DepartmentService;
             }
@@ -99,7 +100,7 @@ namespace Service
             {
                 if (_EquipmentService == null)
                 {
-                    _EquipmentService = new EquipmentService(_repositoryWrapper, _mapper, _utilService);
+                    _EquipmentService = new EquipmentService(_repositoryWrapper,  _utilService);
                 }
                 return _EquipmentService;
             }
@@ -111,7 +112,7 @@ namespace Service
             {
                 if (_EquipmentCategoryService == null)
                 {
-                    _EquipmentCategoryService = new EquipmentCategoryService(_repositoryWrapper, _mapper, _utilService);
+                    _EquipmentCategoryService = new EquipmentCategoryService(_repositoryWrapper,  _utilService);
                 }
                 return _EquipmentCategoryService;
             }
@@ -123,7 +124,7 @@ namespace Service
             {
                 if (_ExpenseService == null)
                 {
-                    _ExpenseService = new ExpenseService(_repositoryWrapper, _mapper, _utilService);
+                    _ExpenseService = new ExpenseService(_repositoryWrapper,  _utilService);
                 }
                 return _ExpenseService;
             }
@@ -135,7 +136,7 @@ namespace Service
             {
                 if (_ExpenseTypeService == null)
                 {
-                    _ExpenseTypeService = new ExpenseTypeService(_repositoryWrapper, _mapper, _utilService);
+                    _ExpenseTypeService = new ExpenseTypeService(_repositoryWrapper,  _utilService);
                 }
                 return _ExpenseTypeService;
             }
@@ -147,9 +148,21 @@ namespace Service
             {
                 if (_FactoryService == null)
                 {
-                    _FactoryService = new FactoryService(_repositoryWrapper, _mapper, _utilService);
+                    _FactoryService = new FactoryService(_repositoryWrapper,  _utilService);
                 }
                 return _FactoryService;
+            }
+
+        }
+        public IIncomeService IncomeService
+        {
+            get
+            {
+                if (_IncomeService == null)
+                {
+                    _IncomeService = new IncomeService(_repositoryWrapper, _utilService);
+                }
+                return _IncomeService;
             }
 
         }
@@ -159,7 +172,7 @@ namespace Service
             {
                 if (_IncomeTypeService == null)
                 {
-                    _IncomeTypeService = new IncomeTypeService(_repositoryWrapper, _mapper, _utilService);
+                    _IncomeTypeService = new IncomeTypeService(_repositoryWrapper,  _utilService);
                 }
                 return _IncomeTypeService;
             }
@@ -171,7 +184,7 @@ namespace Service
             {
                 if (_InvoiceService == null)
                 {
-                    _InvoiceService = new InvoiceService(_repositoryWrapper, _mapper, _utilService);
+                    _InvoiceService = new InvoiceService(_repositoryWrapper,  _utilService);
                 }
                 return _InvoiceService;
             }
@@ -183,7 +196,7 @@ namespace Service
             {
                 if (_InvoiceTypeService == null)
                 {
-                    _InvoiceTypeService = new InvoiceTypeService(_repositoryWrapper, _mapper, _utilService);
+                    _InvoiceTypeService = new InvoiceTypeService(_repositoryWrapper,  _utilService);
                 }
                 return _InvoiceTypeService;
             }
@@ -195,7 +208,7 @@ namespace Service
             {
                 if (_ItemService == null)
                 {
-                    _ItemService = new ItemService(_repositoryWrapper, _mapper, _loggerManager, _utilService);
+                    _ItemService = new ItemService(_repositoryWrapper,   _utilService);
                 }
                 return _ItemService;
             }
@@ -207,7 +220,7 @@ namespace Service
             {
                 if (_ItemCategoryService == null)
                 {
-                    _ItemCategoryService = new ItemCategoryService(_repositoryWrapper, _mapper, _loggerManager, _utilService);
+                    _ItemCategoryService = new ItemCategoryService(_repositoryWrapper,   _utilService);
                 }
                 return _ItemCategoryService;
             }
@@ -219,7 +232,7 @@ namespace Service
             {
                 if (_ItemStatusService == null)
                 {
-                    _ItemStatusService = new ItemStatusService(_repositoryWrapper, _mapper, _utilService);
+                    _ItemStatusService = new ItemStatusService(_repositoryWrapper,  _utilService);
                 }
                 return _ItemStatusService;
             }
@@ -231,7 +244,7 @@ namespace Service
             {
                 if (_PayableService == null)
                 {
-                    _PayableService = new PayableService(_repositoryWrapper, _mapper, _utilService);
+                    _PayableService = new PayableService(_repositoryWrapper,  _utilService);
                 }
                 return _PayableService;
             }
@@ -243,7 +256,7 @@ namespace Service
             {
                 if (_PaymentStatusService == null)
                 {
-                    _PaymentStatusService = new PaymentStatusService(_repositoryWrapper, _mapper, _utilService);
+                    _PaymentStatusService = new PaymentStatusService(_repositoryWrapper,  _utilService);
                 }
                 return _PaymentStatusService;
             }
@@ -255,7 +268,7 @@ namespace Service
             {
                 if (_PhoneService == null)
                 {
-                    _PhoneService = new PhoneService(_repositoryWrapper, _mapper, _utilService);
+                    _PhoneService = new PhoneService(_repositoryWrapper,  _utilService);
                 }
                 return _PhoneService;
             }
@@ -267,7 +280,7 @@ namespace Service
             {
                 if (_ProductionService == null)
                 {
-                    _ProductionService = new ProductionService(_repositoryWrapper, _mapper, _utilService);
+                    _ProductionService = new ProductionService(_repositoryWrapper,  _utilService);
                 }
                 return _ProductionService;
             }
@@ -279,7 +292,7 @@ namespace Service
             {
                 if (_PurchaseService == null)
                 {
-                    _PurchaseService = new PurchaseService(_repositoryWrapper, _mapper, _utilService);
+                    _PurchaseService = new PurchaseService(_repositoryWrapper,  _utilService);
                 }
                 return _PurchaseService;
             }
@@ -291,7 +304,7 @@ namespace Service
             {
                 if (_PurchaseTypeService == null)
                 {
-                    _PurchaseTypeService = new PurchaseTypeService(_repositoryWrapper, _mapper, _utilService);
+                    _PurchaseTypeService = new PurchaseTypeService(_repositoryWrapper,  _utilService);
                 }
                 return _PurchaseTypeService;
             }
@@ -303,7 +316,7 @@ namespace Service
             {
                 if (_RecievableService == null)
                 {
-                    _RecievableService = new RecievableService(_repositoryWrapper, _mapper, _utilService);
+                    _RecievableService = new RecievableService(_repositoryWrapper,  _utilService);
                 }
                 return _RecievableService;
             }
@@ -315,7 +328,7 @@ namespace Service
             {
                 if (_RoleService == null)
                 {
-                    _RoleService = new RoleService(_repositoryWrapper, _mapper, _utilService);
+                    _RoleService = new RoleService(_repositoryWrapper,  _utilService);
                 }
                 return _RoleService;
             }
@@ -327,7 +340,7 @@ namespace Service
             {
                 if (_SalesService == null)
                 {
-                    _SalesService = new SalesService(_repositoryWrapper, _mapper, _utilService);
+                    _SalesService = new SalesService(_repositoryWrapper,  _utilService);
                 }
                 return _SalesService;
             }
@@ -339,7 +352,7 @@ namespace Service
             {
                 if (_StaffService == null)
                 {
-                    _StaffService = new StaffService(_repositoryWrapper, _mapper, _utilService);
+                    _StaffService = new StaffService(_repositoryWrapper,  _utilService);
                 }
                 return _StaffService;
             }
@@ -351,7 +364,7 @@ namespace Service
             {
                 if (_StockService == null)
                 {
-                    _StockService = new StockService(_repositoryWrapper, _mapper, _utilService);
+                    _StockService = new StockService(_repositoryWrapper,  _utilService);
                 }
                 return _StockService;
             }
@@ -363,7 +376,7 @@ namespace Service
             {
                 if (_StockInService == null)
                 {
-                    _StockInService = new StockInService(_repositoryWrapper, _mapper, _utilService);
+                    _StockInService = new StockInService(_repositoryWrapper,  _utilService);
                 }
                 return _StockInService;
             }
@@ -375,7 +388,7 @@ namespace Service
             {
                 if (_StockOutService == null)
                 {
-                    _StockOutService = new StockOutService(_repositoryWrapper, _mapper, _utilService);
+                    _StockOutService = new StockOutService(_repositoryWrapper,  _utilService);
                 }
                 return _StockOutService;
             }
@@ -387,7 +400,7 @@ namespace Service
             {
                 if (_SupplierService == null)
                 {
-                    _SupplierService = new SupplierService(_repositoryWrapper, _mapper, _utilService);
+                    _SupplierService = new SupplierService(_repositoryWrapper,  _utilService);
                 }
                 return _SupplierService;
             }
@@ -399,7 +412,7 @@ namespace Service
             {
                 if (_TransactionService == null)
                 {
-                    _TransactionService = new TransactionService(_repositoryWrapper, _mapper, _utilService);
+                    _TransactionService = new TransactionService(_repositoryWrapper,  _utilService);
                 }
                 return _TransactionService;
             }
@@ -411,7 +424,7 @@ namespace Service
             {
                 if (_TransactionTypeService == null)
                 {
-                    _TransactionTypeService = new TransactionTypeService(_repositoryWrapper, _mapper, _utilService);
+                    _TransactionTypeService = new TransactionTypeService(_repositoryWrapper,  _utilService);
                 }
                 return _TransactionTypeService;
             }
@@ -423,7 +436,7 @@ namespace Service
             {
                 if (_UserAuthInfoService == null)
                 {
-                    _UserAuthInfoService = new UserAuthInfoService(_repositoryWrapper, _mapper, _utilService);
+                    _UserAuthInfoService = new UserAuthInfoService(_repositoryWrapper,  _utilService);
                 }
                 return _UserAuthInfoService;
             }
@@ -435,7 +448,7 @@ namespace Service
             {
                 if (_UserRoleService == null)
                 {
-                    _UserRoleService = new UserRoleService(_repositoryWrapper, _mapper, _utilService);
+                    _UserRoleService = new UserRoleService(_repositoryWrapper,  _utilService);
                 }
                 return _UserRoleService;
             }

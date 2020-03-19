@@ -57,6 +57,7 @@ namespace Service
         {
             return _mapper;
         }
+
         public ILoggerManager GetLogger()
         {
             return _loggerManager;
@@ -67,8 +68,36 @@ namespace Service
             _loggerManager.LogInfo("--------------------------" + DateTime.Now.ToString() + "------------------------------------------------");
             _loggerManager.LogInfo(message);
         }
+        public void LogInfo(string message)
+        {
+            _loggerManager.LogInfo("---------------------------------------------------------------------------------------------------------");
+            _loggerManager.LogInfo("--------------------------" + DateTime.Now.ToString() + "------------------------------------------------");
+            _loggerManager.LogInfo(message);
+        }
+        public void LogDebug(string message)
+        {
+            _loggerManager.LogDebug("---------------------------------------------------------------------------------------------------------");
+            _loggerManager.LogDebug("--------------------------" + DateTime.Now.ToString() + "------------------------------------------------");
+            _loggerManager.LogDebug(message);
+        }
+        public void LogError(string message)
+        {
+            _loggerManager.LogError("---------------------------------------------------------------------------------------------------------");
+            _loggerManager.LogError("--------------------------" + DateTime.Now.ToString() + "------------------------------------------------");
+            _loggerManager.LogError(message);
+        }
+        public void LogWarn(string message)
+        {
+            _loggerManager.LogWarn("---------------------------------------------------------------------------------------------------------");
+            _loggerManager.LogWarn("--------------------------" + DateTime.Now.ToString() + "------------------------------------------------");
+            _loggerManager.LogWarn(message);
+        }
 
-
+        public IMapper Mapper {
+            get {
+                return _mapper;
+            }        
+        }
 
     }
 }

@@ -15,6 +15,7 @@ namespace Contracts
         IExpenseService ExpenseService { get; }
         IExpenseTypeService ExpenseTypeService { get; }
         IFactoryService FactoryService { get; }
+        IIncomeService IncomeService { get; }
         IIncomeTypeService IncomeTypeService { get; }
         IInvoiceService InvoiceService { get; }
         IInvoiceTypeService InvoiceTypeService { get; }

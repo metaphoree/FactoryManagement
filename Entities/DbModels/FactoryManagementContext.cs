@@ -76,6 +76,7 @@ namespace Entities.DbModels
             modelBuilder.ApplyConfiguration(new ExpenseConfiguration());
             modelBuilder.ApplyConfiguration(new ExpenseTypeConfiguration());
             modelBuilder.ApplyConfiguration(new FactoryConfiguration());
+            modelBuilder.ApplyConfiguration(new IncomeConfiguration());
             modelBuilder.ApplyConfiguration(new IncomeTypeConfiguration());
             modelBuilder.ApplyConfiguration(new InvoiceConfiguration());
             modelBuilder.ApplyConfiguration(new InvoiceTypeConfiguration());

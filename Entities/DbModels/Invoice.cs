@@ -5,7 +5,8 @@ namespace Entities.DbModels
 {
     public  class Invoice : BaseEntity
     {
-     
+
+        public string EmployeeId { get; set; }
         public string ClientId { get; set; }
         public string InvoiceId { get; set; }
         public decimal? Discount { get; set; }

@@ -5,7 +5,6 @@ namespace Entities.DbModels
 {
     public  class Expense : BaseEntity
     {
-
         public string ExpenseTypeId { get; set; }
         public string ClientId { get; set; }
         public string InvoiceId { get; set; }

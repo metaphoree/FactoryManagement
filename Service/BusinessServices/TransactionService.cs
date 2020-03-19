@@ -10,13 +10,13 @@ namespace Service.BusinessServices
     public class TransactionService : ITransactionService
     {
         private readonly IRepositoryWrapper _repositoryWrapper;
-        private readonly IMapper _mapper;
+
         private readonly IUtilService _utilService;
 
-        public TransactionService(IRepositoryWrapper repositoryWrapper, IMapper mapper, IUtilService utilService)
+        public TransactionService(IRepositoryWrapper repositoryWrapper,  IUtilService utilService)
         {
             this._repositoryWrapper = repositoryWrapper;
-            this._mapper = mapper;
+
             this._utilService = utilService;
 
         }

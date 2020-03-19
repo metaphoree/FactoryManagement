@@ -10,12 +10,12 @@ namespace Service.BusinessServices
     public class ExpenseService : IExpenseService
     {
         private readonly IRepositoryWrapper _repositoryWrapper;
-        private readonly IMapper _mapper;
+
         private readonly IUtilService _utilService;
-        public ExpenseService(IRepositoryWrapper repositoryWrapper, IMapper mapper, IUtilService utilService)
+        public ExpenseService(IRepositoryWrapper repositoryWrapper, IUtilService utilService)
         {
             this._repositoryWrapper = repositoryWrapper;
-            this._mapper = mapper;
+
             this._utilService = utilService;
 
         }

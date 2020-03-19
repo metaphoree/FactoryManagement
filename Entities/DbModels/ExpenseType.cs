@@ -5,7 +5,6 @@ namespace Entities.DbModels
 {
     public  class ExpenseType : BaseEntity
     {
-
         public string Name { get; set; }
     }
 }

@@ -10,12 +10,12 @@ namespace Service.BusinessServices
   public  class AddressService  :IAddressService
     {
         private readonly IRepositoryWrapper _repositoryWrapper;
-        private readonly IMapper _mapper;
+
         private readonly IUtilService _utilService;
-        public AddressService(IRepositoryWrapper repositoryWrapper, IMapper mapper,IUtilService utilService)
+        public AddressService(IRepositoryWrapper repositoryWrapper, IUtilService utilService)
         {
             this._repositoryWrapper = repositoryWrapper;
-            this._mapper = mapper;
+
             this._utilService = utilService;
 
         }

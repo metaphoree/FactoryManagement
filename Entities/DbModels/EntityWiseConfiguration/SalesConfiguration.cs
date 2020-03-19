@@ -15,21 +15,21 @@ namespace Entities.DbModels.EntityWiseConfiguration
             
                 builder.Property(e => e.Id).HasMaxLength(50);
 
-                builder.Property(e => e.AmountAfterDiscount).HasColumnType("decimal(18, 0)");
+                //builder.Property(e => e.AmountAfterDiscount).HasColumnType("decimal(18, 0)");
 
-                builder.Property(e => e.AmountBeforeDiscount).HasColumnType("decimal(18, 0)");
+                //builder.Property(e => e.AmountBeforeDiscount).HasColumnType("decimal(18, 0)");
 
-                builder.Property(e => e.AmountDue).HasColumnType("decimal(18, 0)");
+                //builder.Property(e => e.AmountDue).HasColumnType("decimal(18, 0)");
 
-                builder.Property(e => e.AmountPaid).HasColumnType("decimal(18, 0)");
+                //builder.Property(e => e.AmountPaid).HasColumnType("decimal(18, 0)");
 
                 builder.Property(e => e.ClientId)
                     .IsRequired()
                     .HasMaxLength(50);
 
-                builder.Property(e => e.Description).HasMaxLength(50);
+                //builder.Property(e => e.Description).HasMaxLength(50);
 
-                builder.Property(e => e.Discount).HasColumnType("decimal(18, 0)");
+                //builder.Property(e => e.Discount).HasColumnType("decimal(18, 0)");
 
                 builder.Property(e => e.FactoryId)
                     .IsRequired()
@@ -51,11 +51,11 @@ namespace Entities.DbModels.EntityWiseConfiguration
                     .IsRequired()
                     .HasMaxLength(50);
 
-                builder.Property(e => e.SaleId)
-                    .IsRequired()
-                    .HasMaxLength(50);
+                //builder.Property(e => e.SaleId)
+                //    .IsRequired()
+                //    .HasMaxLength(50);
 
-                builder.Property(e => e.SellerId).HasMaxLength(50);
+                //builder.Property(e => e.SellerId).HasMaxLength(50);
             builder.Property(p => p.UniqueId)
               .Metadata.SetAfterSaveBehavior(PropertySaveBehavior.Ignore);
             //builder.Property(e => e.UniqueId)

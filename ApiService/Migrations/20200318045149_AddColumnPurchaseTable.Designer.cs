@@ -4,14 +4,16 @@ using Entities.DbModels;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace ApiService.Migrations
 {
     [DbContext(typeof(FactoryManagementContext))]
-    partial class FactoryManagementContextModelSnapshot : ModelSnapshot
+    [Migration("20200318045149_AddColumnPurchaseTable")]
+    partial class AddColumnPurchaseTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -406,76 +408,20 @@ namespace ApiService.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "ec3f99ed-f37c-4a46-abfc-543faacac4f2",
-                            CreatedDateTime = new DateTime(2020, 3, 18, 12, 33, 31, 468, DateTimeKind.Local).AddTicks(2396),
-                            FactoryId = "afb85b05-0f2a-44f0-979c-20352c83b742",
+                            Id = "44d15467-42ad-483d-b2e6-9f1b0e7a5c6e",
+                            CreatedDateTime = new DateTime(2020, 3, 18, 10, 51, 48, 353, DateTimeKind.Local).AddTicks(3030),
+                            FactoryId = "7b526292-3de4-48ae-b28b-e00c7b4345f5",
                             ImageUrl = "",
                             LicenseNo = "",
                             Name = "Fazlu Loom Factory",
                             RegNo = "",
                             RowStatus = "ADDED",
-                            SubscriptionEnd = new DateTime(2022, 12, 13, 12, 33, 31, 468, DateTimeKind.Local).AddTicks(8037),
-                            SubscriptionStart = new DateTime(2020, 3, 18, 12, 33, 31, 468, DateTimeKind.Local).AddTicks(7056),
+                            SubscriptionEnd = new DateTime(2022, 12, 13, 10, 51, 48, 354, DateTimeKind.Local).AddTicks(7699),
+                            SubscriptionStart = new DateTime(2020, 3, 18, 10, 51, 48, 354, DateTimeKind.Local).AddTicks(4509),
                             UniqueId = 0L,
-                            UpdatedDateTime = new DateTime(2020, 3, 18, 12, 33, 31, 468, DateTimeKind.Local).AddTicks(8965),
+                            UpdatedDateTime = new DateTime(2020, 3, 18, 10, 51, 48, 355, DateTimeKind.Local).AddTicks(63),
                             VatRegNo = ""
                         });
-                });
-
-            modelBuilder.Entity("Entities.DbModels.Income", b =>
-                {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(50)")
-                        .HasMaxLength(50);
-
-                    b.Property<decimal?>("Amount")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<string>("ClientId")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("CreatedDateTime")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Description")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("EmployeeId")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("FactoryId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(50)")
-                        .HasMaxLength(50);
-
-                    b.Property<string>("IncomeTypeId")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("InvoiceId")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Month")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime?>("OccurranceDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("RowStatus")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(50)")
-                        .HasMaxLength(50);
-
-                    b.Property<long>("UniqueId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<DateTime>("UpdatedDateTime")
-                        .HasColumnType("datetime2");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Income");
                 });
 
             modelBuilder.Entity("Entities.DbModels.IncomeType", b =>
@@ -560,9 +506,6 @@ namespace ApiService.Migrations
 
                     b.Property<decimal?>("Due")
                         .HasColumnType("decimal(18, 0)");
-
-                    b.Property<string>("EmployeeId")
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("FactoryId")
                         .IsRequired()
@@ -764,23 +707,23 @@ namespace ApiService.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "4d45a488-eb22-454f-9580-1c9ba4629b81",
-                            CreatedDateTime = new DateTime(2020, 3, 18, 6, 33, 31, 491, DateTimeKind.Utc).AddTicks(2269),
+                            Id = "8cb655f8-8ebb-446a-a336-b6d59dead736",
+                            CreatedDateTime = new DateTime(2020, 3, 18, 4, 51, 48, 380, DateTimeKind.Utc).AddTicks(959),
                             FactoryId = "c90a9cdf-ca6b-4f74-b9f6-d00cd37b1b30",
                             Name = "GOOD",
                             RowStatus = "ADDED",
                             UniqueId = 0L,
-                            UpdatedDateTime = new DateTime(2020, 3, 18, 6, 33, 31, 491, DateTimeKind.Utc).AddTicks(4207)
+                            UpdatedDateTime = new DateTime(2020, 3, 18, 4, 51, 48, 380, DateTimeKind.Utc).AddTicks(2790)
                         },
                         new
                         {
-                            Id = "04fd358f-11c1-4089-b31e-77f1b9662bc9",
-                            CreatedDateTime = new DateTime(2020, 3, 18, 6, 33, 31, 491, DateTimeKind.Utc).AddTicks(4248),
+                            Id = "7808f3c1-a97b-4fee-a5f9-9ce6bddd101c",
+                            CreatedDateTime = new DateTime(2020, 3, 18, 4, 51, 48, 380, DateTimeKind.Utc).AddTicks(2831),
                             FactoryId = "c90a9cdf-ca6b-4f74-b9f6-d00cd37b1b30",
                             Name = "BAD",
                             RowStatus = "ADDED",
                             UniqueId = 0L,
-                            UpdatedDateTime = new DateTime(2020, 3, 18, 6, 33, 31, 491, DateTimeKind.Utc).AddTicks(4277)
+                            UpdatedDateTime = new DateTime(2020, 3, 18, 4, 51, 48, 380, DateTimeKind.Utc).AddTicks(2860)
                         });
                 });
 
@@ -880,43 +823,43 @@ namespace ApiService.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "4353f91e-6ade-4d74-868b-6a062a6a7d6b",
-                            CreatedDateTime = new DateTime(2020, 3, 18, 6, 33, 31, 496, DateTimeKind.Utc).AddTicks(5720),
+                            Id = "5bef3ccb-9071-4ca4-8129-269449807c4d",
+                            CreatedDateTime = new DateTime(2020, 3, 18, 4, 51, 48, 387, DateTimeKind.Utc).AddTicks(3841),
                             FactoryId = "c90a9cdf-ca6b-4f74-b9f6-d00cd37b1b30",
                             RowStatus = "ADDED",
                             Status = "CASH_RECIEVED",
                             UniqueId = 0L,
-                            UpdatedDateTime = new DateTime(2020, 3, 18, 12, 33, 31, 496, DateTimeKind.Local).AddTicks(6647)
+                            UpdatedDateTime = new DateTime(2020, 3, 18, 10, 51, 48, 387, DateTimeKind.Local).AddTicks(5216)
                         },
                         new
                         {
-                            Id = "1df2c52d-be35-4576-8524-4046318bcfd7",
-                            CreatedDateTime = new DateTime(2020, 3, 18, 6, 33, 31, 496, DateTimeKind.Utc).AddTicks(6689),
+                            Id = "597222b9-a00e-4c5c-ae5b-c4ec6e83b545",
+                            CreatedDateTime = new DateTime(2020, 3, 18, 4, 51, 48, 387, DateTimeKind.Utc).AddTicks(5274),
                             FactoryId = "c90a9cdf-ca6b-4f74-b9f6-d00cd37b1b30",
                             RowStatus = "ADDED",
                             Status = "CASH_PAYABLE",
                             UniqueId = 0L,
-                            UpdatedDateTime = new DateTime(2020, 3, 18, 12, 33, 31, 496, DateTimeKind.Local).AddTicks(6721)
+                            UpdatedDateTime = new DateTime(2020, 3, 18, 10, 51, 48, 387, DateTimeKind.Local).AddTicks(5327)
                         },
                         new
                         {
-                            Id = "54f36b91-9aa8-4804-a47f-de3e52887472",
-                            CreatedDateTime = new DateTime(2020, 3, 18, 6, 33, 31, 496, DateTimeKind.Utc).AddTicks(6721),
+                            Id = "fd635343-ef7c-4ce7-8814-8a6f85c8de37",
+                            CreatedDateTime = new DateTime(2020, 3, 18, 4, 51, 48, 387, DateTimeKind.Utc).AddTicks(5331),
                             FactoryId = "c90a9cdf-ca6b-4f74-b9f6-d00cd37b1b30",
                             RowStatus = "ADDED",
                             Status = "CASH_RECIEVABLE",
                             UniqueId = 0L,
-                            UpdatedDateTime = new DateTime(2020, 3, 18, 12, 33, 31, 496, DateTimeKind.Local).AddTicks(6730)
+                            UpdatedDateTime = new DateTime(2020, 3, 18, 10, 51, 48, 387, DateTimeKind.Local).AddTicks(5344)
                         },
                         new
                         {
-                            Id = "dc27dbcd-a9a7-467b-8a70-eacd007b08da",
-                            CreatedDateTime = new DateTime(2020, 3, 18, 6, 33, 31, 496, DateTimeKind.Utc).AddTicks(6730),
+                            Id = "3a5d3a6a-e3e3-4dc5-b9b0-de267c2370d2",
+                            CreatedDateTime = new DateTime(2020, 3, 18, 4, 51, 48, 387, DateTimeKind.Utc).AddTicks(5344),
                             FactoryId = "c90a9cdf-ca6b-4f74-b9f6-d00cd37b1b30",
                             RowStatus = "ADDED",
                             Status = "CASH_PAID",
                             UniqueId = 0L,
-                            UpdatedDateTime = new DateTime(2020, 3, 18, 12, 33, 31, 496, DateTimeKind.Local).AddTicks(6750)
+                            UpdatedDateTime = new DateTime(2020, 3, 18, 10, 51, 48, 387, DateTimeKind.Local).AddTicks(5352)
                         });
                 });
 
@@ -1241,8 +1184,17 @@ namespace ApiService.Migrations
                         .HasColumnType("nvarchar(50)")
                         .HasMaxLength(50);
 
-                    b.Property<decimal>("Amount")
-                        .HasColumnType("decimal(18,2)");
+                    b.Property<decimal>("AmountAfterDiscount")
+                        .HasColumnType("decimal(18, 0)");
+
+                    b.Property<decimal>("AmountBeforeDiscount")
+                        .HasColumnType("decimal(18, 0)");
+
+                    b.Property<decimal>("AmountDue")
+                        .HasColumnType("decimal(18, 0)");
+
+                    b.Property<decimal>("AmountPaid")
+                        .HasColumnType("decimal(18, 0)");
 
                     b.Property<string>("ClientId")
                         .IsRequired()
@@ -1251,6 +1203,13 @@ namespace ApiService.Migrations
 
                     b.Property<DateTime>("CreatedDateTime")
                         .HasColumnType("datetime2");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(50)")
+                        .HasMaxLength(50);
+
+                    b.Property<decimal?>("Discount")
+                        .HasColumnType("decimal(18, 0)");
 
                     b.Property<string>("FactoryId")
                         .IsRequired()
@@ -1261,6 +1220,12 @@ namespace ApiService.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(50)")
                         .HasMaxLength(50);
+
+                    b.Property<bool?>("IsDiscountInPercentage")
+                        .HasColumnType("bit");
+
+                    b.Property<bool?>("IsPaid")
+                        .HasColumnType("bit");
 
                     b.Property<string>("Month")
                         .IsRequired()
@@ -1277,6 +1242,18 @@ namespace ApiService.Migrations
 
                     b.Property<string>("RowStatus")
                         .IsRequired()
+                        .HasColumnType("nvarchar(50)")
+                        .HasMaxLength(50);
+
+                    b.Property<string>("SaleId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(50)")
+                        .HasMaxLength(50);
+
+                    b.Property<DateTime>("SalesDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("SellerId")
                         .HasColumnType("nvarchar(50)")
                         .HasMaxLength(50);
 

@@ -18,15 +18,11 @@ namespace Service.BusinessServices
     public class ItemCategoryService : IItemCategoryService
     {
         private readonly IRepositoryWrapper _repositoryWrapper;
-        private readonly IMapper _mapper;
-        private readonly ILoggerManager _logger;
         private readonly IUtilService _utilService;
 
-        public ItemCategoryService(IRepositoryWrapper repositoryWrapper, IMapper mapper, ILoggerManager logger, IUtilService utilService)
+        public ItemCategoryService(IRepositoryWrapper repositoryWrapper, IUtilService utilService)
         {
             this._repositoryWrapper = repositoryWrapper;
-            this._mapper = mapper;
-            this._logger = logger;
             this._utilService = utilService;
 
         }
@@ -63,9 +59,9 @@ namespace Service.BusinessServices
                 ListOfData = itemCategoryVMLists,
                 TotalRecoreds = dataRowCount
             };
-            this._logger.LogInfo("Successful In Getting  Item Category");
-            _logger.LogInfo("----------------------" + DateTime.UtcNow.ToLongDateString() + "-------------------------------------------");
-            _logger.LogInfo("-----------------------------------------------------------------");
+            this._utilService.LogInfo("Successful In Getting  Item Category");
+            _utilService.LogInfo("----------------------" + DateTime.UtcNow.ToLongDateString() + "-------------------------------------------");
+            _utilService.LogInfo("-----------------------------------------------------------------");
             return wrapper;
         }
         public async Task<WrapperItemCategoryListVM> Add(ItemCategoryVM vm)
@@ -77,9 +73,9 @@ namespace Service.BusinessServices
             //entityToAdd.UniqueId = uniqueIdTask;
             entityToAdd = _repositoryWrapper.ItemCategory.Create(entityToAdd);
             await _repositoryWrapper.ItemCategory.SaveChangesAsync();
-            this._logger.LogInfo("Successful In saving  Item Category");
-            _logger.LogInfo("-----------------------" + DateTime.UtcNow.ToLongDateString() + "-----------------");
-            _logger.LogInfo("-----------------------------------------------------------------");
+            this._utilService.LogInfo("Successful In saving  Item Category");
+            _utilService.LogInfo("-----------------------" + DateTime.UtcNow.ToLongDateString() + "-----------------");
+            _utilService.LogInfo("-----------------------------------------------------------------");
             var dataParam = new GetDataListVM()
             {
                 FactoryId = vm.FactoryId,
@@ -96,9 +92,9 @@ namespace Service.BusinessServices
             var ItemUpdated = _utilService.GetMapper().Map<ItemCategoryVM, ItemCategory>(vm, ItemDB.ToList().FirstOrDefault());
             _repositoryWrapper.ItemCategory.Update(ItemUpdated);
             await _repositoryWrapper.ItemCategory.SaveChangesAsync();
-            this._logger.LogInfo("Successful In Updating Item Cateory");
-            _logger.LogInfo("---------------------" + DateTime.UtcNow.ToLongDateString() + "-------------------");
-            _logger.LogInfo("-----------------------------------------------------------------");
+            this._utilService.LogInfo("Successful In Updating Item Cateory");
+            _utilService.LogInfo("---------------------" + DateTime.UtcNow.ToLongDateString() + "-------------------");
+            _utilService.LogInfo("-----------------------------------------------------------------");
 
             var dataParam = new GetDataListVM()
             {
@@ -120,9 +116,9 @@ namespace Service.BusinessServices
             }
             _repositoryWrapper.ItemCategory.Delete(item);
             await _repositoryWrapper.ItemCategory.SaveChangesAsync();
-            this._logger.LogInfo("Successful In Deleting Item Cateory");
-            _logger.LogInfo("--------------------------" + DateTime.UtcNow.ToLongDateString() + "---------------------------------------");
-            _logger.LogInfo("-----------------------------------------------------------------");
+            this._utilService.LogInfo("Successful In Deleting Item Cateory");
+            _utilService.LogInfo("--------------------------" + DateTime.UtcNow.ToLongDateString() + "---------------------------------------");
+            _utilService.LogInfo("-----------------------------------------------------------------");
             var dataParam = new GetDataListVM()
             {
                 FactoryId = itemTemp.FactoryId,

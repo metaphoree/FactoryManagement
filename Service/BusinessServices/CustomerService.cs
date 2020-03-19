@@ -16,14 +16,10 @@ namespace Service.BusinessServices
     public class CustomerService : ICustomerService
     {
         private readonly IRepositoryWrapper _repositoryWrapper;
-        private readonly IMapper _mapper;
-        private readonly ILoggerManager _logger;
         private readonly IUtilService _utilService;
-        public CustomerService(IRepositoryWrapper repositoryWrapper, IMapper mapper, ILoggerManager loggerManager, IUtilService utilService)
+        public CustomerService(IRepositoryWrapper repositoryWrapper, IUtilService utilService)
         {
             this._repositoryWrapper = repositoryWrapper;
-            this._mapper = mapper;
-            this._logger = loggerManager;
             this._utilService = utilService;
         }
 
@@ -54,7 +50,7 @@ namespace Service.BusinessServices
             //Task<int> t3 = _repositoryWrapper.Phone.SaveChangesAsync();
             //// await _repositoryWrapper.SaveAsync();
             await Task.WhenAll(t1);
-            this._logger.LogInfo("Successful In saving");
+            this._utilService.Log("Successful In saving");
            
             var dataParam = new GetDataListVM()
             {
@@ -91,7 +87,7 @@ namespace Service.BusinessServices
             //Task<int> t2 = _repositoryWrapper.Address.SaveChangesAsync();
             //Task<int> t3 = _repositoryWrapper.Phone.SaveChangesAsync();
             await Task.WhenAll(t1);
-            this._logger.LogInfo("Successful In saving");
+            this._utilService.Log("Successful In saving");
 
 
 

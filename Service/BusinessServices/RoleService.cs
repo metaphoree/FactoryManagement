@@ -10,13 +10,13 @@ namespace Service.BusinessServices
     public class RoleService : IRoleService
     {
         private readonly IRepositoryWrapper _repositoryWrapper;
-        private readonly IMapper _mapper;
+
         private readonly IUtilService _utilService;
 
-        public RoleService(IRepositoryWrapper repositoryWrapper, IMapper mapper, IUtilService utilService)
+        public RoleService(IRepositoryWrapper repositoryWrapper, IUtilService utilService)
         {
             this._repositoryWrapper = repositoryWrapper;
-            this._mapper = mapper;
+
             this._utilService = utilService;
 
         }

@@ -16,13 +16,13 @@ namespace Service.BusinessServices
     public class ItemStatusService : IItemStatusService
     {
         private readonly IRepositoryWrapper _repositoryWrapper;
-        private readonly IMapper _mapper;
+
         private readonly IUtilService _utilService;
 
-        public ItemStatusService(IRepositoryWrapper repositoryWrapper, IMapper mapper, IUtilService utilService)
+        public ItemStatusService(IRepositoryWrapper repositoryWrapper,IUtilService utilService)
         {
             this._repositoryWrapper = repositoryWrapper;
-            this._mapper = mapper;
+
             this._utilService = utilService;
 
         }
@@ -39,7 +39,7 @@ namespace Service.BusinessServices
 
             var dataRowCount = await _repositoryWrapper.ItemStatus.NumOfRecord();
             List<ItemStatusVM> itemVMLists = new List<ItemStatusVM>();
-            itemVMLists = _mapper.Map<List<ItemStatus>, List<ItemStatusVM>>(itemList);
+            itemVMLists = this._utilService.Mapper.Map<List<ItemStatus>, List<ItemStatusVM>>(itemList);
             var wrapper = new WrapperItemStatusListVM()
             {
                 ListOfData = itemVMLists,

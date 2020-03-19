@@ -15,23 +15,23 @@ namespace Entities.DbModels.EntityWiseConfiguration
         
                 builder.Property(e => e.Id).HasMaxLength(50);
 
-                builder.Property(e => e.AmountAfterDiscount).HasColumnType("decimal(18, 0)");
+                //builder.Property(e => e.AmountAfterDiscount).HasColumnType("decimal(18, 0)");
 
-                builder.Property(e => e.AmountBeforeDiscount).HasColumnType("decimal(18, 0)");
+                //builder.Property(e => e.AmountBeforeDiscount).HasColumnType("decimal(18, 0)");
 
-                builder.Property(e => e.AmountDue).HasColumnType("decimal(18, 0)");
+                //builder.Property(e => e.AmountDue).HasColumnType("decimal(18, 0)");
 
-                builder.Property(e => e.AmountPaid).HasColumnType("decimal(18, 0)");
+                //builder.Property(e => e.AmountPaid).HasColumnType("decimal(18, 0)");
 
                 builder.Property(e => e.ClientId)
                     .IsRequired()
                     .HasMaxLength(50);
 
-                builder.Property(e => e.Description).HasMaxLength(50);
+                //builder.Property(e => e.Description).HasMaxLength(50);
 
-                builder.Property(e => e.Discount).HasColumnType("decimal(18, 0)");
+                //builder.Property(e => e.Discount).HasColumnType("decimal(18, 0)");
 
-                builder.Property(e => e.EmployeeId).HasMaxLength(50);
+                //builder.Property(e => e.EmployeeId).HasMaxLength(50);
 
                 builder.Property(e => e.FactoryId)
                     .IsRequired()
@@ -41,17 +41,17 @@ namespace Entities.DbModels.EntityWiseConfiguration
                     .IsRequired()
                     .HasMaxLength(50);
 
-                builder.Property(e => e.Month)
-                    .IsRequired()
-                    .HasMaxLength(50);
+                //builder.Property(e => e.Month)
+                //    .IsRequired()
+                //    .HasMaxLength(50);
 
                 builder.Property(e => e.ProductId)
                     .IsRequired()
                     .HasMaxLength(50);
 
-                builder.Property(e => e.PurchaseId)
-                    .IsRequired()
-                    .HasMaxLength(50);
+                //builder.Property(e => e.PurchaseId)
+                //    .IsRequired()
+                //    .HasMaxLength(50);
 
                 builder.Property(e => e.RowStatus)
                     .IsRequired()

@@ -15,13 +15,13 @@ namespace Service.BusinessServices
     public class StaffService : IStaffService
     {
         private readonly IRepositoryWrapper _repositoryWrapper;
-        private readonly IMapper _mapper;
+
         private readonly IUtilService _utilService;
 
-        public StaffService(IRepositoryWrapper repositoryWrapper, IMapper mapper, IUtilService utilService)
+        public StaffService(IRepositoryWrapper repositoryWrapper, IUtilService utilService)
         {
             this._repositoryWrapper = repositoryWrapper;
-            this._mapper = mapper;
+
             this._utilService = utilService;
         }
         public async Task<WrapperStaffListVM> Add(StaffVM ViewModel)
