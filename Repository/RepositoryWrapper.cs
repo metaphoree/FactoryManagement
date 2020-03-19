@@ -21,6 +21,7 @@ namespace Repository
         IExpenseRepository _Expense;
         IExpenseTypeRepository _ExpenseType;
         IFactoryRepository _Factory;
+        IIncomeRepository _Income;
         IIncomeTypeRepository _IncomeType;
         IInvoiceRepository _Invoice;
         IInvoiceTypeRepository _InvoiceType;
@@ -186,6 +187,23 @@ namespace Repository
                 }
 
                 return _Factory;
+
+            }
+
+        }
+        public IIncomeRepository Income
+        {
+
+            get
+            {
+
+                if (_Income == null)
+                {
+                    //return new IncomeTypeRepository(dbContext);
+                    _Income = new IncomeRepository(dbContext);
+                }
+
+                return _Income;
 
             }
 

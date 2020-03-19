@@ -4,14 +4,16 @@ using Entities.DbModels;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace ApiService.Migrations
 {
     [DbContext(typeof(FactoryManagementContext))]
-    partial class FactoryManagementContextModelSnapshot : ModelSnapshot
+    [Migration("20200319110348_EquipmentToEquipmentCategoryRelation")]
+    partial class EquipmentToEquipmentCategoryRelation
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -182,13 +184,13 @@ namespace ApiService.Migrations
                         .HasColumnType("nvarchar(50)")
                         .HasMaxLength(50);
 
-                    b.Property<int?>("MachineNumber")
-                        .HasColumnType("int");
-
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(50)")
                         .HasMaxLength(50);
+
+                    b.Property<int>("Number")
+                        .HasColumnType("int");
 
                     b.Property<decimal>("Price")
                         .HasColumnType("decimal(18, 0)");
@@ -408,18 +410,18 @@ namespace ApiService.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "8f1713d4-e26c-488d-b32c-4c36dcfb4b9e",
-                            CreatedDateTime = new DateTime(2020, 3, 19, 23, 39, 57, 211, DateTimeKind.Local).AddTicks(6023),
-                            FactoryId = "cd72cb44-a064-4a6f-ab83-a4ceb52e283b",
+                            Id = "76cf1f32-7c51-4b07-8916-b10c2814dd31",
+                            CreatedDateTime = new DateTime(2020, 3, 19, 17, 3, 47, 739, DateTimeKind.Local).AddTicks(5311),
+                            FactoryId = "9b6234c3-46da-4574-85a7-8ce144cb1cb6",
                             ImageUrl = "",
                             LicenseNo = "",
                             Name = "Fazlu Loom Factory",
                             RegNo = "",
                             RowStatus = "ADDED",
-                            SubscriptionEnd = new DateTime(2022, 12, 14, 23, 39, 57, 212, DateTimeKind.Local).AddTicks(1425),
-                            SubscriptionStart = new DateTime(2020, 3, 19, 23, 39, 57, 212, DateTimeKind.Local).AddTicks(427),
+                            SubscriptionEnd = new DateTime(2022, 12, 14, 17, 3, 47, 740, DateTimeKind.Local).AddTicks(2118),
+                            SubscriptionStart = new DateTime(2020, 3, 19, 17, 3, 47, 740, DateTimeKind.Local).AddTicks(1194),
                             UniqueId = 0L,
-                            UpdatedDateTime = new DateTime(2020, 3, 19, 23, 39, 57, 212, DateTimeKind.Local).AddTicks(2332),
+                            UpdatedDateTime = new DateTime(2020, 3, 19, 17, 3, 47, 740, DateTimeKind.Local).AddTicks(2980),
                             VatRegNo = ""
                         });
                 });
@@ -766,23 +768,23 @@ namespace ApiService.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "99488d9b-9175-4037-989e-20a55f2106e9",
-                            CreatedDateTime = new DateTime(2020, 3, 19, 17, 39, 57, 237, DateTimeKind.Utc).AddTicks(7776),
+                            Id = "d0b28800-8e2d-4c6f-8c55-67854217cbf5",
+                            CreatedDateTime = new DateTime(2020, 3, 19, 11, 3, 47, 761, DateTimeKind.Utc).AddTicks(6082),
                             FactoryId = "c90a9cdf-ca6b-4f74-b9f6-d00cd37b1b30",
                             Name = "GOOD",
                             RowStatus = "ADDED",
                             UniqueId = 0L,
-                            UpdatedDateTime = new DateTime(2020, 3, 19, 17, 39, 57, 237, DateTimeKind.Utc).AddTicks(9727)
+                            UpdatedDateTime = new DateTime(2020, 3, 19, 11, 3, 47, 761, DateTimeKind.Utc).AddTicks(7696)
                         },
                         new
                         {
-                            Id = "c555e61c-ba95-4888-aac7-b594364472e0",
-                            CreatedDateTime = new DateTime(2020, 3, 19, 17, 39, 57, 237, DateTimeKind.Utc).AddTicks(9768),
+                            Id = "ec9f0924-e0f9-443f-a816-4c0bdefedb13",
+                            CreatedDateTime = new DateTime(2020, 3, 19, 11, 3, 47, 761, DateTimeKind.Utc).AddTicks(7757),
                             FactoryId = "c90a9cdf-ca6b-4f74-b9f6-d00cd37b1b30",
                             Name = "BAD",
                             RowStatus = "ADDED",
                             UniqueId = 0L,
-                            UpdatedDateTime = new DateTime(2020, 3, 19, 17, 39, 57, 237, DateTimeKind.Utc).AddTicks(9796)
+                            UpdatedDateTime = new DateTime(2020, 3, 19, 11, 3, 47, 761, DateTimeKind.Utc).AddTicks(7790)
                         });
                 });
 
@@ -882,43 +884,43 @@ namespace ApiService.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "4e6b21fd-8b82-41ef-b665-506c7a7b0d5a",
-                            CreatedDateTime = new DateTime(2020, 3, 19, 17, 39, 57, 243, DateTimeKind.Utc).AddTicks(6310),
+                            Id = "df514bf0-abc9-4d0b-9ffa-ec6c455598f2",
+                            CreatedDateTime = new DateTime(2020, 3, 19, 11, 3, 47, 766, DateTimeKind.Utc).AddTicks(1437),
                             FactoryId = "c90a9cdf-ca6b-4f74-b9f6-d00cd37b1b30",
                             RowStatus = "ADDED",
                             Status = "CASH_RECIEVED",
                             UniqueId = 0L,
-                            UpdatedDateTime = new DateTime(2020, 3, 19, 23, 39, 57, 243, DateTimeKind.Local).AddTicks(7455)
+                            UpdatedDateTime = new DateTime(2020, 3, 19, 17, 3, 47, 766, DateTimeKind.Local).AddTicks(2246)
                         },
                         new
                         {
-                            Id = "53da6d00-9033-443b-a87d-dd605c9c7861",
-                            CreatedDateTime = new DateTime(2020, 3, 19, 17, 39, 57, 243, DateTimeKind.Utc).AddTicks(7504),
+                            Id = "3ddff730-bc9d-4088-ba8b-d01c0aea0b1b",
+                            CreatedDateTime = new DateTime(2020, 3, 19, 11, 3, 47, 766, DateTimeKind.Utc).AddTicks(2283),
                             FactoryId = "c90a9cdf-ca6b-4f74-b9f6-d00cd37b1b30",
                             RowStatus = "ADDED",
                             Status = "CASH_PAYABLE",
                             UniqueId = 0L,
-                            UpdatedDateTime = new DateTime(2020, 3, 19, 23, 39, 57, 243, DateTimeKind.Local).AddTicks(7558)
+                            UpdatedDateTime = new DateTime(2020, 3, 19, 17, 3, 47, 766, DateTimeKind.Local).AddTicks(2312)
                         },
                         new
                         {
-                            Id = "a7eab0d3-d05f-4a54-a493-f6b97c71960d",
-                            CreatedDateTime = new DateTime(2020, 3, 19, 17, 39, 57, 243, DateTimeKind.Utc).AddTicks(7558),
+                            Id = "02c3e5b7-cf78-4876-8d02-fc0d42e3fde0",
+                            CreatedDateTime = new DateTime(2020, 3, 19, 11, 3, 47, 766, DateTimeKind.Utc).AddTicks(2316),
                             FactoryId = "c90a9cdf-ca6b-4f74-b9f6-d00cd37b1b30",
                             RowStatus = "ADDED",
                             Status = "CASH_RECIEVABLE",
                             UniqueId = 0L,
-                            UpdatedDateTime = new DateTime(2020, 3, 19, 23, 39, 57, 243, DateTimeKind.Local).AddTicks(7570)
+                            UpdatedDateTime = new DateTime(2020, 3, 19, 17, 3, 47, 766, DateTimeKind.Local).AddTicks(2320)
                         },
                         new
                         {
-                            Id = "40aaa664-9eca-41e1-a59b-cfcdd8d8dcd7",
-                            CreatedDateTime = new DateTime(2020, 3, 19, 17, 39, 57, 243, DateTimeKind.Utc).AddTicks(7570),
+                            Id = "0104fcf0-eca2-4e56-97cb-682f7da37aca",
+                            CreatedDateTime = new DateTime(2020, 3, 19, 11, 3, 47, 766, DateTimeKind.Utc).AddTicks(2320),
                             FactoryId = "c90a9cdf-ca6b-4f74-b9f6-d00cd37b1b30",
                             RowStatus = "ADDED",
                             Status = "CASH_PAID",
                             UniqueId = 0L,
-                            UpdatedDateTime = new DateTime(2020, 3, 19, 23, 39, 57, 243, DateTimeKind.Local).AddTicks(7578)
+                            UpdatedDateTime = new DateTime(2020, 3, 19, 17, 3, 47, 766, DateTimeKind.Local).AddTicks(2341)
                         });
                 });
 

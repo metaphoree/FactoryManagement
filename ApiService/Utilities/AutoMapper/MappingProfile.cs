@@ -2,6 +2,12 @@
 using Entities.DbModels;
 using Entities.ViewModels;
 using Entities.ViewModels.CustomerView;
+using Entities.ViewModels.Department;
+using Entities.ViewModels.Equipment;
+using Entities.ViewModels.EquipmentCategory;
+using Entities.ViewModels.ExpenseType;
+using Entities.ViewModels.IncomeType;
+using Entities.ViewModels.InvoiceType;
 using Entities.ViewModels.Item;
 using Entities.ViewModels.ItemCategoryView;
 using Entities.ViewModels.ItemStatus;
@@ -26,6 +32,13 @@ namespace ApiService.Utilities.AutoMapper
             Mapping_SupplierVM();
             Mapping_StaffVM();
             Mapping_ItemStatusVM();
+          
+            Mapping_DepartmentVM();
+            Mapping_EquipmentVM();
+            Mapping_EquipmentCategoryVM();
+            Mapping_ExpenseTypeVM();
+            Mapping_IncomeTypeVM();
+            Mapping_InvoiceTypeVM();
         }
         public void Mapping_CustomerVM()
         {
@@ -131,7 +144,6 @@ namespace ApiService.Utilities.AutoMapper
                          .ForMember(dest => dest.AlternateNumber_1, act => act.MapFrom(src => src.AlternateCellNo))
                      .ForAllOtherMembers(act => act.Ignore());
         }
-
         public void Mapping_StockVM()
         {
             // GET
@@ -153,6 +165,110 @@ namespace ApiService.Utilities.AutoMapper
                            .ForMember(dest => dest.ItemId, act => act.MapFrom(src => src.ItemId))
                             .ForMember(dest => dest.ItemStatusId, act => act.MapFrom(src => src.ItemStatusId))
                      .ForAllOtherMembers(act => act.Ignore());
+        }
+        public void Mapping_DepartmentVM()
+        {
+            // GET
+            CreateMap<Department, DepartmentVM>()
+            .ForMember(dest => dest.Name, act => act.MapFrom(src => src.Name))
+            .ForMember(dest => dest.FactoryId, act => act.MapFrom(src => src.FactoryId))
+            .ForMember(dest => dest.Id, act => act.MapFrom(src => src.Id))
+             .ForAllOtherMembers(act => act.Ignore());
+
+            // ADDITION + UPDATE 
+            CreateMap<DepartmentVM, Department>()
+            .ForMember(dest => dest.Name, act => act.MapFrom(src => src.Name))
+            .ForMember(dest => dest.FactoryId, act => act.MapFrom(src => src.FactoryId))
+            .ForAllOtherMembers(act => act.Ignore());
+
+        }
+
+        public void Mapping_EquipmentVM()
+        {
+            // GET
+            CreateMap<Equipment, EquipmentVM>()
+            .ForMember(dest => dest.Name, act => act.MapFrom(src => src.Name))
+            .ForMember(dest => dest.Description, act => act.MapFrom(src => src.Description))
+            .ForMember(dest => dest.EquipmentCategoryId, act => act.MapFrom(src => src.EquipmentCategory.Id))
+            .ForMember(dest => dest.MachineNumber, act => act.MapFrom(src => src.MachineNumber))
+            .ForMember(dest => dest.Price, act => act.MapFrom(src => src.Price))
+            .ForMember(dest => dest.EquipmentCategoryName, act => act.MapFrom(src => src.EquipmentCategory.Name))
+            .ForMember(dest => dest.FactoryId, act => act.MapFrom(src => src.FactoryId))
+            .ForMember(dest => dest.Id, act => act.MapFrom(src => src.Id))
+             .ForAllOtherMembers(act => act.Ignore());
+
+            // ADDITION + UPDATE 
+            CreateMap<EquipmentVM, Equipment>()
+            .ForMember(dest => dest.Name, act => act.MapFrom(src => src.Name))
+            .ForMember(dest => dest.FactoryId, act => act.MapFrom(src => src.FactoryId))
+            .ForMember(dest => dest.EquipmentCategoryId, act => act.MapFrom(src => src.EquipmentCategoryId))
+            .ForMember(dest => dest.Description, act => act.MapFrom(src => src.Description))
+            .ForMember(dest => dest.Price, act => act.MapFrom(src => src.Price))
+            .ForAllOtherMembers(act => act.Ignore());
+        }
+        public void Mapping_EquipmentCategoryVM()
+        {
+            // GET
+            CreateMap<EquipmentCategory, EquipmentCategoryVM>()
+            .ForMember(dest => dest.Name, act => act.MapFrom(src => src.Name))
+            .ForMember(dest => dest.FactoryId, act => act.MapFrom(src => src.FactoryId))
+            .ForMember(dest => dest.Id, act => act.MapFrom(src => src.Id))
+             .ForAllOtherMembers(act => act.Ignore());
+
+            // ADDITION + UPDATE 
+            CreateMap<EquipmentCategoryVM, EquipmentCategory>()
+            .ForMember(dest => dest.Name, act => act.MapFrom(src => src.Name))
+            .ForMember(dest => dest.FactoryId, act => act.MapFrom(src => src.FactoryId))
+            .ForAllOtherMembers(act => act.Ignore());
+
+        }
+        public void Mapping_ExpenseTypeVM()
+        {
+            // GET
+            CreateMap<ExpenseType, ExpenseTypeVM>()
+            .ForMember(dest => dest.Name, act => act.MapFrom(src => src.Name))
+            .ForMember(dest => dest.FactoryId, act => act.MapFrom(src => src.FactoryId))
+            .ForMember(dest => dest.Id, act => act.MapFrom(src => src.Id))
+             .ForAllOtherMembers(act => act.Ignore());
+
+            // ADDITION + UPDATE 
+            CreateMap<ExpenseTypeVM, ExpenseType>()
+            .ForMember(dest => dest.Name, act => act.MapFrom(src => src.Name))
+            .ForMember(dest => dest.FactoryId, act => act.MapFrom(src => src.FactoryId))
+            .ForAllOtherMembers(act => act.Ignore());
+
+        }
+        public void Mapping_IncomeTypeVM()
+        {
+            // GET
+            CreateMap<IncomeType, IncomeTypeVM>()
+            .ForMember(dest => dest.Name, act => act.MapFrom(src => src.Name))
+            .ForMember(dest => dest.FactoryId, act => act.MapFrom(src => src.FactoryId))
+            .ForMember(dest => dest.Id, act => act.MapFrom(src => src.Id))
+             .ForAllOtherMembers(act => act.Ignore());
+
+            // ADDITION + UPDATE 
+            CreateMap<IncomeTypeVM, IncomeType>()
+            .ForMember(dest => dest.Name, act => act.MapFrom(src => src.Name))
+            .ForMember(dest => dest.FactoryId, act => act.MapFrom(src => src.FactoryId))
+            .ForAllOtherMembers(act => act.Ignore());
+
+        }
+        public void Mapping_InvoiceTypeVM()
+        {
+            // GET
+            CreateMap<InvoiceType, InvoiceTypeVM>()
+            .ForMember(dest => dest.Name, act => act.MapFrom(src => src.Name))
+            .ForMember(dest => dest.FactoryId, act => act.MapFrom(src => src.FactoryId))
+            .ForMember(dest => dest.Id, act => act.MapFrom(src => src.Id))
+             .ForAllOtherMembers(act => act.Ignore());
+
+            // ADDITION + UPDATE 
+            CreateMap<InvoiceTypeVM, InvoiceType>()
+            .ForMember(dest => dest.Name, act => act.MapFrom(src => src.Name))
+            .ForMember(dest => dest.FactoryId, act => act.MapFrom(src => src.FactoryId))
+            .ForAllOtherMembers(act => act.Ignore());
+
         }
 
 

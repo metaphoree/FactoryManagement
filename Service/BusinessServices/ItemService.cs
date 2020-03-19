@@ -71,8 +71,7 @@ namespace Service.BusinessServices
             entityToAdd = _repositoryWrapper.Item.Create(entityToAdd);
             await _repositoryWrapper.Item.SaveChangesAsync();
             this._utilService.LogInfo("Successful In saving  Item");
-            _utilService.LogInfo("-----------------------------------------------------------------");
-            _utilService.LogInfo("-----------------------------------------------------------------");
+
 
             var dataParam = new GetDataListVM()
             {
@@ -91,8 +90,7 @@ namespace Service.BusinessServices
             _repositoryWrapper.Item.Update(ItemUpdated);
             await _repositoryWrapper.Item.SaveChangesAsync();
             this._utilService.LogInfo("Successful In Updating Item");
-            _utilService.LogInfo("-----------------------------------------------------------------");
-            _utilService.LogInfo("-----------------------------------------------------------------");
+
             var dataParam = new GetDataListVM()
             {
                 FactoryId = vm.FactoryId,

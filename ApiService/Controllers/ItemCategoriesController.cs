@@ -84,5 +84,9 @@ namespace ApiService.Controllers
         {
             return _context.ItemCategory.Any(e => e.Name == name);
         }
+   
+    
+    
+    
     }
 }

@@ -60,8 +60,7 @@ namespace Service.BusinessServices
                 TotalRecoreds = dataRowCount
             };
             this._utilService.LogInfo("Successful In Getting  Item Category");
-            _utilService.LogInfo("----------------------" + DateTime.UtcNow.ToLongDateString() + "-------------------------------------------");
-            _utilService.LogInfo("-----------------------------------------------------------------");
+
             return wrapper;
         }
         public async Task<WrapperItemCategoryListVM> Add(ItemCategoryVM vm)
@@ -74,8 +73,7 @@ namespace Service.BusinessServices
             entityToAdd = _repositoryWrapper.ItemCategory.Create(entityToAdd);
             await _repositoryWrapper.ItemCategory.SaveChangesAsync();
             this._utilService.LogInfo("Successful In saving  Item Category");
-            _utilService.LogInfo("-----------------------" + DateTime.UtcNow.ToLongDateString() + "-----------------");
-            _utilService.LogInfo("-----------------------------------------------------------------");
+
             var dataParam = new GetDataListVM()
             {
                 FactoryId = vm.FactoryId,
@@ -93,8 +91,7 @@ namespace Service.BusinessServices
             _repositoryWrapper.ItemCategory.Update(ItemUpdated);
             await _repositoryWrapper.ItemCategory.SaveChangesAsync();
             this._utilService.LogInfo("Successful In Updating Item Cateory");
-            _utilService.LogInfo("---------------------" + DateTime.UtcNow.ToLongDateString() + "-------------------");
-            _utilService.LogInfo("-----------------------------------------------------------------");
+
 
             var dataParam = new GetDataListVM()
             {
@@ -117,8 +114,7 @@ namespace Service.BusinessServices
             _repositoryWrapper.ItemCategory.Delete(item);
             await _repositoryWrapper.ItemCategory.SaveChangesAsync();
             this._utilService.LogInfo("Successful In Deleting Item Cateory");
-            _utilService.LogInfo("--------------------------" + DateTime.UtcNow.ToLongDateString() + "---------------------------------------");
-            _utilService.LogInfo("-----------------------------------------------------------------");
+
             var dataParam = new GetDataListVM()
             {
                 FactoryId = itemTemp.FactoryId,
