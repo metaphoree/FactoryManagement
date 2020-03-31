@@ -14,6 +14,7 @@ namespace Contracts
         IQueryable<T> FindByCondition(Expression<Func<T, bool>> expression);
         Task<IEnumerable<T>> FindByConditionAsync(Expression<Func<T, bool>> expression);
         T Create(T entity);
+        List<T> CreateAll(List<T> entityList);
         T Update(T entity);
         T Delete(T entity);
         Task<long> NumOfRecord();

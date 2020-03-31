@@ -7,6 +7,7 @@ namespace Entities.DbModels
     {
   
         public string ItemId { get; set; }
+        public string BuyerId { get; set; }
         public string ExecutorId { get; set; }
         public string InvoiceId { get; set; }
         public string BatchNumber { get; set; }

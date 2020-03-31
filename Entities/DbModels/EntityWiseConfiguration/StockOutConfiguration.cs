@@ -12,36 +12,40 @@ namespace Entities.DbModels.EntityWiseConfiguration
     {
         public void Configure(EntityTypeBuilder<StockOut> builder)
         {
-           
-                builder.Property(e => e.Id).HasMaxLength(50);
 
-                builder.Property(e => e.BatchNumber)
+            builder.Property(e => e.Id).HasMaxLength(50);
+
+            builder.Property(e => e.BatchNumber)
+                .IsRequired()
+                .HasMaxLength(50);
+
+            builder.Property(e => e.ExecutorId)
+                .IsRequired()
+                .HasMaxLength(50);
+
+            builder.Property(e => e.BuyerId)
+    .IsRequired()
+    .HasMaxLength(50);
+
+            builder.Property(e => e.FactoryId)
                     .IsRequired()
                     .HasMaxLength(50);
 
-                builder.Property(e => e.ExecutorId)
-                    .IsRequired()
-                    .HasMaxLength(50);
+            builder.Property(e => e.InvoiceId)
+                .IsRequired()
+                .HasMaxLength(50);
 
-                builder.Property(e => e.FactoryId)
-                    .IsRequired()
-                    .HasMaxLength(50);
+            builder.Property(e => e.ItemId)
+                .IsRequired()
+                .HasMaxLength(50);
 
-                builder.Property(e => e.InvoiceId)
-                    .IsRequired()
-                    .HasMaxLength(50);
+            builder.Property(e => e.ItemStatusId)
+                .IsRequired()
+                .HasMaxLength(50);
 
-                builder.Property(e => e.ItemId)
-                    .IsRequired()
-                    .HasMaxLength(50);
-
-                builder.Property(e => e.ItemStatusId)
-                    .IsRequired()
-                    .HasMaxLength(50);
-
-                builder.Property(e => e.RowStatus)
-                    .IsRequired()
-                    .HasMaxLength(50);
+            builder.Property(e => e.RowStatus)
+                .IsRequired()
+                .HasMaxLength(50);
             builder.Property(p => p.UniqueId)
               .Metadata.SetAfterSaveBehavior(PropertySaveBehavior.Ignore);
             //builder.Property(e => e.UniqueId)

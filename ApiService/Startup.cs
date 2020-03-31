@@ -37,12 +37,19 @@ namespace ApiService
             services.ConfigureDBContext(Configuration);
             services.ConfigureLoggerService();
             services.ConfigureAutoMapper();
+
+            services.ConfigureRepository();
             services.ConfigureRepositoryWrapper();
+            services.ConfigureService();
             services.ConfigureServiceWrapper();
+     
+          
+
+
+
             // Register the Swagger generator, defining 1 or more Swagger documents
             services.ConfigureSwagger();
             services.AddDistributedMemoryCache();
-            services.ConfigureRepository();
             services.AddSession(options =>
             {
                 // Set a short timeout for easy testing.

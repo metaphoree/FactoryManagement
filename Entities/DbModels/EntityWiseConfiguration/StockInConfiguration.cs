@@ -42,7 +42,13 @@ namespace Entities.DbModels.EntityWiseConfiguration
                 builder.Property(e => e.SupplierId)
                     .IsRequired()
                     .HasMaxLength(50);
+            builder.Property(p => p.UniqueId);
+
+                  builder.Property(e => e.ExecutorId)
+                    .IsRequired()
+                    .HasMaxLength(50);
             builder.Property(p => p.UniqueId)
+
               .Metadata.SetAfterSaveBehavior(PropertySaveBehavior.Ignore);
             //builder.Property(e => e.UniqueId)
             //    .IsRequired();

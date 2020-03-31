@@ -1,0 +1,784 @@
+2020-03-25 12:37:09.8857 ERROR Something went wrong: System.InvalidOperationException: A second operation started on this context before a previous operation completed. This is usually caused by different threads using the same instance of DbContext. For more information on how to avoid threading issues with DbContext, see https://go.microsoft.com/fwlink/?linkid=2097913.
+   at Microsoft.EntityFrameworkCore.Internal.ConcurrencyDetector.EnterCriticalSection()
+   at Microsoft.EntityFrameworkCore.Query.Internal.QueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+   at Microsoft.EntityFrameworkCore.EntityFrameworkQueryableExtensions.ToListAsync[TSource](IQueryable`1 source, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.EntityFrameworkQueryableExtensions.ToListAsync[TSource](IQueryable`1 source, CancellationToken cancellationToken)
+   at Service.BusinessServices.ItemCategoryService.GetListPaged(GetDataListVM dataListVM) in D:\Projects\ApiService\Service\BusinessServices\ItemCategoryService.cs:line 45
+   at Service.BusinessServiceWrapper.PurchaseWrapperService.GetPurchaseInitialData(GetDataListVM getDataListVM) in D:\Projects\ApiService\Service\BusinessServiceWrapper\PurchaseWrapperService.cs:line 34
+   at ApiService.Controllers.BusinessOpController.GetDepartment(GetDataListVM getDataVM) in D:\Projects\ApiService\ApiService\Controllers\BusinessOpController.cs:line 46
+   at lambda_method(Closure , Object )
+   at Microsoft.Extensions.Internal.ObjectMethodExecutorAwaitable.Awaiter.GetResult()
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.AwaitableObjectResultExecutor.Execute(IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|19_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|6_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Swashbuckle.AspNetCore.SwaggerUI.SwaggerUIMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at ApiService.Utilities.ExceptionHandler.ExceptionMiddleware.InvokeAsync(HttpContext httpContext) in D:\Projects\ApiService\ApiService\Utilities\ExceptionHandler\ExceptionMiddleware.cs:line 26
+2020-03-25 12:37:10.1086 ERROR -------------------------------------------------------------------------------
+2020-03-25 12:37:10.1256 ERROR -------------------------------------------------------------------------------
+2020-03-25 13:04:48.0245 ERROR Something went wrong: System.InvalidOperationException: A second operation started on this context before a previous operation completed. This is usually caused by different threads using the same instance of DbContext. For more information on how to avoid threading issues with DbContext, see https://go.microsoft.com/fwlink/?linkid=2097913.
+   at Microsoft.EntityFrameworkCore.Internal.ConcurrencyDetector.EnterCriticalSection()
+   at Microsoft.EntityFrameworkCore.Query.Internal.QueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+   at Microsoft.EntityFrameworkCore.EntityFrameworkQueryableExtensions.ToListAsync[TSource](IQueryable`1 source, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.EntityFrameworkQueryableExtensions.ToListAsync[TSource](IQueryable`1 source, CancellationToken cancellationToken)
+   at Service.BusinessServices.ItemCategoryService.GetListPaged(GetDataListVM dataListVM) in D:\Projects\ApiService\Service\BusinessServices\ItemCategoryService.cs:line 45
+   at Service.BusinessServiceWrapper.PurchaseWrapperService.GetPurchaseInitialData(GetDataListVM getDataListVM) in D:\Projects\ApiService\Service\BusinessServiceWrapper\PurchaseWrapperService.cs:line 34
+   at ApiService.Controllers.BusinessOpController.GetDepartment(GetDataListVM getDataVM) in D:\Projects\ApiService\ApiService\Controllers\BusinessOpController.cs:line 46
+   at lambda_method(Closure , Object )
+   at Microsoft.Extensions.Internal.ObjectMethodExecutorAwaitable.Awaiter.GetResult()
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.AwaitableObjectResultExecutor.Execute(IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|19_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|6_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Swashbuckle.AspNetCore.SwaggerUI.SwaggerUIMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at ApiService.Utilities.ExceptionHandler.ExceptionMiddleware.InvokeAsync(HttpContext httpContext) in D:\Projects\ApiService\ApiService\Utilities\ExceptionHandler\ExceptionMiddleware.cs:line 26
+2020-03-25 13:04:48.0612 ERROR -------------------------------------------------------------------------------
+2020-03-25 13:04:48.0893 ERROR -------------------------------------------------------------------------------
+2020-03-25 13:05:37.5552 INFO ---------------------------------------------------------------------------------------------------------
+2020-03-25 13:05:37.6599 INFO --------------------------25-Mar-20 1:05:37 PM------------------------------------------------
+2020-03-25 13:05:37.7125 INFO Successful In Getting Data
+2020-03-25 13:05:38.1670 ERROR Something went wrong: System.InvalidOperationException: A second operation started on this context before a previous operation completed. This is usually caused by different threads using the same instance of DbContext. For more information on how to avoid threading issues with DbContext, see https://go.microsoft.com/fwlink/?linkid=2097913.
+   at Microsoft.EntityFrameworkCore.Internal.ConcurrencyDetector.EnterCriticalSection()
+   at Microsoft.EntityFrameworkCore.Query.Internal.QueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+   at Microsoft.EntityFrameworkCore.EntityFrameworkQueryableExtensions.ToListAsync[TSource](IQueryable`1 source, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.EntityFrameworkQueryableExtensions.ToListAsync[TSource](IQueryable`1 source, CancellationToken cancellationToken)
+   at Service.BusinessServices.ItemCategoryService.GetListPaged(GetDataListVM dataListVM) in D:\Projects\ApiService\Service\BusinessServices\ItemCategoryService.cs:line 45
+   at Service.BusinessServiceWrapper.PurchaseWrapperService.GetPurchaseInitialData(GetDataListVM getDataListVM) in D:\Projects\ApiService\Service\BusinessServiceWrapper\PurchaseWrapperService.cs:line 34
+   at ApiService.Controllers.BusinessOpController.GetDepartment(GetDataListVM getDataVM) in D:\Projects\ApiService\ApiService\Controllers\BusinessOpController.cs:line 46
+   at lambda_method(Closure , Object )
+   at Microsoft.Extensions.Internal.ObjectMethodExecutorAwaitable.Awaiter.GetResult()
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.AwaitableObjectResultExecutor.Execute(IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|19_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|6_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Swashbuckle.AspNetCore.SwaggerUI.SwaggerUIMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at ApiService.Utilities.ExceptionHandler.ExceptionMiddleware.InvokeAsync(HttpContext httpContext) in D:\Projects\ApiService\ApiService\Utilities\ExceptionHandler\ExceptionMiddleware.cs:line 26
+2020-03-25 13:05:38.1936 ERROR -------------------------------------------------------------------------------
+2020-03-25 13:05:38.2110 ERROR -------------------------------------------------------------------------------
+2020-03-25 13:05:57.5334 ERROR Something went wrong: System.InvalidOperationException: A second operation started on this context before a previous operation completed. This is usually caused by different threads using the same instance of DbContext. For more information on how to avoid threading issues with DbContext, see https://go.microsoft.com/fwlink/?linkid=2097913.
+   at Microsoft.EntityFrameworkCore.Internal.ConcurrencyDetector.EnterCriticalSection()
+   at Microsoft.EntityFrameworkCore.Query.Internal.QueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+   at Microsoft.EntityFrameworkCore.EntityFrameworkQueryableExtensions.ToListAsync[TSource](IQueryable`1 source, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.EntityFrameworkQueryableExtensions.ToListAsync[TSource](IQueryable`1 source, CancellationToken cancellationToken)
+   at Service.BusinessServices.ItemCategoryService.GetListPaged(GetDataListVM dataListVM) in D:\Projects\ApiService\Service\BusinessServices\ItemCategoryService.cs:line 45
+   at Service.BusinessServiceWrapper.PurchaseWrapperService.GetPurchaseInitialData(GetDataListVM getDataListVM) in D:\Projects\ApiService\Service\BusinessServiceWrapper\PurchaseWrapperService.cs:line 34
+   at ApiService.Controllers.BusinessOpController.GetDepartment(GetDataListVM getDataVM) in D:\Projects\ApiService\ApiService\Controllers\BusinessOpController.cs:line 46
+   at lambda_method(Closure , Object )
+   at Microsoft.Extensions.Internal.ObjectMethodExecutorAwaitable.Awaiter.GetResult()
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.AwaitableObjectResultExecutor.Execute(IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|19_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|6_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Swashbuckle.AspNetCore.SwaggerUI.SwaggerUIMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at ApiService.Utilities.ExceptionHandler.ExceptionMiddleware.InvokeAsync(HttpContext httpContext) in D:\Projects\ApiService\ApiService\Utilities\ExceptionHandler\ExceptionMiddleware.cs:line 26
+2020-03-25 13:05:57.5540 ERROR -------------------------------------------------------------------------------
+2020-03-25 13:05:57.5784 ERROR -------------------------------------------------------------------------------
+2020-03-25 13:59:01.1972 INFO ---------------------------------------------------------------------------------------------------------
+2020-03-25 13:59:01.1972 INFO ---------------------------------------------------------------------------------------------------------
+2020-03-25 13:59:01.2983 INFO --------------------------25-Mar-20 1:59:01 PM------------------------------------------------
+2020-03-25 13:59:01.3171 INFO Successful In Getting  Item Category
+2020-03-25 13:59:01.2810 INFO --------------------------25-Mar-20 1:59:01 PM------------------------------------------------
+2020-03-25 13:59:01.3504 INFO Successful In Getting Data
+2020-03-25 14:44:19.0791 ERROR Something went wrong: System.NullReferenceException: Object reference not set to an instance of an object.
+   at Service.BusinessServices.ItemService.GetListPaged(GetDataListVM dataListVM) in D:\Projects\ApiService\Service\BusinessServices\ItemService.cs:line 46
+   at Service.BusinessServiceWrapper.PurchaseWrapperService.GetPurchaseInitialData(GetDataListVM getDataListVM) in D:\Projects\ApiService\Service\BusinessServiceWrapper\PurchaseWrapperService.cs:line 34
+   at ApiService.Controllers.BusinessOpController.GetDepartment(GetDataListVM getDataVM) in D:\Projects\ApiService\ApiService\Controllers\BusinessOpController.cs:line 46
+   at lambda_method(Closure , Object )
+   at Microsoft.Extensions.Internal.ObjectMethodExecutorAwaitable.Awaiter.GetResult()
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.AwaitableObjectResultExecutor.Execute(IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|19_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|6_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Swashbuckle.AspNetCore.SwaggerUI.SwaggerUIMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at ApiService.Utilities.ExceptionHandler.ExceptionMiddleware.InvokeAsync(HttpContext httpContext) in D:\Projects\ApiService\ApiService\Utilities\ExceptionHandler\ExceptionMiddleware.cs:line 26
+2020-03-25 14:44:19.2404 ERROR -------------------------------------------------------------------------------
+2020-03-25 14:44:19.2799 ERROR -------------------------------------------------------------------------------
+2020-03-25 14:48:13.1054 ERROR Something went wrong: System.NullReferenceException: Object reference not set to an instance of an object.
+   at Service.BusinessServices.ItemService.GetListPaged(GetDataListVM dataListVM) in D:\Projects\ApiService\Service\BusinessServices\ItemService.cs:line 46
+   at Service.BusinessServiceWrapper.PurchaseWrapperService.GetPurchaseInitialData(GetDataListVM getDataListVM) in D:\Projects\ApiService\Service\BusinessServiceWrapper\PurchaseWrapperService.cs:line 34
+   at ApiService.Controllers.BusinessOpController.GetDepartment(GetDataListVM getDataVM) in D:\Projects\ApiService\ApiService\Controllers\BusinessOpController.cs:line 46
+   at lambda_method(Closure , Object )
+   at Microsoft.Extensions.Internal.ObjectMethodExecutorAwaitable.Awaiter.GetResult()
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.AwaitableObjectResultExecutor.Execute(IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|19_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|6_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Swashbuckle.AspNetCore.SwaggerUI.SwaggerUIMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at ApiService.Utilities.ExceptionHandler.ExceptionMiddleware.InvokeAsync(HttpContext httpContext) in D:\Projects\ApiService\ApiService\Utilities\ExceptionHandler\ExceptionMiddleware.cs:line 26
+2020-03-25 14:48:13.1670 ERROR -------------------------------------------------------------------------------
+2020-03-25 14:48:13.1846 ERROR -------------------------------------------------------------------------------
+2020-03-25 15:21:42.0093 ERROR Something went wrong: System.NullReferenceException: Object reference not set to an instance of an object.
+   at Service.BusinessServices.ItemService.GetListPaged(GetDataListVM dataListVM) in D:\Projects\ApiService\Service\BusinessServices\ItemService.cs:line 46
+   at Service.BusinessServiceWrapper.PurchaseWrapperService.GetPurchaseInitialData(GetDataListVM getDataListVM) in D:\Projects\ApiService\Service\BusinessServiceWrapper\PurchaseWrapperService.cs:line 34
+   at ApiService.Controllers.BusinessOpController.GetDepartment(GetDataListVM getDataVM) in D:\Projects\ApiService\ApiService\Controllers\BusinessOpController.cs:line 46
+   at lambda_method(Closure , Object )
+   at Microsoft.Extensions.Internal.ObjectMethodExecutorAwaitable.Awaiter.GetResult()
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.AwaitableObjectResultExecutor.Execute(IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|19_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|6_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Swashbuckle.AspNetCore.SwaggerUI.SwaggerUIMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at ApiService.Utilities.ExceptionHandler.ExceptionMiddleware.InvokeAsync(HttpContext httpContext) in D:\Projects\ApiService\ApiService\Utilities\ExceptionHandler\ExceptionMiddleware.cs:line 26
+2020-03-25 15:21:42.1256 ERROR -------------------------------------------------------------------------------
+2020-03-25 15:21:42.1998 ERROR -------------------------------------------------------------------------------
+2020-03-25 18:59:04.4999 ERROR Something went wrong: System.NullReferenceException: Object reference not set to an instance of an object.
+   at Service.BusinessServices.ItemService.GetListPaged(GetDataListVM dataListVM) in D:\Projects\ApiService\Service\BusinessServices\ItemService.cs:line 46
+   at Service.BusinessServiceWrapper.PurchaseWrapperService.GetPurchaseInitialData(GetDataListVM getDataListVM) in D:\Projects\ApiService\Service\BusinessServiceWrapper\PurchaseWrapperService.cs:line 34
+   at ApiService.Controllers.BusinessOpController.GetDepartment(GetDataListVM getDataVM) in D:\Projects\ApiService\ApiService\Controllers\BusinessOpController.cs:line 46
+   at lambda_method(Closure , Object )
+   at Microsoft.Extensions.Internal.ObjectMethodExecutorAwaitable.Awaiter.GetResult()
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.AwaitableObjectResultExecutor.Execute(IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|19_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|6_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Swashbuckle.AspNetCore.SwaggerUI.SwaggerUIMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at ApiService.Utilities.ExceptionHandler.ExceptionMiddleware.InvokeAsync(HttpContext httpContext) in D:\Projects\ApiService\ApiService\Utilities\ExceptionHandler\ExceptionMiddleware.cs:line 26
+2020-03-25 18:59:04.5754 ERROR -------------------------------------------------------------------------------
+2020-03-25 18:59:04.5948 ERROR -------------------------------------------------------------------------------
+2020-03-25 19:00:08.6505 ERROR Something went wrong: System.NullReferenceException: Object reference not set to an instance of an object.
+   at Service.BusinessServices.ItemService.GetListPaged(GetDataListVM dataListVM) in D:\Projects\ApiService\Service\BusinessServices\ItemService.cs:line 46
+   at Service.BusinessServiceWrapper.PurchaseWrapperService.GetPurchaseInitialData(GetDataListVM getDataListVM) in D:\Projects\ApiService\Service\BusinessServiceWrapper\PurchaseWrapperService.cs:line 34
+   at ApiService.Controllers.BusinessOpController.GetDepartment(GetDataListVM getDataVM) in D:\Projects\ApiService\ApiService\Controllers\BusinessOpController.cs:line 46
+   at lambda_method(Closure , Object )
+   at Microsoft.Extensions.Internal.ObjectMethodExecutorAwaitable.Awaiter.GetResult()
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.AwaitableObjectResultExecutor.Execute(IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|19_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|6_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Swashbuckle.AspNetCore.SwaggerUI.SwaggerUIMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at ApiService.Utilities.ExceptionHandler.ExceptionMiddleware.InvokeAsync(HttpContext httpContext) in D:\Projects\ApiService\ApiService\Utilities\ExceptionHandler\ExceptionMiddleware.cs:line 26
+2020-03-25 19:00:08.7459 ERROR -------------------------------------------------------------------------------
+2020-03-25 19:00:08.7690 ERROR -------------------------------------------------------------------------------
+2020-03-25 19:21:07.0972 ERROR Something went wrong: System.NullReferenceException: Object reference not set to an instance of an object.
+   at Service.BusinessServices.ItemService.GetListPaged(GetDataListVM dataListVM) in D:\Projects\ApiService\Service\BusinessServices\ItemService.cs:line 46
+   at Service.BusinessServiceWrapper.PurchaseWrapperService.GetPurchaseInitialData(GetDataListVM getDataListVM) in D:\Projects\ApiService\Service\BusinessServiceWrapper\PurchaseWrapperService.cs:line 34
+   at ApiService.Controllers.BusinessOpController.GetDepartment(GetDataListVM getDataVM) in D:\Projects\ApiService\ApiService\Controllers\BusinessOpController.cs:line 46
+   at lambda_method(Closure , Object )
+   at Microsoft.Extensions.Internal.ObjectMethodExecutorAwaitable.Awaiter.GetResult()
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.AwaitableObjectResultExecutor.Execute(IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|19_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|6_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Swashbuckle.AspNetCore.SwaggerUI.SwaggerUIMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at ApiService.Utilities.ExceptionHandler.ExceptionMiddleware.InvokeAsync(HttpContext httpContext) in D:\Projects\ApiService\ApiService\Utilities\ExceptionHandler\ExceptionMiddleware.cs:line 26
+2020-03-25 19:21:07.1980 ERROR -------------------------------------------------------------------------------
+2020-03-25 19:21:07.2348 ERROR -------------------------------------------------------------------------------
+2020-03-25 19:24:40.0729 ERROR Something went wrong: System.NullReferenceException: Object reference not set to an instance of an object.
+   at Service.BusinessServices.ItemService.GetListPaged(GetDataListVM dataListVM) in D:\Projects\ApiService\Service\BusinessServices\ItemService.cs:line 46
+   at Service.BusinessServiceWrapper.PurchaseWrapperService.GetPurchaseInitialData(GetDataListVM getDataListVM) in D:\Projects\ApiService\Service\BusinessServiceWrapper\PurchaseWrapperService.cs:line 34
+   at ApiService.Controllers.BusinessOpController.GetDepartment(GetDataListVM getDataVM) in D:\Projects\ApiService\ApiService\Controllers\BusinessOpController.cs:line 46
+   at lambda_method(Closure , Object )
+   at Microsoft.Extensions.Internal.ObjectMethodExecutorAwaitable.Awaiter.GetResult()
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.AwaitableObjectResultExecutor.Execute(IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|19_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|6_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Swashbuckle.AspNetCore.SwaggerUI.SwaggerUIMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at ApiService.Utilities.ExceptionHandler.ExceptionMiddleware.InvokeAsync(HttpContext httpContext) in D:\Projects\ApiService\ApiService\Utilities\ExceptionHandler\ExceptionMiddleware.cs:line 26
+2020-03-25 19:24:40.1001 ERROR -------------------------------------------------------------------------------
+2020-03-25 19:24:40.1231 ERROR -------------------------------------------------------------------------------
+2020-03-25 19:25:25.8634 ERROR Something went wrong: System.NullReferenceException: Object reference not set to an instance of an object.
+   at Service.BusinessServices.ItemService.GetListPaged(GetDataListVM dataListVM) in D:\Projects\ApiService\Service\BusinessServices\ItemService.cs:line 46
+   at Service.BusinessServiceWrapper.PurchaseWrapperService.GetPurchaseInitialData(GetDataListVM getDataListVM) in D:\Projects\ApiService\Service\BusinessServiceWrapper\PurchaseWrapperService.cs:line 34
+   at ApiService.Controllers.BusinessOpController.GetDepartment(GetDataListVM getDataVM) in D:\Projects\ApiService\ApiService\Controllers\BusinessOpController.cs:line 46
+   at lambda_method(Closure , Object )
+   at Microsoft.Extensions.Internal.ObjectMethodExecutorAwaitable.Awaiter.GetResult()
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.AwaitableObjectResultExecutor.Execute(IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|19_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|6_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Swashbuckle.AspNetCore.SwaggerUI.SwaggerUIMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at ApiService.Utilities.ExceptionHandler.ExceptionMiddleware.InvokeAsync(HttpContext httpContext) in D:\Projects\ApiService\ApiService\Utilities\ExceptionHandler\ExceptionMiddleware.cs:line 26
+2020-03-25 19:25:25.8911 ERROR -------------------------------------------------------------------------------
+2020-03-25 19:25:25.9286 ERROR -------------------------------------------------------------------------------
+2020-03-25 19:26:49.7564 ERROR Something went wrong: System.NullReferenceException: Object reference not set to an instance of an object.
+   at Service.BusinessServices.ItemService.GetListPaged(GetDataListVM dataListVM) in D:\Projects\ApiService\Service\BusinessServices\ItemService.cs:line 46
+   at Service.BusinessServiceWrapper.PurchaseWrapperService.GetPurchaseInitialData(GetDataListVM getDataListVM) in D:\Projects\ApiService\Service\BusinessServiceWrapper\PurchaseWrapperService.cs:line 34
+   at ApiService.Controllers.BusinessOpController.GetDepartment(GetDataListVM getDataVM) in D:\Projects\ApiService\ApiService\Controllers\BusinessOpController.cs:line 46
+   at lambda_method(Closure , Object )
+   at Microsoft.Extensions.Internal.ObjectMethodExecutorAwaitable.Awaiter.GetResult()
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.AwaitableObjectResultExecutor.Execute(IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|19_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|6_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Swashbuckle.AspNetCore.SwaggerUI.SwaggerUIMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at ApiService.Utilities.ExceptionHandler.ExceptionMiddleware.InvokeAsync(HttpContext httpContext) in D:\Projects\ApiService\ApiService\Utilities\ExceptionHandler\ExceptionMiddleware.cs:line 26
+2020-03-25 19:26:49.7773 ERROR -------------------------------------------------------------------------------
+2020-03-25 19:26:49.8159 ERROR -------------------------------------------------------------------------------
+2020-03-25 20:11:20.8375 ERROR Something went wrong: System.NullReferenceException: Object reference not set to an instance of an object.
+   at Service.BusinessServices.ItemService.GetListPaged(GetDataListVM dataListVM) in D:\Projects\ApiService\Service\BusinessServices\ItemService.cs:line 46
+   at Service.BusinessServiceWrapper.PurchaseWrapperService.GetPurchaseInitialData(GetDataListVM getDataListVM) in D:\Projects\ApiService\Service\BusinessServiceWrapper\PurchaseWrapperService.cs:line 34
+   at ApiService.Controllers.BusinessOpController.GetDepartment(GetDataListVM getDataVM) in D:\Projects\ApiService\ApiService\Controllers\BusinessOpController.cs:line 46
+   at lambda_method(Closure , Object )
+   at Microsoft.Extensions.Internal.ObjectMethodExecutorAwaitable.Awaiter.GetResult()
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.AwaitableObjectResultExecutor.Execute(IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|19_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|6_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Swashbuckle.AspNetCore.SwaggerUI.SwaggerUIMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at ApiService.Utilities.ExceptionHandler.ExceptionMiddleware.InvokeAsync(HttpContext httpContext) in D:\Projects\ApiService\ApiService\Utilities\ExceptionHandler\ExceptionMiddleware.cs:line 26
+2020-03-25 20:11:20.9120 ERROR -------------------------------------------------------------------------------
+2020-03-25 20:11:20.9264 ERROR -------------------------------------------------------------------------------
+2020-03-25 20:17:36.2745 ERROR Something went wrong: System.NullReferenceException: Object reference not set to an instance of an object.
+   at Service.BusinessServices.ItemService.GetListPaged(GetDataListVM dataListVM) in D:\Projects\ApiService\Service\BusinessServices\ItemService.cs:line 46
+   at Service.BusinessServiceWrapper.PurchaseWrapperService.GetPurchaseInitialData(GetDataListVM getDataListVM) in D:\Projects\ApiService\Service\BusinessServiceWrapper\PurchaseWrapperService.cs:line 34
+   at ApiService.Controllers.BusinessOpController.GetDepartment(GetDataListVM getDataVM) in D:\Projects\ApiService\ApiService\Controllers\BusinessOpController.cs:line 46
+   at lambda_method(Closure , Object )
+   at Microsoft.Extensions.Internal.ObjectMethodExecutorAwaitable.Awaiter.GetResult()
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.AwaitableObjectResultExecutor.Execute(IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|19_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|6_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Swashbuckle.AspNetCore.SwaggerUI.SwaggerUIMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at ApiService.Utilities.ExceptionHandler.ExceptionMiddleware.InvokeAsync(HttpContext httpContext) in D:\Projects\ApiService\ApiService\Utilities\ExceptionHandler\ExceptionMiddleware.cs:line 26
+2020-03-25 20:17:36.3666 ERROR -------------------------------------------------------------------------------
+2020-03-25 20:17:36.4257 ERROR -------------------------------------------------------------------------------
+2020-03-25 20:20:35.8548 ERROR Something went wrong: System.NullReferenceException: Object reference not set to an instance of an object.
+   at Service.BusinessServices.ItemService.GetListPaged(GetDataListVM dataListVM) in D:\Projects\ApiService\Service\BusinessServices\ItemService.cs:line 46
+   at Service.BusinessServiceWrapper.PurchaseWrapperService.GetPurchaseInitialData(GetDataListVM getDataListVM) in D:\Projects\ApiService\Service\BusinessServiceWrapper\PurchaseWrapperService.cs:line 34
+   at ApiService.Controllers.BusinessOpController.GetDepartment(GetDataListVM getDataVM) in D:\Projects\ApiService\ApiService\Controllers\BusinessOpController.cs:line 46
+   at lambda_method(Closure , Object )
+   at Microsoft.Extensions.Internal.ObjectMethodExecutorAwaitable.Awaiter.GetResult()
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.AwaitableObjectResultExecutor.Execute(IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|19_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|6_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Swashbuckle.AspNetCore.SwaggerUI.SwaggerUIMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at ApiService.Utilities.ExceptionHandler.ExceptionMiddleware.InvokeAsync(HttpContext httpContext) in D:\Projects\ApiService\ApiService\Utilities\ExceptionHandler\ExceptionMiddleware.cs:line 26
+2020-03-25 20:20:35.9497 ERROR -------------------------------------------------------------------------------
+2020-03-25 20:20:35.9636 ERROR -------------------------------------------------------------------------------
+2020-03-25 20:23:55.1791 ERROR Something went wrong: System.NullReferenceException: Object reference not set to an instance of an object.
+   at Service.BusinessServices.ItemService.GetListPaged(GetDataListVM dataListVM) in D:\Projects\ApiService\Service\BusinessServices\ItemService.cs:line 46
+   at Service.BusinessServiceWrapper.PurchaseWrapperService.GetPurchaseInitialData(GetDataListVM getDataListVM) in D:\Projects\ApiService\Service\BusinessServiceWrapper\PurchaseWrapperService.cs:line 34
+   at ApiService.Controllers.BusinessOpController.GetDepartment(GetDataListVM getDataVM) in D:\Projects\ApiService\ApiService\Controllers\BusinessOpController.cs:line 46
+   at lambda_method(Closure , Object )
+   at Microsoft.Extensions.Internal.ObjectMethodExecutorAwaitable.Awaiter.GetResult()
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.AwaitableObjectResultExecutor.Execute(IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|19_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|6_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Swashbuckle.AspNetCore.SwaggerUI.SwaggerUIMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at ApiService.Utilities.ExceptionHandler.ExceptionMiddleware.InvokeAsync(HttpContext httpContext) in D:\Projects\ApiService\ApiService\Utilities\ExceptionHandler\ExceptionMiddleware.cs:line 26
+2020-03-25 20:23:55.2583 ERROR -------------------------------------------------------------------------------
+2020-03-25 20:23:55.2744 ERROR -------------------------------------------------------------------------------
+2020-03-25 20:36:28.0819 INFO ---------------------------------------------------------------------------------------------------------
+2020-03-25 20:36:28.0819 INFO ---------------------------------------------------------------------------------------------------------
+2020-03-25 20:36:28.1677 INFO --------------------------25-Mar-20 8:36:28 PM------------------------------------------------
+2020-03-25 20:36:28.1822 INFO Successful In Getting  Item Category
+2020-03-25 20:36:28.1677 INFO --------------------------25-Mar-20 8:36:28 PM------------------------------------------------
+2020-03-25 20:36:28.2097 INFO Successful In Getting Data
+2020-03-25 20:46:33.9221 INFO ---------------------------------------------------------------------------------------------------------
+2020-03-25 20:46:34.1416 INFO ---------------------------------------------------------------------------------------------------------
+2020-03-25 20:46:34.6526 INFO --------------------------25-Mar-20 8:46:34 PM------------------------------------------------
+2020-03-25 20:46:34.6266 INFO --------------------------25-Mar-20 8:46:34 PM------------------------------------------------
+2020-03-25 20:46:34.6961 INFO Successful In Getting  Item Category
+2020-03-25 20:46:34.6750 INFO Successful In Getting Data
+2020-03-25 20:48:43.6759 INFO ---------------------------------------------------------------------------------------------------------
+2020-03-25 20:48:43.7061 INFO --------------------------25-Mar-20 8:48:43 PM------------------------------------------------
+2020-03-25 20:48:43.8060 INFO ---------------------------------------------------------------------------------------------------------
+2020-03-25 20:48:43.8645 INFO --------------------------25-Mar-20 8:48:43 PM------------------------------------------------
+2020-03-25 20:48:43.8407 INFO Successful In Getting  Item Category
+2020-03-25 20:48:43.9026 INFO Successful In Getting Data
+2020-03-25 20:49:30.0283 INFO ---------------------------------------------------------------------------------------------------------
+2020-03-25 20:49:30.0967 INFO --------------------------25-Mar-20 8:49:30 PM------------------------------------------------
+2020-03-25 20:49:30.1446 INFO Successful In Getting  Item Category
+2020-03-25 20:49:30.1969 INFO ---------------------------------------------------------------------------------------------------------
+2020-03-25 20:49:30.2521 INFO --------------------------25-Mar-20 8:49:30 PM------------------------------------------------
+2020-03-25 20:49:30.3174 INFO Successful In Getting Data
+2020-03-25 20:49:34.7134 INFO ---------------------------------------------------------------------------------------------------------
+2020-03-25 20:49:34.7134 INFO ---------------------------------------------------------------------------------------------------------
+2020-03-25 20:49:34.7579 INFO --------------------------25-Mar-20 8:49:34 PM------------------------------------------------
+2020-03-25 20:49:34.8080 INFO Successful In Getting  Item Category
+2020-03-25 20:49:34.7837 INFO --------------------------25-Mar-20 8:49:34 PM------------------------------------------------
+2020-03-25 20:49:34.8619 INFO Successful In Getting Data
+2020-03-25 20:50:26.3319 INFO ---------------------------------------------------------------------------------------------------------
+2020-03-25 20:50:26.3577 INFO --------------------------25-Mar-20 8:50:26 PM------------------------------------------------
+2020-03-25 20:50:26.3319 INFO ---------------------------------------------------------------------------------------------------------
+2020-03-25 20:50:26.4454 INFO Successful In Getting Data
+2020-03-25 20:50:26.4836 INFO --------------------------25-Mar-20 8:50:26 PM------------------------------------------------
+2020-03-25 20:50:26.5434 INFO Successful In Getting  Item Category
+2020-03-25 20:52:54.4251 INFO ---------------------------------------------------------------------------------------------------------
+2020-03-25 20:52:54.4251 INFO ---------------------------------------------------------------------------------------------------------
+2020-03-25 20:52:54.4524 INFO --------------------------25-Mar-20 8:52:54 PM------------------------------------------------
+2020-03-25 20:52:54.4854 INFO --------------------------25-Mar-20 8:52:54 PM------------------------------------------------
+2020-03-25 20:52:54.5244 INFO Successful In Getting  Item Category
+2020-03-25 20:52:54.5476 INFO Successful In Getting Data
+2020-03-25 21:00:00.5774 INFO ---------------------------------------------------------------------------------------------------------
+2020-03-25 21:00:00.6238 INFO ---------------------------------------------------------------------------------------------------------
+2020-03-25 21:00:00.7132 INFO --------------------------25-Mar-20 9:00:00 PM------------------------------------------------
+2020-03-25 21:00:00.7457 INFO --------------------------25-Mar-20 9:00:00 PM------------------------------------------------
+2020-03-25 21:00:00.7773 INFO Successful In Getting  Item Category
+2020-03-25 21:00:00.8071 INFO Successful In Getting Data
+2020-03-25 21:00:57.9955 INFO ---------------------------------------------------------------------------------------------------------
+2020-03-25 21:00:58.0190 INFO --------------------------25-Mar-20 9:00:58 PM------------------------------------------------
+2020-03-25 21:00:58.0329 INFO ---------------------------------------------------------------------------------------------------------
+2020-03-25 21:00:58.0329 INFO Successful In Getting  Item Category
+2020-03-25 21:00:58.0642 INFO --------------------------25-Mar-20 9:00:58 PM------------------------------------------------
+2020-03-25 21:00:58.1501 INFO Successful In Getting Data
+2020-03-25 21:02:59.1612 INFO ---------------------------------------------------------------------------------------------------------
+2020-03-25 21:02:59.2248 INFO --------------------------25-Mar-20 9:02:59 PM------------------------------------------------
+2020-03-25 21:02:59.2939 INFO Successful In Getting  Item Category
+2020-03-25 21:02:59.4093 INFO ---------------------------------------------------------------------------------------------------------
+2020-03-25 21:02:59.4354 INFO --------------------------25-Mar-20 9:02:59 PM------------------------------------------------
+2020-03-25 21:02:59.4559 INFO Successful In Getting Data
+2020-03-25 21:03:41.8000 INFO ---------------------------------------------------------------------------------------------------------
+2020-03-25 21:03:41.8198 INFO ---------------------------------------------------------------------------------------------------------
+2020-03-25 21:03:41.8393 INFO --------------------------25-Mar-20 9:03:41 PM------------------------------------------------
+2020-03-25 21:03:41.9465 INFO Successful In Getting  Item Category
+2020-03-25 21:03:41.9214 INFO --------------------------25-Mar-20 9:03:41 PM------------------------------------------------
+2020-03-25 21:03:42.0057 INFO Successful In Getting Data
+2020-03-25 21:04:20.7462 INFO ---------------------------------------------------------------------------------------------------------
+2020-03-25 21:04:20.7660 INFO ---------------------------------------------------------------------------------------------------------
+2020-03-25 21:04:20.8167 INFO --------------------------25-Mar-20 9:04:20 PM------------------------------------------------
+2020-03-25 21:04:20.8455 INFO --------------------------25-Mar-20 9:04:20 PM------------------------------------------------
+2020-03-25 21:04:20.9050 INFO Successful In Getting  Item Category
+2020-03-25 21:04:20.9250 INFO Successful In Getting Data
+2020-03-25 21:04:53.4698 INFO ---------------------------------------------------------------------------------------------------------
+2020-03-25 21:04:53.5312 INFO ---------------------------------------------------------------------------------------------------------
+2020-03-25 21:04:53.5850 INFO --------------------------25-Mar-20 9:04:53 PM------------------------------------------------
+2020-03-25 21:04:53.6110 INFO --------------------------25-Mar-20 9:04:53 PM------------------------------------------------
+2020-03-25 21:04:53.6634 INFO Successful In Getting Data
+2020-03-25 21:04:53.6363 INFO Successful In Getting  Item Category
+2020-03-25 21:12:10.1474 INFO ---------------------------------------------------------------------------------------------------------
+2020-03-25 21:12:10.1864 INFO ---------------------------------------------------------------------------------------------------------
+2020-03-25 21:12:10.2578 INFO --------------------------25-Mar-20 9:12:10 PM------------------------------------------------
+2020-03-25 21:12:10.2304 INFO --------------------------25-Mar-20 9:12:10 PM------------------------------------------------
+2020-03-25 21:12:10.3028 INFO Successful In Getting Data
+2020-03-25 21:12:10.2809 INFO Successful In Getting  Item Category
+2020-03-25 21:16:35.7899 INFO ---------------------------------------------------------------------------------------------------------
+2020-03-25 21:16:35.8671 INFO --------------------------25-Mar-20 9:16:35 PM------------------------------------------------
+2020-03-25 21:16:35.8755 INFO ---------------------------------------------------------------------------------------------------------
+2020-03-25 21:16:35.9061 INFO Successful In Getting  Item Category
+2020-03-25 21:16:35.9348 INFO --------------------------25-Mar-20 9:16:35 PM------------------------------------------------
+2020-03-25 21:16:35.9955 INFO Successful In Getting Data
+2020-03-25 21:16:46.2881 INFO ---------------------------------------------------------------------------------------------------------
+2020-03-25 21:16:46.3071 INFO ---------------------------------------------------------------------------------------------------------
+2020-03-25 21:16:46.4108 INFO --------------------------25-Mar-20 9:16:46 PM------------------------------------------------
+2020-03-25 21:16:46.3827 INFO --------------------------25-Mar-20 9:16:46 PM------------------------------------------------
+2020-03-25 21:16:46.4362 INFO Successful In Getting Data
+2020-03-25 21:16:46.4698 INFO Successful In Getting  Item Category
+2020-03-25 21:20:43.7352 INFO ---------------------------------------------------------------------------------------------------------
+2020-03-25 21:20:43.8325 INFO --------------------------25-Mar-20 9:20:43 PM------------------------------------------------
+2020-03-25 21:20:43.7801 INFO ---------------------------------------------------------------------------------------------------------
+2020-03-25 21:20:43.8544 INFO Successful In Getting  Item Category
+2020-03-25 21:20:43.8747 INFO --------------------------25-Mar-20 9:20:43 PM------------------------------------------------
+2020-03-25 21:20:43.9074 INFO Successful In Getting Data
+2020-03-25 21:23:46.3776 INFO ---------------------------------------------------------------------------------------------------------
+2020-03-25 21:23:46.4079 INFO --------------------------25-Mar-20 9:23:46 PM------------------------------------------------
+2020-03-25 21:23:46.4317 INFO ---------------------------------------------------------------------------------------------------------
+2020-03-25 21:23:46.4438 INFO Successful In Getting  Item Category
+2020-03-25 21:23:46.5056 INFO --------------------------25-Mar-20 9:23:46 PM------------------------------------------------
+2020-03-25 21:23:46.5620 INFO Successful In Getting Data
+2020-03-25 21:23:56.2235 INFO ---------------------------------------------------------------------------------------------------------
+2020-03-25 21:23:56.2775 INFO --------------------------25-Mar-20 9:23:56 PM------------------------------------------------
+2020-03-25 21:23:56.2451 INFO ---------------------------------------------------------------------------------------------------------
+2020-03-25 21:23:56.3214 INFO Successful In Getting  Item Category
+2020-03-25 21:23:56.3572 INFO --------------------------25-Mar-20 9:23:56 PM------------------------------------------------
+2020-03-25 21:23:56.4519 INFO Successful In Getting Data
+2020-03-25 21:24:03.0610 INFO ---------------------------------------------------------------------------------------------------------
+2020-03-25 21:24:03.0858 INFO ---------------------------------------------------------------------------------------------------------
+2020-03-25 21:24:03.0941 INFO --------------------------25-Mar-20 9:24:03 PM------------------------------------------------
+2020-03-25 21:24:03.1797 INFO Successful In Getting  Item Category
+2020-03-25 21:24:03.1503 INFO --------------------------25-Mar-20 9:24:03 PM------------------------------------------------
+2020-03-25 21:24:03.2644 INFO Successful In Getting Data
+2020-03-25 21:29:19.3437 INFO ---------------------------------------------------------------------------------------------------------
+2020-03-25 21:29:19.5480 INFO ---------------------------------------------------------------------------------------------------------
+2020-03-25 21:29:20.5073 INFO --------------------------25-Mar-20 9:29:20 PM------------------------------------------------
+2020-03-25 21:29:20.4600 INFO --------------------------25-Mar-20 9:29:20 PM------------------------------------------------
+2020-03-25 21:29:20.6466 INFO Successful In Getting Data
+2020-03-25 21:29:20.6245 INFO Successful In Getting  Item Category
+2020-03-25 21:29:30.6562 INFO ---------------------------------------------------------------------------------------------------------
+2020-03-25 21:29:30.6562 INFO ---------------------------------------------------------------------------------------------------------
+2020-03-25 21:29:31.2605 INFO --------------------------25-Mar-20 9:29:31 PM------------------------------------------------
+2020-03-25 21:29:31.3017 INFO Successful In Getting  Item Category
+2020-03-25 21:29:31.2795 INFO --------------------------25-Mar-20 9:29:31 PM------------------------------------------------
+2020-03-25 21:29:31.3604 INFO Successful In Getting Data
+2020-03-25 21:41:40.8078 INFO ---------------------------------------------------------------------------------------------------------
+2020-03-25 21:41:40.8432 INFO --------------------------25-Mar-20 9:41:40 PM------------------------------------------------
+2020-03-25 21:41:40.9056 INFO Successful In Getting  Item Category
+2020-03-25 21:41:40.9014 INFO ---------------------------------------------------------------------------------------------------------
+2020-03-25 21:41:40.9397 INFO --------------------------25-Mar-20 9:41:40 PM------------------------------------------------
+2020-03-25 21:41:40.9947 INFO Successful In Getting Data
+2020-03-25 21:42:20.9638 INFO ---------------------------------------------------------------------------------------------------------
+2020-03-25 21:42:21.0271 INFO --------------------------25-Mar-20 9:42:21 PM------------------------------------------------
+2020-03-25 21:42:21.0631 INFO Successful In Getting  Item Category
+2020-03-25 21:42:21.0897 INFO ---------------------------------------------------------------------------------------------------------
+2020-03-25 21:42:21.1256 INFO --------------------------25-Mar-20 9:42:21 PM------------------------------------------------
+2020-03-25 21:42:21.1485 INFO Successful In Getting Data
+2020-03-25 21:42:39.8207 INFO ---------------------------------------------------------------------------------------------------------
+2020-03-25 21:42:39.8613 INFO --------------------------25-Mar-20 9:42:39 PM------------------------------------------------
+2020-03-25 21:42:39.8963 INFO Successful In Getting  Item Category
+2020-03-25 21:42:39.9634 INFO ---------------------------------------------------------------------------------------------------------
+2020-03-25 21:42:39.9979 INFO --------------------------25-Mar-20 9:42:39 PM------------------------------------------------
+2020-03-25 21:42:40.0358 INFO Successful In Getting Data
+2020-03-25 21:43:29.8495 INFO ---------------------------------------------------------------------------------------------------------
+2020-03-25 21:43:29.8946 INFO --------------------------25-Mar-20 9:43:29 PM------------------------------------------------
+2020-03-25 21:43:29.9329 INFO Successful In Getting  Item Category
+2020-03-25 21:43:29.9642 INFO ---------------------------------------------------------------------------------------------------------
+2020-03-25 21:43:30.0065 INFO --------------------------25-Mar-20 9:43:30 PM------------------------------------------------
+2020-03-25 21:43:30.0326 INFO Successful In Getting Data
+2020-03-25 21:43:51.9718 INFO ---------------------------------------------------------------------------------------------------------
+2020-03-25 21:43:51.9954 INFO ---------------------------------------------------------------------------------------------------------
+2020-03-25 21:43:52.0085 INFO --------------------------25-Mar-20 9:43:52 PM------------------------------------------------
+2020-03-25 21:43:52.0783 INFO Successful In Getting  Item Category
+2020-03-25 21:43:52.0455 INFO --------------------------25-Mar-20 9:43:52 PM------------------------------------------------
+2020-03-25 21:43:52.1260 INFO Successful In Getting Data
+2020-03-25 21:44:27.3936 INFO ---------------------------------------------------------------------------------------------------------
+2020-03-25 21:44:27.4266 INFO --------------------------25-Mar-20 9:44:27 PM------------------------------------------------
+2020-03-25 21:44:27.4068 INFO ---------------------------------------------------------------------------------------------------------
+2020-03-25 21:44:27.4562 INFO Successful In Getting  Item Category
+2020-03-25 21:44:27.4812 INFO --------------------------25-Mar-20 9:44:27 PM------------------------------------------------
+2020-03-25 21:44:27.5398 INFO Successful In Getting Data
+2020-03-25 21:45:14.6749 INFO ---------------------------------------------------------------------------------------------------------
+2020-03-25 21:45:14.7045 INFO --------------------------25-Mar-20 9:45:14 PM------------------------------------------------
+2020-03-25 21:45:14.6749 INFO ---------------------------------------------------------------------------------------------------------
+2020-03-25 21:45:14.7313 INFO Successful In Getting  Item Category
+2020-03-25 21:45:14.7679 INFO --------------------------25-Mar-20 9:45:14 PM------------------------------------------------
+2020-03-25 21:45:14.8264 INFO Successful In Getting Data
+2020-03-25 21:45:38.8023 INFO ---------------------------------------------------------------------------------------------------------
+2020-03-25 21:45:38.8666 INFO --------------------------25-Mar-20 9:45:38 PM------------------------------------------------
+2020-03-25 21:45:38.8961 INFO Successful In Getting  Item Category
+2020-03-25 21:45:38.8666 INFO ---------------------------------------------------------------------------------------------------------
+2020-03-25 21:45:38.9515 INFO --------------------------25-Mar-20 9:45:38 PM------------------------------------------------
+2020-03-25 21:45:38.9777 INFO Successful In Getting Data
+2020-03-25 21:46:31.2346 INFO ---------------------------------------------------------------------------------------------------------
+2020-03-25 21:46:31.2597 INFO --------------------------25-Mar-20 9:46:31 PM------------------------------------------------
+2020-03-25 21:46:31.2346 INFO ---------------------------------------------------------------------------------------------------------
+2020-03-25 21:46:31.3361 INFO --------------------------25-Mar-20 9:46:31 PM------------------------------------------------
+2020-03-25 21:46:31.3806 INFO Successful In Getting Data
+2020-03-25 21:46:31.3028 INFO Successful In Getting  Item Category
+2020-03-25 21:47:11.0810 INFO ---------------------------------------------------------------------------------------------------------
+2020-03-25 21:47:11.0810 INFO ---------------------------------------------------------------------------------------------------------
+2020-03-25 21:47:11.1348 INFO --------------------------25-Mar-20 9:47:11 PM------------------------------------------------
+2020-03-25 21:47:11.2115 INFO Successful In Getting  Item Category
+2020-03-25 21:47:11.1759 INFO --------------------------25-Mar-20 9:47:11 PM------------------------------------------------
+2020-03-25 21:47:11.3002 INFO Successful In Getting Data
+2020-03-25 21:47:51.7885 INFO ---------------------------------------------------------------------------------------------------------
+2020-03-25 21:47:51.8023 INFO ---------------------------------------------------------------------------------------------------------
+2020-03-25 21:47:51.8520 INFO --------------------------25-Mar-20 9:47:51 PM------------------------------------------------
+2020-03-25 21:47:51.8772 INFO Successful In Getting Data
+2020-03-25 21:47:51.8256 INFO --------------------------25-Mar-20 9:47:51 PM------------------------------------------------
+2020-03-25 21:47:51.9201 INFO Successful In Getting  Item Category
+2020-03-25 21:49:04.4164 INFO ---------------------------------------------------------------------------------------------------------
+2020-03-25 21:49:04.4454 INFO --------------------------25-Mar-20 9:49:04 PM------------------------------------------------
+2020-03-25 21:49:04.4938 INFO Successful In Getting  Item Category
+2020-03-25 21:49:04.5485 INFO ---------------------------------------------------------------------------------------------------------
+2020-03-25 21:49:04.5747 INFO --------------------------25-Mar-20 9:49:04 PM------------------------------------------------
+2020-03-25 21:49:04.5984 INFO Successful In Getting Data
+2020-03-25 21:49:23.9920 INFO ---------------------------------------------------------------------------------------------------------
+2020-03-25 21:49:24.0277 INFO --------------------------25-Mar-20 9:49:24 PM------------------------------------------------
+2020-03-25 21:49:24.0572 INFO Successful In Getting  Item Category
+2020-03-25 21:49:24.0080 INFO ---------------------------------------------------------------------------------------------------------
+2020-03-25 21:49:24.1232 INFO --------------------------25-Mar-20 9:49:24 PM------------------------------------------------
+2020-03-25 21:49:24.1464 INFO Successful In Getting Data
+2020-03-25 21:50:13.1667 INFO ---------------------------------------------------------------------------------------------------------
+2020-03-25 21:50:13.2049 INFO --------------------------25-Mar-20 9:50:13 PM------------------------------------------------
+2020-03-25 21:50:13.2334 INFO Successful In Getting  Item Category
+2020-03-25 21:50:13.1878 INFO ---------------------------------------------------------------------------------------------------------
+2020-03-25 21:50:13.2905 INFO --------------------------25-Mar-20 9:50:13 PM------------------------------------------------
+2020-03-25 21:50:13.3176 INFO Successful In Getting Data
+2020-03-25 21:52:10.4516 INFO ---------------------------------------------------------------------------------------------------------
+2020-03-25 21:52:10.4792 INFO --------------------------25-Mar-20 9:52:10 PM------------------------------------------------
+2020-03-25 21:52:10.4553 INFO ---------------------------------------------------------------------------------------------------------
+2020-03-25 21:52:10.5072 INFO Successful In Getting  Item Category
+2020-03-25 21:52:10.5379 INFO --------------------------25-Mar-20 9:52:10 PM------------------------------------------------
+2020-03-25 21:52:10.5931 INFO Successful In Getting Data
+2020-03-25 21:58:29.1434 INFO ---------------------------------------------------------------------------------------------------------
+2020-03-25 21:58:29.1637 INFO ---------------------------------------------------------------------------------------------------------
+2020-03-25 21:58:29.1716 INFO --------------------------25-Mar-20 9:58:29 PM------------------------------------------------
+2020-03-25 21:58:29.2275 INFO Successful In Getting Data
+2020-03-25 21:58:29.1969 INFO --------------------------25-Mar-20 9:58:29 PM------------------------------------------------
+2020-03-25 21:58:29.2647 INFO Successful In Getting  Item Category
+2020-03-25 22:03:30.3280 INFO ---------------------------------------------------------------------------------------------------------
+2020-03-25 22:03:30.4043 INFO --------------------------25-Mar-20 10:03:30 PM------------------------------------------------
+2020-03-25 22:03:30.4289 INFO Successful In Getting Data
+2020-03-25 22:03:30.3515 INFO ---------------------------------------------------------------------------------------------------------
+2020-03-25 22:03:30.4983 INFO --------------------------25-Mar-20 10:03:30 PM------------------------------------------------
+2020-03-25 22:03:30.5301 INFO Successful In Getting  Item Category
+2020-03-25 22:03:54.7102 INFO ---------------------------------------------------------------------------------------------------------
+2020-03-25 22:03:54.7330 INFO --------------------------25-Mar-20 10:03:54 PM------------------------------------------------
+2020-03-25 22:03:54.7102 INFO ---------------------------------------------------------------------------------------------------------
+2020-03-25 22:03:54.7925 INFO --------------------------25-Mar-20 10:03:54 PM------------------------------------------------
+2020-03-25 22:03:54.8135 INFO Successful In Getting Data
+2020-03-25 22:03:54.7586 INFO Successful In Getting  Item Category
+2020-03-25 22:12:31.4945 INFO ---------------------------------------------------------------------------------------------------------
+2020-03-25 22:12:31.5415 INFO ---------------------------------------------------------------------------------------------------------
+2020-03-25 22:12:31.6434 INFO --------------------------25-Mar-20 10:12:31 PM------------------------------------------------
+2020-03-25 22:12:31.6794 INFO --------------------------25-Mar-20 10:12:31 PM------------------------------------------------
+2020-03-25 22:12:31.7541 INFO Successful In Getting  Item Category
+2020-03-25 22:12:31.7276 INFO Successful In Getting Data
+2020-03-25 22:12:37.9011 INFO ---------------------------------------------------------------------------------------------------------
+2020-03-25 22:12:37.9370 INFO ---------------------------------------------------------------------------------------------------------
+2020-03-25 22:12:38.1642 INFO --------------------------25-Mar-20 10:12:38 PM------------------------------------------------
+2020-03-25 22:12:38.1862 INFO Successful In Getting Data
+2020-03-25 22:12:38.1380 INFO --------------------------25-Mar-20 10:12:38 PM------------------------------------------------
+2020-03-25 22:12:38.2505 INFO Successful In Getting  Item Category
+2020-03-25 22:14:31.4995 INFO ---------------------------------------------------------------------------------------------------------
+2020-03-25 22:14:31.5571 INFO --------------------------25-Mar-20 10:14:31 PM------------------------------------------------
+2020-03-25 22:14:31.5185 INFO ---------------------------------------------------------------------------------------------------------
+2020-03-25 22:14:31.6124 INFO Successful In Getting  Item Category
+2020-03-25 22:14:31.7188 INFO --------------------------25-Mar-20 10:14:31 PM------------------------------------------------
+2020-03-25 22:14:31.9086 INFO Successful In Getting Data
+2020-03-25 22:14:41.1308 INFO ---------------------------------------------------------------------------------------------------------
+2020-03-25 22:14:41.1308 INFO ---------------------------------------------------------------------------------------------------------
+2020-03-25 22:14:41.2153 INFO --------------------------25-Mar-20 10:14:41 PM------------------------------------------------
+2020-03-25 22:14:41.2680 INFO Successful In Getting  Item Category
+2020-03-25 22:14:41.2387 INFO --------------------------25-Mar-20 10:14:41 PM------------------------------------------------
+2020-03-25 22:14:41.3131 INFO Successful In Getting Data
+2020-03-25 22:17:34.0035 INFO ---------------------------------------------------------------------------------------------------------
+2020-03-25 22:17:34.0467 INFO --------------------------25-Mar-20 10:17:34 PM------------------------------------------------
+2020-03-25 22:17:34.0962 INFO Successful In Getting  Item Category
+2020-03-25 22:17:34.1094 INFO ---------------------------------------------------------------------------------------------------------
+2020-03-25 22:17:34.1591 INFO --------------------------25-Mar-20 10:17:34 PM------------------------------------------------
+2020-03-25 22:17:34.2013 INFO Successful In Getting Data
+2020-03-25 22:21:53.0117 INFO ---------------------------------------------------------------------------------------------------------
+2020-03-25 22:21:53.0399 INFO ---------------------------------------------------------------------------------------------------------
+2020-03-25 22:21:53.1920 INFO --------------------------25-Mar-20 10:21:53 PM------------------------------------------------
+2020-03-25 22:21:53.2188 INFO Successful In Getting Data
+2020-03-25 22:21:53.1657 INFO --------------------------25-Mar-20 10:21:53 PM------------------------------------------------
+2020-03-25 22:21:53.2693 INFO Successful In Getting  Item Category
+2020-03-25 22:22:39.2988 INFO ---------------------------------------------------------------------------------------------------------
+2020-03-25 22:22:39.3537 INFO ---------------------------------------------------------------------------------------------------------
+2020-03-25 22:22:39.4177 INFO --------------------------25-Mar-20 10:22:39 PM------------------------------------------------
+2020-03-25 22:22:39.4434 INFO --------------------------25-Mar-20 10:22:39 PM------------------------------------------------
+2020-03-25 22:22:39.4981 INFO Successful In Getting Data
+2020-03-25 22:22:39.4760 INFO Successful In Getting  Item Category
+2020-03-25 22:23:30.5649 INFO ---------------------------------------------------------------------------------------------------------
+2020-03-25 22:23:30.5920 INFO --------------------------25-Mar-20 10:23:30 PM------------------------------------------------
+2020-03-25 22:23:30.5649 INFO ---------------------------------------------------------------------------------------------------------
+2020-03-25 22:23:30.6227 INFO Successful In Getting  Item Category
+2020-03-25 22:23:30.6496 INFO --------------------------25-Mar-20 10:23:30 PM------------------------------------------------
+2020-03-25 22:23:30.7042 INFO Successful In Getting Data
+2020-03-25 22:25:55.4423 INFO ---------------------------------------------------------------------------------------------------------
+2020-03-25 22:25:55.4714 INFO --------------------------25-Mar-20 10:25:55 PM------------------------------------------------
+2020-03-25 22:25:55.5034 INFO Successful In Getting  Item Category
+2020-03-25 22:25:55.4885 INFO ---------------------------------------------------------------------------------------------------------
+2020-03-25 22:25:55.5714 INFO --------------------------25-Mar-20 10:25:55 PM------------------------------------------------
+2020-03-25 22:25:55.5939 INFO Successful In Getting Data
+2020-03-25 22:28:32.8586 INFO ---------------------------------------------------------------------------------------------------------
+2020-03-25 22:28:32.8883 INFO --------------------------25-Mar-20 10:28:32 PM------------------------------------------------
+2020-03-25 22:28:32.9290 INFO Successful In Getting  Item Category
+2020-03-25 22:28:32.8668 INFO ---------------------------------------------------------------------------------------------------------
+2020-03-25 22:28:32.9974 INFO --------------------------25-Mar-20 10:28:32 PM------------------------------------------------
+2020-03-25 22:28:33.0189 INFO Successful In Getting Data
+2020-03-25 22:29:16.9899 INFO ---------------------------------------------------------------------------------------------------------
+2020-03-25 22:29:17.0249 INFO --------------------------25-Mar-20 10:29:17 PM------------------------------------------------
+2020-03-25 22:29:17.0555 INFO Successful In Getting  Item Category
+2020-03-25 22:29:17.0249 INFO ---------------------------------------------------------------------------------------------------------
+2020-03-25 22:29:17.1118 INFO --------------------------25-Mar-20 10:29:17 PM------------------------------------------------
+2020-03-25 22:29:17.1431 INFO Successful In Getting Data
+2020-03-25 22:29:50.5486 INFO ---------------------------------------------------------------------------------------------------------
+2020-03-25 22:29:50.5486 INFO ---------------------------------------------------------------------------------------------------------
+2020-03-25 22:29:50.6161 INFO --------------------------25-Mar-20 10:29:50 PM------------------------------------------------
+2020-03-25 22:29:50.5806 INFO --------------------------25-Mar-20 10:29:50 PM------------------------------------------------
+2020-03-25 22:29:50.6457 INFO Successful In Getting Data
+2020-03-25 22:29:50.6715 INFO Successful In Getting  Item Category
+2020-03-25 22:30:02.9082 INFO ---------------------------------------------------------------------------------------------------------
+2020-03-25 22:30:02.9082 INFO ---------------------------------------------------------------------------------------------------------
+2020-03-25 22:30:02.9400 INFO --------------------------25-Mar-20 10:30:02 PM------------------------------------------------
+2020-03-25 22:30:02.9944 INFO Successful In Getting  Item Category
+2020-03-25 22:30:02.9726 INFO --------------------------25-Mar-20 10:30:02 PM------------------------------------------------
+2020-03-25 22:30:03.0385 INFO Successful In Getting Data
+2020-03-25 22:31:21.9993 INFO ---------------------------------------------------------------------------------------------------------
+2020-03-25 22:31:21.9993 INFO ---------------------------------------------------------------------------------------------------------
+2020-03-25 22:31:22.0333 INFO --------------------------25-Mar-20 10:31:22 PM------------------------------------------------
+2020-03-25 22:31:22.0979 INFO Successful In Getting  Item Category
+2020-03-25 22:31:22.0624 INFO --------------------------25-Mar-20 10:31:22 PM------------------------------------------------
+2020-03-25 22:31:22.1621 INFO Successful In Getting Data
+2020-03-25 22:33:29.5993 INFO ---------------------------------------------------------------------------------------------------------
+2020-03-25 22:33:29.6257 INFO --------------------------25-Mar-20 10:33:29 PM------------------------------------------------
+2020-03-25 22:33:29.6685 INFO Successful In Getting  Item Category
+2020-03-25 22:33:29.6117 INFO ---------------------------------------------------------------------------------------------------------
+2020-03-25 22:33:29.7798 INFO --------------------------25-Mar-20 10:33:29 PM------------------------------------------------
+2020-03-25 22:33:29.8225 INFO Successful In Getting Data
+2020-03-25 23:08:58.0578 INFO ---------------------------------------------------------------------------------------------------------
+2020-03-25 23:08:58.1654 INFO --------------------------25-Mar-20 11:08:58 PM------------------------------------------------
+2020-03-25 23:08:58.2239 INFO Successful In Getting  Item Category
+2020-03-25 23:09:02.8518 INFO ---------------------------------------------------------------------------------------------------------
+2020-03-25 23:09:02.8685 INFO --------------------------25-Mar-20 11:09:02 PM------------------------------------------------
+2020-03-25 23:09:02.8892 INFO Successful In Getting Data
+2020-03-25 23:09:02.9090 INFO ---------------------------------------------------------------------------------------------------------
+2020-03-25 23:09:02.9316 INFO --------------------------25-Mar-20 11:09:02 PM------------------------------------------------
+2020-03-25 23:09:02.9450 INFO Supplier Successfully Getted
+2020-03-25 23:09:06.3960 INFO ---------------------------------------------------------------------------------------------------------
+2020-03-25 23:09:06.4153 INFO --------------------------25-Mar-20 11:09:06 PM------------------------------------------------
+2020-03-25 23:09:06.4429 INFO Successful In Getting  Item Category
+2020-03-25 23:09:09.4698 INFO ---------------------------------------------------------------------------------------------------------
+2020-03-25 23:09:09.4886 INFO --------------------------25-Mar-20 11:09:09 PM------------------------------------------------
+2020-03-25 23:09:09.5123 INFO Successful In Getting  Item Category
+2020-03-25 23:09:20.0175 INFO ---------------------------------------------------------------------------------------------------------
+2020-03-25 23:09:20.0423 INFO --------------------------25-Mar-20 11:09:20 PM------------------------------------------------
+2020-03-25 23:09:20.0628 INFO Successful In Getting  Item Category
+2020-03-25 23:09:26.9007 INFO ---------------------------------------------------------------------------------------------------------
+2020-03-25 23:09:26.9238 INFO --------------------------25-Mar-20 11:09:26 PM------------------------------------------------
+2020-03-25 23:09:26.9146 INFO ---------------------------------------------------------------------------------------------------------
+2020-03-25 23:09:26.9448 INFO Successful In Getting  Item Category
+2020-03-25 23:09:26.9636 INFO --------------------------25-Mar-20 11:09:26 PM------------------------------------------------
+2020-03-25 23:09:26.9924 INFO Successful In Getting Data

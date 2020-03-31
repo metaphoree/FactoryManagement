@@ -15,6 +15,11 @@ using System.Reflection;
 using System.IO;
 using Repository.EntitywiseRepository;
 using Contracts.EntitywiseContracts;
+using Contracts.IBusinessServiceWrapper;
+using Service.BusinessServiceWrapper;
+using Service.BusinessWrapper;
+using Contracts.ServiceContracts;
+using Service.BusinessServices;
 
 namespace ApiService.Utilities.Extensions
 {
@@ -46,7 +51,43 @@ namespace ApiService.Utilities.Extensions
         {
             services.AddSingleton<ILoggerManager, LoggerManager>();
         }
-
+        public static void ConfigureService(this IServiceCollection services)
+        {
+            services.AddScoped<IAddressService, AddressService>();
+            services.AddScoped<ICustomerService, CustomerService>();
+            services.AddScoped<IDepartmentService, DepartmentService>();
+            services.AddScoped<IEquipmentService, EquipmentService>();
+            services.AddScoped<IEquipmentCategoryService, EquipmentCategoryService>();
+            services.AddScoped<IExpenseService, ExpenseService>();
+            services.AddScoped<IExpenseTypeService, ExpenseTypeService>();
+            services.AddScoped<IFactoryService, FactoryService>();
+            services.AddScoped<IIncomeService, IncomeService>();
+            services.AddScoped<IIncomeTypeService, IncomeTypeService>();
+            services.AddScoped<IInvoiceService, InvoiceService>();
+            services.AddScoped<IInvoiceTypeService, InvoiceTypeService>();
+            services.AddScoped<IItemService, ItemService>();
+            services.AddScoped<IItemCategoryService, ItemCategoryService>();
+            services.AddScoped<IItemStatusService, ItemStatusService>();
+            services.AddScoped<IPayableService, PayableService>();
+            services.AddScoped<IPaymentStatusService, PaymentStatusService>();
+            services.AddScoped<IPhoneService, PhoneService>();
+            services.AddScoped<IProductionService, ProductionService>();
+            services.AddScoped<IPurchaseService, PurchaseService>();
+            services.AddScoped<IPurchaseTypeService, PurchaseTypeService>();
+            services.AddScoped<IRecievableService, RecievableService>();
+            services.AddScoped<IRoleService, RoleService>();
+            services.AddScoped<ISalesService, SalesService>();
+            services.AddScoped<IStaffService, StaffService>();
+            services.AddScoped<IStockService, StockService>();
+            services.AddScoped<IStockInService, StockInService>();
+            services.AddScoped<IStockOutService, StockOutService>();
+            services.AddScoped<ISupplierService, SupplierService>();
+            services.AddScoped<ITransactionService, TransactionService>();
+            services.AddScoped<ITransactionTypeService, TransactionTypeService>();
+            services.AddScoped<IUserAuthInfoService, UserAuthInfoService>();
+            services.AddScoped<IUserRoleService, UserRoleService>();
+            services.AddScoped<IUtilService, UtilService>();
+        }
         public static void ConfigureRepository(this IServiceCollection services) {
                                 
             services.AddScoped<IAddressRepository, AddressRepository>();
@@ -57,6 +98,7 @@ namespace ApiService.Utilities.Extensions
             services.AddScoped<IExpenseRepository, ExpenseRepository>();
             services.AddScoped<IExpenseTypeRepository, ExpenseTypeRepository>();
             services.AddScoped<IFactoryRepository, FactoryRepository>();
+            services.AddScoped<IIncomeRepository, IncomeRepository>();
             services.AddScoped<IIncomeTypeRepository, IncomeTypeRepository>();
             services.AddScoped<IInvoiceRepository, InvoiceRepository>();
             services.AddScoped<IInvoiceTypeRepository, InvoiceTypeRepository>();
@@ -88,9 +130,10 @@ namespace ApiService.Utilities.Extensions
             services.AddScoped<IRepositoryWrapper, RepositoryWrapper>();
         }
         public static void ConfigureServiceWrapper(this IServiceCollection services)
-        {
-            services.AddScoped<IUtilService, UtilService>();
+        {        
             services.AddScoped<IServiceWrapper, ServiceWrapper>();
+            services.AddScoped<IPurchaseWrapperService, PurchaseWrapperService>();
+            services.AddScoped<IBusinessService, BusinessServices>();
         }
         public static void ConfigureAutoMapper(this IServiceCollection services)
         {

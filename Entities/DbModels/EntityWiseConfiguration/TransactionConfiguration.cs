@@ -39,7 +39,7 @@ namespace Entities.DbModels.EntityWiseConfiguration
                     .IsRequired()
                     .HasMaxLength(50);
 
-                builder.Property(e => e.PaymentStatusId)
+                builder.Property(e => e.PaymentStatus)
                     .IsRequired()
                     .HasMaxLength(50);
 
@@ -53,7 +53,7 @@ namespace Entities.DbModels.EntityWiseConfiguration
                     .IsRequired()
                     .HasMaxLength(50);
 
-                builder.Property(e => e.TransactionTypeId)
+                builder.Property(e => e.TransactionType)
                     .IsRequired()
                     .HasMaxLength(50);
             builder.Property(p => p.UniqueId)

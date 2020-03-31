@@ -12,50 +12,60 @@ namespace Entities.DbModels.EntityWiseConfiguration
     {
         public void Configure(EntityTypeBuilder<Sales> builder)
         {
-            
-                builder.Property(e => e.Id).HasMaxLength(50);
 
-                //builder.Property(e => e.AmountAfterDiscount).HasColumnType("decimal(18, 0)");
+            builder.Property(e => e.Id).HasMaxLength(50);
 
-                //builder.Property(e => e.AmountBeforeDiscount).HasColumnType("decimal(18, 0)");
+            //builder.Property(e => e.AmountAfterDiscount).HasColumnType("decimal(18, 0)");
 
-                //builder.Property(e => e.AmountDue).HasColumnType("decimal(18, 0)");
+            //builder.Property(e => e.AmountBeforeDiscount).HasColumnType("decimal(18, 0)");
 
-                //builder.Property(e => e.AmountPaid).HasColumnType("decimal(18, 0)");
+            //builder.Property(e => e.AmountDue).HasColumnType("decimal(18, 0)");
 
-                builder.Property(e => e.ClientId)
+            //builder.Property(e => e.AmountPaid).HasColumnType("decimal(18, 0)");
+
+            builder.Property(e => e.ClientId)
+                .IsRequired()
+                .HasMaxLength(50);
+
+            //builder.Property(e => e.Description).HasMaxLength(50);
+
+            //builder.Property(e => e.Discount).HasColumnType("decimal(18, 0)");
+
+            builder.Property(e => e.FactoryId)
+                .IsRequired()
+                .HasMaxLength(50);
+
+            builder.Property(e => e.InvoiceId)
+                .IsRequired()
+                .HasMaxLength(50);
+
+            builder.Property(e => e.Month)
+                .IsRequired()
+                .HasMaxLength(50);
+
+
+            builder.Property(e => e.ItemId)
+    .IsRequired()
+    .HasMaxLength(50);
+            builder.Property(e => e.ItemCategoryId)
+    .IsRequired()
+    .HasMaxLength(50);
+
+
+
+
+
+
+
+            builder.Property(e => e.RowStatus)
                     .IsRequired()
                     .HasMaxLength(50);
 
-                //builder.Property(e => e.Description).HasMaxLength(50);
+            //builder.Property(e => e.SaleId)
+            //    .IsRequired()
+            //    .HasMaxLength(50);
 
-                //builder.Property(e => e.Discount).HasColumnType("decimal(18, 0)");
-
-                builder.Property(e => e.FactoryId)
-                    .IsRequired()
-                    .HasMaxLength(50);
-
-                builder.Property(e => e.InvoiceId)
-                    .IsRequired()
-                    .HasMaxLength(50);
-
-                builder.Property(e => e.Month)
-                    .IsRequired()
-                    .HasMaxLength(50);
-
-                builder.Property(e => e.ProductId)
-                    .IsRequired()
-                    .HasMaxLength(50);
-
-                builder.Property(e => e.RowStatus)
-                    .IsRequired()
-                    .HasMaxLength(50);
-
-                //builder.Property(e => e.SaleId)
-                //    .IsRequired()
-                //    .HasMaxLength(50);
-
-                //builder.Property(e => e.SellerId).HasMaxLength(50);
+            //builder.Property(e => e.SellerId).HasMaxLength(50);
             builder.Property(p => p.UniqueId)
               .Metadata.SetAfterSaveBehavior(PropertySaveBehavior.Ignore);
             //builder.Property(e => e.UniqueId)

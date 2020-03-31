@@ -48,13 +48,87 @@ namespace Service
         IMapper _mapper;
         ILoggerManager _loggerManager;
         IUtilService _utilService;
-        public ServiceWrapper(IRepositoryWrapper repositoryWrapper,IMapper mapper,ILoggerManager loggerManager, IUtilService utilService)
+        public ServiceWrapper(
+             IAddressService AddressService,
+             ICustomerService CustomerService,
+             IDepartmentService DepartmentService,
+             IEquipmentService EquipmentService,
+             IEquipmentCategoryService EquipmentCategoryService,
+             IExpenseService ExpenseService,
+             IExpenseTypeService ExpenseTypeService,
+             IFactoryService FactoryService,
+             IIncomeService IncomeService,
+             IIncomeTypeService IncomeTypeService,
+             IInvoiceService InvoiceService,
+             IInvoiceTypeService InvoiceTypeService,
+             IItemService ItemService,
+             IItemCategoryService ItemCategoryService,
+             IItemStatusService ItemStatusService,
+             IPayableService PayableService,
+             IPaymentStatusService PaymentStatusService,
+             IPhoneService PhoneService,
+             IProductionService ProductionService,
+             IPurchaseService PurchaseService,
+             IPurchaseTypeService PurchaseTypeService,
+             IRecievableService RecievableService,
+             IRoleService RoleService,
+             ISalesService SalesService,
+             IStaffService StaffService,
+             IStockService StockService,
+             IStockInService StockInService,
+             IStockOutService StockOutService,
+             ISupplierService SupplierService,
+             ITransactionService TransactionService,
+             ITransactionTypeService TransactionTypeService,
+             IUserAuthInfoService UserAuthInfoService,
+             IUserRoleService UserRoleService,
+             IRepositoryWrapper repositoryWrapper,
+             IMapper mapper,
+             ILoggerManager loggerManager,
+             IUtilService utilService
+             )
         {
-            this._repositoryWrapper = repositoryWrapper; 
+            this._AddressService = AddressService;
+            this._CustomerService = CustomerService;
+            this._DepartmentService = DepartmentService;
+            this._EquipmentService = EquipmentService;
+            this._EquipmentCategoryService = EquipmentCategoryService;
+            this._ExpenseService = ExpenseService;
+            this._ExpenseTypeService = ExpenseTypeService;
+            this._FactoryService = FactoryService;
+            this._IncomeService = IncomeService;
+            this._IncomeTypeService = IncomeTypeService;
+            this._InvoiceService = InvoiceService;
+            this._InvoiceTypeService = InvoiceTypeService;
+            this._ItemService = ItemService;
+            this._ItemCategoryService = ItemCategoryService;
+            this._ItemStatusService = ItemStatusService;
+            this._PayableService = PayableService;
+            this._PaymentStatusService = PaymentStatusService;
+            this._PhoneService = PhoneService;
+            this._ProductionService = ProductionService;
+            this._PurchaseService = PurchaseService;
+            this._PurchaseTypeService = PurchaseTypeService;
+            this._RecievableService = RecievableService;
+            this._RoleService = RoleService;
+            this._SalesService = SalesService;
+            this._StaffService = StaffService;
+            this._StockService = StockService;
+            this._StockInService = StockInService;
+            this._StockOutService = StockOutService;
+            this._SupplierService = SupplierService;
+            this._TransactionService = TransactionService;
+            this._TransactionTypeService = TransactionTypeService;
+            this._UserAuthInfoService = UserAuthInfoService;
+            this._UserRoleService = UserRoleService;
+            this._repositoryWrapper = repositoryWrapper;
             this._mapper = mapper;
             this._loggerManager = loggerManager;
             this._utilService = utilService;
         }
+
+
+
 
 
         public ICustomerService CustomerService

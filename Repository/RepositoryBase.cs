@@ -62,12 +62,32 @@ namespace Repository
             type.GetProperty("CreatedDateTime").SetValue(entity, DateTime.Now);
             type.GetProperty("UpdatedDateTime").SetValue(entity, DateTime.Now);
             type.GetProperty("Id").SetValue(entity, Guid.NewGuid().ToString());
-            //     type.GetProperty("FactoryId").SetValue(entity, type.GetProperty("Id").GetValue();
             type.GetProperty("RowStatus").SetValue(entity, DB_ROW_STATUS.ADDED.ToString());
-            //    type.GetProperty("UniqueId").SetValue(entity, Guid.NewGuid().ToString());
             this.RepositoryContext.Set<T>().Add(entity);
             return entity;
         }
+        public List<T> CreateAll(List<T> entityList)
+        {
+            for (int i = 0;i< entityList.Count;i++ ) {
+                Type type = entityList[i].GetType();
+
+                PropertyInfo? prop = type.GetProperty("CreatedDateTime");
+                PropertyInfo? prop8 = type.GetProperty("CreatedDateTime");
+
+                //type.GetProperty()
+                type.GetProperty("CreatedDateTime").SetValue(entityList[i], DateTime.Now);
+                type.GetProperty("UpdatedDateTime").SetValue(entityList[i], DateTime.Now);
+                type.GetProperty("Id").SetValue(entityList[i], Guid.NewGuid().ToString());
+                type.GetProperty("RowStatus").SetValue(entityList[i], DB_ROW_STATUS.ADDED.ToString());
+                this.RepositoryContext.Set<T>().Add(entityList[i]);
+            }
+            return entityList;
+        }
+
+
+
+
+
 
         public T Update(T entity)
         {

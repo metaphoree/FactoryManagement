@@ -12,8 +12,8 @@ namespace Repository
     public class RepositoryWrapper : IRepositoryWrapper
     {
         #region Var Declaration
-       public FactoryManagementContext dbContext;
-        public IAddressRepository _Address;
+        FactoryManagementContext dbContext;
+        IAddressRepository _Address;
         ICustomerRepository _Customer;
         IDepartmentRepository _Department;
         IEquipmentRepository _Equipment;
@@ -48,15 +48,74 @@ namespace Repository
         IUserRoleRepository _UserRole;
         #endregion
         public RepositoryWrapper(
-            FactoryManagementContext context,
-            ICustomerRepository customerRepository,
-            IAddressRepository addressRepository,
-            IPhoneRepository phoneRepository)
+         FactoryManagementContext dbContext,
+         IAddressRepository Address,
+         ICustomerRepository Customer,
+         IDepartmentRepository Department,
+         IEquipmentRepository Equipment,
+         IEquipmentCategoryRepository EquipmentCategory,
+         IExpenseRepository Expense,
+         IExpenseTypeRepository ExpenseType,
+         IFactoryRepository Factory,
+         IIncomeRepository Income,
+         IIncomeTypeRepository IncomeType,
+         IInvoiceRepository Invoice,
+         IInvoiceTypeRepository InvoiceType,
+         IItemRepository Item,
+         IItemCategoryRepository ItemCategory,
+         IItemStatusRepository ItemStatus,
+         IPayableRepository Payable,
+         IPaymentStatusRepository PaymentStatus,
+         IPhoneRepository Phone,
+         IProductionRepository Production,
+         IPurchaseRepository Purchase,
+         IPurchaseTypeRepository PurchaseType,
+         IRecievableRepository Recievable,
+         IRoleRepository Role,
+         ISalesRepository Sales,
+         IStaffRepository Staff,
+         IStockRepository Stock,
+         IStockInRepository StockIn,
+         IStockOutRepository StockOut,
+         ISupplierRepository Supplier,
+         ITransactionRepository Transaction,
+         ITransactionTypeRepository TransactionType,
+         IUserAuthInfoRepository UserAuthInfo,
+         IUserRoleRepository UserRole)
         {
-            this.dbContext = context;
-            this._Address = addressRepository;
-            this._Customer = customerRepository;
-            this._Phone = phoneRepository;
+            this.dbContext = dbContext;
+            this._Address = Address;
+            this._Customer = Customer;
+            this._Department = Department;
+            this._Equipment = Equipment;
+            this._EquipmentCategory = EquipmentCategory;
+            this._Expense = Expense;
+            this._ExpenseType = ExpenseType;
+            this._Income = Income;
+            this._IncomeType = IncomeType;
+            this._Invoice = Invoice;
+            this._InvoiceType = InvoiceType;
+            this._Item = Item;
+            this._ItemCategory = ItemCategory;
+            this._ItemStatus = ItemStatus;
+            this._Payable = Payable;
+            this._PaymentStatus = PaymentStatus;
+            this._Phone = Phone;
+            this._Production = Production;
+            this._Purchase = Purchase;
+            this._PurchaseType = PurchaseType;
+            this._Recievable = Recievable;
+            this._Role = Role;
+            this._Sales = Sales;
+            this._Staff = Staff;
+            this._Stock = Stock;
+            this._StockIn = StockIn;
+            this._StockOut = StockOut;
+            this._Supplier = Supplier;
+            this._Transaction = Transaction;
+            this._TransactionType = TransactionType;
+            this._UserAuthInfo = UserAuthInfo;
+            this._UserRole = UserRole;
         }
 
 
