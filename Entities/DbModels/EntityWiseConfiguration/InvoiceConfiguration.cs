@@ -15,13 +15,13 @@ namespace Entities.DbModels.EntityWiseConfiguration
           
                 builder.Property(e => e.Id).HasMaxLength(50);
 
-                builder.Property(e => e.AmountAfterDiscount)
-                    .IsRequired()
-                    .HasMaxLength(50);
+                //builder.Property(e => e.AmountAfterDiscount)
+                //    .IsRequired()
+                //    .HasMaxLength(50);
 
-                builder.Property(e => e.AmountBeforeDiscount)
-                    .IsRequired()
-                    .HasMaxLength(50);
+                //builder.Property(e => e.AmountBeforeDiscount)
+                //    .IsRequired()
+                //    .HasMaxLength(50);
 
                 builder.Property(e => e.ClientId).HasMaxLength(50);
 

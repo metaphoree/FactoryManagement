@@ -45,7 +45,7 @@ namespace Entities.DbModels
         public virtual DbSet<StockIn> StockIn { get; set; }
         public virtual DbSet<StockOut> StockOut { get; set; }
         public virtual DbSet<Supplier> Supplier { get; set; }
-        public virtual DbSet<Transaction> Transaction { get; set; }
+        public virtual DbSet<TblTransaction> Transaction { get; set; }
         public virtual DbSet<TransactionType> TransactionType { get; set; }
         public virtual DbSet<UserAuthInfo> UserAuthInfo { get; set; }
         public virtual DbSet<UserRole> UserRole { get; set; } 
@@ -97,12 +97,11 @@ namespace Entities.DbModels
             modelBuilder.ApplyConfiguration(new StockInConfiguration());
             modelBuilder.ApplyConfiguration(new StockOutConfiguration());
             modelBuilder.ApplyConfiguration(new SupplierConfiguration());
-            modelBuilder.ApplyConfiguration(new TransactionConfiguration());
+            modelBuilder.ApplyConfiguration(new TblTransactionConfiguration());
             modelBuilder.ApplyConfiguration(new TransactionTypeConfiguration());
             modelBuilder.ApplyConfiguration(new UserAuthInfoConfiguration());
             modelBuilder.ApplyConfiguration(new UserRoleConfiguration()); 
             #endregion
-
             OnModelCreatingPartial(modelBuilder);
         }
 

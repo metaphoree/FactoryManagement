@@ -310,6 +310,8 @@ namespace ApiService.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("ExpenseTypeId");
+
                     b.ToTable("Expense");
                 });
 
@@ -408,18 +410,18 @@ namespace ApiService.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "0c4f2c7d-d285-4e88-bd04-8c7d4b614563",
-                            CreatedDateTime = new DateTime(2020, 3, 29, 19, 37, 38, 757, DateTimeKind.Local).AddTicks(953),
-                            FactoryId = "d29872df-ee8d-4a56-b584-ccd01a97862e",
+                            Id = "85344622-7e53-4d48-bc6b-fd6e4e04a34f",
+                            CreatedDateTime = new DateTime(2020, 4, 11, 13, 4, 55, 914, DateTimeKind.Local).AddTicks(865),
+                            FactoryId = "ac3ee4b2-e3df-4a14-80ee-b3966d0bed3d",
                             ImageUrl = "",
                             LicenseNo = "",
                             Name = "Fazlu Loom Factory",
                             RegNo = "",
                             RowStatus = "ADDED",
-                            SubscriptionEnd = new DateTime(2022, 12, 24, 19, 37, 38, 757, DateTimeKind.Local).AddTicks(7858),
-                            SubscriptionStart = new DateTime(2020, 3, 29, 19, 37, 38, 757, DateTimeKind.Local).AddTicks(6852),
+                            SubscriptionEnd = new DateTime(2023, 1, 6, 13, 4, 55, 914, DateTimeKind.Local).AddTicks(8250),
+                            SubscriptionStart = new DateTime(2020, 4, 11, 13, 4, 55, 914, DateTimeKind.Local).AddTicks(6669),
                             UniqueId = 0L,
-                            UpdatedDateTime = new DateTime(2020, 3, 29, 19, 37, 38, 757, DateTimeKind.Local).AddTicks(8757),
+                            UpdatedDateTime = new DateTime(2020, 4, 11, 13, 4, 55, 914, DateTimeKind.Local).AddTicks(9551),
                             VatRegNo = ""
                         });
                 });
@@ -451,7 +453,7 @@ namespace ApiService.Migrations
                         .HasMaxLength(50);
 
                     b.Property<string>("IncomeTypeId")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<string>("InvoiceId")
                         .HasColumnType("nvarchar(max)");
@@ -476,6 +478,8 @@ namespace ApiService.Migrations
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("IncomeTypeId");
 
                     b.ToTable("Income");
                 });
@@ -520,16 +524,6 @@ namespace ApiService.Migrations
             modelBuilder.Entity("Entities.DbModels.Invoice", b =>
                 {
                     b.Property<string>("Id")
-                        .HasColumnType("nvarchar(50)")
-                        .HasMaxLength(50);
-
-                    b.Property<string>("AmountAfterDiscount")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(50)")
-                        .HasMaxLength(50);
-
-                    b.Property<string>("AmountBeforeDiscount")
-                        .IsRequired()
                         .HasColumnType("nvarchar(50)")
                         .HasMaxLength(50);
 
@@ -603,6 +597,8 @@ namespace ApiService.Migrations
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("InvoiceTypeId");
 
                     b.ToTable("Invoice");
                 });
@@ -766,23 +762,23 @@ namespace ApiService.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "8515c91f-975b-4fab-98e6-dfb203b2c2c4",
-                            CreatedDateTime = new DateTime(2020, 3, 29, 13, 37, 38, 783, DateTimeKind.Utc).AddTicks(7571),
+                            Id = "36323012-8010-4eac-9796-34a2d85b13ec",
+                            CreatedDateTime = new DateTime(2020, 4, 11, 7, 4, 55, 940, DateTimeKind.Utc).AddTicks(3000),
                             FactoryId = "c90a9cdf-ca6b-4f74-b9f6-d00cd37b1b30",
                             Name = "GOOD",
                             RowStatus = "ADDED",
                             UniqueId = 0L,
-                            UpdatedDateTime = new DateTime(2020, 3, 29, 13, 37, 38, 783, DateTimeKind.Utc).AddTicks(9382)
+                            UpdatedDateTime = new DateTime(2020, 4, 11, 7, 4, 55, 940, DateTimeKind.Utc).AddTicks(4696)
                         },
                         new
                         {
-                            Id = "500c0279-043f-4348-b6fb-583e1f614e1d",
-                            CreatedDateTime = new DateTime(2020, 3, 29, 13, 37, 38, 783, DateTimeKind.Utc).AddTicks(9427),
+                            Id = "8485d71e-6b29-44d3-92a0-eec5bdb9c958",
+                            CreatedDateTime = new DateTime(2020, 4, 11, 7, 4, 55, 940, DateTimeKind.Utc).AddTicks(4737),
                             FactoryId = "c90a9cdf-ca6b-4f74-b9f6-d00cd37b1b30",
                             Name = "BAD",
                             RowStatus = "ADDED",
                             UniqueId = 0L,
-                            UpdatedDateTime = new DateTime(2020, 3, 29, 13, 37, 38, 783, DateTimeKind.Utc).AddTicks(9456)
+                            UpdatedDateTime = new DateTime(2020, 4, 11, 7, 4, 55, 940, DateTimeKind.Utc).AddTicks(4765)
                         });
                 });
 
@@ -821,8 +817,7 @@ namespace ApiService.Migrations
                         .HasColumnType("nvarchar(50)")
                         .HasMaxLength(50);
 
-                    b.Property<string>("PurposeTypeId")
-                        .IsRequired()
+                    b.Property<string>("Purpose")
                         .HasColumnType("nvarchar(50)")
                         .HasMaxLength(50);
 
@@ -882,43 +877,43 @@ namespace ApiService.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "b91e6e8b-ab34-4109-bfab-a3b6d65e3795",
-                            CreatedDateTime = new DateTime(2020, 3, 29, 13, 37, 38, 789, DateTimeKind.Utc).AddTicks(1138),
+                            Id = "e7155feb-4e3b-4f16-bdf0-44b86524d85e",
+                            CreatedDateTime = new DateTime(2020, 4, 11, 7, 4, 55, 946, DateTimeKind.Utc).AddTicks(9555),
                             FactoryId = "c90a9cdf-ca6b-4f74-b9f6-d00cd37b1b30",
                             RowStatus = "ADDED",
                             Status = "CASH_RECIEVED",
                             UniqueId = 0L,
-                            UpdatedDateTime = new DateTime(2020, 3, 29, 19, 37, 38, 789, DateTimeKind.Local).AddTicks(2033)
+                            UpdatedDateTime = new DateTime(2020, 4, 11, 13, 4, 55, 947, DateTimeKind.Local).AddTicks(901)
                         },
                         new
                         {
-                            Id = "4182aeb4-a094-4502-86c3-ab3f9f90418d",
-                            CreatedDateTime = new DateTime(2020, 3, 29, 13, 37, 38, 789, DateTimeKind.Utc).AddTicks(2078),
+                            Id = "c65036c0-6411-4dc7-b3bc-902823b2ae1a",
+                            CreatedDateTime = new DateTime(2020, 4, 11, 7, 4, 55, 947, DateTimeKind.Utc).AddTicks(967),
                             FactoryId = "c90a9cdf-ca6b-4f74-b9f6-d00cd37b1b30",
                             RowStatus = "ADDED",
                             Status = "CASH_PAYABLE",
                             UniqueId = 0L,
-                            UpdatedDateTime = new DateTime(2020, 3, 29, 19, 37, 38, 789, DateTimeKind.Local).AddTicks(2124)
+                            UpdatedDateTime = new DateTime(2020, 4, 11, 13, 4, 55, 947, DateTimeKind.Local).AddTicks(1021)
                         },
                         new
                         {
-                            Id = "c0db46a3-3c81-4fcf-a925-5b38edb218c9",
-                            CreatedDateTime = new DateTime(2020, 3, 29, 13, 37, 38, 789, DateTimeKind.Utc).AddTicks(2128),
+                            Id = "2e5d6777-3879-47e5-b1fa-579a6bd2b5b6",
+                            CreatedDateTime = new DateTime(2020, 4, 11, 7, 4, 55, 947, DateTimeKind.Utc).AddTicks(1021),
                             FactoryId = "c90a9cdf-ca6b-4f74-b9f6-d00cd37b1b30",
                             RowStatus = "ADDED",
                             Status = "CASH_RECIEVABLE",
                             UniqueId = 0L,
-                            UpdatedDateTime = new DateTime(2020, 3, 29, 19, 37, 38, 789, DateTimeKind.Local).AddTicks(2132)
+                            UpdatedDateTime = new DateTime(2020, 4, 11, 13, 4, 55, 947, DateTimeKind.Local).AddTicks(1123)
                         },
                         new
                         {
-                            Id = "888e3297-4332-4bd9-94ec-2ffaa3a8fea6",
-                            CreatedDateTime = new DateTime(2020, 3, 29, 13, 37, 38, 789, DateTimeKind.Utc).AddTicks(2136),
+                            Id = "67345721-7e6e-4393-8eec-fce69c7de747",
+                            CreatedDateTime = new DateTime(2020, 4, 11, 7, 4, 55, 947, DateTimeKind.Utc).AddTicks(1123),
                             FactoryId = "c90a9cdf-ca6b-4f74-b9f6-d00cd37b1b30",
                             RowStatus = "ADDED",
                             Status = "CASH_PAID",
                             UniqueId = 0L,
-                            UpdatedDateTime = new DateTime(2020, 3, 29, 19, 37, 38, 789, DateTimeKind.Local).AddTicks(2140)
+                            UpdatedDateTime = new DateTime(2020, 4, 11, 13, 4, 55, 947, DateTimeKind.Local).AddTicks(1131)
                         });
                 });
 
@@ -996,6 +991,10 @@ namespace ApiService.Migrations
                     b.Property<DateTime>("EntryDate")
                         .HasColumnType("datetime2");
 
+                    b.Property<string>("EquipmentId")
+                        .HasColumnType("nvarchar(50)")
+                        .HasMaxLength(50);
+
                     b.Property<string>("FactoryId")
                         .IsRequired()
                         .HasColumnType("nvarchar(50)")
@@ -1004,11 +1003,12 @@ namespace ApiService.Migrations
                     b.Property<bool?>("IsMadeJointly")
                         .HasColumnType("bit");
 
-                    b.Property<string>("MachineId")
+                    b.Property<string>("ItemCategoryId")
+                        .IsRequired()
                         .HasColumnType("nvarchar(50)")
                         .HasMaxLength(50);
 
-                    b.Property<string>("ProductId")
+                    b.Property<string>("ItemId")
                         .IsRequired()
                         .HasColumnType("nvarchar(50)")
                         .HasMaxLength(50);
@@ -1019,9 +1019,6 @@ namespace ApiService.Migrations
 
                     b.Property<long>("Quantity")
                         .HasColumnType("bigint");
-
-                    b.Property<decimal>("RatePerProduct")
-                        .HasColumnType("decimal(18, 0)");
 
                     b.Property<string>("RowStatus")
                         .IsRequired()
@@ -1041,10 +1038,15 @@ namespace ApiService.Migrations
                         .HasColumnType("bigint")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<decimal>("UnitPrice")
+                        .HasColumnType("decimal(18, 0)");
+
                     b.Property<DateTime>("UpdatedDateTime")
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("ItemId");
 
                     b.ToTable("Production");
                 });
@@ -1088,6 +1090,9 @@ namespace ApiService.Migrations
 
                     b.Property<string>("Month")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("OccurranceDate")
+                        .HasColumnType("datetime2");
 
                     b.Property<long>("Quantity")
                         .HasColumnType("bigint");
@@ -1185,8 +1190,7 @@ namespace ApiService.Migrations
                         .HasColumnType("nvarchar(50)")
                         .HasMaxLength(50);
 
-                    b.Property<string>("PurposeTypeId")
-                        .IsRequired()
+                    b.Property<string>("Purpose")
                         .HasColumnType("nvarchar(50)")
                         .HasMaxLength(50);
 
@@ -1287,6 +1291,9 @@ namespace ApiService.Migrations
                         .HasColumnType("nvarchar(50)")
                         .HasMaxLength(50);
 
+                    b.Property<DateTime>("OccurranceDate")
+                        .HasColumnType("datetime2");
+
                     b.Property<long>("Quantity")
                         .HasColumnType("bigint");
 
@@ -1307,6 +1314,8 @@ namespace ApiService.Migrations
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("ItemId");
 
                     b.ToTable("Sales");
                 });
@@ -1646,7 +1655,7 @@ namespace ApiService.Migrations
                     b.ToTable("Supplier");
                 });
 
-            modelBuilder.Entity("Entities.DbModels.Transaction", b =>
+            modelBuilder.Entity("Entities.DbModels.TblTransaction", b =>
                 {
                     b.Property<string>("Id")
                         .HasColumnType("nvarchar(50)")
@@ -1707,7 +1716,6 @@ namespace ApiService.Migrations
                         .HasMaxLength(50);
 
                     b.Property<string>("TransactionType")
-                        .IsRequired()
                         .HasColumnType("nvarchar(50)")
                         .HasMaxLength(50);
 
@@ -1721,7 +1729,7 @@ namespace ApiService.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Transaction");
+                    b.ToTable("TblTransaction");
                 });
 
             modelBuilder.Entity("Entities.DbModels.TransactionType", b =>
@@ -1856,11 +1864,52 @@ namespace ApiService.Migrations
                         .HasForeignKey("EquipmentCategoryId");
                 });
 
+            modelBuilder.Entity("Entities.DbModels.Expense", b =>
+                {
+                    b.HasOne("Entities.DbModels.ExpenseType", "ExpenseType")
+                        .WithMany()
+                        .HasForeignKey("ExpenseTypeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Entities.DbModels.Income", b =>
+                {
+                    b.HasOne("Entities.DbModels.IncomeType", "IncomeType")
+                        .WithMany()
+                        .HasForeignKey("IncomeTypeId");
+                });
+
+            modelBuilder.Entity("Entities.DbModels.Invoice", b =>
+                {
+                    b.HasOne("Entities.DbModels.InvoiceType", "InvoiceType")
+                        .WithMany()
+                        .HasForeignKey("InvoiceTypeId");
+                });
+
             modelBuilder.Entity("Entities.DbModels.Item", b =>
                 {
                     b.HasOne("Entities.DbModels.ItemCategory", "ItemCategory")
-                        .WithMany("Items")
+                        .WithMany()
                         .HasForeignKey("CategoryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Entities.DbModels.Production", b =>
+                {
+                    b.HasOne("Entities.DbModels.Item", "Item")
+                        .WithMany()
+                        .HasForeignKey("ItemId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Entities.DbModels.Sales", b =>
+                {
+                    b.HasOne("Entities.DbModels.Item", "Item")
+                        .WithMany()
+                        .HasForeignKey("ItemId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

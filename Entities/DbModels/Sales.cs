@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Entities.DbModels
 {
@@ -16,7 +17,14 @@ namespace Entities.DbModels
         public string Month { get; set; }        
         public long Quantity { get; set; }
         public decimal Amount { get; set; }
+        public DateTime OccurranceDate { get; set; }
 
+
+        [ForeignKey("ItemId")]
+        public virtual Item Item { get; set; }
+
+        //[ForeignKey("ItemCategoryId")]
+        //public virtual ItemCategory ItemCategory { get; set; }
 
     }
 }

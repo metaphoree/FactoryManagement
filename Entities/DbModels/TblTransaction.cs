@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Entities.DbModels
 {
-    public  class Transaction : BaseEntity
+    [Table("TblTransaction")]
+    public  class TblTransaction : BaseEntity
     {      
         public string InvoiceId { get; set; }
 

@@ -10,7 +10,7 @@ namespace Entities.DbModels.EntityWiseConfiguration
 {
     public class ExpenseTypeConfiguration : IEntityTypeConfiguration<ExpenseType>
     {
-        string FactoryId = "c90a9cdf-ca6b-4f74-b9f6-d00cd37b1b30";
+       // string FactoryId = "c90a9cdf-ca6b-4f74-b9f6-d00cd37b1b30";
         public void Configure(EntityTypeBuilder<ExpenseType> builder)
         {
 

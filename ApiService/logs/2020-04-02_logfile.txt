@@ -1,0 +1,355 @@
+2020-04-02 12:00:17.2603 INFO ---------------------------------------------------------------------------------------------------------
+2020-04-02 12:00:17.2603 INFO ---------------------------------------------------------------------------------------------------------
+2020-04-02 12:00:17.2603 INFO ---------------------------------------------------------------------------------------------------------
+2020-04-02 12:00:17.2603 INFO ---------------------------------------------------------------------------------------------------------
+2020-04-02 12:00:17.2603 INFO ---------------------------------------------------------------------------------------------------------
+2020-04-02 12:00:17.6831 INFO --------------------------02-Apr-20 12:00:17 PM------------------------------------------------
+2020-04-02 12:00:17.6509 INFO --------------------------02-Apr-20 12:00:17 PM------------------------------------------------
+2020-04-02 12:00:17.7225 INFO Successful In Getting  Item Status
+2020-04-02 12:00:17.6617 INFO --------------------------02-Apr-20 12:00:17 PM------------------------------------------------
+2020-04-02 12:00:17.7464 INFO Successful In Getting  Item Category
+2020-04-02 12:00:17.6941 INFO Successful In Getting Data
+2020-04-02 12:00:17.6617 INFO --------------------------02-Apr-20 12:00:17 PM------------------------------------------------
+2020-04-02 12:00:17.6509 INFO --------------------------02-Apr-20 12:00:17 PM------------------------------------------------
+2020-04-02 12:00:17.7720 INFO Successful In Getting  Item Category
+2020-04-02 12:00:17.7957 INFO Successful In Getting  Item Category
+2020-04-02 12:00:57.3976 INFO ---------------------------------------------------------------------------------------------------------
+2020-04-02 12:00:57.4499 INFO ---------------------------------------------------------------------------------------------------------
+2020-04-02 12:00:57.4824 INFO --------------------------02-Apr-20 12:00:57 PM------------------------------------------------
+2020-04-02 12:00:57.4603 INFO --------------------------02-Apr-20 12:00:57 PM------------------------------------------------
+2020-04-02 12:00:57.5032 INFO Successful In Getting  Item Status
+2020-04-02 12:00:57.5235 INFO Successful In Getting Data
+2020-04-02 12:00:57.5934 INFO ---------------------------------------------------------------------------------------------------------
+2020-04-02 12:00:57.6137 INFO --------------------------02-Apr-20 12:00:57 PM------------------------------------------------
+2020-04-02 12:00:57.6283 INFO Stock Successfully Getted
+2020-04-02 12:04:58.1717 INFO ---------------------------------------------------------------------------------------------------------
+2020-04-02 12:04:58.2380 INFO --------------------------02-Apr-20 12:04:58 PM------------------------------------------------
+2020-04-02 12:04:58.2626 INFO Successful In Getting  Item Category
+2020-04-02 12:04:58.2854 INFO ---------------------------------------------------------------------------------------------------------
+2020-04-02 12:04:58.3046 INFO ---------------------------------------------------------------------------------------------------------
+2020-04-02 12:04:58.3473 INFO --------------------------02-Apr-20 12:04:58 PM------------------------------------------------
+2020-04-02 12:04:58.3380 INFO ---------------------------------------------------------------------------------------------------------
+2020-04-02 12:04:58.3943 INFO --------------------------02-Apr-20 12:04:58 PM------------------------------------------------
+2020-04-02 12:04:58.3738 INFO Successful In Getting  Item Category
+2020-04-02 12:04:58.3255 INFO --------------------------02-Apr-20 12:04:58 PM------------------------------------------------
+2020-04-02 12:04:58.4546 INFO Successful In Getting  Item Status
+2020-04-02 12:04:58.4158 INFO Successful In Getting  Item Category
+2020-04-02 12:05:21.6123 INFO ---------------------------------------------------------------------------------------------------------
+2020-04-02 12:05:21.6137 INFO ---------------------------------------------------------------------------------------------------------
+2020-04-02 12:05:21.7904 INFO --------------------------02-Apr-20 12:05:21 PM------------------------------------------------
+2020-04-02 12:05:21.8447 INFO Successful In Getting  Item Status
+2020-04-02 12:05:21.8118 INFO --------------------------02-Apr-20 12:05:21 PM------------------------------------------------
+2020-04-02 12:05:21.8961 INFO Successful In Getting Data
+2020-04-02 12:05:21.9275 INFO ---------------------------------------------------------------------------------------------------------
+2020-04-02 12:05:21.9448 INFO --------------------------02-Apr-20 12:05:21 PM------------------------------------------------
+2020-04-02 12:05:21.9629 INFO Stock Successfully Getted
+2020-04-02 12:05:41.4671 INFO ---------------------------------------------------------------------------------------------------------
+2020-04-02 12:05:41.5272 INFO --------------------------02-Apr-20 12:05:41 PM------------------------------------------------
+2020-04-02 12:05:41.5522 INFO Successful In Adding Data
+2020-04-02 12:05:41.5955 INFO ---------------------------------------------------------------------------------------------------------
+2020-04-02 12:05:41.6115 INFO --------------------------02-Apr-20 12:05:41 PM------------------------------------------------
+2020-04-02 12:05:41.6234 INFO Successful In Getting Data
+2020-04-02 12:05:41.6361 INFO ---------------------------------------------------------------------------------------------------------
+2020-04-02 12:05:41.6493 INFO --------------------------02-Apr-20 12:05:41 PM------------------------------------------------
+2020-04-02 12:05:41.6632 INFO Stock Successfully Added
+2020-04-02 13:29:18.2629 INFO ---------------------------------------------------------------------------------------------------------
+2020-04-02 13:29:18.2629 INFO ---------------------------------------------------------------------------------------------------------
+2020-04-02 13:29:18.2629 INFO ---------------------------------------------------------------------------------------------------------
+2020-04-02 13:29:18.4256 INFO --------------------------02-Apr-20 1:29:18 PM------------------------------------------------
+2020-04-02 13:29:18.4516 INFO Successful In Getting  Item Category
+2020-04-02 13:29:18.4091 INFO --------------------------02-Apr-20 1:29:18 PM------------------------------------------------
+2020-04-02 13:29:18.4256 INFO --------------------------02-Apr-20 1:29:18 PM------------------------------------------------
+2020-04-02 13:29:18.2629 INFO ---------------------------------------------------------------------------------------------------------
+2020-04-02 13:29:18.4889 INFO --------------------------02-Apr-20 1:29:18 PM------------------------------------------------
+2020-04-02 13:29:18.5132 INFO Successful In Getting  Item Category
+2020-04-02 13:29:18.4889 INFO Successful In Getting  Item Status
+2020-04-02 13:29:18.2629 INFO ---------------------------------------------------------------------------------------------------------
+2020-04-02 13:29:18.5800 INFO --------------------------02-Apr-20 1:29:18 PM------------------------------------------------
+2020-04-02 13:29:18.4764 INFO Successful In Getting  Item Category
+2020-04-02 13:29:18.6022 INFO Successful In Getting Data
+2020-04-02 13:43:18.4983 ERROR Something went wrong: Microsoft.EntityFrameworkCore.DbUpdateException: An error occurred while updating the entries. See the inner exception for details.
+ ---> Microsoft.Data.SqlClient.SqlException (0x80131904): Cannot insert the value NULL into column 'ClientId', table 'FactoryManagementDB.dbo.Payable'; column does not allow nulls. INSERT fails.
+The statement has been terminated.
+   at Microsoft.Data.SqlClient.SqlCommand.<>c.<ExecuteDbDataReaderAsync>b__164_0(Task`1 result)
+   at System.Threading.Tasks.ContinuationResultTaskFromResultTask`2.InnerInvoke()
+   at System.Threading.Tasks.Task.<>c.<.cctor>b__274_0(Object obj)
+   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state)
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state)
+   at System.Threading.Tasks.Task.ExecuteWithThreadLocal(Task& currentTaskSlot, Thread threadPoolThread)
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+ClientConnectionId:69bca210-1af6-4fc0-b595-c09dfa1f555f
+Error Number:515,State:2,Class:16
+   --- End of inner exception stack trace ---
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(IList`1 entriesToSave, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(DbContext _, Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal.SqlServerExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync(Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at Repository.RepositoryBase`1.SaveChangesAsync() in D:\Projects\ApiService\Repository\RepositoryBase.cs:line 111
+   at Service.BusinessServices.PurchaseService.AddPurchaseAsync(PurchaseVM purchaseVM) in D:\Projects\ApiService\Service\BusinessServices\PurchaseService.cs:line 116
+   at ApiService.Controllers.BusinessOpController.AddPurchase(PurchaseVM purchase) in D:\Projects\ApiService\ApiService\Controllers\BusinessOpController.cs:line 55
+   at lambda_method(Closure , Object )
+   at Microsoft.Extensions.Internal.ObjectMethodExecutorAwaitable.Awaiter.GetResult()
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.AwaitableResultExecutor.Execute(IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|19_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|6_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Swashbuckle.AspNetCore.SwaggerUI.SwaggerUIMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at ApiService.Utilities.ExceptionHandler.ExceptionMiddleware.InvokeAsync(HttpContext httpContext) in D:\Projects\ApiService\ApiService\Utilities\ExceptionHandler\ExceptionMiddleware.cs:line 26
+2020-04-02 13:43:18.5967 ERROR -------------------------------------------------------------------------------
+2020-04-02 13:43:18.5971 ERROR -------------------------------------------------------------------------------
+2020-04-02 13:51:58.5300 ERROR Something went wrong: Microsoft.EntityFrameworkCore.DbUpdateException: An error occurred while updating the entries. See the inner exception for details.
+ ---> Microsoft.Data.SqlClient.SqlException (0x80131904): Cannot insert the value NULL into column 'ClientId', table 'FactoryManagementDB.dbo.Payable'; column does not allow nulls. INSERT fails.
+The statement has been terminated.
+   at Microsoft.Data.SqlClient.SqlCommand.<>c.<ExecuteDbDataReaderAsync>b__164_0(Task`1 result)
+   at System.Threading.Tasks.ContinuationResultTaskFromResultTask`2.InnerInvoke()
+   at System.Threading.Tasks.Task.<>c.<.cctor>b__274_0(Object obj)
+   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state)
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state)
+   at System.Threading.Tasks.Task.ExecuteWithThreadLocal(Task& currentTaskSlot, Thread threadPoolThread)
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+ClientConnectionId:9e0ef2d2-47db-47f3-8a54-b52a96f3aa37
+Error Number:515,State:2,Class:16
+   --- End of inner exception stack trace ---
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(IList`1 entriesToSave, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(DbContext _, Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal.SqlServerExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync(Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at Repository.RepositoryBase`1.SaveChangesAsync() in D:\Projects\ApiService\Repository\RepositoryBase.cs:line 111
+   at Service.BusinessServices.PurchaseService.AddPurchaseAsync(PurchaseVM purchaseVM) in D:\Projects\ApiService\Service\BusinessServices\PurchaseService.cs:line 116
+   at ApiService.Controllers.BusinessOpController.AddPurchase(PurchaseVM purchase) in D:\Projects\ApiService\ApiService\Controllers\BusinessOpController.cs:line 55
+   at lambda_method(Closure , Object )
+   at Microsoft.Extensions.Internal.ObjectMethodExecutorAwaitable.Awaiter.GetResult()
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.AwaitableResultExecutor.Execute(IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|19_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|6_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Swashbuckle.AspNetCore.SwaggerUI.SwaggerUIMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at ApiService.Utilities.ExceptionHandler.ExceptionMiddleware.InvokeAsync(HttpContext httpContext) in D:\Projects\ApiService\ApiService\Utilities\ExceptionHandler\ExceptionMiddleware.cs:line 26
+2020-04-02 13:51:58.6372 ERROR -------------------------------------------------------------------------------
+2020-04-02 13:51:58.6654 ERROR -------------------------------------------------------------------------------
+2020-04-02 13:53:40.4184 INFO ---------------------------------------------------------------------------------------------------------
+2020-04-02 13:53:40.4966 INFO --------------------------02-Apr-20 1:53:40 PM------------------------------------------------
+2020-04-02 13:53:40.5590 INFO Successful In Getting  Item Category
+2020-04-02 13:53:40.6561 INFO ---------------------------------------------------------------------------------------------------------
+2020-04-02 13:53:40.6821 INFO --------------------------02-Apr-20 1:53:40 PM------------------------------------------------
+2020-04-02 13:53:40.6821 INFO ---------------------------------------------------------------------------------------------------------
+2020-04-02 13:53:40.7153 INFO Successful In Getting  Item Category
+2020-04-02 13:53:40.7539 INFO --------------------------02-Apr-20 1:53:40 PM------------------------------------------------
+2020-04-02 13:53:40.7899 INFO ---------------------------------------------------------------------------------------------------------
+2020-04-02 13:53:40.8034 INFO Successful In Getting Data
+2020-04-02 13:53:40.8281 INFO --------------------------02-Apr-20 1:53:40 PM------------------------------------------------
+2020-04-02 13:53:40.8850 INFO Successful In Getting  Item Status
+2020-04-02 13:53:40.8414 INFO ---------------------------------------------------------------------------------------------------------
+2020-04-02 13:53:40.9256 INFO --------------------------02-Apr-20 1:53:40 PM------------------------------------------------
+2020-04-02 13:53:40.9519 INFO Successful In Getting  Item Category
+2020-04-02 14:31:41.0081 INFO ---------------------------------------------------------------------------------------------------------
+2020-04-02 14:31:41.0081 INFO ---------------------------------------------------------------------------------------------------------
+2020-04-02 14:31:41.0081 INFO ---------------------------------------------------------------------------------------------------------
+2020-04-02 14:31:41.1776 INFO --------------------------02-Apr-20 2:31:41 PM------------------------------------------------
+2020-04-02 14:31:41.1946 INFO Successful In Getting  Item Category
+2020-04-02 14:31:41.1338 INFO --------------------------02-Apr-20 2:31:41 PM------------------------------------------------
+2020-04-02 14:31:41.2295 INFO Successful In Getting  Item Category
+2020-04-02 14:31:41.0081 INFO ---------------------------------------------------------------------------------------------------------
+2020-04-02 14:31:41.0081 INFO ---------------------------------------------------------------------------------------------------------
+2020-04-02 14:31:41.1563 INFO --------------------------02-Apr-20 2:31:41 PM------------------------------------------------
+2020-04-02 14:31:41.2650 INFO --------------------------02-Apr-20 2:31:41 PM------------------------------------------------
+2020-04-02 14:31:41.2887 INFO --------------------------02-Apr-20 2:31:41 PM------------------------------------------------
+2020-04-02 14:31:41.3136 INFO Successful In Getting  Item Status
+2020-04-02 14:31:41.3284 INFO Successful In Getting  Item Category
+2020-04-02 14:31:41.3425 INFO Successful In Getting Data
+2020-04-02 14:32:48.1570 INFO ---------------------------------------------------------------------------------------------------------
+2020-04-02 14:32:48.1837 INFO --------------------------02-Apr-20 2:32:48 PM------------------------------------------------
+2020-04-02 14:32:48.2217 INFO Successful In Getting  Item Category
+2020-04-02 14:32:48.2253 INFO ---------------------------------------------------------------------------------------------------------
+2020-04-02 14:32:48.2955 INFO --------------------------02-Apr-20 2:32:48 PM------------------------------------------------
+2020-04-02 14:32:48.3232 INFO Successful In Getting Data
+2020-04-02 14:32:48.4196 INFO ---------------------------------------------------------------------------------------------------------
+2020-04-02 14:32:48.4425 INFO --------------------------02-Apr-20 2:32:48 PM------------------------------------------------
+2020-04-02 14:32:48.4760 INFO Successful In Getting  Item Category
+2020-04-02 14:32:48.4895 INFO ---------------------------------------------------------------------------------------------------------
+2020-04-02 14:32:48.4895 INFO ---------------------------------------------------------------------------------------------------------
+2020-04-02 14:32:48.5244 INFO --------------------------02-Apr-20 2:32:48 PM------------------------------------------------
+2020-04-02 14:32:48.5682 INFO Successful In Getting  Item Status
+2020-04-02 14:32:48.5459 INFO --------------------------02-Apr-20 2:32:48 PM------------------------------------------------
+2020-04-02 14:32:48.6069 INFO Successful In Getting  Item Category
+2020-04-02 14:34:14.1617 INFO ---------------------------------------------------------------------------------------------------------
+2020-04-02 14:34:14.1852 INFO --------------------------02-Apr-20 2:34:14 PM------------------------------------------------
+2020-04-02 14:34:14.4040 INFO Successful In Getting  Item Category
+2020-04-02 14:34:14.5353 INFO ---------------------------------------------------------------------------------------------------------
+2020-04-02 14:34:14.5612 INFO --------------------------02-Apr-20 2:34:14 PM------------------------------------------------
+2020-04-02 14:34:14.5882 INFO Successful In Getting Data
+2020-04-02 14:34:14.6225 INFO ---------------------------------------------------------------------------------------------------------
+2020-04-02 14:34:14.6384 INFO ---------------------------------------------------------------------------------------------------------
+2020-04-02 14:34:14.6384 INFO ---------------------------------------------------------------------------------------------------------
+2020-04-02 14:34:14.6498 INFO --------------------------02-Apr-20 2:34:14 PM------------------------------------------------
+2020-04-02 14:34:14.7604 INFO Successful In Getting  Item Category
+2020-04-02 14:34:14.7309 INFO --------------------------02-Apr-20 2:34:14 PM------------------------------------------------
+2020-04-02 14:34:14.6749 INFO --------------------------02-Apr-20 2:34:14 PM------------------------------------------------
+2020-04-02 14:34:14.8235 INFO Successful In Getting  Item Category
+2020-04-02 14:34:14.8468 INFO Successful In Getting  Item Status
+2020-04-02 14:35:24.3575 INFO ---------------------------------------------------------------------------------------------------------
+2020-04-02 14:35:24.3701 INFO ---------------------------------------------------------------------------------------------------------
+2020-04-02 14:35:24.3948 INFO --------------------------02-Apr-20 2:35:24 PM------------------------------------------------
+2020-04-02 14:35:24.4705 INFO Successful In Getting  Item Category
+2020-04-02 14:35:24.4437 INFO --------------------------02-Apr-20 2:35:24 PM------------------------------------------------
+2020-04-02 14:35:24.5622 INFO Successful In Getting Data
+2020-04-02 14:35:24.8439 INFO ---------------------------------------------------------------------------------------------------------
+2020-04-02 14:35:24.8718 INFO --------------------------02-Apr-20 2:35:24 PM------------------------------------------------
+2020-04-02 14:35:24.8718 INFO ---------------------------------------------------------------------------------------------------------
+2020-04-02 14:35:24.8976 INFO Successful In Getting  Item Category
+2020-04-02 14:35:24.9228 INFO --------------------------02-Apr-20 2:35:24 PM------------------------------------------------
+2020-04-02 14:35:24.9828 INFO Successful In Getting  Item Status
+2020-04-02 14:35:25.0332 INFO ---------------------------------------------------------------------------------------------------------
+2020-04-02 14:35:25.0609 INFO --------------------------02-Apr-20 2:35:25 PM------------------------------------------------
+2020-04-02 14:35:25.0829 INFO Successful In Getting  Item Category
+2020-04-02 14:37:33.2259 INFO ---------------------------------------------------------------------------------------------------------
+2020-04-02 14:37:33.2634 INFO --------------------------02-Apr-20 2:37:33 PM------------------------------------------------
+2020-04-02 14:37:33.2921 INFO Successful In Getting  Item Category
+2020-04-02 14:37:33.8225 INFO ---------------------------------------------------------------------------------------------------------
+2020-04-02 14:37:33.8467 INFO --------------------------02-Apr-20 2:37:33 PM------------------------------------------------
+2020-04-02 14:37:33.8910 INFO Successful In Getting Data
+2020-04-02 14:37:34.0094 INFO ---------------------------------------------------------------------------------------------------------
+2020-04-02 14:37:34.0094 INFO ---------------------------------------------------------------------------------------------------------
+2020-04-02 14:37:34.0325 INFO ---------------------------------------------------------------------------------------------------------
+2020-04-02 14:37:34.1086 INFO --------------------------02-Apr-20 2:37:34 PM------------------------------------------------
+2020-04-02 14:37:34.0874 INFO --------------------------02-Apr-20 2:37:34 PM------------------------------------------------
+2020-04-02 14:37:34.0426 INFO --------------------------02-Apr-20 2:37:34 PM------------------------------------------------
+2020-04-02 14:37:34.1318 INFO Successful In Getting  Item Category
+2020-04-02 14:37:34.1962 INFO Successful In Getting  Item Status
+2020-04-02 14:37:34.2294 INFO Successful In Getting  Item Category
+2020-04-02 14:39:11.9177 INFO ---------------------------------------------------------------------------------------------------------
+2020-04-02 14:39:11.9980 INFO --------------------------02-Apr-20 2:39:11 PM------------------------------------------------
+2020-04-02 14:39:12.0333 INFO Successful In Getting  Item Category
+2020-04-02 14:39:12.1519 INFO ---------------------------------------------------------------------------------------------------------
+2020-04-02 14:39:12.1836 INFO --------------------------02-Apr-20 2:39:12 PM------------------------------------------------
+2020-04-02 14:39:12.2484 INFO Successful In Getting Data
+2020-04-02 14:39:12.3227 INFO ---------------------------------------------------------------------------------------------------------
+2020-04-02 14:39:12.3836 INFO --------------------------02-Apr-20 2:39:12 PM------------------------------------------------
+2020-04-02 14:39:12.4111 INFO Successful In Getting  Item Category
+2020-04-02 14:39:12.4947 INFO ---------------------------------------------------------------------------------------------------------
+2020-04-02 14:39:12.5222 INFO --------------------------02-Apr-20 2:39:12 PM------------------------------------------------
+2020-04-02 14:39:12.5148 INFO ---------------------------------------------------------------------------------------------------------
+2020-04-02 14:39:12.5450 INFO Successful In Getting  Item Status
+2020-04-02 14:39:12.5682 INFO --------------------------02-Apr-20 2:39:12 PM------------------------------------------------
+2020-04-02 14:39:12.6110 INFO Successful In Getting  Item Category
+2020-04-02 14:39:59.4095 INFO ---------------------------------------------------------------------------------------------------------
+2020-04-02 14:39:59.4503 INFO --------------------------02-Apr-20 2:39:59 PM------------------------------------------------
+2020-04-02 14:39:59.5205 INFO Successful In Getting  Item Category
+2020-04-02 14:39:59.5205 INFO ---------------------------------------------------------------------------------------------------------
+2020-04-02 14:39:59.5808 INFO --------------------------02-Apr-20 2:39:59 PM------------------------------------------------
+2020-04-02 14:39:59.6160 INFO Successful In Getting Data
+2020-04-02 14:39:59.6845 INFO ---------------------------------------------------------------------------------------------------------
+2020-04-02 14:39:59.7071 INFO --------------------------02-Apr-20 2:39:59 PM------------------------------------------------
+2020-04-02 14:39:59.8048 INFO Successful In Getting  Item Category
+2020-04-02 14:39:59.8048 INFO ---------------------------------------------------------------------------------------------------------
+2020-04-02 14:39:59.8822 INFO --------------------------02-Apr-20 2:39:59 PM------------------------------------------------
+2020-04-02 14:39:59.8994 INFO ---------------------------------------------------------------------------------------------------------
+2020-04-02 14:39:59.9125 INFO Successful In Getting  Item Status
+2020-04-02 14:39:59.9477 INFO --------------------------02-Apr-20 2:39:59 PM------------------------------------------------
+2020-04-02 14:40:00.0086 INFO Successful In Getting  Item Category
+2020-04-02 14:40:51.3810 INFO ---------------------------------------------------------------------------------------------------------
+2020-04-02 14:40:51.4093 INFO --------------------------02-Apr-20 2:40:51 PM------------------------------------------------
+2020-04-02 14:40:51.4369 INFO Successful In Getting  Item Category
+2020-04-02 14:40:51.8034 INFO ---------------------------------------------------------------------------------------------------------
+2020-04-02 14:40:51.8350 INFO --------------------------02-Apr-20 2:40:51 PM------------------------------------------------
+2020-04-02 14:40:51.8750 INFO Successful In Getting Data
+2020-04-02 14:40:51.9426 INFO ---------------------------------------------------------------------------------------------------------
+2020-04-02 14:40:51.9684 INFO --------------------------02-Apr-20 2:40:51 PM------------------------------------------------
+2020-04-02 14:40:52.0038 INFO Successful In Getting  Item Category
+2020-04-02 14:40:52.1086 INFO ---------------------------------------------------------------------------------------------------------
+2020-04-02 14:40:52.1367 INFO --------------------------02-Apr-20 2:40:52 PM------------------------------------------------
+2020-04-02 14:40:52.1573 INFO Successful In Getting  Item Status
+2020-04-02 14:40:52.2078 INFO ---------------------------------------------------------------------------------------------------------
+2020-04-02 14:40:52.2350 INFO --------------------------02-Apr-20 2:40:52 PM------------------------------------------------
+2020-04-02 14:40:52.2795 INFO Successful In Getting  Item Category
+2020-04-02 14:41:36.3015 INFO ---------------------------------------------------------------------------------------------------------
+2020-04-02 14:41:36.4294 INFO --------------------------02-Apr-20 2:41:36 PM------------------------------------------------
+2020-04-02 14:41:36.4612 INFO Successful In Getting  Item Category
+2020-04-02 14:41:36.5013 INFO ---------------------------------------------------------------------------------------------------------
+2020-04-02 14:41:36.5377 INFO --------------------------02-Apr-20 2:41:36 PM------------------------------------------------
+2020-04-02 14:41:36.5596 INFO Successful In Getting Data
+2020-04-02 14:41:36.6350 INFO ---------------------------------------------------------------------------------------------------------
+2020-04-02 14:41:36.6444 INFO ---------------------------------------------------------------------------------------------------------
+2020-04-02 14:41:36.6893 INFO --------------------------02-Apr-20 2:41:36 PM------------------------------------------------
+2020-04-02 14:41:36.7363 INFO Successful In Getting  Item Category
+2020-04-02 14:41:36.7140 INFO --------------------------02-Apr-20 2:41:36 PM------------------------------------------------
+2020-04-02 14:41:36.7049 INFO ---------------------------------------------------------------------------------------------------------
+2020-04-02 14:41:36.8124 INFO Successful In Getting  Item Status
+2020-04-02 14:41:36.8710 INFO --------------------------02-Apr-20 2:41:36 PM------------------------------------------------
+2020-04-02 14:41:36.9197 INFO Successful In Getting  Item Category
+2020-04-02 14:49:17.4359 INFO ---------------------------------------------------------------------------------------------------------
+2020-04-02 14:49:17.8619 INFO --------------------------02-Apr-20 2:49:17 PM------------------------------------------------
+2020-04-02 14:49:17.9175 INFO Successful In Getting  Item Category
+2020-04-02 14:49:17.8859 INFO ---------------------------------------------------------------------------------------------------------
+2020-04-02 14:49:17.9175 INFO ---------------------------------------------------------------------------------------------------------
+2020-04-02 14:49:17.8997 INFO ---------------------------------------------------------------------------------------------------------
+2020-04-02 14:49:17.9454 INFO ---------------------------------------------------------------------------------------------------------
+2020-04-02 14:49:17.9823 INFO --------------------------02-Apr-20 2:49:17 PM------------------------------------------------
+2020-04-02 14:49:18.0050 INFO --------------------------02-Apr-20 2:49:18 PM------------------------------------------------
+2020-04-02 14:49:18.0937 INFO Successful In Getting  Item Status
+2020-04-02 14:49:18.0536 INFO --------------------------02-Apr-20 2:49:18 PM------------------------------------------------
+2020-04-02 14:49:18.1238 INFO Successful In Getting  Item Category
+2020-04-02 14:49:18.0299 INFO --------------------------02-Apr-20 2:49:18 PM------------------------------------------------
+2020-04-02 14:49:18.1543 INFO Successful In Getting Data
+2020-04-02 14:49:18.0732 INFO Successful In Getting  Item Category
+2020-04-02 14:49:29.6231 INFO ---------------------------------------------------------------------------------------------------------
+2020-04-02 14:49:29.6638 INFO --------------------------02-Apr-20 2:49:29 PM------------------------------------------------
+2020-04-02 14:49:29.7643 INFO Successful In Getting  Item Category
+2020-04-02 14:49:29.8491 INFO ---------------------------------------------------------------------------------------------------------
+2020-04-02 14:49:29.8491 INFO ---------------------------------------------------------------------------------------------------------
+2020-04-02 14:49:29.8864 INFO ---------------------------------------------------------------------------------------------------------
+2020-04-02 14:49:29.8864 INFO --------------------------02-Apr-20 2:49:29 PM------------------------------------------------
+2020-04-02 14:49:29.9661 INFO Successful In Getting Data
+2020-04-02 14:49:29.9137 INFO --------------------------02-Apr-20 2:49:29 PM------------------------------------------------
+2020-04-02 14:49:30.0440 INFO Successful In Getting  Item Category
+2020-04-02 14:49:29.9137 INFO ---------------------------------------------------------------------------------------------------------
+2020-04-02 14:49:29.9376 INFO --------------------------02-Apr-20 2:49:29 PM------------------------------------------------
+2020-04-02 14:49:30.1475 INFO --------------------------02-Apr-20 2:49:30 PM------------------------------------------------
+2020-04-02 14:49:30.1708 INFO Successful In Getting  Item Status
+2020-04-02 14:49:30.2270 INFO Successful In Getting  Item Category
+2020-04-02 14:50:53.4910 INFO ---------------------------------------------------------------------------------------------------------
+2020-04-02 14:50:53.5154 INFO --------------------------02-Apr-20 2:50:53 PM------------------------------------------------
+2020-04-02 14:50:53.5376 INFO Successful In Getting  Item Category
+2020-04-02 14:50:53.6789 INFO ---------------------------------------------------------------------------------------------------------
+2020-04-02 14:50:53.6989 INFO ---------------------------------------------------------------------------------------------------------
+2020-04-02 14:50:53.7205 INFO --------------------------02-Apr-20 2:50:53 PM------------------------------------------------
+2020-04-02 14:50:53.7383 INFO Successful In Getting  Item Category
+2020-04-02 14:50:53.6989 INFO --------------------------02-Apr-20 2:50:53 PM------------------------------------------------
+2020-04-02 14:50:53.7622 INFO Successful In Getting  Item Status
+2020-04-02 14:50:53.6989 INFO ---------------------------------------------------------------------------------------------------------
+2020-04-02 14:50:53.7862 INFO --------------------------02-Apr-20 2:50:53 PM------------------------------------------------
+2020-04-02 14:50:53.7862 INFO Successful In Getting  Item Category

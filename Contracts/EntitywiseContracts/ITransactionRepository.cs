@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Contracts.EntitywiseContracts
 {
-    public interface ITransactionRepository : IRepositoryBase<Transaction>
+    public interface ITransactionRepository : IRepositoryBase<TblTransaction>
     {
     }
 }

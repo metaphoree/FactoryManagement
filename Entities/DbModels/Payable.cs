@@ -4,8 +4,9 @@ using System.Collections.Generic;
 namespace Entities.DbModels
 {
     public  class Payable : BaseEntity
-    {      
-        public string PurposeTypeId { get; set; }    
+    {
+        public string Purpose { get; set; }
+      //  public string PurposeTypeId { get; set; }    
         public string ClientId { get; set; }
         public string InvoiceId { get; set; }
         public string Month { get; set; }

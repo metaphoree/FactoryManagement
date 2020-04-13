@@ -33,8 +33,7 @@ namespace Entities.DbModels.EntityWiseConfiguration
 
                 builder.Property(e => e.Month).HasMaxLength(50);
 
-                builder.Property(e => e.PurposeTypeId)
-                    .IsRequired()
+                builder.Property(e => e.Purpose)
                     .HasMaxLength(50);
 
                 builder.Property(e => e.RowStatus)

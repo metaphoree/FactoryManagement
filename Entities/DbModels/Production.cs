@@ -1,19 +1,28 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Entities.DbModels
 {
     public  class Production : BaseEntity
     {
-     
         public string StaffId { get; set; }
-        public string ProductId { get; set; }
+        public string ItemId { get; set; }
+        public string ItemCategoryId { get; set; }
         public long Quantity { get; set; }
-        public string MachineId { get; set; }
+        public string EquipmentId { get; set; }
         public DateTime EntryDate { get; set; }
-        public decimal RatePerProduct { get; set; }
+
+        public decimal UnitPrice { get; set; }
         public decimal TotalAmount { get; set; }
         public bool? IsMadeJointly { get; set; }
         public string ProductionId { get; set; }
+
+
+        [ForeignKey("ItemId")]
+        public virtual Item Item { get; set; }
+
+        //[ForeignKey("ItemCategoryId")]
+        //public virtual ItemCategory ItemCategory { get; set; }
     }
 }

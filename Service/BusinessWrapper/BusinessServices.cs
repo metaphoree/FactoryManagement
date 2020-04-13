@@ -10,9 +10,11 @@ namespace Service.BusinessWrapper
     {
 
         public IPurchaseWrapperService _PurchaseWrapperService;
-
-        public BusinessServices(IPurchaseWrapperService PurchaseWrapperService) {
-            this._PurchaseWrapperService = PurchaseWrapperService;        
+        public IBusinessWrapperService _BusinessWrapperService;
+        public BusinessServices(IPurchaseWrapperService PurchaseWrapperService,
+            IBusinessWrapperService BusinessWrapperService) {
+            this._PurchaseWrapperService = PurchaseWrapperService;
+            this._BusinessWrapperService = BusinessWrapperService;
         }
 
         public IPurchaseWrapperService PurchaseServiceWrapper
@@ -21,5 +23,13 @@ namespace Service.BusinessWrapper
                 return _PurchaseWrapperService;            
             }               
         }
+        public IBusinessWrapperService BusinessWrapperService
+        {
+            get
+            {
+                return _BusinessWrapperService;
+            }
+        }
+
     }
 }

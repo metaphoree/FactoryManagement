@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using CommonUtils.Exception.Sales;
 using Contracts;
 using Contracts.ServiceContracts;
 using Entities.DbModels;
@@ -58,7 +59,8 @@ namespace Service.BusinessServices
             // Sales
             List<Sales> listOfSalesToAdd = new List<Sales>();
             listOfSalesToAdd = _utilService.Mapper.Map<List<SalesItemVM>, List<Sales>>(salesVM.ItemList);
-            _repositoryWrapper.Sales.CreateAll(listOfSalesToAdd);
+
+                _repositoryWrapper.Sales.CreateAll(listOfSalesToAdd);
 
 
             // Stock
@@ -70,10 +72,13 @@ namespace Service.BusinessServices
                 // IF NOT PRESENT ADD
                 if (existingStock == null)
                 {
+
+                    _utilService.Log("Stock Is Empty. Not Enough Stock available");
+                    throw new StockEmptyException();
                     //stockToAdd = _utilService.Mapper.Map<SalesItemVM, Stock>(salesVM.ItemList[i]);
                     //_repositoryWrapper.Stock.Create(stockToAdd);
-                    _utilService.Log("Stock Is Empty");
-                    return;
+                    
+                    
                 }
                 // IF PRESENT UPDATE
                 else
@@ -98,22 +103,30 @@ namespace Service.BusinessServices
 
 
             // Transaction
-            Transaction transactionRecieved = new Transaction();
-            transactionRecieved = _utilService.Mapper.Map<SalesVM, Transaction>(salesVM);
+            TblTransaction transactionRecieved = new TblTransaction();
+            transactionRecieved = _utilService.Mapper.Map<SalesVM, TblTransaction>(salesVM);
             transactionRecieved.Amount = salesVM.PaidAmount;
             transactionRecieved.PaymentStatus = PAYMENT_STATUS.CASH_RECIEVED.ToString();
-            transactionRecieved.TransactionType = TRANSACTION_TYPE.DEBIT.ToString();
+            transactionRecieved.TransactionType = TRANSACTION_TYPE.CREDIT.ToString();
             _repositoryWrapper.Transaction.Create(transactionRecieved);
 
 
-            Transaction transactionRecievable = new Transaction();
-            transactionRecievable = _utilService.Mapper.Map<SalesVM, Transaction>(salesVM);
+            TblTransaction transactionRecievable = new TblTransaction();
+            transactionRecievable = _utilService.Mapper.Map<SalesVM, TblTransaction>(salesVM);
             transactionRecievable.Amount = salesVM.DueAmount;
             transactionRecievable.PaymentStatus = PAYMENT_STATUS.CASH_RECIEVABLE.ToString();
-            transactionRecieved.TransactionType = TRANSACTION_TYPE.NOT_YET_EXECUTED.ToString();
+            transactionRecievable.TransactionType = TRANSACTION_TYPE.NOT_YET_EXECUTED.ToString();
+            transactionRecievable.TransactionId = transactionRecieved.TransactionId;
             _repositoryWrapper.Transaction.Create(transactionRecievable);
 
-            await _repositoryWrapper.SaveAsync();
+            Task<int> Invoice =   _repositoryWrapper.Invoice.SaveChangesAsync();
+            Task<int> Income = _repositoryWrapper.Income.SaveChangesAsync();
+            Task<int> Recievable = _repositoryWrapper.Recievable.SaveChangesAsync();
+            Task<int> Sales = _repositoryWrapper.Sales.SaveChangesAsync();
+            Task<int> Stock = _repositoryWrapper.Stock.SaveChangesAsync();
+            Task<int> StockOut = _repositoryWrapper.StockOut.SaveChangesAsync();
+            Task<int> Transaction = _repositoryWrapper.Transaction.SaveChangesAsync();
+            await Task.WhenAll(Invoice, Income, Recievable, Sales, Stock, StockOut, Transaction);
         }
 
     }

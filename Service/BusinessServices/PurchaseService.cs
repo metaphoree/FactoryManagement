@@ -90,22 +90,30 @@ namespace Service.BusinessServices
 
            
             // Transaction
-            Transaction transactionPaid = new Transaction();
-            transactionPaid = _utilService.Mapper.Map<PurchaseVM, Transaction>(purchaseVM);
+            TblTransaction transactionPaid = new TblTransaction();
+            transactionPaid = _utilService.Mapper.Map<PurchaseVM, TblTransaction>(purchaseVM);
             transactionPaid.Amount = purchaseVM.PaidAmount;
             transactionPaid.PaymentStatus = PAYMENT_STATUS.CASH_PAID.ToString();
             transactionPaid.TransactionType = TRANSACTION_TYPE.DEBIT.ToString();
             _repositoryWrapper.Transaction.Create(transactionPaid);
 
 
-            Transaction transactionPayable = new Transaction();
-            transactionPayable = _utilService.Mapper.Map<PurchaseVM, Transaction>(purchaseVM);
+            TblTransaction transactionPayable = new TblTransaction();
+            transactionPayable = _utilService.Mapper.Map<PurchaseVM, TblTransaction>(purchaseVM);
             transactionPayable.Amount = purchaseVM.DueAmount;
             transactionPayable.PaymentStatus = PAYMENT_STATUS.CASH_PAYABLE.ToString();
-            transactionPaid.TransactionType = TRANSACTION_TYPE.NOT_YET_EXECUTED.ToString();
+            transactionPayable.TransactionType = TRANSACTION_TYPE.NOT_YET_EXECUTED.ToString();
+            transactionPayable.TransactionId = transactionPaid.TransactionId;
             _repositoryWrapper.Transaction.Create(transactionPayable);
 
-          await  _repositoryWrapper.SaveAsync();
+            Task<int> Invoice = _repositoryWrapper.Invoice.SaveChangesAsync();
+            Task<int> Expense = _repositoryWrapper.Expense.SaveChangesAsync();
+            Task<int> Payable = _repositoryWrapper.Payable.SaveChangesAsync();
+            Task<int> Purchase = _repositoryWrapper.Purchase.SaveChangesAsync();
+            Task<int> Stock = _repositoryWrapper.Stock.SaveChangesAsync();
+            Task<int> StockIn = _repositoryWrapper.StockIn.SaveChangesAsync();
+            Task<int> Transaction = _repositoryWrapper.Transaction.SaveChangesAsync();
+            await Task.WhenAll(Invoice, Expense, Payable, Purchase, Stock, StockIn, Transaction);
         }
     }
 }

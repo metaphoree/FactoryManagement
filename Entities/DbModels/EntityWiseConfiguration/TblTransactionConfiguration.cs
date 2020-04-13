@@ -8,9 +8,9 @@ using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 namespace Entities.DbModels.EntityWiseConfiguration
 {
-    public class TransactionConfiguration : IEntityTypeConfiguration<Transaction>
+    public class TblTransactionConfiguration : IEntityTypeConfiguration<TblTransaction>
     {
-        public void Configure(EntityTypeBuilder<Transaction> builder)
+        public void Configure(EntityTypeBuilder<TblTransaction> builder)
         {
           
                 builder.Property(e => e.Id).HasMaxLength(50);
@@ -54,7 +54,6 @@ namespace Entities.DbModels.EntityWiseConfiguration
                     .HasMaxLength(50);
 
                 builder.Property(e => e.TransactionType)
-                    .IsRequired()
                     .HasMaxLength(50);
             builder.Property(p => p.UniqueId)
               .Metadata.SetAfterSaveBehavior(PropertySaveBehavior.Ignore);

@@ -133,6 +133,7 @@ namespace ApiService.Utilities.Extensions
         {        
             services.AddScoped<IServiceWrapper, ServiceWrapper>();
             services.AddScoped<IPurchaseWrapperService, PurchaseWrapperService>();
+            services.AddScoped<IBusinessWrapperService, BusinessWrapperService>();
             services.AddScoped<IBusinessService, BusinessServices>();
         }
         public static void ConfigureAutoMapper(this IServiceCollection services)

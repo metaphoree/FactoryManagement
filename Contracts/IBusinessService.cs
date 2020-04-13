@@ -8,5 +8,6 @@ namespace Contracts
   public interface IBusinessService
     {
         IPurchaseWrapperService PurchaseServiceWrapper { get; }
+        IBusinessWrapperService BusinessWrapperService { get; }
     }
 }

@@ -11,6 +11,7 @@ using Entities.ViewModels.EquipmentCategory;
 using Entities.ViewModels.ExpenseType;
 using Entities.ViewModels.IncomeType;
 using Entities.ViewModels.InvoiceType;
+using Entities.ViewModels.Production;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -205,7 +206,7 @@ namespace ApiService.Controllers
             return await _serviceWrapper.EquipmentService.Delete(itemVM);
         }
 
-        #endregion
+        #endregion       
         #region EquipmentCategory
         [HttpPost]
         [Route("EquipmentCategory/getAll")]
@@ -213,8 +214,6 @@ namespace ApiService.Controllers
         {
             return await _serviceWrapper.EquipmentCategoryService.GetListPaged(customer);
         }
-
-
 
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         [Route("EquipmentCategory/update/{id}")]
@@ -238,6 +237,39 @@ namespace ApiService.Controllers
         public async Task<ActionResult<WrapperEquipmentCategoryListVM>> DeleteEquipmentCategory([FromBody]EquipmentCategoryVM itemVM)
         {
             return await _serviceWrapper.EquipmentCategoryService.Delete(itemVM);
+        }
+
+        #endregion
+        #region Production
+        [HttpPost]
+        [Route("Production/getAll")]
+        public async Task<ActionResult<WrapperProductionListVM>> GetProduction([FromBody]GetDataListVM customer)
+        {
+            return await _serviceWrapper.ProductionService.GetListPaged(customer);
+        }
+
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for
+        [Route("Production/update/{id}")]
+        [HttpPost]
+        public async Task<ActionResult<WrapperProductionListVM>> PutProduction(string id, [FromBody]EditProductionVM Production)
+        {
+            return await _serviceWrapper.ProductionService.Update(id, Production);
+        }
+
+
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for
+        [HttpPost]
+        [Route("Production/add")]
+        public async Task<ActionResult<WrapperProductionListVM>> PostProduction([FromBody]AddProductionVM Production)
+        {
+            return await _serviceWrapper.ProductionService.Add(Production);
+        }
+
+        [HttpPost]
+        [Route("Production/delete")]
+        public async Task<ActionResult<WrapperProductionListVM>> DeleteProduction([FromBody]AddProductionVM itemVM)
+        {
+            return await _serviceWrapper.ProductionService.Delete(itemVM);
         }
 
         #endregion

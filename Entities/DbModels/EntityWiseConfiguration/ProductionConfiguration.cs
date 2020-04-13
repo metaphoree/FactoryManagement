@@ -12,32 +12,38 @@ namespace Entities.DbModels.EntityWiseConfiguration
     {
         public void Configure(EntityTypeBuilder<Production> builder)
         {
-        
-                builder.Property(e => e.Id).HasMaxLength(50);
 
-                builder.Property(e => e.FactoryId)
-                    .IsRequired()
-                    .HasMaxLength(50);
+            builder.Property(e => e.Id).HasMaxLength(50);
 
-                builder.Property(e => e.MachineId).HasMaxLength(50);
+            builder.Property(e => e.FactoryId)
+                .IsRequired()
+                .HasMaxLength(50);
+            builder.Property(e => e.ItemCategoryId)
+                .IsRequired()
+                .HasMaxLength(50);
+            builder
+                .Property(e => e.EquipmentId)
+                .HasMaxLength(50);
 
-                builder.Property(e => e.ProductId)
-                    .IsRequired()
-                    .HasMaxLength(50);
+            builder.Property(e => e.ItemId)
+                .IsRequired()
+                .HasMaxLength(50);
 
-                builder.Property(e => e.ProductionId).HasMaxLength(50);
+            builder
+                .Property(e => e.ProductionId)
+                .HasMaxLength(50);
 
-                builder.Property(e => e.RatePerProduct).HasColumnType("decimal(18, 0)");
+            builder.Property(e => e.UnitPrice).HasColumnType("decimal(18, 0)");
 
-                builder.Property(e => e.RowStatus)
-                    .IsRequired()
-                    .HasMaxLength(50);
+            builder.Property(e => e.RowStatus)
+                .IsRequired()
+                .HasMaxLength(50);
 
-                builder.Property(e => e.StaffId)
-                    .IsRequired()
-                    .HasMaxLength(50);
+            builder.Property(e => e.StaffId)
+                .IsRequired()
+                .HasMaxLength(50);
 
-                builder.Property(e => e.TotalAmount).HasColumnType("decimal(18, 0)");
+            builder.Property(e => e.TotalAmount).HasColumnType("decimal(18, 0)");
             builder.Property(p => p.UniqueId)
               .Metadata.SetAfterSaveBehavior(PropertySaveBehavior.Ignore);
             //builder.Property(e => e.UniqueId)

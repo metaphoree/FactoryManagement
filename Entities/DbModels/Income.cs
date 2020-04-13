@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 
 namespace Entities.DbModels
@@ -14,6 +15,9 @@ namespace Entities.DbModels
         public string Description { get; set; }
         public DateTime? OccurranceDate { get; set; }
         public string EmployeeId { get; set; }
+
+        [ForeignKey("IncomeTypeId")]
+        public virtual IncomeType IncomeType { get; set; }
 
     }
 }

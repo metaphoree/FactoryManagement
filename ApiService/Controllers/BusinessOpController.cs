@@ -2,9 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using CommonUtils;
 using Contracts;
 using Entities.DbModels;
 using Entities.ViewModels;
+using Entities.ViewModels.Payment;
+using Entities.ViewModels.Production;
 using Entities.ViewModels.Purchase;
 using Entities.ViewModels.Sales;
 using Microsoft.AspNetCore.Http;
@@ -72,6 +75,66 @@ namespace ApiService.Controllers
         }
 
         #endregion
+        #region Payment
+
+        #region Supplier
+        [HttpPost]
+        [Route("supplier/pay")]
+        public async Task<CommonResponse> SupplierPay([FromBody]PaymentVM vm)
+        {
+            return await _businessService.BusinessWrapperService.PayToSupplier(vm);
+        }
+
+
+
+
+        #endregion
+
+
+
+
+        #region Staff
+        [HttpPost]
+        [Route("staff/pay")]
+        public async Task<CommonResponse> StaffPay([FromBody]PaymentVM vm)
+        {
+            return await _businessService.BusinessWrapperService.PayToWorker(vm);
+        }
+
+        [HttpPost]
+        [Route("pay/init_data")]
+        public async Task<InitialLoadDataVM> StaffInitData([FromBody]GetDataListVM getDataVM)
+        {
+            return await _businessService.PurchaseServiceWrapper.GetPaymentInitialData(getDataVM);
+        }
+
+        #endregion
+
+
+        #region Customer
+        [HttpPost]
+        [Route("customer/cash")]
+        public async Task<CommonResponse> CustomerCash([FromBody]PaymentVM vm)
+        {
+            return await _businessService.BusinessWrapperService.RecieveFromCustomer(vm);
+        }
+
+
+        #endregion
+        #endregion
+
+        #region Production
+
+        [HttpPost]
+        [Route("production/getInitData")]
+        public async Task<ActionResult<InitialLoadDataVM>> GetProductionInitData([FromBody]GetDataListVM getDataVM)
+        {
+            return await _businessService.PurchaseServiceWrapper.GetProductionInitialData(getDataVM);
+        }
+
+        #endregion
+
+
 
     }
 }

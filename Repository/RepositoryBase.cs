@@ -83,12 +83,6 @@ namespace Repository
             }
             return entityList;
         }
-
-
-
-
-
-
         public T Update(T entity)
         {
             Type type = entity.GetType();

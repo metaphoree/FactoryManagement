@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Entities.DbModels
 {
@@ -13,5 +14,8 @@ namespace Entities.DbModels
         public string Description { get; set; }
         public DateTime? OccurranceDate { get; set; }
         public string EmployeeId { get; set; }
+
+        [ForeignKey("ExpenseTypeId")]
+        public virtual ExpenseType ExpenseType { get; set; }
     }
 }
