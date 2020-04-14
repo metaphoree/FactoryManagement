@@ -9,7 +9,7 @@ namespace Repository.EntitywiseRepository
 {
     public class RecievableRepository : RepositoryBase<Recievable>, IRecievableRepository
     {
-        public RecievableRepository(FactoryManagementContext context) : base(context)
+        public RecievableRepository(FactoryManagementContext context, IUtilService util) : base(context, util)
         { }
     }
 }

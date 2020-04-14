@@ -31,78 +31,7 @@ namespace ApiService.Controllers
         }
 
 
-        [HttpPost]
-        [Route("getAll")]
-        public async Task<ActionResult<WrapperItemListVM>> GetCustomer([FromBody]GetDataListVM dataParam)
-        {
-            var data = await _serviceWrapper.ItemService.GetListPaged(dataParam);
-            return Ok(data);
-        }
 
-
-        [HttpPost]
-        [Route("getById")]
-        public async Task<ActionResult<Item>> GetItem(string id)
-        {
-            // var item = await _context.Item.FindAsync(id);
-            var enumerables = await _repositoryWrapper.Item.FindByConditionAsync(x => x.Id == id);
-            var item = enumerables.ToList().FirstOrDefault();
-            if (item == null)
-            {
-                return NotFound();
-            }
-
-            return item;
-        }
-
-
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for
-        // more details see https://aka.ms/RazorPagesCRUD.
-        [Route("update/{id}")]
-        [HttpPost]
-        public async Task<ActionResult<WrapperItemListVM>> PutItem(string id, [FromBody]ItemVM item)
-        {
-           return Ok(await _serviceWrapper.ItemService.Update(id, item));            
-        }
-
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for
-        // more details see https://aka.ms/RazorPagesCRUD.
-        [HttpPost]
-        [Route("add")]
-        public async Task<ActionResult<WrapperItemListVM>> PostItem([FromBody]ItemVM item)
-        {
-            
-            return Ok(await _serviceWrapper.ItemService.Add(item));
-        }
-
-
-        [HttpPost]
-        [Route("delete")]
-        public async Task<ActionResult<WrapperItemListVM>> DeleteItem([FromBody]ItemVM itemVM)
-        {
-            return Ok(await _serviceWrapper.ItemService.Delete(itemVM));
-        }
-
-        private bool ItemExists(string CategoryId,decimal? UnitPrice,string Name)
-        {
-            return _context.Item.Any(e => e.CategoryId == CategoryId && e.UnitPrice == UnitPrice && e.Name == Name);
-        }
-
-
-
-
-
-        #region ItemStatus
-
-        [HttpPost]
-        [Route("status/getAll")]
-        public async Task<ActionResult<WrapperItemStatusListVM>> GetItemStatus([FromBody]GetDataListVM dataParam)
-        {
-            var data = await _serviceWrapper.ItemStatusService.GetListPaged(dataParam);
-            return Ok(data);
-        }
-
-        #endregion
 
 
 

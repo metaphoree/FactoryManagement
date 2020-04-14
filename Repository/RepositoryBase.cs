@@ -16,10 +16,13 @@ namespace Repository
     public abstract class RepositoryBase<T> : IRepositoryBase<T> where T : class
     {
         public FactoryManagementContext RepositoryContext { get; set; }
+        public IUtilService util { get; set; }
 
-        public RepositoryBase(FactoryManagementContext repositoryContext)
+        public RepositoryBase(FactoryManagementContext repositoryContext,
+            IUtilService _util)
         {
             this.RepositoryContext = repositoryContext;
+            this.util = _util; 
         }
         public async Task<long> NumOfRecord()
         {
@@ -64,6 +67,7 @@ namespace Repository
             type.GetProperty("Id").SetValue(entity, Guid.NewGuid().ToString());
             type.GetProperty("RowStatus").SetValue(entity, DB_ROW_STATUS.ADDED.ToString());
             this.RepositoryContext.Set<T>().Add(entity);
+            util.LogInfo("-------" + typeof(T).Name.ToUpper() + "-----Added-----");
             return entity;
         }
         public List<T> CreateAll(List<T> entityList)
@@ -81,6 +85,7 @@ namespace Repository
                 type.GetProperty("RowStatus").SetValue(entityList[i], DB_ROW_STATUS.ADDED.ToString());
                 this.RepositoryContext.Set<T>().Add(entityList[i]);
             }
+            util.LogInfo("-------" + typeof(T).Name.ToUpper() + "-----All Added-----");
             return entityList;
         }
         public T Update(T entity)
@@ -89,6 +94,7 @@ namespace Repository
             type.GetProperty("UpdatedDateTime").SetValue(entity, DateTime.Now);
             type.GetProperty("RowStatus").SetValue(entity, DB_ROW_STATUS.UPDATED.ToString());
             this.RepositoryContext.Set<T>().Update(entity);
+            util.LogInfo("-------" + typeof(T).Name.ToUpper() + "-----Updated-----");
             return entity;
         }
 
@@ -98,11 +104,15 @@ namespace Repository
             type.GetProperty("UpdatedDateTime").SetValue(entity, DateTime.Now);
             type.GetProperty("RowStatus").SetValue(entity, DB_ROW_STATUS.DELETED.ToString());
             this.RepositoryContext.Set<T>().Update(entity);
+            util.LogInfo("-------" + typeof(T).Name.ToUpper() + "-----Deleted-----");
             return entity;
         }
         public async Task<int> SaveChangesAsync()
         {
-            return await RepositoryContext.SaveChangesAsync();
+            Task<int>  tas =  RepositoryContext.SaveChangesAsync();
+            await tas;
+            util.LogInfo("------------Saved Successfully-----");
+            return tas.Result;
         }
     }
 }

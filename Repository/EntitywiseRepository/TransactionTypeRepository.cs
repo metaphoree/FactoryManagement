@@ -9,7 +9,7 @@ namespace Repository.EntitywiseRepository
 {
     public class TransactionTypeRepository : RepositoryBase<TransactionType>, ITransactionTypeRepository
     {
-        public TransactionTypeRepository(FactoryManagementContext context) : base(context)
+        public TransactionTypeRepository(FactoryManagementContext context, IUtilService util) : base(context, util)
         { }
     }
 }

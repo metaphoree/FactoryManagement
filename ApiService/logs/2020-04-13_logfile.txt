@@ -70,3 +70,831 @@
 2020-04-13 10:33:36.4709 INFO ---------------------------------------------------------------------------------------------------------
 2020-04-13 10:33:36.4993 INFO --------------------------13-Apr-20 10:33:36 AM------------------------------------------------
 2020-04-13 10:33:36.5226 INFO Successful In Getting  Item Category
+2020-04-13 12:59:34.6180 INFO ---------------------------------------------------------------------------------------------------------
+2020-04-13 12:59:34.6180 INFO ---------------------------------------------------------------------------------------------------------
+2020-04-13 12:59:34.6180 INFO ---------------------------------------------------------------------------------------------------------
+2020-04-13 12:59:35.4501 INFO --------------------------13-Apr-20 12:59:35 PM------------------------------------------------
+2020-04-13 12:59:35.6105 INFO --------------------------13-Apr-20 12:59:35 PM------------------------------------------------
+2020-04-13 12:59:36.1349 INFO Successful In Getting Data
+2020-04-13 12:59:36.2526 INFO Successful In Getting  Item Category
+2020-04-13 12:59:34.6180 INFO ---------------------------------------------------------------------------------------------------------
+2020-04-13 12:59:34.6180 INFO ---------------------------------------------------------------------------------------------------------
+2020-04-13 12:59:35.0983 INFO --------------------------13-Apr-20 12:59:35 PM------------------------------------------------
+2020-04-13 12:59:34.6180 INFO ---------------------------------------------------------------------------------------------------------
+2020-04-13 12:59:34.6180 INFO ---------------------------------------------------------------------------------------------------------
+2020-04-13 12:59:37.0336 INFO ---------------------------------------------------------------------------------------------------------
+2020-04-13 12:59:37.1843 INFO --------------------------13-Apr-20 12:59:37 PM------------------------------------------------
+2020-04-13 12:59:37.2617 INFO Successful In Getting Data
+2020-04-13 12:59:37.1966 INFO Successful In Getting  Item Category
+2020-04-13 12:59:37.2240 INFO --------------------------13-Apr-20 12:59:37 PM------------------------------------------------
+2020-04-13 12:59:37.2240 INFO --------------------------13-Apr-20 12:59:37 PM------------------------------------------------
+2020-04-13 12:59:37.3146 INFO Successful In Getting  Item Category
+2020-04-13 12:59:37.1966 INFO --------------------------13-Apr-20 12:59:37 PM------------------------------------------------
+2020-04-13 12:59:37.3013 INFO Successful In Getting  Item Category
+2020-04-13 12:59:37.2494 INFO --------------------------13-Apr-20 12:59:37 PM------------------------------------------------
+2020-04-13 12:59:37.3408 INFO Successful In Getting Data
+2020-04-13 12:59:37.3652 INFO Staff Successfully Getted
+2020-04-13 12:59:37.6104 ERROR Something went wrong: Microsoft.Data.SqlClient.SqlException (0x80131904): Invalid column name 'EquipmentId'.
+Invalid column name 'ItemCategoryId'.
+Invalid column name 'ItemId'.
+Invalid column name 'UnitPrice'.
+   at Microsoft.Data.SqlClient.SqlCommand.<>c.<ExecuteDbDataReaderAsync>b__164_0(Task`1 result)
+   at System.Threading.Tasks.ContinuationResultTaskFromResultTask`2.InnerInvoke()
+   at System.Threading.Tasks.Task.<>c.<.cctor>b__274_0(Object obj)
+   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state)
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state)
+   at System.Threading.Tasks.Task.ExecuteWithThreadLocal(Task& currentTaskSlot, Thread threadPoolThread)
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.QueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(DbContext _, Boolean result, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal.SqlServerExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.QueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+   at Microsoft.EntityFrameworkCore.EntityFrameworkQueryableExtensions.ToListAsync[TSource](IQueryable`1 source, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.EntityFrameworkQueryableExtensions.ToListAsync[TSource](IQueryable`1 source, CancellationToken cancellationToken)
+   at Service.BusinessServices.ProductionService.GetListPaged(GetDataListVM dataListVM) in D:\Projects\ApiService\Service\BusinessServices\ProductionService.cs:line 33
+   at ApiService.Controllers.MassCrudController.GetProduction(GetDataListVM customer) in D:\Projects\ApiService\ApiService\Controllers\MassCrudController.cs:line 248
+   at lambda_method(Closure , Object )
+   at Microsoft.Extensions.Internal.ObjectMethodExecutorAwaitable.Awaiter.GetResult()
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.AwaitableObjectResultExecutor.Execute(IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|19_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|6_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Swashbuckle.AspNetCore.SwaggerUI.SwaggerUIMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at ApiService.Utilities.ExceptionHandler.ExceptionMiddleware.InvokeAsync(HttpContext httpContext) in D:\Projects\ApiService\ApiService\Utilities\ExceptionHandler\ExceptionMiddleware.cs:line 26
+ClientConnectionId:d7de57a2-6c1c-46a9-84ea-65a22a1ac61f
+Error Number:207,State:1,Class:16
+2020-04-13 12:59:37.6409 ERROR -------------------------------------------------------------------------------
+2020-04-13 12:59:37.6636 ERROR -------------------------------------------------------------------------------
+2020-04-13 12:59:37.6104 ERROR Something went wrong: Microsoft.Data.SqlClient.SqlException (0x80131904): Invalid column name 'EquipmentId'.
+Invalid column name 'ItemCategoryId'.
+Invalid column name 'ItemId'.
+Invalid column name 'UnitPrice'.
+   at Microsoft.Data.SqlClient.SqlCommand.<>c.<ExecuteDbDataReaderAsync>b__164_0(Task`1 result)
+   at System.Threading.Tasks.ContinuationResultTaskFromResultTask`2.InnerInvoke()
+   at System.Threading.Tasks.Task.<>c.<.cctor>b__274_0(Object obj)
+   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state)
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state)
+   at System.Threading.Tasks.Task.ExecuteWithThreadLocal(Task& currentTaskSlot, Thread threadPoolThread)
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.QueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(DbContext _, Boolean result, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal.SqlServerExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.QueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+   at Microsoft.EntityFrameworkCore.EntityFrameworkQueryableExtensions.ToListAsync[TSource](IQueryable`1 source, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.EntityFrameworkQueryableExtensions.ToListAsync[TSource](IQueryable`1 source, CancellationToken cancellationToken)
+   at Service.BusinessServices.ProductionService.GetListPaged(GetDataListVM dataListVM) in D:\Projects\ApiService\Service\BusinessServices\ProductionService.cs:line 33
+   at ApiService.Controllers.MassCrudController.GetProduction(GetDataListVM customer) in D:\Projects\ApiService\ApiService\Controllers\MassCrudController.cs:line 248
+   at lambda_method(Closure , Object )
+   at Microsoft.Extensions.Internal.ObjectMethodExecutorAwaitable.Awaiter.GetResult()
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.AwaitableObjectResultExecutor.Execute(IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|19_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|6_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Swashbuckle.AspNetCore.SwaggerUI.SwaggerUIMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at ApiService.Utilities.ExceptionHandler.ExceptionMiddleware.InvokeAsync(HttpContext httpContext) in D:\Projects\ApiService\ApiService\Utilities\ExceptionHandler\ExceptionMiddleware.cs:line 26
+ClientConnectionId:43e4318a-2d92-48d5-8baf-72c9c054c2b5
+Error Number:207,State:1,Class:16
+2020-04-13 12:59:37.6973 ERROR -------------------------------------------------------------------------------
+2020-04-13 12:59:37.7301 ERROR -------------------------------------------------------------------------------
+2020-04-13 13:10:31.0063 INFO ---------------------------------------------------------------------------------------------------------
+2020-04-13 13:10:31.0063 INFO ---------------------------------------------------------------------------------------------------------
+2020-04-13 13:10:31.0691 INFO ---------------------------------------------------------------------------------------------------------
+2020-04-13 13:10:31.1588 INFO --------------------------13-Apr-20 1:10:31 PM------------------------------------------------
+2020-04-13 13:10:31.1839 INFO Successful In Getting  Item Category
+2020-04-13 13:10:31.0942 INFO ---------------------------------------------------------------------------------------------------------
+2020-04-13 13:10:31.2321 INFO --------------------------13-Apr-20 1:10:31 PM------------------------------------------------
+2020-04-13 13:10:31.1039 INFO --------------------------13-Apr-20 1:10:31 PM------------------------------------------------
+2020-04-13 13:10:31.2636 INFO Successful In Getting  Item Category
+2020-04-13 13:10:31.1323 INFO --------------------------13-Apr-20 1:10:31 PM------------------------------------------------
+2020-04-13 13:10:31.2500 INFO Successful In Getting Data
+2020-04-13 13:10:31.1039 INFO ---------------------------------------------------------------------------------------------------------
+2020-04-13 13:10:31.2956 INFO Successful In Getting  Item Category
+2020-04-13 13:10:31.3297 INFO --------------------------13-Apr-20 1:10:31 PM------------------------------------------------
+2020-04-13 13:10:31.3585 INFO Successful In Getting Data
+2020-04-13 13:10:36.6256 INFO ---------------------------------------------------------------------------------------------------------
+2020-04-13 13:10:36.6723 INFO --------------------------13-Apr-20 1:10:36 PM------------------------------------------------
+2020-04-13 13:10:36.6723 INFO ---------------------------------------------------------------------------------------------------------
+2020-04-13 13:10:36.7241 INFO Successful In Getting Data
+2020-04-13 13:10:36.7641 INFO --------------------------13-Apr-20 1:10:36 PM------------------------------------------------
+2020-04-13 13:10:36.7878 INFO ---------------------------------------------------------------------------------------------------------
+2020-04-13 13:10:36.8509 INFO --------------------------13-Apr-20 1:10:36 PM------------------------------------------------
+2020-04-13 13:10:36.8759 INFO Staff Successfully Getted
+2020-04-13 13:10:36.7878 INFO ---------------------------------------------------------------------------------------------------------
+2020-04-13 13:10:36.8189 INFO ---------------------------------------------------------------------------------------------------------
+2020-04-13 13:10:36.9480 INFO --------------------------13-Apr-20 1:10:36 PM------------------------------------------------
+2020-04-13 13:10:36.9810 INFO Successful In Getting Data
+2020-04-13 13:10:36.7641 INFO ---------------------------------------------------------------------------------------------------------
+2020-04-13 13:10:37.0326 INFO --------------------------13-Apr-20 1:10:37 PM------------------------------------------------
+2020-04-13 13:10:37.0635 INFO Successful In Getting  Item Category
+2020-04-13 13:10:36.8138 INFO ---------------------------------------------------------------------------------------------------------
+2020-04-13 13:10:36.9214 INFO --------------------------13-Apr-20 1:10:36 PM------------------------------------------------
+2020-04-13 13:10:36.8189 INFO Successful In Getting  Item Category
+2020-04-13 13:10:37.0906 INFO --------------------------13-Apr-20 1:10:37 PM------------------------------------------------
+2020-04-13 13:10:37.1055 INFO Successful In Getting  Item Category
+2020-04-13 13:10:37.1388 INFO Successful In Getting Data
+2020-04-13 13:10:39.3536 INFO ---------------------------------------------------------------------------------------------------------
+2020-04-13 13:10:39.3880 INFO --------------------------13-Apr-20 1:10:39 PM------------------------------------------------
+2020-04-13 13:10:39.4212 INFO Successful In Getting  Item Category
+2020-04-13 13:10:39.4301 INFO ---------------------------------------------------------------------------------------------------------
+2020-04-13 13:10:39.4418 INFO ---------------------------------------------------------------------------------------------------------
+2020-04-13 13:10:39.4885 INFO --------------------------13-Apr-20 1:10:39 PM------------------------------------------------
+2020-04-13 13:10:39.5184 INFO --------------------------13-Apr-20 1:10:39 PM------------------------------------------------
+2020-04-13 13:10:39.5631 INFO Successful In Getting  Item Category
+2020-04-13 13:10:39.4628 INFO ---------------------------------------------------------------------------------------------------------
+2020-04-13 13:10:39.5421 INFO Successful In Getting  Item Category
+2020-04-13 13:10:39.4885 INFO ---------------------------------------------------------------------------------------------------------
+2020-04-13 13:10:39.6930 INFO --------------------------13-Apr-20 1:10:39 PM------------------------------------------------
+2020-04-13 13:10:39.6078 INFO --------------------------13-Apr-20 1:10:39 PM------------------------------------------------
+2020-04-13 13:10:39.7345 INFO Successful In Getting Data
+2020-04-13 13:10:39.4791 INFO ---------------------------------------------------------------------------------------------------------
+2020-04-13 13:10:39.8095 INFO --------------------------13-Apr-20 1:10:39 PM------------------------------------------------
+2020-04-13 13:10:39.8297 INFO Successful In Getting  Item Category
+2020-04-13 13:10:39.7662 INFO Successful In Getting  Item Category
+2020-04-13 13:10:39.4418 INFO ---------------------------------------------------------------------------------------------------------
+2020-04-13 13:10:39.8961 INFO --------------------------13-Apr-20 1:10:39 PM------------------------------------------------
+2020-04-13 13:10:39.9276 INFO Successful In Getting  Item Category
+2020-04-13 13:10:39.4885 INFO ---------------------------------------------------------------------------------------------------------
+2020-04-13 13:10:39.9762 INFO --------------------------13-Apr-20 1:10:39 PM------------------------------------------------
+2020-04-13 13:10:40.0075 INFO Successful In Getting Data
+2020-04-13 13:11:06.9507 INFO ---------------------------------------------------------------------------------------------------------
+2020-04-13 13:11:06.9805 INFO --------------------------13-Apr-20 1:11:06 PM------------------------------------------------
+2020-04-13 13:11:07.0035 INFO Successful In saving  Item Category
+2020-04-13 13:11:07.4924 ERROR Something went wrong: System.NullReferenceException: Object reference not set to an instance of an object.
+   at Service.BusinessServices.ProductionService.<>c__DisplayClass3_0.<GetListPaged>b__0(AddProductionVM x) in D:\Projects\ApiService\Service\BusinessServices\ProductionService.cs:line 44
+   at System.Linq.Enumerable.WhereListIterator`1.ToArray()
+   at System.Linq.Buffer`1..ctor(IEnumerable`1 source)
+   at System.Linq.OrderedEnumerable`1.ToList(Int32 minIdx, Int32 maxIdx)
+   at System.Linq.OrderedPartition`1.ToList()
+   at System.Linq.Enumerable.ToList[TSource](IEnumerable`1 source)
+   at Service.BusinessServices.ProductionService.GetListPaged(GetDataListVM dataListVM) in D:\Projects\ApiService\Service\BusinessServices\ProductionService.cs:line 41
+   at Service.BusinessServices.ProductionService.Add(AddProductionVM vm) in D:\Projects\ApiService\Service\BusinessServices\ProductionService.cs:line 79
+   at ApiService.Controllers.MassCrudController.PostProduction(AddProductionVM Production) in D:\Projects\ApiService\ApiService\Controllers\MassCrudController.cs:line 265
+   at lambda_method(Closure , Object )
+   at Microsoft.Extensions.Internal.ObjectMethodExecutorAwaitable.Awaiter.GetResult()
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.AwaitableObjectResultExecutor.Execute(IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|19_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|6_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Swashbuckle.AspNetCore.SwaggerUI.SwaggerUIMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at ApiService.Utilities.ExceptionHandler.ExceptionMiddleware.InvokeAsync(HttpContext httpContext) in D:\Projects\ApiService\ApiService\Utilities\ExceptionHandler\ExceptionMiddleware.cs:line 26
+2020-04-13 13:11:07.5259 ERROR -------------------------------------------------------------------------------
+2020-04-13 13:11:07.5463 ERROR -------------------------------------------------------------------------------
+2020-04-13 13:11:51.4568 INFO ---------------------------------------------------------------------------------------------------------
+2020-04-13 13:11:51.4826 INFO --------------------------13-Apr-20 1:11:51 PM------------------------------------------------
+2020-04-13 13:11:51.5074 INFO Successful In saving  Item Category
+2020-04-13 13:11:51.9200 ERROR Something went wrong: System.NullReferenceException: Object reference not set to an instance of an object.
+   at Service.BusinessServices.ProductionService.<>c__DisplayClass3_0.<GetListPaged>b__0(AddProductionVM x) in D:\Projects\ApiService\Service\BusinessServices\ProductionService.cs:line 44
+   at System.Linq.Enumerable.WhereListIterator`1.ToArray()
+   at System.Linq.Buffer`1..ctor(IEnumerable`1 source)
+   at System.Linq.OrderedEnumerable`1.ToList(Int32 minIdx, Int32 maxIdx)
+   at System.Linq.OrderedPartition`1.ToList()
+   at System.Linq.Enumerable.ToList[TSource](IEnumerable`1 source)
+   at Service.BusinessServices.ProductionService.GetListPaged(GetDataListVM dataListVM) in D:\Projects\ApiService\Service\BusinessServices\ProductionService.cs:line 41
+   at Service.BusinessServices.ProductionService.Add(AddProductionVM vm) in D:\Projects\ApiService\Service\BusinessServices\ProductionService.cs:line 79
+   at ApiService.Controllers.MassCrudController.PostProduction(AddProductionVM Production) in D:\Projects\ApiService\ApiService\Controllers\MassCrudController.cs:line 265
+   at lambda_method(Closure , Object )
+   at Microsoft.Extensions.Internal.ObjectMethodExecutorAwaitable.Awaiter.GetResult()
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.AwaitableObjectResultExecutor.Execute(IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|19_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|6_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Swashbuckle.AspNetCore.SwaggerUI.SwaggerUIMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at ApiService.Utilities.ExceptionHandler.ExceptionMiddleware.InvokeAsync(HttpContext httpContext) in D:\Projects\ApiService\ApiService\Utilities\ExceptionHandler\ExceptionMiddleware.cs:line 26
+2020-04-13 13:11:51.9346 ERROR -------------------------------------------------------------------------------
+2020-04-13 13:11:51.9507 ERROR -------------------------------------------------------------------------------
+2020-04-13 13:16:36.8239 INFO ---------------------------------------------------------------------------------------------------------
+2020-04-13 13:16:36.9009 INFO --------------------------13-Apr-20 1:16:36 PM------------------------------------------------
+2020-04-13 13:16:36.9889 INFO Successful In Getting Data
+2020-04-13 13:16:37.0626 INFO ---------------------------------------------------------------------------------------------------------
+2020-04-13 13:16:37.1136 INFO ---------------------------------------------------------------------------------------------------------
+2020-04-13 13:16:37.1320 INFO --------------------------13-Apr-20 1:16:37 PM------------------------------------------------
+2020-04-13 13:16:37.1724 INFO --------------------------13-Apr-20 1:16:37 PM------------------------------------------------
+2020-04-13 13:16:37.2254 INFO Staff Successfully Getted
+2020-04-13 13:16:37.3033 INFO ---------------------------------------------------------------------------------------------------------
+2020-04-13 13:16:37.3649 INFO ---------------------------------------------------------------------------------------------------------
+2020-04-13 13:16:37.3931 INFO --------------------------13-Apr-20 1:16:37 PM------------------------------------------------
+2020-04-13 13:16:37.5964 INFO --------------------------13-Apr-20 1:16:37 PM------------------------------------------------
+2020-04-13 13:16:37.7173 INFO Successful In Getting  Item Category
+2020-04-13 13:16:37.6782 INFO ---------------------------------------------------------------------------------------------------------
+2020-04-13 13:16:37.6919 INFO Successful In Getting  Item Category
+2020-04-13 13:16:37.6782 ERROR Something went wrong: System.NullReferenceException: Object reference not set to an instance of an object.
+   at Service.BusinessServices.ProductionService.<>c__DisplayClass3_0.<GetListPaged>b__0(AddProductionVM x) in D:\Projects\ApiService\Service\BusinessServices\ProductionService.cs:line 44
+   at System.Linq.Enumerable.WhereListIterator`1.ToArray()
+   at System.Linq.Buffer`1..ctor(IEnumerable`1 source)
+   at System.Linq.OrderedEnumerable`1.ToList(Int32 minIdx, Int32 maxIdx)
+   at System.Linq.OrderedPartition`1.ToList()
+   at System.Linq.Enumerable.ToList[TSource](IEnumerable`1 source)
+   at Service.BusinessServices.ProductionService.GetListPaged(GetDataListVM dataListVM) in D:\Projects\ApiService\Service\BusinessServices\ProductionService.cs:line 41
+   at ApiService.Controllers.MassCrudController.GetProduction(GetDataListVM customer) in D:\Projects\ApiService\ApiService\Controllers\MassCrudController.cs:line 248
+   at lambda_method(Closure , Object )
+   at Microsoft.Extensions.Internal.ObjectMethodExecutorAwaitable.Awaiter.GetResult()
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.AwaitableObjectResultExecutor.Execute(IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|19_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|6_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Swashbuckle.AspNetCore.SwaggerUI.SwaggerUIMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at ApiService.Utilities.ExceptionHandler.ExceptionMiddleware.InvokeAsync(HttpContext httpContext) in D:\Projects\ApiService\ApiService\Utilities\ExceptionHandler\ExceptionMiddleware.cs:line 26
+2020-04-13 13:16:37.5255 INFO ---------------------------------------------------------------------------------------------------------
+2020-04-13 13:16:37.6782 ERROR Something went wrong: System.NullReferenceException: Object reference not set to an instance of an object.
+   at Service.BusinessServices.ProductionService.<>c__DisplayClass3_0.<GetListPaged>b__0(AddProductionVM x) in D:\Projects\ApiService\Service\BusinessServices\ProductionService.cs:line 44
+   at System.Linq.Enumerable.WhereListIterator`1.ToArray()
+   at System.Linq.Buffer`1..ctor(IEnumerable`1 source)
+   at System.Linq.OrderedEnumerable`1.ToList(Int32 minIdx, Int32 maxIdx)
+   at System.Linq.OrderedPartition`1.ToList()
+   at System.Linq.Enumerable.ToList[TSource](IEnumerable`1 source)
+   at Service.BusinessServices.ProductionService.GetListPaged(GetDataListVM dataListVM) in D:\Projects\ApiService\Service\BusinessServices\ProductionService.cs:line 41
+   at ApiService.Controllers.MassCrudController.GetProduction(GetDataListVM customer) in D:\Projects\ApiService\ApiService\Controllers\MassCrudController.cs:line 248
+   at lambda_method(Closure , Object )
+   at Microsoft.Extensions.Internal.ObjectMethodExecutorAwaitable.Awaiter.GetResult()
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.AwaitableObjectResultExecutor.Execute(IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|19_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|6_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Swashbuckle.AspNetCore.SwaggerUI.SwaggerUIMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at ApiService.Utilities.ExceptionHandler.ExceptionMiddleware.InvokeAsync(HttpContext httpContext) in D:\Projects\ApiService\ApiService\Utilities\ExceptionHandler\ExceptionMiddleware.cs:line 26
+2020-04-13 13:16:37.8287 ERROR -------------------------------------------------------------------------------
+2020-04-13 13:16:37.8418 ERROR -------------------------------------------------------------------------------
+2020-04-13 13:16:37.7655 INFO --------------------------13-Apr-20 1:16:37 PM------------------------------------------------
+2020-04-13 13:16:37.8789 INFO Successful In Getting Data
+2020-04-13 13:16:37.8151 INFO --------------------------13-Apr-20 1:16:37 PM------------------------------------------------
+2020-04-13 13:16:37.9284 INFO Successful In Getting  Item Category
+2020-04-13 13:16:37.3033 INFO Successful In Getting  Item Category
+2020-04-13 13:16:37.8003 ERROR -------------------------------------------------------------------------------
+2020-04-13 13:16:37.6919 INFO ---------------------------------------------------------------------------------------------------------
+2020-04-13 13:16:38.0186 INFO --------------------------13-Apr-20 1:16:38 PM------------------------------------------------
+2020-04-13 13:16:37.9999 ERROR -------------------------------------------------------------------------------
+2020-04-13 13:16:38.0363 INFO Successful In Getting Data
+2020-04-13 13:18:19.4641 INFO ---------------------------------------------------------------------------------------------------------
+2020-04-13 13:18:19.6644 INFO --------------------------13-Apr-20 1:18:19 PM------------------------------------------------
+2020-04-13 13:18:19.7569 INFO Successful In Getting Data
+2020-04-13 13:18:19.9187 INFO ---------------------------------------------------------------------------------------------------------
+2020-04-13 13:18:19.9470 INFO --------------------------13-Apr-20 1:18:19 PM------------------------------------------------
+2020-04-13 13:18:20.0549 INFO Staff Successfully Getted
+2020-04-13 13:18:20.2412 ERROR Something went wrong: System.NullReferenceException: Object reference not set to an instance of an object.
+   at Service.BusinessServices.ProductionService.<>c__DisplayClass3_0.<GetListPaged>b__0(AddProductionVM x) in D:\Projects\ApiService\Service\BusinessServices\ProductionService.cs:line 44
+   at System.Linq.Enumerable.WhereListIterator`1.ToArray()
+   at System.Linq.Buffer`1..ctor(IEnumerable`1 source)
+   at System.Linq.OrderedEnumerable`1.ToList(Int32 minIdx, Int32 maxIdx)
+   at System.Linq.OrderedPartition`1.ToList()
+   at System.Linq.Enumerable.ToList[TSource](IEnumerable`1 source)
+   at Service.BusinessServices.ProductionService.GetListPaged(GetDataListVM dataListVM) in D:\Projects\ApiService\Service\BusinessServices\ProductionService.cs:line 41
+   at ApiService.Controllers.MassCrudController.GetProduction(GetDataListVM customer) in D:\Projects\ApiService\ApiService\Controllers\MassCrudController.cs:line 248
+   at lambda_method(Closure , Object )
+   at Microsoft.Extensions.Internal.ObjectMethodExecutorAwaitable.Awaiter.GetResult()
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.AwaitableObjectResultExecutor.Execute(IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|19_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|6_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Swashbuckle.AspNetCore.SwaggerUI.SwaggerUIMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at ApiService.Utilities.ExceptionHandler.ExceptionMiddleware.InvokeAsync(HttpContext httpContext) in D:\Projects\ApiService\ApiService\Utilities\ExceptionHandler\ExceptionMiddleware.cs:line 26
+2020-04-13 13:18:20.2412 ERROR Something went wrong: System.NullReferenceException: Object reference not set to an instance of an object.
+   at Service.BusinessServices.ProductionService.<>c__DisplayClass3_0.<GetListPaged>b__0(AddProductionVM x) in D:\Projects\ApiService\Service\BusinessServices\ProductionService.cs:line 44
+   at System.Linq.Enumerable.WhereListIterator`1.ToArray()
+   at System.Linq.Buffer`1..ctor(IEnumerable`1 source)
+   at System.Linq.OrderedEnumerable`1.ToList(Int32 minIdx, Int32 maxIdx)
+   at System.Linq.OrderedPartition`1.ToList()
+   at System.Linq.Enumerable.ToList[TSource](IEnumerable`1 source)
+   at Service.BusinessServices.ProductionService.GetListPaged(GetDataListVM dataListVM) in D:\Projects\ApiService\Service\BusinessServices\ProductionService.cs:line 41
+   at ApiService.Controllers.MassCrudController.GetProduction(GetDataListVM customer) in D:\Projects\ApiService\ApiService\Controllers\MassCrudController.cs:line 248
+   at lambda_method(Closure , Object )
+   at Microsoft.Extensions.Internal.ObjectMethodExecutorAwaitable.Awaiter.GetResult()
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.AwaitableObjectResultExecutor.Execute(IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|19_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|6_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Swashbuckle.AspNetCore.SwaggerUI.SwaggerUIMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at ApiService.Utilities.ExceptionHandler.ExceptionMiddleware.InvokeAsync(HttpContext httpContext) in D:\Projects\ApiService\ApiService\Utilities\ExceptionHandler\ExceptionMiddleware.cs:line 26
+2020-04-13 13:18:20.2851 ERROR -------------------------------------------------------------------------------
+2020-04-13 13:18:20.3115 ERROR -------------------------------------------------------------------------------
+2020-04-13 13:18:20.3371 ERROR -------------------------------------------------------------------------------
+2020-04-13 13:18:20.3656 ERROR -------------------------------------------------------------------------------
+2020-04-13 13:18:20.4063 INFO ---------------------------------------------------------------------------------------------------------
+2020-04-13 13:18:20.3542 INFO ---------------------------------------------------------------------------------------------------------
+2020-04-13 13:18:20.4486 INFO --------------------------13-Apr-20 1:18:20 PM------------------------------------------------
+2020-04-13 13:18:20.5041 INFO --------------------------13-Apr-20 1:18:20 PM------------------------------------------------
+2020-04-13 13:18:20.5309 INFO Successful In Getting  Item Category
+2020-04-13 13:18:20.5309 INFO ---------------------------------------------------------------------------------------------------------
+2020-04-13 13:18:20.5591 INFO Successful In Getting  Item Category
+2020-04-13 13:18:20.6367 INFO --------------------------13-Apr-20 1:18:20 PM------------------------------------------------
+2020-04-13 13:18:20.7375 INFO Successful In Getting  Item Category
+2020-04-13 13:18:20.7391 INFO ---------------------------------------------------------------------------------------------------------
+2020-04-13 13:18:20.7864 INFO --------------------------13-Apr-20 1:18:20 PM------------------------------------------------
+2020-04-13 13:18:20.7864 INFO ---------------------------------------------------------------------------------------------------------
+2020-04-13 13:18:20.8347 INFO --------------------------13-Apr-20 1:18:20 PM------------------------------------------------
+2020-04-13 13:18:20.8108 INFO Successful In Getting  Item Category
+2020-04-13 13:18:20.8108 INFO ---------------------------------------------------------------------------------------------------------
+2020-04-13 13:18:20.8575 INFO Successful In Getting Data
+2020-04-13 13:18:20.9001 INFO --------------------------13-Apr-20 1:18:20 PM------------------------------------------------
+2020-04-13 13:18:20.9383 INFO Successful In Getting Data
+2020-04-13 13:29:23.6476 INFO ---------------------------------------------------------------------------------------------------------
+2020-04-13 13:29:23.6476 INFO ---------------------------------------------------------------------------------------------------------
+2020-04-13 13:29:23.7880 INFO --------------------------13-Apr-20 1:29:23 PM------------------------------------------------
+2020-04-13 13:29:23.8064 INFO Successful In Getting Data
+2020-04-13 13:29:23.7706 INFO --------------------------13-Apr-20 1:29:23 PM------------------------------------------------
+2020-04-13 13:29:23.8485 INFO Successful In Getting Data
+2020-04-13 13:29:23.6476 INFO ---------------------------------------------------------------------------------------------------------
+2020-04-13 13:29:23.8395 INFO ---------------------------------------------------------------------------------------------------------
+2020-04-13 13:29:23.6476 INFO ---------------------------------------------------------------------------------------------------------
+2020-04-13 13:29:23.8714 INFO ---------------------------------------------------------------------------------------------------------
+2020-04-13 13:29:23.8878 INFO --------------------------13-Apr-20 1:29:23 PM------------------------------------------------
+2020-04-13 13:29:23.9071 INFO --------------------------13-Apr-20 1:29:23 PM------------------------------------------------
+2020-04-13 13:29:23.9818 INFO Successful In Getting  Item Category
+2020-04-13 13:29:23.9418 INFO --------------------------13-Apr-20 1:29:23 PM------------------------------------------------
+2020-04-13 13:29:23.9212 INFO --------------------------13-Apr-20 1:29:23 PM------------------------------------------------
+2020-04-13 13:29:23.9646 INFO Successful In Getting Data
+2020-04-13 13:29:24.0161 INFO Staff Successfully Getted
+2020-04-13 13:29:24.0313 INFO Successful In Getting  Item Category
+2020-04-13 13:29:24.0625 INFO ---------------------------------------------------------------------------------------------------------
+2020-04-13 13:29:24.0802 INFO ---------------------------------------------------------------------------------------------------------
+2020-04-13 13:29:24.1126 INFO ---------------------------------------------------------------------------------------------------------
+2020-04-13 13:29:24.1237 INFO --------------------------13-Apr-20 1:29:24 PM------------------------------------------------
+2020-04-13 13:29:24.1042 INFO --------------------------13-Apr-20 1:29:24 PM------------------------------------------------
+2020-04-13 13:29:24.1947 INFO Successful In Getting  Item Category
+2020-04-13 13:29:24.1503 INFO --------------------------13-Apr-20 1:29:24 PM------------------------------------------------
+2020-04-13 13:29:24.1732 INFO Successful In Getting  Item Category
+2020-04-13 13:29:24.1237 INFO ---------------------------------------------------------------------------------------------------------
+2020-04-13 13:29:24.2405 INFO Successful In Getting  Item Category
+2020-04-13 13:29:24.2802 INFO --------------------------13-Apr-20 1:29:24 PM------------------------------------------------
+2020-04-13 13:29:24.3252 INFO Successful In Getting  Item Category
+2020-04-13 13:29:42.0228 INFO ---------------------------------------------------------------------------------------------------------
+2020-04-13 13:29:42.0411 INFO --------------------------13-Apr-20 1:29:42 PM------------------------------------------------
+2020-04-13 13:29:42.0658 INFO Successful In saving  Item Category
+2020-04-13 13:29:42.9001 ERROR Something went wrong: System.ArgumentNullException: Value cannot be null. (Parameter 'value')
+   at System.String.Contains(String value)
+   at Service.BusinessServices.ProductionService.<>c__DisplayClass3_0.<GetListPaged>b__0(AddProductionVM x) in D:\Projects\ApiService\Service\BusinessServices\ProductionService.cs:line 48
+   at System.Linq.Enumerable.WhereListIterator`1.ToArray()
+   at System.Linq.Buffer`1..ctor(IEnumerable`1 source)
+   at System.Linq.OrderedEnumerable`1.ToList(Int32 minIdx, Int32 maxIdx)
+   at System.Linq.OrderedPartition`1.ToList()
+   at Service.BusinessServices.ProductionService.GetListPaged(GetDataListVM dataListVM) in D:\Projects\ApiService\Service\BusinessServices\ProductionService.cs:line 45
+   at Service.BusinessServices.ProductionService.Add(AddProductionVM vm) in D:\Projects\ApiService\Service\BusinessServices\ProductionService.cs:line 83
+   at ApiService.Controllers.MassCrudController.PostProduction(AddProductionVM Production) in D:\Projects\ApiService\ApiService\Controllers\MassCrudController.cs:line 265
+   at lambda_method(Closure , Object )
+   at Microsoft.Extensions.Internal.ObjectMethodExecutorAwaitable.Awaiter.GetResult()
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.AwaitableObjectResultExecutor.Execute(IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|19_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|6_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Swashbuckle.AspNetCore.SwaggerUI.SwaggerUIMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at ApiService.Utilities.ExceptionHandler.ExceptionMiddleware.InvokeAsync(HttpContext httpContext) in D:\Projects\ApiService\ApiService\Utilities\ExceptionHandler\ExceptionMiddleware.cs:line 26
+2020-04-13 13:29:42.9138 ERROR -------------------------------------------------------------------------------
+2020-04-13 13:29:42.9266 ERROR -------------------------------------------------------------------------------
+2020-04-13 13:33:18.4044 INFO ---------------------------------------------------------------------------------------------------------
+2020-04-13 13:33:18.4044 INFO ---------------------------------------------------------------------------------------------------------
+2020-04-13 13:33:18.4044 INFO ---------------------------------------------------------------------------------------------------------
+2020-04-13 13:33:18.5129 INFO --------------------------13-Apr-20 1:33:18 PM------------------------------------------------
+2020-04-13 13:33:18.4044 INFO ---------------------------------------------------------------------------------------------------------
+2020-04-13 13:33:18.4044 INFO ---------------------------------------------------------------------------------------------------------
+2020-04-13 13:33:18.4847 INFO --------------------------13-Apr-20 1:33:18 PM------------------------------------------------
+2020-04-13 13:33:18.5672 INFO Successful In Getting  Item Category
+2020-04-13 13:33:18.4044 INFO ---------------------------------------------------------------------------------------------------------
+2020-04-13 13:33:18.5535 INFO --------------------------13-Apr-20 1:33:18 PM------------------------------------------------
+2020-04-13 13:33:18.6091 INFO Successful In Getting  Item Category
+2020-04-13 13:33:18.5402 INFO --------------------------13-Apr-20 1:33:18 PM------------------------------------------------
+2020-04-13 13:33:18.5842 INFO ---------------------------------------------------------------------------------------------------------
+2020-04-13 13:33:18.5265 INFO Successful In Getting  Item Category
+2020-04-13 13:33:18.6645 INFO --------------------------13-Apr-20 1:33:18 PM------------------------------------------------
+2020-04-13 13:33:18.7126 INFO Successful In Getting  Item Category
+2020-04-13 13:33:18.4993 INFO --------------------------13-Apr-20 1:33:18 PM------------------------------------------------
+2020-04-13 13:33:18.7126 INFO ---------------------------------------------------------------------------------------------------------
+2020-04-13 13:33:18.6418 INFO Successful In Getting  Item Category
+2020-04-13 13:33:18.5842 INFO --------------------------13-Apr-20 1:33:18 PM------------------------------------------------
+2020-04-13 13:33:18.7437 INFO ---------------------------------------------------------------------------------------------------------
+2020-04-13 13:33:18.7437 INFO Successful In Getting  Item Category
+2020-04-13 13:33:18.7643 INFO --------------------------13-Apr-20 1:33:18 PM------------------------------------------------
+2020-04-13 13:33:18.8579 INFO Successful In Getting Data
+2020-04-13 13:33:18.8182 INFO --------------------------13-Apr-20 1:33:18 PM------------------------------------------------
+2020-04-13 13:33:18.7985 INFO Successful In Getting Data
+2020-04-13 13:33:18.8777 INFO ---------------------------------------------------------------------------------------------------------
+2020-04-13 13:33:18.8995 INFO Successful In Getting Data
+2020-04-13 13:33:18.9367 INFO --------------------------13-Apr-20 1:33:18 PM------------------------------------------------
+2020-04-13 13:33:18.9746 INFO Staff Successfully Getted
+2020-04-13 13:59:42.7358 INFO ---------------------------------------------------------------------------------------------------------
+2020-04-13 13:59:42.7358 INFO ---------------------------------------------------------------------------------------------------------
+2020-04-13 13:59:42.7358 INFO ---------------------------------------------------------------------------------------------------------
+2020-04-13 13:59:42.7358 INFO ---------------------------------------------------------------------------------------------------------
+2020-04-13 13:59:42.8376 INFO --------------------------13-Apr-20 1:59:42 PM------------------------------------------------
+2020-04-13 13:59:42.7358 INFO ---------------------------------------------------------------------------------------------------------
+2020-04-13 13:59:42.8010 INFO --------------------------13-Apr-20 1:59:42 PM------------------------------------------------
+2020-04-13 13:59:42.8010 INFO --------------------------13-Apr-20 1:59:42 PM------------------------------------------------
+2020-04-13 13:59:42.8860 INFO Successful In Getting  Item Category
+2020-04-13 13:59:42.7358 INFO ---------------------------------------------------------------------------------------------------------
+2020-04-13 13:59:42.8256 INFO --------------------------13-Apr-20 1:59:42 PM------------------------------------------------
+2020-04-13 13:59:42.9246 INFO Successful In Getting Data
+2020-04-13 13:59:42.8502 INFO Successful In Getting  Item Category
+2020-04-13 13:59:42.9246 INFO ---------------------------------------------------------------------------------------------------------
+2020-04-13 13:59:42.9553 INFO ---------------------------------------------------------------------------------------------------------
+2020-04-13 13:59:42.9909 INFO --------------------------13-Apr-20 1:59:42 PM------------------------------------------------
+2020-04-13 13:59:43.0039 INFO Successful In Getting  Item Category
+2020-04-13 13:59:42.9150 INFO --------------------------13-Apr-20 1:59:42 PM------------------------------------------------
+2020-04-13 13:59:42.9754 INFO --------------------------13-Apr-20 1:59:42 PM------------------------------------------------
+2020-04-13 13:59:42.8621 INFO --------------------------13-Apr-20 1:59:42 PM------------------------------------------------
+2020-04-13 13:59:42.9553 INFO ---------------------------------------------------------------------------------------------------------
+2020-04-13 13:59:43.0685 INFO --------------------------13-Apr-20 1:59:43 PM------------------------------------------------
+2020-04-13 13:59:43.0812 INFO Successful In Getting  Item Category
+2020-04-13 13:59:43.0430 INFO Successful In Getting  Item Category
+2020-04-13 13:59:43.0549 INFO Successful In Getting Data
+2020-04-13 13:59:42.8621 INFO Successful In Getting Data
+2020-04-13 13:59:43.1417 INFO ---------------------------------------------------------------------------------------------------------
+2020-04-13 13:59:43.0306 INFO Successful In Getting  Item Category
+2020-04-13 13:59:43.1944 INFO --------------------------13-Apr-20 1:59:43 PM------------------------------------------------
+2020-04-13 13:59:43.2445 INFO Staff Successfully Getted
+2020-04-13 14:00:07.8698 INFO ---------------------------------------------------------------------------------------------------------
+2020-04-13 14:00:07.8983 INFO ---------------------------------------------------------------------------------------------------------
+2020-04-13 14:00:07.9287 INFO --------------------------13-Apr-20 2:00:07 PM------------------------------------------------
+2020-04-13 14:00:07.9642 INFO --------------------------13-Apr-20 2:00:07 PM------------------------------------------------
+2020-04-13 14:00:08.0236 INFO Successful In Getting  Item Category
+2020-04-13 14:00:07.8983 INFO ---------------------------------------------------------------------------------------------------------
+2020-04-13 14:00:08.0625 INFO --------------------------13-Apr-20 2:00:08 PM------------------------------------------------
+2020-04-13 14:00:08.0972 INFO Successful In Getting  Item Category
+2020-04-13 14:00:07.9993 INFO ---------------------------------------------------------------------------------------------------------
+2020-04-13 14:00:07.9993 INFO Customer Successfully Getted
+2020-04-13 14:00:07.9209 INFO ---------------------------------------------------------------------------------------------------------
+2020-04-13 14:00:07.9287 INFO ---------------------------------------------------------------------------------------------------------
+2020-04-13 14:00:08.1878 INFO --------------------------13-Apr-20 2:00:08 PM------------------------------------------------
+2020-04-13 14:00:08.1430 INFO --------------------------13-Apr-20 2:00:08 PM------------------------------------------------
+2020-04-13 14:00:08.2340 INFO Successful In Getting  Item Category
+2020-04-13 14:00:08.2118 INFO --------------------------13-Apr-20 2:00:08 PM------------------------------------------------
+2020-04-13 14:00:08.3129 INFO Successful In Getting Data
+2020-04-13 14:00:08.2651 INFO Successful In Getting Data
+2020-04-13 14:00:11.8382 INFO ---------------------------------------------------------------------------------------------------------
+2020-04-13 14:00:11.8695 INFO --------------------------13-Apr-20 2:00:11 PM------------------------------------------------
+2020-04-13 14:00:11.8924 INFO Successful In Getting  Item Category
+2020-04-13 14:00:13.4066 INFO ---------------------------------------------------------------------------------------------------------
+2020-04-13 14:00:13.4209 INFO --------------------------13-Apr-20 2:00:13 PM------------------------------------------------
+2020-04-13 14:00:13.4359 INFO Successful In Getting  Item Category
+2020-04-13 14:00:14.5719 INFO ---------------------------------------------------------------------------------------------------------
+2020-04-13 14:00:14.5719 INFO ---------------------------------------------------------------------------------------------------------
+2020-04-13 14:00:14.6002 INFO --------------------------13-Apr-20 2:00:14 PM------------------------------------------------
+2020-04-13 14:00:14.6479 INFO ---------------------------------------------------------------------------------------------------------
+2020-04-13 14:00:14.6398 INFO ---------------------------------------------------------------------------------------------------------
+2020-04-13 14:00:14.6210 INFO ---------------------------------------------------------------------------------------------------------
+2020-04-13 14:00:14.6210 INFO --------------------------13-Apr-20 2:00:14 PM------------------------------------------------
+2020-04-13 14:00:14.6479 INFO ---------------------------------------------------------------------------------------------------------
+2020-04-13 14:00:14.6479 INFO Successful In Getting Data
+2020-04-13 14:00:14.6730 INFO --------------------------13-Apr-20 2:00:14 PM------------------------------------------------
+2020-04-13 14:00:14.7650 INFO Successful In Getting Data
+2020-04-13 14:00:14.7037 INFO --------------------------13-Apr-20 2:00:14 PM------------------------------------------------
+2020-04-13 14:00:14.7935 INFO Successful In Getting  Item Category
+2020-04-13 14:00:14.7335 INFO --------------------------13-Apr-20 2:00:14 PM------------------------------------------------
+2020-04-13 14:00:14.7475 INFO ---------------------------------------------------------------------------------------------------------
+2020-04-13 14:00:14.6881 INFO --------------------------13-Apr-20 2:00:14 PM------------------------------------------------
+2020-04-13 14:00:14.7181 INFO Successful In Getting  Item Category
+2020-04-13 14:00:14.8291 INFO Successful In Getting Data
+2020-04-13 14:00:14.8424 INFO --------------------------13-Apr-20 2:00:14 PM------------------------------------------------
+2020-04-13 14:00:14.8548 INFO Successful In Getting  Item Category
+2020-04-13 14:00:14.8793 INFO Staff Successfully Getted
+2020-04-13 14:00:16.0634 INFO ---------------------------------------------------------------------------------------------------------
+2020-04-13 14:00:16.0847 INFO ---------------------------------------------------------------------------------------------------------
+2020-04-13 14:00:16.0705 INFO ---------------------------------------------------------------------------------------------------------
+2020-04-13 14:00:16.0847 INFO --------------------------13-Apr-20 2:00:16 PM------------------------------------------------
+2020-04-13 14:00:16.1298 INFO Successful In Getting  Item Category
+2020-04-13 14:00:16.1021 INFO ---------------------------------------------------------------------------------------------------------
+2020-04-13 14:00:16.1021 INFO ---------------------------------------------------------------------------------------------------------
+2020-04-13 14:00:16.1162 INFO --------------------------13-Apr-20 2:00:16 PM------------------------------------------------
+2020-04-13 14:00:16.1986 INFO Successful In Getting  Item Category
+2020-04-13 14:00:16.0705 INFO ---------------------------------------------------------------------------------------------------------
+2020-04-13 14:00:16.2379 INFO --------------------------13-Apr-20 2:00:16 PM------------------------------------------------
+2020-04-13 14:00:16.2582 INFO Successful In Getting Data
+2020-04-13 14:00:16.1298 INFO --------------------------13-Apr-20 2:00:16 PM------------------------------------------------
+2020-04-13 14:00:16.2979 INFO Successful In Getting  Item Category
+2020-04-13 14:00:16.1845 INFO --------------------------13-Apr-20 2:00:16 PM------------------------------------------------
+2020-04-13 14:00:16.3302 INFO Successful In Getting Data
+2020-04-13 14:00:16.1702 INFO --------------------------13-Apr-20 2:00:16 PM------------------------------------------------
+2020-04-13 14:00:16.3635 INFO Successful In Getting Data
+2020-04-13 14:00:16.2805 INFO ---------------------------------------------------------------------------------------------------------
+2020-04-13 14:00:16.4004 INFO --------------------------13-Apr-20 2:00:16 PM------------------------------------------------
+2020-04-13 14:00:16.4257 INFO Supplier Successfully Getted
+2020-04-13 14:00:17.9156 INFO ---------------------------------------------------------------------------------------------------------
+2020-04-13 14:00:17.9284 INFO --------------------------13-Apr-20 2:00:17 PM------------------------------------------------
+2020-04-13 14:00:17.9284 INFO Successful In Getting  Item Category
+2020-04-13 14:00:20.4684 INFO ---------------------------------------------------------------------------------------------------------
+2020-04-13 14:00:20.4880 INFO --------------------------13-Apr-20 2:00:20 PM------------------------------------------------
+2020-04-13 14:00:20.5108 INFO Successful In Getting  Item Category
+2020-04-13 14:00:23.4506 INFO ---------------------------------------------------------------------------------------------------------
+2020-04-13 14:00:23.4656 INFO --------------------------13-Apr-20 2:00:23 PM------------------------------------------------
+2020-04-13 14:00:23.4886 INFO Successful In Getting  Item Category
+2020-04-13 14:00:25.7097 INFO ---------------------------------------------------------------------------------------------------------
+2020-04-13 14:00:25.7242 INFO --------------------------13-Apr-20 2:00:25 PM------------------------------------------------
+2020-04-13 14:00:25.7459 INFO Successful In Getting  Item Category
+2020-04-13 14:00:27.7415 INFO ---------------------------------------------------------------------------------------------------------
+2020-04-13 14:00:27.7569 INFO --------------------------13-Apr-20 2:00:27 PM------------------------------------------------
+2020-04-13 14:00:27.7569 INFO Successful In Getting  Item Category
+2020-04-13 14:00:33.4884 INFO ---------------------------------------------------------------------------------------------------------
+2020-04-13 14:00:33.4884 INFO ---------------------------------------------------------------------------------------------------------
+2020-04-13 14:00:33.5061 INFO --------------------------13-Apr-20 2:00:33 PM------------------------------------------------
+2020-04-13 14:00:33.5410 INFO --------------------------13-Apr-20 2:00:33 PM------------------------------------------------
+2020-04-13 14:00:33.5733 INFO Successful In Getting  Item Category
+2020-04-13 14:00:33.6029 INFO Successful In Getting Data
+2020-04-13 14:00:33.6029 INFO ---------------------------------------------------------------------------------------------------------
+2020-04-13 14:00:33.6632 INFO --------------------------13-Apr-20 2:00:33 PM------------------------------------------------
+2020-04-13 14:00:33.6768 INFO Successful In Getting  Item Category
+2020-04-13 14:00:33.5061 INFO ---------------------------------------------------------------------------------------------------------
+2020-04-13 14:00:33.6409 INFO ---------------------------------------------------------------------------------------------------------
+2020-04-13 14:00:33.7029 INFO --------------------------13-Apr-20 2:00:33 PM------------------------------------------------
+2020-04-13 14:00:33.7287 INFO Successful In Getting  Item Category
+2020-04-13 14:00:33.7156 INFO --------------------------13-Apr-20 2:00:33 PM------------------------------------------------
+2020-04-13 14:00:33.7542 INFO Successful In Getting  Item Status
+2020-04-13 14:00:36.1056 INFO ---------------------------------------------------------------------------------------------------------
+2020-04-13 14:00:36.1268 INFO ---------------------------------------------------------------------------------------------------------
+2020-04-13 14:00:36.1342 INFO --------------------------13-Apr-20 2:00:36 PM------------------------------------------------
+2020-04-13 14:00:36.1787 INFO Successful In Getting  Item Category
+2020-04-13 14:00:36.1450 INFO ---------------------------------------------------------------------------------------------------------
+2020-04-13 14:00:36.1450 INFO --------------------------13-Apr-20 2:00:36 PM------------------------------------------------
+2020-04-13 14:00:36.2240 INFO Successful In Getting  Item Category
+2020-04-13 14:00:36.2107 INFO --------------------------13-Apr-20 2:00:36 PM------------------------------------------------
+2020-04-13 14:00:36.2530 INFO Successful In Getting  Item Category
+2020-04-13 14:00:36.1450 INFO ---------------------------------------------------------------------------------------------------------
+2020-04-13 14:00:36.2880 INFO --------------------------13-Apr-20 2:00:36 PM------------------------------------------------
+2020-04-13 14:00:36.3063 INFO Successful In Getting  Item Status
+2020-04-13 14:02:15.4728 INFO ---------------------------------------------------------------------------------------------------------
+2020-04-13 14:02:15.5040 INFO ---------------------------------------------------------------------------------------------------------
+2020-04-13 14:02:15.5040 INFO --------------------------13-Apr-20 2:02:15 PM------------------------------------------------
+2020-04-13 14:02:15.5619 INFO Customer Successfully Getted
+2020-04-13 14:02:15.5402 INFO --------------------------13-Apr-20 2:02:15 PM------------------------------------------------
+2020-04-13 14:02:15.6176 INFO ---------------------------------------------------------------------------------------------------------
+2020-04-13 14:02:15.6176 INFO Successful In Getting  Item Category
+2020-04-13 14:02:15.5866 INFO ---------------------------------------------------------------------------------------------------------
+2020-04-13 14:02:15.6457 INFO --------------------------13-Apr-20 2:02:15 PM------------------------------------------------
+2020-04-13 14:02:15.6404 INFO ---------------------------------------------------------------------------------------------------------
+2020-04-13 14:02:15.6792 INFO ---------------------------------------------------------------------------------------------------------
+2020-04-13 14:02:15.7523 INFO --------------------------13-Apr-20 2:02:15 PM------------------------------------------------
+2020-04-13 14:02:15.7203 INFO Successful In Getting  Item Category
+2020-04-13 14:02:15.7362 INFO --------------------------13-Apr-20 2:02:15 PM------------------------------------------------
+2020-04-13 14:02:15.7020 INFO --------------------------13-Apr-20 2:02:15 PM------------------------------------------------
+2020-04-13 14:02:15.8132 INFO Successful In Getting  Item Category
+2020-04-13 14:02:15.7936 INFO Successful In Getting Data
+2020-04-13 14:02:15.7670 INFO Successful In Getting Data
+2020-04-13 14:02:17.6946 INFO ---------------------------------------------------------------------------------------------------------
+2020-04-13 14:02:17.7167 INFO --------------------------13-Apr-20 2:02:17 PM------------------------------------------------
+2020-04-13 14:02:17.7499 INFO Successful In Getting  Item Category
+2020-04-13 14:02:19.6877 INFO ---------------------------------------------------------------------------------------------------------
+2020-04-13 14:02:19.7026 INFO --------------------------13-Apr-20 2:02:19 PM------------------------------------------------
+2020-04-13 14:02:19.7181 INFO Successful In Getting  Item Category
+2020-04-13 14:02:20.6742 INFO ---------------------------------------------------------------------------------------------------------
+2020-04-13 14:02:20.6991 INFO --------------------------13-Apr-20 2:02:20 PM------------------------------------------------
+2020-04-13 14:02:20.7255 INFO Successful In Getting Data
+2020-04-13 14:02:20.7255 INFO ---------------------------------------------------------------------------------------------------------
+2020-04-13 14:02:20.7550 INFO ---------------------------------------------------------------------------------------------------------
+2020-04-13 14:02:20.7550 INFO ---------------------------------------------------------------------------------------------------------
+2020-04-13 14:02:20.8327 INFO --------------------------13-Apr-20 2:02:20 PM------------------------------------------------
+2020-04-13 14:02:20.8085 INFO --------------------------13-Apr-20 2:02:20 PM------------------------------------------------
+2020-04-13 14:02:20.8539 INFO Staff Successfully Getted
+2020-04-13 14:02:20.7767 INFO --------------------------13-Apr-20 2:02:20 PM------------------------------------------------
+2020-04-13 14:02:20.8957 INFO Successful In Getting  Item Category
+2020-04-13 14:02:20.9569 INFO Successful In Getting  Item Category
+2020-04-13 14:02:20.8539 INFO ---------------------------------------------------------------------------------------------------------
+2020-04-13 14:02:20.7941 INFO ---------------------------------------------------------------------------------------------------------
+2020-04-13 14:02:21.0581 INFO --------------------------13-Apr-20 2:02:21 PM------------------------------------------------
+2020-04-13 14:02:20.7550 INFO ---------------------------------------------------------------------------------------------------------
+2020-04-13 14:02:21.1066 INFO --------------------------13-Apr-20 2:02:21 PM------------------------------------------------
+2020-04-13 14:02:21.1234 INFO Successful In Getting  Item Category
+2020-04-13 14:02:21.0778 INFO --------------------------13-Apr-20 2:02:21 PM------------------------------------------------
+2020-04-13 14:02:21.1533 INFO Successful In Getting Data
+2020-04-13 14:02:21.0916 INFO Successful In Getting Data
+2020-04-13 14:02:22.3546 INFO ---------------------------------------------------------------------------------------------------------
+2020-04-13 14:02:22.3828 INFO --------------------------13-Apr-20 2:02:22 PM------------------------------------------------
+2020-04-13 14:02:22.3964 INFO Successful In Getting Data
+2020-04-13 14:02:22.3964 INFO ---------------------------------------------------------------------------------------------------------
+2020-04-13 14:02:22.3546 INFO ---------------------------------------------------------------------------------------------------------
+2020-04-13 14:02:22.3546 INFO ---------------------------------------------------------------------------------------------------------
+2020-04-13 14:02:22.3828 INFO ---------------------------------------------------------------------------------------------------------
+2020-04-13 14:02:22.3702 INFO ---------------------------------------------------------------------------------------------------------
+2020-04-13 14:02:22.4760 INFO --------------------------13-Apr-20 2:02:22 PM------------------------------------------------
+2020-04-13 14:02:22.4366 INFO --------------------------13-Apr-20 2:02:22 PM------------------------------------------------
+2020-04-13 14:02:22.4494 INFO --------------------------13-Apr-20 2:02:22 PM------------------------------------------------
+2020-04-13 14:02:22.5267 INFO Successful In Getting  Item Category
+2020-04-13 14:02:22.4760 INFO --------------------------13-Apr-20 2:02:22 PM------------------------------------------------
+2020-04-13 14:02:22.5519 INFO Successful In Getting Data
+2020-04-13 14:02:22.4887 INFO Successful In Getting  Item Category
+2020-04-13 14:02:22.5140 INFO Successful In Getting Data
+2020-04-13 14:02:22.4628 INFO --------------------------13-Apr-20 2:02:22 PM------------------------------------------------
+2020-04-13 14:02:22.4241 INFO ---------------------------------------------------------------------------------------------------------
+2020-04-13 14:02:22.6216 INFO --------------------------13-Apr-20 2:02:22 PM------------------------------------------------
+2020-04-13 14:02:22.6355 INFO Supplier Successfully Getted
+2020-04-13 14:02:22.6091 INFO Successful In Getting  Item Category
+2020-04-13 14:02:25.3704 INFO ---------------------------------------------------------------------------------------------------------
+2020-04-13 14:02:25.3896 INFO --------------------------13-Apr-20 2:02:25 PM------------------------------------------------
+2020-04-13 14:02:25.4131 INFO Successful In Getting  Item Status
+2020-04-13 14:02:25.4757 INFO ---------------------------------------------------------------------------------------------------------
+2020-04-13 14:02:25.4892 INFO --------------------------13-Apr-20 2:02:25 PM------------------------------------------------
+2020-04-13 14:02:25.5064 INFO Successful In Getting Data
+2020-04-13 14:02:25.5230 INFO ---------------------------------------------------------------------------------------------------------
+2020-04-13 14:02:25.5358 INFO --------------------------13-Apr-20 2:02:25 PM------------------------------------------------
+2020-04-13 14:02:25.5358 INFO Stock Successfully Getted
+2020-04-13 14:05:43.8375 INFO ---------------------------------------------------------------------------------------------------------
+2020-04-13 14:05:43.8375 INFO ---------------------------------------------------------------------------------------------------------
+2020-04-13 14:05:43.9814 INFO --------------------------13-Apr-20 2:05:43 PM------------------------------------------------
+2020-04-13 14:05:44.1125 INFO Successful In Getting  Item Status
+2020-04-13 14:05:44.0880 INFO --------------------------13-Apr-20 2:05:44 PM------------------------------------------------
+2020-04-13 14:05:44.2446 INFO Successful In Getting Data
+2020-04-13 14:05:44.2810 INFO ---------------------------------------------------------------------------------------------------------
+2020-04-13 14:05:44.3045 INFO --------------------------13-Apr-20 2:05:44 PM------------------------------------------------
+2020-04-13 14:05:44.3404 INFO Stock Successfully Getted
+2020-04-13 14:05:48.6472 INFO ---------------------------------------------------------------------------------------------------------
+2020-04-13 14:05:48.7893 INFO --------------------------13-Apr-20 2:05:48 PM------------------------------------------------
+2020-04-13 14:05:48.7500 INFO ---------------------------------------------------------------------------------------------------------
+2020-04-13 14:05:48.8709 INFO --------------------------13-Apr-20 2:05:48 PM------------------------------------------------
+2020-04-13 14:05:48.8319 INFO Successful In Getting  Item Status
+2020-04-13 14:05:48.9292 INFO Successful In Getting Data
+2020-04-13 14:05:49.0247 INFO ---------------------------------------------------------------------------------------------------------
+2020-04-13 14:05:49.0502 INFO --------------------------13-Apr-20 2:05:49 PM------------------------------------------------
+2020-04-13 14:05:49.1036 INFO Stock Successfully Getted
+2020-04-13 14:06:07.1163 INFO ---------------------------------------------------------------------------------------------------------
+2020-04-13 14:06:07.1405 INFO --------------------------13-Apr-20 2:06:07 PM------------------------------------------------
+2020-04-13 14:06:07.1625 INFO Successful In Getting Data
+2020-04-13 14:06:07.1625 INFO ---------------------------------------------------------------------------------------------------------
+2020-04-13 14:06:07.1918 INFO ---------------------------------------------------------------------------------------------------------
+2020-04-13 14:06:07.2253 INFO --------------------------13-Apr-20 2:06:07 PM------------------------------------------------
+2020-04-13 14:06:07.2494 INFO --------------------------13-Apr-20 2:06:07 PM------------------------------------------------
+2020-04-13 14:06:07.2741 INFO Successful In Getting  Item Category
+2020-04-13 14:06:07.2494 INFO ---------------------------------------------------------------------------------------------------------
+2020-04-13 14:06:07.2494 INFO ---------------------------------------------------------------------------------------------------------
+2020-04-13 14:06:07.2741 INFO ---------------------------------------------------------------------------------------------------------
+2020-04-13 14:06:07.3502 INFO --------------------------13-Apr-20 2:06:07 PM------------------------------------------------
+2020-04-13 14:06:07.3036 INFO Staff Successfully Getted
+2020-04-13 14:06:07.3368 INFO --------------------------13-Apr-20 2:06:07 PM------------------------------------------------
+2020-04-13 14:06:07.3001 INFO ---------------------------------------------------------------------------------------------------------
+2020-04-13 14:06:07.3502 INFO --------------------------13-Apr-20 2:06:07 PM------------------------------------------------
+2020-04-13 14:06:07.4590 INFO Successful In Getting  Item Category
+2020-04-13 14:06:07.4167 INFO Successful In Getting  Item Category
+2020-04-13 14:06:07.4363 INFO --------------------------13-Apr-20 2:06:07 PM------------------------------------------------
+2020-04-13 14:06:07.4889 INFO Successful In Getting Data
+2020-04-13 14:06:07.3756 INFO Successful In Getting Data
+2020-04-13 14:06:09.8840 INFO ---------------------------------------------------------------------------------------------------------
+2020-04-13 14:06:09.9055 INFO ---------------------------------------------------------------------------------------------------------
+2020-04-13 14:06:09.9401 INFO --------------------------13-Apr-20 2:06:09 PM------------------------------------------------
+2020-04-13 14:06:09.9619 INFO Successful In Getting  Item Category
+2020-04-13 14:06:09.9124 INFO ---------------------------------------------------------------------------------------------------------
+2020-04-13 14:06:10.0154 INFO --------------------------13-Apr-20 2:06:10 PM------------------------------------------------
+2020-04-13 14:06:09.9124 INFO --------------------------13-Apr-20 2:06:09 PM------------------------------------------------
+2020-04-13 14:06:10.0460 INFO Successful In Getting  Item Category
+2020-04-13 14:06:10.0625 INFO ---------------------------------------------------------------------------------------------------------
+2020-04-13 14:06:10.0788 INFO Successful In Getting  Item Category
+2020-04-13 14:06:10.1312 INFO --------------------------13-Apr-20 2:06:10 PM------------------------------------------------
+2020-04-13 14:06:10.0325 INFO ---------------------------------------------------------------------------------------------------------
+2020-04-13 14:06:09.9908 INFO ---------------------------------------------------------------------------------------------------------
+2020-04-13 14:06:10.0154 INFO ---------------------------------------------------------------------------------------------------------
+2020-04-13 14:06:10.2072 INFO --------------------------13-Apr-20 2:06:10 PM------------------------------------------------
+2020-04-13 14:06:10.2340 INFO Successful In Getting  Item Category
+2020-04-13 14:06:10.1922 INFO --------------------------13-Apr-20 2:06:10 PM------------------------------------------------
+2020-04-13 14:06:10.2670 INFO Successful In Getting  Item Category
+2020-04-13 14:06:10.0788 INFO ---------------------------------------------------------------------------------------------------------
+2020-04-13 14:06:10.3043 INFO --------------------------13-Apr-20 2:06:10 PM------------------------------------------------
+2020-04-13 14:06:10.2072 INFO --------------------------13-Apr-20 2:06:10 PM------------------------------------------------
+2020-04-13 14:06:10.1776 INFO Successful In Getting Data
+2020-04-13 14:06:10.3189 INFO Successful In Getting Data
+2020-04-13 14:06:10.3348 INFO Successful In Getting  Item Category
+2020-04-13 14:07:48.0897 INFO ---------------------------------------------------------------------------------------------------------
+2020-04-13 14:07:48.1316 INFO ---------------------------------------------------------------------------------------------------------
+2020-04-13 14:07:48.2827 INFO --------------------------13-Apr-20 2:07:48 PM------------------------------------------------
+2020-04-13 14:07:48.2594 INFO --------------------------13-Apr-20 2:07:48 PM------------------------------------------------
+2020-04-13 14:07:48.3843 INFO Successful In Getting Data
+2020-04-13 14:07:48.4106 INFO Successful In Getting  Item Category
+2020-04-13 14:07:48.4292 INFO ---------------------------------------------------------------------------------------------------------
+2020-04-13 14:07:48.4292 INFO ---------------------------------------------------------------------------------------------------------
+2020-04-13 14:07:48.5000 INFO --------------------------13-Apr-20 2:07:48 PM------------------------------------------------
+2020-04-13 14:07:48.5139 INFO Staff Successfully Getted
+2020-04-13 14:07:48.4825 INFO --------------------------13-Apr-20 2:07:48 PM------------------------------------------------
+2020-04-13 14:07:48.4608 INFO ---------------------------------------------------------------------------------------------------------
+2020-04-13 14:07:48.5679 INFO --------------------------13-Apr-20 2:07:48 PM------------------------------------------------
+2020-04-13 14:07:48.5841 INFO Successful In Getting  Item Category
+2020-04-13 14:07:48.5515 INFO Successful In Getting  Item Category
+2020-04-13 14:07:48.5456 INFO ---------------------------------------------------------------------------------------------------------
+2020-04-13 14:07:48.6197 INFO ---------------------------------------------------------------------------------------------------------
+2020-04-13 14:07:48.6475 INFO ---------------------------------------------------------------------------------------------------------
+2020-04-13 14:07:48.6772 INFO --------------------------13-Apr-20 2:07:48 PM------------------------------------------------
+2020-04-13 14:07:48.7186 INFO Successful In Getting  Item Category
+2020-04-13 14:07:48.1992 INFO ---------------------------------------------------------------------------------------------------------
+2020-04-13 14:07:48.7600 INFO --------------------------13-Apr-20 2:07:48 PM------------------------------------------------
+2020-04-13 14:07:48.6475 INFO --------------------------13-Apr-20 2:07:48 PM------------------------------------------------
+2020-04-13 14:07:48.7982 INFO Successful In Getting Data
+2020-04-13 14:07:48.7019 INFO --------------------------13-Apr-20 2:07:48 PM------------------------------------------------
+2020-04-13 14:07:48.7820 INFO Successful In Getting  Item Category
+2020-04-13 14:07:48.6726 INFO ---------------------------------------------------------------------------------------------------------
+2020-04-13 14:07:48.8595 INFO --------------------------13-Apr-20 2:07:48 PM------------------------------------------------
+2020-04-13 14:07:48.8752 INFO Successful In Getting Data
+2020-04-13 14:07:48.8268 INFO Successful In Getting  Item Category
+2020-04-13 14:08:44.5482 INFO ---------------------------------------------------------------------------------------------------------
+2020-04-13 14:08:44.5931 INFO --------------------------13-Apr-20 2:08:44 PM------------------------------------------------
+2020-04-13 14:08:44.9209 INFO Successful In Getting  Item Category
+2020-04-13 14:08:45.0198 INFO ---------------------------------------------------------------------------------------------------------
+2020-04-13 14:08:45.0479 INFO --------------------------13-Apr-20 2:08:45 PM------------------------------------------------
+2020-04-13 14:08:45.0782 INFO Successful In Getting  Item Category
+2020-04-13 14:08:45.1165 INFO ---------------------------------------------------------------------------------------------------------
+2020-04-13 14:08:45.1455 INFO --------------------------13-Apr-20 2:08:45 PM------------------------------------------------
+2020-04-13 14:08:45.1646 INFO ---------------------------------------------------------------------------------------------------------
+2020-04-13 14:08:45.1983 INFO --------------------------13-Apr-20 2:08:45 PM------------------------------------------------
+2020-04-13 14:08:45.2219 INFO Successful In Getting Data
+2020-04-13 14:08:45.2463 INFO ---------------------------------------------------------------------------------------------------------
+2020-04-13 14:08:45.2687 INFO --------------------------13-Apr-20 2:08:45 PM------------------------------------------------
+2020-04-13 14:08:45.1646 INFO ---------------------------------------------------------------------------------------------------------
+2020-04-13 14:08:45.1646 INFO Successful In Getting  Item Category
+2020-04-13 14:08:45.1455 INFO ---------------------------------------------------------------------------------------------------------
+2020-04-13 14:08:45.3074 INFO ---------------------------------------------------------------------------------------------------------
+2020-04-13 14:08:45.2954 INFO --------------------------13-Apr-20 2:08:45 PM------------------------------------------------
+2020-04-13 14:08:45.3598 INFO --------------------------13-Apr-20 2:08:45 PM------------------------------------------------
+2020-04-13 14:08:45.3882 INFO Successful In Getting  Item Category
+2020-04-13 14:08:45.4161 INFO Successful In Getting  Item Category
+2020-04-13 14:08:45.2829 INFO Staff Successfully Getted
+2020-04-13 14:08:45.3346 INFO --------------------------13-Apr-20 2:08:45 PM------------------------------------------------
+2020-04-13 14:08:45.3346 INFO ---------------------------------------------------------------------------------------------------------
+2020-04-13 14:08:45.4161 INFO ---------------------------------------------------------------------------------------------------------
+2020-04-13 14:08:45.5310 INFO --------------------------13-Apr-20 2:08:45 PM------------------------------------------------
+2020-04-13 14:08:45.5147 INFO --------------------------13-Apr-20 2:08:45 PM------------------------------------------------
+2020-04-13 14:08:45.5683 INFO Successful In Getting Data
+2020-04-13 14:08:45.5525 INFO Successful In Getting Data
+2020-04-13 14:08:45.4981 INFO Successful In Getting  Item Category
+2020-04-13 14:11:30.1035 INFO ---------------------------------------------------------------------------------------------------------
+2020-04-13 14:11:30.1236 INFO --------------------------13-Apr-20 2:11:30 PM------------------------------------------------
+2020-04-13 14:11:30.1473 INFO Successful In Deleting Item Cateory
+2020-04-13 14:11:30.1946 INFO ---------------------------------------------------------------------------------------------------------
+2020-04-13 14:11:30.2153 INFO --------------------------13-Apr-20 2:11:30 PM------------------------------------------------
+2020-04-13 14:11:30.2349 INFO Successful In Getting  Item Category

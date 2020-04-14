@@ -59,8 +59,7 @@ namespace Service.BusinessServices
             // Sales
             List<Sales> listOfSalesToAdd = new List<Sales>();
             listOfSalesToAdd = _utilService.Mapper.Map<List<SalesItemVM>, List<Sales>>(salesVM.ItemList);
-
-                _repositoryWrapper.Sales.CreateAll(listOfSalesToAdd);
+            _repositoryWrapper.Sales.CreateAll(listOfSalesToAdd);
 
 
             // Stock
@@ -111,13 +110,13 @@ namespace Service.BusinessServices
             _repositoryWrapper.Transaction.Create(transactionRecieved);
 
 
-            TblTransaction transactionRecievable = new TblTransaction();
-            transactionRecievable = _utilService.Mapper.Map<SalesVM, TblTransaction>(salesVM);
-            transactionRecievable.Amount = salesVM.DueAmount;
-            transactionRecievable.PaymentStatus = PAYMENT_STATUS.CASH_RECIEVABLE.ToString();
-            transactionRecievable.TransactionType = TRANSACTION_TYPE.NOT_YET_EXECUTED.ToString();
-            transactionRecievable.TransactionId = transactionRecieved.TransactionId;
-            _repositoryWrapper.Transaction.Create(transactionRecievable);
+            //TblTransaction transactionRecievable = new TblTransaction();
+            //transactionRecievable = _utilService.Mapper.Map<SalesVM, TblTransaction>(salesVM);
+            //transactionRecievable.Amount = salesVM.DueAmount;
+            //transactionRecievable.PaymentStatus = PAYMENT_STATUS.CASH_RECIEVABLE.ToString();
+            //transactionRecievable.TransactionType = TRANSACTION_TYPE.NOT_YET_EXECUTED.ToString();
+            //transactionRecievable.TransactionId = transactionRecieved.TransactionId;
+            //_repositoryWrapper.Transaction.Create(transactionRecievable);
 
             Task<int> Invoice =   _repositoryWrapper.Invoice.SaveChangesAsync();
             Task<int> Income = _repositoryWrapper.Income.SaveChangesAsync();

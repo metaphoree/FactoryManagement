@@ -83,7 +83,6 @@ namespace Service.BusinessServices
             }
 
             // StockIn
-
             List<StockIn> stockInsToAdd = new List<StockIn>();
             stockInsToAdd = _utilService.Mapper.Map<List<PurchaseItemVM>, List<StockIn>>(purchaseVM.ItemList);
             _repositoryWrapper.StockIn.CreateAll(stockInsToAdd);
@@ -98,13 +97,13 @@ namespace Service.BusinessServices
             _repositoryWrapper.Transaction.Create(transactionPaid);
 
 
-            TblTransaction transactionPayable = new TblTransaction();
-            transactionPayable = _utilService.Mapper.Map<PurchaseVM, TblTransaction>(purchaseVM);
-            transactionPayable.Amount = purchaseVM.DueAmount;
-            transactionPayable.PaymentStatus = PAYMENT_STATUS.CASH_PAYABLE.ToString();
-            transactionPayable.TransactionType = TRANSACTION_TYPE.NOT_YET_EXECUTED.ToString();
-            transactionPayable.TransactionId = transactionPaid.TransactionId;
-            _repositoryWrapper.Transaction.Create(transactionPayable);
+            //TblTransaction transactionPayable = new TblTransaction();
+            //transactionPayable = _utilService.Mapper.Map<PurchaseVM, TblTransaction>(purchaseVM);
+            //transactionPayable.Amount = purchaseVM.DueAmount;
+            //transactionPayable.PaymentStatus = PAYMENT_STATUS.CASH_PAYABLE.ToString();
+            //transactionPayable.TransactionType = TRANSACTION_TYPE.NOT_YET_EXECUTED.ToString();
+            //transactionPayable.TransactionId = transactionPaid.TransactionId;
+            //_repositoryWrapper.Transaction.Create(transactionPayable);
 
             Task<int> Invoice = _repositoryWrapper.Invoice.SaveChangesAsync();
             Task<int> Expense = _repositoryWrapper.Expense.SaveChangesAsync();

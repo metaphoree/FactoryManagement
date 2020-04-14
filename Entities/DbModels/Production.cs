@@ -22,7 +22,14 @@ namespace Entities.DbModels
         [ForeignKey("ItemId")]
         public virtual Item Item { get; set; }
 
-        //[ForeignKey("ItemCategoryId")]
-        //public virtual ItemCategory ItemCategory { get; set; }
+        [ForeignKey("ItemCategoryId")]
+        public virtual ItemCategory ItemCategory { get; set; }
+
+        [ForeignKey("StaffId")]
+        public virtual Staff Staff { get; set; }
+
+        [ForeignKey("EquipmentId")]
+        public virtual Equipment Equipment { get; set; }
+
     }
 }

@@ -9,7 +9,7 @@ namespace Repository.EntitywiseRepository
 {
     public class AddressRepository : RepositoryBase<Address>, IAddressRepository
     {
-        public AddressRepository(FactoryManagementContext context) : base(context) { 
+        public AddressRepository(FactoryManagementContext context,IUtilService util) : base(context, util) { 
         
         
         }

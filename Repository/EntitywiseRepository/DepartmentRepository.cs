@@ -8,7 +8,7 @@ namespace Repository.EntitywiseRepository
 {
     public class DepartmentRepository : RepositoryBase<Department>, IDepartmentRepository
     {
-        public DepartmentRepository(FactoryManagementContext context) : base(context)
+        public DepartmentRepository(FactoryManagementContext context, IUtilService util) : base(context,util)
         {
 
 

@@ -32,5 +32,12 @@ namespace Entities.DbModels
         [ForeignKey("InvoiceTypeId")]
         public virtual InvoiceType InvoiceType { get; set; }
 
+        [ForeignKey("ClientId")]
+        public virtual Supplier Supplier { get; set; }
+
+
+        [ForeignKey("ClientId")]
+        public virtual Customer Customer { get; set; }
+
     }
 }

@@ -9,7 +9,7 @@ namespace Repository.EntitywiseRepository
 {
     public class InvoiceRepository : RepositoryBase<Invoice>, IInvoiceRepository
     {
-        public InvoiceRepository(FactoryManagementContext context) : base(context)
+        public InvoiceRepository(FactoryManagementContext context, IUtilService util) : base(context, util)
         { 
         }
     }

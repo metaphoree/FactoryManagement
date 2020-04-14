@@ -9,7 +9,7 @@ namespace Repository.EntitywiseRepository
 {
     public class StaffRepository : RepositoryBase<Staff>, IStaffRepository
     {
-        public StaffRepository(FactoryManagementContext context) : base(context)
+        public StaffRepository(FactoryManagementContext context, IUtilService util) : base(context, util)
         { }
     }
 }

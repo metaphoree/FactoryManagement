@@ -9,7 +9,7 @@ namespace Repository.EntitywiseRepository
 {
     public class StockRepository : RepositoryBase<Stock>, IStockRepository
     {
-        public StockRepository(FactoryManagementContext context) : base(context)
+        public StockRepository(FactoryManagementContext context, IUtilService util) : base(context, util)
         { }
     }
 }

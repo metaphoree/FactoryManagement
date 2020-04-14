@@ -29,7 +29,6 @@ namespace Service.BusinessServiceWrapper
             this._serviceWrapper = serviceWrapper;
             this._utilService = utilService; 
         }
-
         public async Task<InitialLoadDataVM> GetPurchaseInitialData(GetDataListVM getDataListVM) {
             InitialLoadDataVM vm = new InitialLoadDataVM();
 
@@ -72,8 +71,6 @@ namespace Service.BusinessServiceWrapper
             vm.InvoiceTypeVMs = invoiceTypeListTask.Result.ListOfData;
             return vm;
         }
-
-
         public async Task<InitialLoadDataVM> GetPaymentInitialData(GetDataListVM getDataListVM)
         {
             InitialLoadDataVM vm = new InitialLoadDataVM();
@@ -112,11 +109,12 @@ namespace Service.BusinessServiceWrapper
             Task<WrapperStaffListVM> staffListTask = _serviceWrapper.StaffService.GetListPaged(getDataListVM);
             Task<WrapperEquipmentListVM> equipmentListTask = _serviceWrapper.EquipmentService.GetListPaged(getDataListVM);
 
+            Task<WrapperItemStatusListVM> itemStatusListTask = _serviceWrapper.ItemStatusService.GetListPaged(getDataListVM);
 
 
             await Task.WhenAll(customerListTask, incomeTypeListTask,
                 invoiceTypeListTask, expenseTypeTask, supplierListTask, staffListTask,
-                itemListTask, itemCategoryListTask, equipmentListTask);
+                itemListTask, itemCategoryListTask, equipmentListTask, itemStatusListTask);
 
             vm.ItemVMs = itemListTask.Result.ListOfData;
             vm.ItemCategoryVMs = itemCategoryListTask.Result.ListOfData;
@@ -127,20 +125,8 @@ namespace Service.BusinessServiceWrapper
             vm.SupplierVMs = supplierListTask.Result.ListOfData;
             vm.StaffVMs = staffListTask.Result.ListOfData;
             vm.EquipmentVMs = equipmentListTask.Result.ListOfData;
+            vm.ItemStatusVMs = itemStatusListTask.Result.ListOfData;
             return vm;
         }
-        // staff
-        // equipment
-        // item
-        // item category
-
-
-
-
-
-
-
-
-
     }
 }

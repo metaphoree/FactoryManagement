@@ -9,7 +9,7 @@ namespace Repository.EntitywiseRepository
 {
     public class SupplierRepository : RepositoryBase<Supplier>, ISupplierRepository
     {
-        public SupplierRepository(FactoryManagementContext context) : base(context)
+        public SupplierRepository(FactoryManagementContext context, IUtilService util) : base(context, util)
         { }
     }
 }

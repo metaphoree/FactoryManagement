@@ -14,7 +14,9 @@ namespace Entities.DbModels
         public long? Quantity { get; set; }
         public decimal? Unitprice { get; set; }
         public string ItemStatusId { get; set; }
+        public string Source { get; set; }
         public DateTime ExpiryDate { get; set; }
         public DateTime AddedDateTime { get; set; }
+        public string ProductionId { get; set; }
     }
 }

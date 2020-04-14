@@ -46,6 +46,7 @@ namespace Repository
         ITransactionTypeRepository _TransactionType;
         IUserAuthInfoRepository _UserAuthInfo;
         IUserRoleRepository _UserRole;
+        IUtilService _util;
         #endregion
         public RepositoryWrapper(
          FactoryManagementContext dbContext,
@@ -81,7 +82,8 @@ namespace Repository
          ITransactionRepository Transaction,
          ITransactionTypeRepository TransactionType,
          IUserAuthInfoRepository UserAuthInfo,
-         IUserRoleRepository UserRole)
+         IUserRoleRepository UserRole,
+         IUtilService util)
         {
             this.dbContext = dbContext;
             this._Address = Address;
@@ -116,6 +118,7 @@ namespace Repository
             this._TransactionType = TransactionType;
             this._UserAuthInfo = UserAuthInfo;
             this._UserRole = UserRole;
+            this._util = util;
         }
 
 
@@ -125,8 +128,8 @@ namespace Repository
             {
                 if (_Address == null)
                 {
-                    //return new AddressRepository(dbContext);
-                    _Address = new AddressRepository(dbContext);
+                    //return new AddressRepository(dbContext,_util);
+                    _Address = new AddressRepository(dbContext,_util);
                 }
                 return _Address;
             }
@@ -139,8 +142,8 @@ namespace Repository
 
                 if (_Customer == null)
                 {
-                    //return new CustomerRepository(dbContext);
-                    _Customer = new CustomerRepository(dbContext);
+                    //return new CustomerRepository(dbContext,_util);
+                    _Customer = new CustomerRepository(dbContext,_util);
                 }
 
                 return _Customer;
@@ -156,8 +159,8 @@ namespace Repository
 
                 if (_Department == null)
                 {
-                    //return new DepartmentRepository(dbContext);
-                    _Department = new DepartmentRepository(dbContext);
+                    //return new DepartmentRepository(dbContext,_util);
+                    _Department = new DepartmentRepository(dbContext,_util);
                 }
 
                 return _Department;
@@ -173,8 +176,8 @@ namespace Repository
 
                 if (_Equipment == null)
                 {
-                    //return new EquipmentRepository(dbContext);
-                    _Equipment = new EquipmentRepository(dbContext);
+                    //return new EquipmentRepository(dbContext,_util);
+                    _Equipment = new EquipmentRepository(dbContext,_util);
                 }
 
                 return _Equipment;
@@ -190,8 +193,8 @@ namespace Repository
 
                 if (_EquipmentCategory == null)
                 {
-                    //return new EquipmentCategoryRepository(dbContext);
-                    _EquipmentCategory = new EquipmentCategoryRepository(dbContext);
+                    //return new EquipmentCategoryRepository(dbContext,_util);
+                    _EquipmentCategory = new EquipmentCategoryRepository(dbContext,_util);
                 }
 
                 return _EquipmentCategory;
@@ -207,8 +210,8 @@ namespace Repository
 
                 if (_Expense == null)
                 {
-                    //return new ExpenseRepository(dbContext);
-                    _Expense = new ExpenseRepository(dbContext);
+                    //return new ExpenseRepository(dbContext,_util);
+                    _Expense = new ExpenseRepository(dbContext,_util);
                 }
 
                 return _Expense;
@@ -224,8 +227,8 @@ namespace Repository
 
                 if (_ExpenseType == null)
                 {
-                    //return new ExpenseTypeRepository(dbContext);
-                    _ExpenseType = new ExpenseTypeRepository(dbContext);
+                    //return new ExpenseTypeRepository(dbContext,_util);
+                    _ExpenseType = new ExpenseTypeRepository(dbContext,_util);
                 }
 
                 return _ExpenseType;
@@ -241,8 +244,8 @@ namespace Repository
 
                 if (_Factory == null)
                 {
-                    //return new FactoryRepository(dbContext);
-                    _Factory = new FactoryRepository(dbContext);
+                    //return new FactoryRepository(dbContext,_util);
+                    _Factory = new FactoryRepository(dbContext,_util);
                 }
 
                 return _Factory;
@@ -258,8 +261,8 @@ namespace Repository
 
                 if (_Income == null)
                 {
-                    //return new IncomeTypeRepository(dbContext);
-                    _Income = new IncomeRepository(dbContext);
+                    //return new IncomeTypeRepository(dbContext,_util);
+                    _Income = new IncomeRepository(dbContext,_util);
                 }
 
                 return _Income;
@@ -275,8 +278,8 @@ namespace Repository
 
                 if (_IncomeType == null)
                 {
-                    //return new IncomeTypeRepository(dbContext);
-                    _IncomeType = new IncomeTypeRepository(dbContext);
+                    //return new IncomeTypeRepository(dbContext,_util);
+                    _IncomeType = new IncomeTypeRepository(dbContext,_util);
                 }
 
                 return _IncomeType;
@@ -292,8 +295,8 @@ namespace Repository
 
                 if (_Invoice == null)
                 {
-                    //return new InvoiceRepository(dbContext);
-                    _Invoice = new InvoiceRepository(dbContext);
+                    //return new InvoiceRepository(dbContext,_util);
+                    _Invoice = new InvoiceRepository(dbContext,_util);
                 }
 
                 return _Invoice;
@@ -309,8 +312,8 @@ namespace Repository
 
                 if (_InvoiceType == null)
                 {
-                    //return new InvoiceTypeRepository(dbContext);
-                    _InvoiceType = new InvoiceTypeRepository(dbContext);
+                    //return new InvoiceTypeRepository(dbContext,_util);
+                    _InvoiceType = new InvoiceTypeRepository(dbContext,_util);
                 }
 
                 return _InvoiceType;
@@ -326,8 +329,8 @@ namespace Repository
 
                 if (_Item == null)
                 {
-                    //return new ItemRepository(dbContext);
-                    _Item = new ItemRepository(dbContext);
+                    //return new ItemRepository(dbContext,_util);
+                    _Item = new ItemRepository(dbContext,_util);
                 }
 
                 return _Item;
@@ -343,8 +346,8 @@ namespace Repository
 
                 if (_ItemCategory == null)
                 {
-                    //return new ItemCategoryRepository(dbContext);
-                    _ItemCategory = new ItemCategoryRepository(dbContext);
+                    //return new ItemCategoryRepository(dbContext,_util);
+                    _ItemCategory = new ItemCategoryRepository(dbContext,_util);
                 }
 
                 return _ItemCategory;
@@ -360,8 +363,8 @@ namespace Repository
 
                 if (_ItemStatus == null)
                 {
-                    //return new ItemStatusRepository(dbContext);
-                    _ItemStatus = new ItemStatusRepository(dbContext);
+                    //return new ItemStatusRepository(dbContext,_util);
+                    _ItemStatus = new ItemStatusRepository(dbContext,_util);
                 }
 
                 return _ItemStatus;
@@ -377,8 +380,8 @@ namespace Repository
 
                 if (_Payable == null)
                 {
-                    //return new PayableRepository(dbContext);
-                    _Payable = new PayableRepository(dbContext);
+                    //return new PayableRepository(dbContext,_util);
+                    _Payable = new PayableRepository(dbContext,_util);
                 }
 
                 return _Payable;
@@ -394,8 +397,8 @@ namespace Repository
 
                 if (_PaymentStatus == null)
                 {
-                    //return new PaymentStatusRepository(dbContext);
-                    _PaymentStatus = new PaymentStatusRepository(dbContext);
+                    //return new PaymentStatusRepository(dbContext,_util);
+                    _PaymentStatus = new PaymentStatusRepository(dbContext,_util);
                 }
 
                 return _PaymentStatus;
@@ -411,8 +414,8 @@ namespace Repository
 
                 if (_Phone == null)
                 {
-                    //return new PhoneRepository(dbContext);
-                    _Phone = new PhoneRepository(dbContext);
+                    //return new PhoneRepository(dbContext,_util);
+                    _Phone = new PhoneRepository(dbContext,_util);
                 }
 
                 return _Phone;
@@ -428,8 +431,8 @@ namespace Repository
 
                 if (_Production == null)
                 {
-                    //return new ProductionRepository(dbContext);
-                    _Production = new ProductionRepository(dbContext);
+                    //return new ProductionRepository(dbContext,_util);
+                    _Production = new ProductionRepository(dbContext,_util);
                 }
 
                 return _Production;
@@ -445,8 +448,8 @@ namespace Repository
 
                 if (_Purchase == null)
                 {
-                    //return new PurchaseRepository(dbContext);
-                    _Purchase = new PurchaseRepository(dbContext);
+                    //return new PurchaseRepository(dbContext,_util);
+                    _Purchase = new PurchaseRepository(dbContext,_util);
                 }
 
                 return _Purchase;
@@ -462,8 +465,8 @@ namespace Repository
 
                 if (_PurchaseType == null)
                 {
-                    //return new PurchaseTypeRepository(dbContext);
-                    _PurchaseType = new PurchaseTypeRepository(dbContext);
+                    //return new PurchaseTypeRepository(dbContext,_util);
+                    _PurchaseType = new PurchaseTypeRepository(dbContext,_util);
                 }
 
                 return _PurchaseType;
@@ -479,8 +482,8 @@ namespace Repository
 
                 if (_Recievable == null)
                 {
-                    //return new RecievableRepository(dbContext);
-                    _Recievable = new RecievableRepository(dbContext);
+                    //return new RecievableRepository(dbContext,_util);
+                    _Recievable = new RecievableRepository(dbContext,_util);
                 }
 
                 return _Recievable;
@@ -496,8 +499,8 @@ namespace Repository
 
                 if (_Role == null)
                 {
-                    //return new RoleRepository(dbContext);
-                    _Role = new RoleRepository(dbContext);
+                    //return new RoleRepository(dbContext,_util);
+                    _Role = new RoleRepository(dbContext,_util);
                 }
 
                 return _Role;
@@ -513,8 +516,8 @@ namespace Repository
 
                 if (_Sales == null)
                 {
-                    //return new SalesRepository(dbContext);
-                    _Sales = new SalesRepository(dbContext);
+                    //return new SalesRepository(dbContext,_util);
+                    _Sales = new SalesRepository(dbContext,_util);
                 }
 
                 return _Sales;
@@ -530,8 +533,8 @@ namespace Repository
 
                 if (_Staff == null)
                 {
-                    //return new StaffRepository(dbContext);
-                    _Staff = new StaffRepository(dbContext);
+                    //return new StaffRepository(dbContext,_util);
+                    _Staff = new StaffRepository(dbContext,_util);
                 }
 
                 return _Staff;
@@ -547,8 +550,8 @@ namespace Repository
 
                 if (_Stock == null)
                 {
-                    //return new StockRepository(dbContext);
-                    _Stock = new StockRepository(dbContext);
+                    //return new StockRepository(dbContext,_util);
+                    _Stock = new StockRepository(dbContext,_util);
                 }
 
                 return _Stock;
@@ -564,8 +567,8 @@ namespace Repository
 
                 if (_StockIn == null)
                 {
-                    //return new StockInRepository(dbContext);
-                    _StockIn = new StockInRepository(dbContext);
+                    //return new StockInRepository(dbContext,_util);
+                    _StockIn = new StockInRepository(dbContext,_util);
                 }
 
                 return _StockIn;
@@ -581,8 +584,8 @@ namespace Repository
 
                 if (_StockOut == null)
                 {
-                    //return new StockOutRepository(dbContext);
-                    _StockOut = new StockOutRepository(dbContext);
+                    //return new StockOutRepository(dbContext,_util);
+                    _StockOut = new StockOutRepository(dbContext,_util);
                 }
 
                 return _StockOut;
@@ -598,8 +601,8 @@ namespace Repository
 
                 if (_Supplier == null)
                 {
-                    //return new SupplierRepository(dbContext);
-                    _Supplier = new SupplierRepository(dbContext);
+                    //return new SupplierRepository(dbContext,_util);
+                    _Supplier = new SupplierRepository(dbContext,_util);
                 }
 
                 return _Supplier;
@@ -615,8 +618,8 @@ namespace Repository
 
                 if (_Transaction == null)
                 {
-                    //return new TransactionRepository(dbContext);
-                    _Transaction = new TransactionRepository(dbContext);
+                    //return new TransactionRepository(dbContext,_util);
+                    _Transaction = new TransactionRepository(dbContext,_util);
                 }
 
                 return _Transaction;
@@ -632,8 +635,8 @@ namespace Repository
 
                 if (_TransactionType == null)
                 {
-                    //return new TransactionTypeRepository(dbContext);
-                    _TransactionType = new TransactionTypeRepository(dbContext);
+                    //return new TransactionTypeRepository(dbContext,_util);
+                    _TransactionType = new TransactionTypeRepository(dbContext,_util);
                 }
 
                 return _TransactionType;
@@ -649,8 +652,8 @@ namespace Repository
 
                 if (_UserAuthInfo == null)
                 {
-                    //return new UserAuthInfoRepository(dbContext);
-                    _UserAuthInfo = new UserAuthInfoRepository(dbContext);
+                    //return new UserAuthInfoRepository(dbContext,_util);
+                    _UserAuthInfo = new UserAuthInfoRepository(dbContext,_util);
                 }
 
                 return _UserAuthInfo;
@@ -666,8 +669,8 @@ namespace Repository
 
                 if (_UserRole == null)
                 {
-                    //return new UserRoleRepository(dbContext);
-                    _UserRole = new UserRoleRepository(dbContext);
+                    //return new UserRoleRepository(dbContext,_util);
+                    _UserRole = new UserRoleRepository(dbContext,_util);
                 }
 
                 return _UserRole;

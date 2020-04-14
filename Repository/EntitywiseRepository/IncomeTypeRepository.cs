@@ -9,7 +9,7 @@ namespace Repository.EntitywiseRepository
 {
     public class IncomeTypeRepository : RepositoryBase<IncomeType>, IIncomeTypeRepository
     {
-        public IncomeTypeRepository(FactoryManagementContext context) : base(context)
+        public IncomeTypeRepository(FactoryManagementContext context, IUtilService util) : base(context, util)
         { }
     }
 }

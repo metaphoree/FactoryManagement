@@ -1,4 +1,5 @@
-﻿using Contracts.EntitywiseContracts;
+﻿using Contracts;
+using Contracts.EntitywiseContracts;
 using Entities.DbModels;
 using System;
 using System.Collections.Generic;
@@ -8,7 +9,7 @@ namespace Repository.EntitywiseRepository
 {
     public class UserRoleRepository : RepositoryBase<UserRole>, IUserRoleRepository
     {
-        public UserRoleRepository(FactoryManagementContext context) : base(context)
+        public UserRoleRepository(FactoryManagementContext context, IUtilService util) : base(context, util)
         { }
     }
 }

@@ -431,6 +431,7 @@ namespace ApiService.Utilities.AutoMapper
                 .ForMember(dest => dest.Month, act => act.MapFrom(src => DateTime.Now.ToString(MonthFormat.MMMM.ToString())))
                 .ForMember(dest => dest.ClientId, act => act.MapFrom(src => src.SupplierVM.Id))
                 .ForMember(dest => dest.InvoiceId, act => act.MapFrom(src => src.InvoiceId))
+                .ForMember(dest => dest.Purpose, act => act.MapFrom(src => PayablePurpose.PurchaseDue.ToString()))
                 .ForAllOtherMembers(act => act.Ignore());
 
 
@@ -457,7 +458,7 @@ namespace ApiService.Utilities.AutoMapper
                 .ForMember(dest => dest.FactoryId, act => act.MapFrom(src => src.FactoryId))
                 .ForMember(dest => dest.ItemId, act => act.MapFrom(src => src.Item.Id))
                 .ForMember(dest => dest.ItemStatusId, act => act.MapFrom(src => src.ItemStatus.Id))
-                .ForAllOtherMembers(act => act.Ignore()); ;
+                .ForAllOtherMembers(act => act.Ignore());
 
             //-------------------------------------StockIn-------------------------------------
             // Addition
@@ -474,6 +475,7 @@ namespace ApiService.Utilities.AutoMapper
                   .ForMember(dest => dest.SupplierId, act => act.MapFrom(src => src.SupplierVM.Id))
                   .ForMember(dest => dest.ExecutorId, act => act.MapFrom(src => src.EmployeeId))
                   .ForMember(dest => dest.InvoiceId, act => act.MapFrom(src => src.InvoiceId))
+                  .ForMember(dest => dest.Source, act => act.MapFrom(src => StockInSource.Purchase.ToString()))
                   .ForAllOtherMembers(act => act.Ignore());
 
 
@@ -616,7 +618,7 @@ namespace ApiService.Utilities.AutoMapper
             //-------------------------------Invoice-------------------------------------
             //
             CreateMap<PaymentVM, Invoice>()
-                 .ForMember(dest => dest.AmountPaid, act => act.MapFrom(src => src.Amount))
+               .ForMember(dest => dest.AmountPaid, act => act.MapFrom(src => src.Amount))
                .ForMember(dest => dest.AmountAfterDiscount, act => act.MapFrom(src => src.Amount))
                .ForMember(dest => dest.AmountBeforeDiscount, act => act.MapFrom(src => src.Amount))
                .ForMember(dest => dest.ClientId, act => act.MapFrom(src => src.ClientId))
@@ -628,6 +630,25 @@ namespace ApiService.Utilities.AutoMapper
                .ForMember(dest => dest.InvoiceId, act => act.MapFrom(src => Guid.NewGuid()))
                //.ForMember(dest => dest.IsFullyPaid, act => act.MapFrom(src => !(src.DueAmount > 0)))
                .ForMember(dest => dest.DateOfOcurrance, act => act.MapFrom(src => DateTime.Now))
+               .ForAllOtherMembers(act => act.Ignore());
+
+
+            //-------------------------------PaymentVM-------------------------------------
+            //
+            CreateMap<Invoice,PaymentVM>()
+               .ForMember(dest => dest.Amount, act => act.MapFrom(src => src.AmountPaid))
+               .ForMember(dest => dest.Amount, act => act.MapFrom(src => src.AmountAfterDiscount))
+               .ForMember(dest => dest.Amount, act => act.MapFrom(src => src.AmountBeforeDiscount))
+               .ForMember(dest => dest.ClientId, act => act.MapFrom(src => src.ClientId))
+               //.ForMember(dest => dest.Discount, act => act.MapFrom(src => src.DiscountAmount))
+               //.ForMember(dest => dest.Due, act => act.MapFrom(src => src.DueAmount))
+               .ForMember(dest => dest.EmployeeId, act => act.MapFrom(src => src.EmployeeId))
+               .ForMember(dest => dest.FactoryId, act => act.MapFrom(src => src.FactoryId))
+               .ForMember(dest => dest.InvoiceTypeId, act => act.MapFrom(src => src.InvoiceTypeId))
+               .ForMember(dest => dest.InvoiceId, act => act.MapFrom(src => src.Id))
+               .ForMember(dest => dest.ClientName, act => act.MapFrom(src => src.Customer.Name))
+               //.ForMember(dest => dest.IsFullyPaid, act => act.MapFrom(src => !(src.DueAmount > 0)))
+               .ForMember(dest => dest.PaymentDate, act => act.MapFrom(src => src.DateOfOcurrance))
                .ForAllOtherMembers(act => act.Ignore());
 
 
@@ -760,19 +781,66 @@ namespace ApiService.Utilities.AutoMapper
             CreateMap<Production, AddProductionVM>()
                     .ForMember(dest => dest.EntryDate, act => act.MapFrom(src => src.EntryDate))
                     .ForMember(dest => dest.EquipmentId, act => act.MapFrom(src => src.EquipmentId))
+                    .ForMember(dest => dest.EquipmentName, act => act.MapFrom(src => src.Equipment.Name))
                     .ForMember(dest => dest.FactoryId, act => act.MapFrom(src => src.FactoryId))
                     .ForMember(dest => dest.ItemCategoryId, act => act.MapFrom(src => src.ItemCategoryId))
+                    .ForMember(dest => dest.ItemCategoryName, act => act.MapFrom(src => src.ItemCategory.Name))
                     .ForMember(dest => dest.ItemId, act => act.MapFrom(src => src.ItemId))
+                    .ForMember(dest => dest.ItemName, act => act.MapFrom(src => src.Item.Name))
                     .ForMember(dest => dest.ProductionId, act => act.MapFrom(src => src.ProductionId))
                     .ForMember(dest => dest.Quantity, act => act.MapFrom(src => src.Quantity))
                     .ForMember(dest => dest.StaffId, act => act.MapFrom(src => src.StaffId))
+                    .ForMember(dest => dest.StaffName, act => act.MapFrom(src => src.Staff.Name))
                     .ForMember(dest => dest.TotalAmount, act => act.MapFrom(src => (src.Quantity * src.UnitPrice)))
                     .ForMember(dest => dest.UnitPrice, act => act.MapFrom(src => src.UnitPrice))
                     .ForMember(dest => dest.Id, act => act.MapFrom(src => src.Id))
                     .ForMember(dest => dest.UpdatedDateTime, act => act.MapFrom(src => src.UpdatedDateTime))
                     .ForAllOtherMembers(act => act.Ignore());
-        }
 
+
+
+            //-------------------------------------StockIn-------------------------------------
+            // Addition
+            // InvoiceId
+            CreateMap<AddProductionVM, StockIn>()
+                 .ForMember(dest => dest.FactoryId, act => act.MapFrom(src => src.FactoryId))
+                  .ForMember(dest => dest.ItemStatusId, act => act.MapFrom(src => src.ItemStatusId))
+                  .ForMember(dest => dest.BatchNumber, act => act.MapFrom(src => Guid.NewGuid()))
+                  .ForMember(dest => dest.ExpiryDate, act => act.MapFrom(src => DateTime.Now.AddYears(1)))
+                  .ForMember(dest => dest.AddedDateTime, act => act.MapFrom(src => DateTime.Now))
+                  .ForMember(dest => dest.ItemId, act => act.MapFrom(src => src.ItemId))
+                  .ForMember(dest => dest.Quantity, act => act.MapFrom(src => src.Quantity))
+                  .ForMember(dest => dest.Unitprice, act => act.MapFrom(src => src.UnitPrice))
+                  .ForMember(dest => dest.SupplierId, act => act.MapFrom(src => src.StaffId))
+                  .ForMember(dest => dest.Source, act => act.MapFrom(src => StockInSource.Production.ToString()))
+                  .ForMember(dest => dest.ExecutorId, act => act.MapFrom(src => src.ExecutorId))
+                  .ForAllOtherMembers(act => act.Ignore());
+
+
+            //----------------------------------Payable-------------------------------------
+            // Addition
+            // InvoiceId, 
+            CreateMap<AddProductionVM, Payable>()
+                .ForMember(dest => dest.FactoryId, act => act.MapFrom(src => src.FactoryId))
+                .ForMember(dest => dest.Amount, act => act.MapFrom(src => src.TotalAmount))
+                .ForMember(dest => dest.Month, act => act.MapFrom(src => DateTime.Now.ToString(MonthFormat.MMMM.ToString())))
+                .ForMember(dest => dest.ClientId, act => act.MapFrom(src => src.StaffId))
+                .ForMember(dest => dest.Purpose, act => act.MapFrom(src => PayablePurpose.StaffPaymentDue.ToString()))
+                //.ForMember(dest => dest.InvoiceId, act => act.MapFrom(src => src.InvoiceId))
+                .ForAllOtherMembers(act => act.Ignore());
+
+
+            //-------------------------------------Stock-------------------------------------
+            // Addition
+
+            CreateMap<AddProductionVM, Stock>()
+                .ForMember(dest => dest.Quantity, act => act.MapFrom(src => src.Quantity))
+                .ForMember(dest => dest.FactoryId, act => act.MapFrom(src => src.FactoryId))
+                .ForMember(dest => dest.ItemId, act => act.MapFrom(src => src.ItemId))
+                .ForMember(dest => dest.ItemStatusId, act => act.MapFrom(src => src.ItemStatusId))
+                .ForMember(dest => dest.ExpiryDate, act => act.MapFrom(src => DateTime.Now.AddYears(1)))
+                .ForAllOtherMembers(act => act.Ignore());
+        }
         public void Mapping_StaffHistory()
         {
             //-----------------------------------Purchase-------------------------------------

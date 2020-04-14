@@ -9,7 +9,7 @@ namespace Repository.EntitywiseRepository
 {
     public class PhoneRepository : RepositoryBase<Phone>, IPhoneRepository
     {
-        public PhoneRepository(FactoryManagementContext context) : base(context)
+        public PhoneRepository(FactoryManagementContext context, IUtilService util) : base(context, util)
         { }
     }
 }

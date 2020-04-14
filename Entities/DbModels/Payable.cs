@@ -12,5 +12,9 @@ namespace Entities.DbModels
         public string Month { get; set; }
         public decimal Amount { get; set; }
         public string Description { get; set; }
+
+        public string ProductionId { get; set; }
+
+
     }
 }

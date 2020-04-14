@@ -6,10 +6,13 @@ using CommonUtils;
 using Contracts;
 using Entities.DbModels;
 using Entities.ViewModels;
+using Entities.ViewModels.CustomerView;
 using Entities.ViewModels.Payment;
 using Entities.ViewModels.Production;
 using Entities.ViewModels.Purchase;
 using Entities.ViewModels.Sales;
+using Entities.ViewModels.Staff;
+using Entities.ViewModels.Supplier;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -59,6 +62,8 @@ namespace ApiService.Controllers
         }
 
         #endregion
+   
+        
         #region Sales
         [HttpPost]
         [Route("sales/getInitData")]
@@ -75,30 +80,36 @@ namespace ApiService.Controllers
         }
 
         #endregion
+        
+        
         #region Payment
-
+       
         #region Supplier
         [HttpPost]
-        [Route("supplier/pay")]
-        public async Task<CommonResponse> SupplierPay([FromBody]PaymentVM vm)
+        [Route("supplier/payment")]
+        public async Task<WrapperPaymentListVM> SupplierPay([FromBody]PaymentVM vm)
         {
             return await _businessService.BusinessWrapperService.PayToSupplier(vm);
         }
-
-
-
-
+        [HttpPost]
+        [Route("supplier/payment/list")]
+        public async Task<WrapperPaymentListVM> SupplierPaymentList([FromBody]GetPaymentDataListVM vm)
+        {
+            return await _businessService.BusinessWrapperService.GetSupplierPaymentList(vm);
+        }
+        [HttpPost]
+        [Route("supplier/payment/delete")]
+        public async Task<WrapperPaymentListVM> SupplierPaymentDelete([FromBody]PaymentVM vm)
+        {
+            return await _businessService.BusinessWrapperService.DeleteSupplierPayment(vm);
+        }
         #endregion
-
-
-
-
         #region Staff
         [HttpPost]
-        [Route("staff/pay")]
-        public async Task<CommonResponse> StaffPay([FromBody]PaymentVM vm)
+        [Route("staff/payment")]
+        public async Task<WrapperPaymentListVM> StaffPay([FromBody]PaymentVM vm)
         {
-            return await _businessService.BusinessWrapperService.PayToWorker(vm);
+            return await _businessService.BusinessWrapperService.PayToStaff(vm);
         }
 
         [HttpPost]
@@ -107,21 +118,72 @@ namespace ApiService.Controllers
         {
             return await _businessService.PurchaseServiceWrapper.GetPaymentInitialData(getDataVM);
         }
-
+        [HttpPost]
+        [Route("staff/payment/list")]
+        public async Task<WrapperPaymentListVM> StaffPaymentList([FromBody]GetPaymentDataListVM vm)
+        {
+            return await _businessService.BusinessWrapperService.GetStaffPaymentList(vm);
+        }
+        [HttpPost]
+        [Route("staff/payment/delete")]
+        public async Task<WrapperPaymentListVM> StaffPaymentDelete([FromBody]PaymentVM vm)
+        {
+            return await _businessService.BusinessWrapperService.DeleteStaffPayment(vm);
+        }
         #endregion
-
-
         #region Customer
         [HttpPost]
-        [Route("customer/cash")]
-        public async Task<CommonResponse> CustomerCash([FromBody]PaymentVM vm)
+        [Route("customer/payment")]
+        public async Task<WrapperPaymentListVM> CustomerCash([FromBody]PaymentVM vm)
         {
             return await _businessService.BusinessWrapperService.RecieveFromCustomer(vm);
         }
+        [HttpPost]
+        [Route("customer/payment/list")]
+        public async Task<WrapperPaymentListVM> CustomerPaymentList([FromBody]GetPaymentDataListVM vm)
+        {
+            return await _businessService.BusinessWrapperService.GetCustomerPaymentList(vm);
+        }
+        [HttpPost]
+        [Route("customer/payment/delete")]
+        public async Task<WrapperPaymentListVM> CustomerPaymentDelete([FromBody]PaymentVM vm)
+        {
+            return await _businessService.BusinessWrapperService.DeleteCustomerPayment(vm);
+        }
+        #endregion
 
 
         #endregion
+
+
+        #region History
+        #region Customer
+        [HttpPost]
+        [Route("supplier/history")]
+        public async Task<WrapperSupplierHistory> SupplierHistory([FromBody]SupplierVM vm)
+        {
+            return await _businessService.BusinessWrapperService.GetSupplierHistory(vm);
+        }
         #endregion
+
+        #region Staff
+        [HttpPost]
+        [Route("staff/history")]
+        public async Task<WrapperStaffHistory> StaffHistory([FromBody]StaffVM vm)
+        {
+            return await _businessService.BusinessWrapperService.GetStaffHistory(vm);
+        }
+        #endregion
+        #region Supplier
+        [HttpPost]
+        [Route("customer/history")]
+        public async Task<WrapperCustomerHistory> CustomerHistory([FromBody]CustomerVM vm)
+        {
+            return await _businessService.BusinessWrapperService.GetCustomerHistory(vm);
+        }
+        #endregion
+        #endregion
+
 
         #region Production
 

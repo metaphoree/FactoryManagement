@@ -5,6 +5,23 @@ using System.Text;
 namespace Entities.Enums
 {
 
+    public enum PayablePurpose
+    {
+        StaffPaymentDue,
+        PurchaseDue
+    }
+
+    public enum StatusItem
+    {
+        GOOD,
+        BAD,
+        DEFECTED
+    }
+    public enum StockInSource
+    {
+        Purchase,
+        Production
+    }
     public enum MonthFormat
     {
         MMMM
@@ -20,9 +37,10 @@ namespace Entities.Enums
     }
     public enum TypeInvoice
     {
+        StaffPayment,
+        ClientPayment,
+        SupplierPayment,
         Purchase,
-        Sales,
-        CashPayment,
-        CashRecieved
+        Sales
     }
 }

@@ -9,7 +9,7 @@ namespace Repository.EntitywiseRepository
 {
     public class PurchaseTypeRepository : RepositoryBase<PurchaseType>, IPurchaseTypeRepository
     {
-        public PurchaseTypeRepository(FactoryManagementContext context) : base(context)
+        public PurchaseTypeRepository(FactoryManagementContext context, IUtilService util) : base(context, util)
         { }
     }
 }

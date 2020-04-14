@@ -9,7 +9,7 @@ namespace Repository.EntitywiseRepository
 {
     public class ProductionRepository : RepositoryBase<Production>, IProductionRepository
     {
-        public ProductionRepository(FactoryManagementContext context) : base(context)
+        public ProductionRepository(FactoryManagementContext context, IUtilService util) : base(context, util)
         { }
     }
 }

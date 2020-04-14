@@ -9,7 +9,7 @@ namespace Repository.EntitywiseRepository
 {
     public class EquipmentRepository : RepositoryBase<Equipment>, IEquipmentRepository
     {
-        public EquipmentRepository(FactoryManagementContext context) : base(context)
+        public EquipmentRepository(FactoryManagementContext context, IUtilService util) : base(context, util)
         { }
     }
 }

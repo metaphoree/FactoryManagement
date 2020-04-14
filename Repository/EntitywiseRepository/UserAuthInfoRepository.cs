@@ -9,7 +9,7 @@ namespace Repository.EntitywiseRepository
 {
     public class UserAuthInfoRepository : RepositoryBase<UserAuthInfo>, IUserAuthInfoRepository
     {
-        public UserAuthInfoRepository(FactoryManagementContext context) : base(context)
+        public UserAuthInfoRepository(FactoryManagementContext context, IUtilService util) : base(context, util)
         { }
     }
 }
