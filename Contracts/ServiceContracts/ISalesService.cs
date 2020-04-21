@@ -1,4 +1,5 @@
-﻿using Entities.ViewModels.Sales;
+﻿using Entities.ViewModels;
+using Entities.ViewModels.Sales;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -8,6 +9,7 @@ namespace Contracts.ServiceContracts
 {
     public interface ISalesService
     {
-        Task AddSalesAsync(SalesVM salesVM);
+        Task<WrapperSalesListVM> AddSalesAsync(SalesVM salesVM);
+        Task<WrapperSalesListVM> GetAllSalesAsync(GetDataListVM getDataListVM);
     }
 }

@@ -16,6 +16,10 @@ namespace Entities.ViewModels.Sales
         public int Quantity { get; set; }
         public double UnitPrice { get; set; }
 
+        public string ItemName { get; set; }
+        public string ItemCategoryName { get; set; }
+        public string Status { get; set; }
+        public string Month { get; set; }
         public string FactoryId { get; set; }
         public DateTime ExpiryDate { get; set; }
         public CustomerVM CustomerVM { get; set; }

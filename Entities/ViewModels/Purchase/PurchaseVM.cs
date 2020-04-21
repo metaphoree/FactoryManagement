@@ -23,7 +23,7 @@ namespace Entities.ViewModels.Purchase
 
         public string EmployeeId { get; set; }
         public string FactoryId { get; set; }
-
+        public string SupplierName { get; set; }
         public string InvoiceId { get; set; }
 
         //    public DateTime DeliveryDate { get; set; }

@@ -8,6 +8,7 @@ namespace Entities.DbModels
     {
         public string StaffId { get; set; }
         public string ItemId { get; set; }
+        public string InvoiceId { get; set; }
         public string ItemCategoryId { get; set; }
         public long Quantity { get; set; }
         public string EquipmentId { get; set; }

@@ -11,6 +11,10 @@ namespace Entities.ViewModels.Purchase
    public class PurchaseItemVM
     {
         public ItemVM Item { get; set;}
+        public string ItemName { get; set; }
+        public string ItemCategoryName { get; set; }
+        public string Status { get; set; }
+        public string Month { get; set; }
         public ItemStatusVM ItemStatus { get; set;}
         public ItemCategoryVM ItemCategory { get; set;}
         public int Quantity { get; set;}

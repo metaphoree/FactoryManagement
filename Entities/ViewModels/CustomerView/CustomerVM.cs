@@ -19,5 +19,17 @@ namespace Entities.ViewModels.CustomerView
 
         public string FactoryId { get; set; }
         public string CustomerId { get; set; }
+
+
+
+
+
+        public long PaidAmount { get; set; }
+        public long RecievedAmount { get; set; }
+        public long PayableAmount { get; set; }
+        public long RecievableAmount { get; set; }
+
+
+
     }
 }

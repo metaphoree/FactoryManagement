@@ -3,8 +3,10 @@ using Contracts;
 using Contracts.ServiceContracts;
 using Entities.DbModels;
 using Entities.Enums;
+using Entities.ViewModels;
 using Entities.ViewModels.Purchase;
 using Entities.ViewModels.Stock;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -33,7 +35,8 @@ namespace Service.BusinessServices
         // Stock
         // StockIn
         // Transaction
-        public async Task AddPurchaseAsync(PurchaseVM purchaseVM) {
+        public async Task<WrapperPurchaseListVM> AddPurchaseAsync(PurchaseVM purchaseVM)
+        {
 
             // Invoice
             Invoice invoiceToAdd = new Invoice();
@@ -66,17 +69,20 @@ namespace Service.BusinessServices
             // Stock
             Stock stockToAdd = new Stock();
             IEnumerable<Stock> stockList = await _repositoryWrapper.Stock.FindByConditionAsync(x => x.FactoryId == purchaseVM.FactoryId);
-            for (int i = 0; i <  purchaseVM.ItemList.Count; i++) {
+            for (int i = 0; i < purchaseVM.ItemList.Count; i++)
+            {
 
                 Stock existingStock = stockList.ToList().Where(x => x.ItemId == purchaseVM.ItemList[i].Item.Id).FirstOrDefault();
-                
+
                 // IF NOT PRESENT ADD
-                if (existingStock == null) {
+                if (existingStock == null)
+                {
                     stockToAdd = _utilService.Mapper.Map<PurchaseItemVM, Stock>(purchaseVM.ItemList[i]);
                     _repositoryWrapper.Stock.Create(stockToAdd);
                 }
                 // IF PRESENT UPDATE
-                else {
+                else
+                {
                     existingStock.Quantity += purchaseVM.ItemList[i].Quantity;
                     _repositoryWrapper.Stock.Update(existingStock);
                 }
@@ -87,7 +93,7 @@ namespace Service.BusinessServices
             stockInsToAdd = _utilService.Mapper.Map<List<PurchaseItemVM>, List<StockIn>>(purchaseVM.ItemList);
             _repositoryWrapper.StockIn.CreateAll(stockInsToAdd);
 
-           
+
             // Transaction
             TblTransaction transactionPaid = new TblTransaction();
             transactionPaid = _utilService.Mapper.Map<PurchaseVM, TblTransaction>(purchaseVM);
@@ -113,6 +119,61 @@ namespace Service.BusinessServices
             Task<int> StockIn = _repositoryWrapper.StockIn.SaveChangesAsync();
             Task<int> Transaction = _repositoryWrapper.Transaction.SaveChangesAsync();
             await Task.WhenAll(Invoice, Expense, Payable, Purchase, Stock, StockIn, Transaction);
+
+            var getDatalistVM = new GetDataListVM()
+            {
+                FactoryId = purchaseVM.FactoryId,
+                PageNumber = 1,
+                PageSize = 10
+            };
+
+
+            return await GetAllPurchaseAsync(getDatalistVM);
+
         }
+
+        public async Task<WrapperPurchaseListVM> GetAllPurchaseAsync(GetDataListVM getDataListVM)
+        {
+            WrapperPurchaseListVM vm = new WrapperPurchaseListVM();
+
+            List<PurchaseVM> vmList = new List<PurchaseVM>();
+
+            Task<List<Invoice>> invoicesT = _repositoryWrapper
+                .Invoice
+                .FindAll()
+                .Include(x => x.Supplier)
+                .Include(x => x.InvoiceType)
+                .Where(x => x.FactoryId == getDataListVM.FactoryId
+                && x.InvoiceType.Name == TypeInvoice.Purchase.ToString())
+                .Skip((getDataListVM.PageNumber - 1) * (getDataListVM.PageSize))
+                .Take(getDataListVM.PageSize)
+                .ToListAsync();
+
+
+            Task<List<Purchase>> purchasesT = _repositoryWrapper
+                .Purchase
+                .FindAll()
+                .Where(x => x.FactoryId == getDataListVM.FactoryId)
+                .Include(x => x.Item)
+                .ThenInclude(s => s.ItemCategory)
+                .ToListAsync();
+
+            await Task.WhenAll(invoicesT, purchasesT);
+            List<Purchase> dbListPurchase = purchasesT.Result.ToList();
+            vmList = _utilService.Mapper.Map<List<Invoice>, List<PurchaseVM>>(invoicesT.Result.ToList());
+            List<Purchase> temp = new List<Purchase>();
+
+            for (int i = 0; i < vmList.Count; i++)
+            {
+                temp = dbListPurchase.Where(x => x.InvoiceId == vmList.ElementAt(i).InvoiceId).ToList();
+                vmList.ElementAt(i).ItemList = _utilService.Mapper.Map<List<Purchase>, List<PurchaseItemVM>>(temp);
+            }
+
+            vm.ListOfData = vmList;
+            vm.TotalRecoreds = invoicesT.Result.ToList().Count;
+            return vm;
+        }
+
+
     }
 }

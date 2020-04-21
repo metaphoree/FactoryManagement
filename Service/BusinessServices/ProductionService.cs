@@ -42,17 +42,33 @@ namespace Service.BusinessServices
             var dataRowCount = await _repositoryWrapper.Production.NumOfRecord();
             List<AddProductionVM> ProductionVMLists = new List<AddProductionVM>();
             ProductionVMLists = _utilService.GetMapper().Map<List<Production>, List<AddProductionVM>>(dataList);
-            ProductionVMLists =
-                 ProductionVMLists
-                .Where((x) =>
-                   //!string.IsNullOrEmpty(x.EquipmentName) && !string.IsNullOrWhiteSpace(x.EquipmentName) && x.EquipmentName.Contains(dataListVM.GlobalFilter)
-                     !string.IsNullOrEmpty(x.ItemCategoryName) && !string.IsNullOrWhiteSpace(x.ItemCategoryName) && x.ItemCategoryName.Contains(dataListVM.GlobalFilter)
-                    || !string.IsNullOrEmpty(x.ItemName) && !string.IsNullOrWhiteSpace(x.ItemName) && x.ItemName.Contains(dataListVM.GlobalFilter)
-                    || !string.IsNullOrEmpty(x.StaffName) && !string.IsNullOrWhiteSpace(x.StaffName) && x.StaffName.Contains(dataListVM.GlobalFilter))
-                .OrderByDescending(x => x.UpdatedDateTime)
-                .Skip((dataListVM.PageNumber - 1) * (dataListVM.PageSize))
-                .Take(dataListVM.PageSize)
-                .ToList();
+
+            if (string.IsNullOrEmpty(dataListVM.GlobalFilter) || string.IsNullOrWhiteSpace(dataListVM.GlobalFilter))
+            {
+                ProductionVMLists =
+                     ProductionVMLists
+                    .OrderByDescending(x => x.UpdatedDateTime)
+                    .Skip((dataListVM.PageNumber - 1) * (dataListVM.PageSize))
+                    .Take(dataListVM.PageSize)
+                    .ToList();
+            }
+            else
+            {
+                ProductionVMLists =
+                     ProductionVMLists
+                    .Where((x) =>
+                         //!string.IsNullOrEmpty(x.EquipmentName) && !string.IsNullOrWhiteSpace(x.EquipmentName) && x.EquipmentName.Contains(dataListVM.GlobalFilter)
+                         !string.IsNullOrEmpty(x.ItemCategoryName) && !string.IsNullOrWhiteSpace(x.ItemCategoryName) && x.ItemCategoryName.Contains(dataListVM.GlobalFilter)
+                        || !string.IsNullOrEmpty(x.ItemName) && !string.IsNullOrWhiteSpace(x.ItemName) && x.ItemName.Contains(dataListVM.GlobalFilter)
+                        || !string.IsNullOrEmpty(x.StaffName) && !string.IsNullOrWhiteSpace(x.StaffName) && x.StaffName.Contains(dataListVM.GlobalFilter))
+                    .OrderByDescending(x => x.UpdatedDateTime)
+                    .Skip((dataListVM.PageNumber - 1) * (dataListVM.PageSize))
+                    .Take(dataListVM.PageSize)
+                    .ToList();
+            }
+
+
+
             var wrapper = new WrapperProductionListVM()
             {
                 ListOfData = ProductionVMLists,
@@ -74,15 +90,26 @@ namespace Service.BusinessServices
             var productionToAdd = _utilService.GetMapper().Map<AddProductionVM, Production>(vm);
             var stockInToAdd = _utilService.GetMapper().Map<AddProductionVM, StockIn>(vm);
             var payableToAdd = _utilService.GetMapper().Map<AddProductionVM, Payable>(vm);
+            var invoiceToAdd = _utilService.GetMapper().Map<AddProductionVM, Invoice>(vm);
             //string uniqueIdTask =await _repositoryWrapper.Production.GetUniqueId();
 
             //// Todo  need to aandle unique id from db
             //entityToAdd.UniqueId = uniqueIdTask;
+            invoiceToAdd = _repositoryWrapper.Invoice.Create(invoiceToAdd);
+
+            productionToAdd.InvoiceId = invoiceToAdd.Id;
+            stockInToAdd.InvoiceId = invoiceToAdd.Id;
+            payableToAdd.InvoiceId = invoiceToAdd.Id;
+
             productionToAdd = _repositoryWrapper.Production.Create(productionToAdd);
             stockInToAdd.ProductionId = productionToAdd.Id;
             payableToAdd.ProductionId = productionToAdd.Id;
+          
+
             stockInToAdd = _repositoryWrapper.StockIn.Create(stockInToAdd);
             payableToAdd = _repositoryWrapper.Payable.Create(payableToAdd);
+
+
 
             Stock stockToAdd = new Stock();
             IEnumerable<Stock> stockList = await _repositoryWrapper.Stock.FindByConditionAsync(x => x.FactoryId == vm.FactoryId && x.ItemId == vm.ItemId);
@@ -106,8 +133,9 @@ namespace Service.BusinessServices
             Task<int> stockInToAddT = _repositoryWrapper.StockIn.SaveChangesAsync();
             Task<int> payableToAddT = _repositoryWrapper.Payable.SaveChangesAsync();
             Task<int> stockToAddT = _repositoryWrapper.Stock.SaveChangesAsync();
+            Task<int> incoiceToAddT = _repositoryWrapper.Invoice.SaveChangesAsync();
 
-            await Task.WhenAll(productionToAddT, stockInToAddT, payableToAddT, stockToAddT);
+            await Task.WhenAll(productionToAddT, stockInToAddT, payableToAddT, stockToAddT, incoiceToAddT);
 
             var dataParam = new GetDataListVM()
             {
@@ -151,7 +179,7 @@ namespace Service.BusinessServices
             Task<IEnumerable<Production>> productionT =  _repositoryWrapper.Production.FindByConditionAsync(x => x.Id == itemTemp.Id && x.FactoryId == itemTemp.FactoryId);
             Task<IEnumerable<Stock>> stockT =  _repositoryWrapper.Stock.FindByConditionAsync(x => x.FactoryId == itemTemp.FactoryId && x.ItemId == itemTemp.ItemId);
             Task<IEnumerable<Payable>> payableT =  _repositoryWrapper.Payable.FindByConditionAsync(x => x.FactoryId == itemTemp.FactoryId && x.ClientId == itemTemp.StaffId && x.Amount == itemTemp.TotalAmount && x.ProductionId == itemTemp.Id);
-            Task<IEnumerable<StockIn>> stockInT = _repositoryWrapper.StockIn.FindByConditionAsync(x => x.FactoryId == itemTemp.FactoryId && x.SupplierId == itemTemp.StaffId && x.ProductionId == itemTemp.ProductionId);
+            Task<IEnumerable<StockIn>> stockInT = _repositoryWrapper.StockIn.FindByConditionAsync(x => x.FactoryId == itemTemp.FactoryId && x.SupplierId == itemTemp.StaffId && x.ProductionId == itemTemp.Id);
 
             await Task.WhenAll(productionT, stockT, payableT, stockInT);
 

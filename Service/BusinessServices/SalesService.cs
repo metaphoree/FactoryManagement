@@ -4,7 +4,9 @@ using Contracts;
 using Contracts.ServiceContracts;
 using Entities.DbModels;
 using Entities.Enums;
+using Entities.ViewModels;
 using Entities.ViewModels.Sales;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -31,7 +33,7 @@ namespace Service.BusinessServices
         // Stock
         // StockOut
         // Transaction
-        public async Task AddSalesAsync(SalesVM salesVM)
+        public async Task<WrapperSalesListVM> AddSalesAsync(SalesVM salesVM)
         {
 
             // Invoice
@@ -90,7 +92,7 @@ namespace Service.BusinessServices
                     else {
 
                         _utilService.Log("Stock Is Empty");
-                        return;
+                        return new WrapperSalesListVM();
                     }
                 }
             }
@@ -126,7 +128,61 @@ namespace Service.BusinessServices
             Task<int> StockOut = _repositoryWrapper.StockOut.SaveChangesAsync();
             Task<int> Transaction = _repositoryWrapper.Transaction.SaveChangesAsync();
             await Task.WhenAll(Invoice, Income, Recievable, Sales, Stock, StockOut, Transaction);
+
+
+
+
+
+            var getDatalistVM = new GetDataListVM()
+            {
+                FactoryId = salesVM.FactoryId,
+                PageNumber = 1,
+                PageSize = 10
+            };
+
+
+            return await GetAllSalesAsync(getDatalistVM);
+
         }
 
+        public async Task<WrapperSalesListVM> GetAllSalesAsync(GetDataListVM getDataListVM)
+        {
+            WrapperSalesListVM vm = new WrapperSalesListVM();
+            List<SalesVM> vmList = new List<SalesVM>();
+
+            Task<List<Invoice>> invoicesT = _repositoryWrapper
+                .Invoice
+                .FindAll()
+                .Include(x => x.Customer)
+                .Include(x => x.InvoiceType)
+                .Where(x => x.FactoryId == getDataListVM.FactoryId
+                && x.InvoiceType.Name == TypeInvoice.Sales.ToString())
+                .Skip((getDataListVM.PageNumber - 1) * (getDataListVM.PageSize))
+                .Take(getDataListVM.PageSize)
+                .ToListAsync();
+
+
+            Task<List<Sales>> salesT = _repositoryWrapper
+                .Sales
+                .FindAll()
+                .Where(x => x.FactoryId == getDataListVM.FactoryId)
+                .Include(x => x.Item)
+                .ThenInclude(s => s.ItemCategory)
+                .ToListAsync();
+
+            await Task.WhenAll(invoicesT, salesT);
+            List<Sales> dbListSales = salesT.Result.ToList();
+            vmList = _utilService.Mapper.Map<List<Invoice>, List<SalesVM>>(invoicesT.Result.ToList());
+            List<Sales> temp = new List<Sales>();
+
+            for (int i = 0; i < vmList.Count; i++)
+            {
+                temp = dbListSales.Where(x => x.InvoiceId == vmList.ElementAt(i).InvoiceId).ToList();
+                vmList.ElementAt(i).ItemList = _utilService.Mapper.Map<List<Sales>, List<SalesItemVM>>(temp);
+            }
+            vm.ListOfData = vmList;
+            vm.TotalRecoreds = invoicesT.Result.ToList().Count;
+            return vm;
+        }
     }
 }

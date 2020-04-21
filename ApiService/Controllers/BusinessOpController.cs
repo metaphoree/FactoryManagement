@@ -56,14 +56,20 @@ namespace ApiService.Controllers
 
         [HttpPost]
         [Route("purchase/add")]
-        public async Task AddPurchase([FromBody]PurchaseVM purchase)
+        public async Task<WrapperPurchaseListVM> AddPurchase([FromBody]PurchaseVM purchase)
         {
-             await _serviceWrapper.PurchaseService.AddPurchaseAsync(purchase);       
+            return await _serviceWrapper.PurchaseService.AddPurchaseAsync(purchase);       
         }
 
+        [HttpPost]
+        [Route("purchase/getAll")]
+        public async Task<WrapperPurchaseListVM> GetAllPurchase([FromBody]GetDataListVM purchase)
+        {
+           return await _serviceWrapper.PurchaseService.GetAllPurchaseAsync(purchase);
+        }
         #endregion
-   
-        
+
+
         #region Sales
         [HttpPost]
         [Route("sales/getInitData")]
@@ -74,16 +80,23 @@ namespace ApiService.Controllers
 
         [HttpPost]
         [Route("sales/add")]
-        public async Task AddSales([FromBody]SalesVM sales)
+        public async Task<WrapperSalesListVM> AddSales([FromBody]SalesVM sales)
         {
-             await _serviceWrapper.SalesService.AddSalesAsync(sales);
+           return  await _serviceWrapper.SalesService.AddSalesAsync(sales);
+        }
+
+        [HttpPost]
+        [Route("sales/getAll")]
+        public async Task<WrapperSalesListVM> GetAllSales([FromBody]GetDataListVM purchase)
+        {
+            return await _serviceWrapper.SalesService.GetAllSalesAsync(purchase);
         }
 
         #endregion
-        
-        
+
+
         #region Payment
-       
+
         #region Supplier
         [HttpPost]
         [Route("supplier/payment")]
@@ -160,7 +173,7 @@ namespace ApiService.Controllers
         #region Customer
         [HttpPost]
         [Route("supplier/history")]
-        public async Task<WrapperSupplierHistory> SupplierHistory([FromBody]SupplierVM vm)
+        public async Task<WrapperSupplierHistory> SupplierHistory([FromBody]GetDataListHistory vm)
         {
             return await _businessService.BusinessWrapperService.GetSupplierHistory(vm);
         }
@@ -169,7 +182,7 @@ namespace ApiService.Controllers
         #region Staff
         [HttpPost]
         [Route("staff/history")]
-        public async Task<WrapperStaffHistory> StaffHistory([FromBody]StaffVM vm)
+        public async Task<WrapperStaffHistory> StaffHistory([FromBody]GetDataListHistory vm)
         {
             return await _businessService.BusinessWrapperService.GetStaffHistory(vm);
         }
@@ -177,7 +190,7 @@ namespace ApiService.Controllers
         #region Supplier
         [HttpPost]
         [Route("customer/history")]
-        public async Task<WrapperCustomerHistory> CustomerHistory([FromBody]CustomerVM vm)
+        public async Task<WrapperCustomerHistory> CustomerHistory([FromBody]GetDataListHistory vm)
         {
             return await _businessService.BusinessWrapperService.GetCustomerHistory(vm);
         }

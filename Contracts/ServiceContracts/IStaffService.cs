@@ -1,4 +1,5 @@
 ﻿using Entities.ViewModels;
+using Entities.ViewModels.Payment;
 using Entities.ViewModels.Staff;
 using System;
 using System.Collections.Generic;
@@ -13,5 +14,11 @@ namespace Contracts.ServiceContracts
         Task<WrapperStaffListVM> Update(string id, StaffVM updateCustomerViewModel);
         Task<WrapperStaffListVM> GetListPaged(GetDataListVM dataListVM);
         Task<WrapperStaffListVM> Delete(StaffVM customerTemp);
+        Task<WrapperStaffHistory> GetStaffHistory(GetDataListHistory staffVM);
+
+        Task<WrapperPaymentListVM> GetStaffPaymentList(GetPaymentDataListVM vm);
+        Task<WrapperPaymentListVM> PayToStaff(PaymentVM paymentVM);
+        Task<WrapperPaymentListVM> DeleteStaffPayment(PaymentVM vm);
+        StaffHistory GetStaffHistoryOverview(WrapperStaffHistory list);
     }
 }

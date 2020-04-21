@@ -19,6 +19,7 @@ namespace Entities.ViewModels.Staff
         public long RecievedAmount { get; set; }
         public long PayableAmount { get; set; }
         public long RecievableAmount { get; set; }
+        public long InvoiceTotalAfterDiscount { get; set; }
         public DateTime OccurranceDate { get; set; }
         public string Type { get; set; }
     }

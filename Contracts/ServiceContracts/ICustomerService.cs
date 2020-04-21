@@ -1,5 +1,6 @@
 ﻿using Entities.ViewModels;
 using Entities.ViewModels.CustomerView;
+using Entities.ViewModels.Payment;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -15,5 +16,10 @@ namespace Contracts.ServiceContracts
         //Task<CustomerVM> GetSingle(string cusId, string FactoryId);
         Task<WrapperListCustomerVM> GetListPaged(GetDataListVM dataListVM);
         Task<WrapperListCustomerVM> Delete(CustomerVM customerTemp);
+        Task<WrapperCustomerHistory> GetCustomerHistory(GetDataListHistory customerVM);
+        Task<WrapperPaymentListVM> GetCustomerPaymentList(Entities.ViewModels.Payment.GetPaymentDataListVM vm);
+        Task<WrapperPaymentListVM> RecieveFromCustomer(Entities.ViewModels.Payment.PaymentVM paymentVM);
+        Task<WrapperPaymentListVM> DeleteCustomerPayment(Entities.ViewModels.Payment.PaymentVM vm);
+        CustomerHistory GetCustomerHistoryOverview(WrapperCustomerHistory list);
     }
 }

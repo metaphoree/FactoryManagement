@@ -19,5 +19,15 @@ namespace Entities.ViewModels.Staff
 
         public string FactoryId { get; set; }
         public string Id { get; set; }
+
+
+
+
+        public long PaidAmount { get; set; }
+        public long RecievedAmount { get; set; }
+        public long PayableAmount { get; set; }
+        public long RecievableAmount { get; set; }
+
+
     }
 }

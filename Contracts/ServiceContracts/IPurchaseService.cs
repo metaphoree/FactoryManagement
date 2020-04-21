@@ -1,4 +1,5 @@
-﻿using Entities.ViewModels.Purchase;
+﻿using Entities.ViewModels;
+using Entities.ViewModels.Purchase;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -8,6 +9,7 @@ namespace Contracts.ServiceContracts
 {
     public interface IPurchaseService
     {
-        Task AddPurchaseAsync(PurchaseVM purchaseVM);
+        Task<WrapperPurchaseListVM> AddPurchaseAsync(PurchaseVM purchaseVM);
+        Task<WrapperPurchaseListVM> GetAllPurchaseAsync(GetDataListVM getDataListVM);
     }
 }

@@ -35,21 +35,26 @@ namespace Repository
         }
         public IQueryable<T> FindAll()
         {
+            util.LogInfo("---STARTED FINDING ----" + typeof(T).Name.ToUpper() + "----------");
             return this.RepositoryContext.Set<T>().AsNoTracking();
         }
 
         public async Task<IEnumerable<T>> FindAllAsync()
         {
+            util.LogInfo("---STARTED FINDING ----" + typeof(T).Name.ToUpper() + "----------");
             return await this.FindAll().ToListAsync();
         }
 
         public IQueryable<T> FindByCondition(Expression<Func<T, bool>> expression)
         {
+            util.LogInfo("---STARTED FINDING ----" + typeof(T).Name.ToUpper() + "----------");
             return this.RepositoryContext.Set<T>().Where(expression).AsNoTracking();
         }
 
         public async Task<IEnumerable<T>> FindByConditionAsync(Expression<Func<T, bool>> expression)
         {
+            util.LogInfo("---STARTED FINDING ----" + typeof(T).Name.ToUpper() + "----------");
+            util.LogInfo(expression.ToString());
             return await this.FindByCondition(expression).ToListAsync();
         }
 

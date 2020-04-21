@@ -9,6 +9,8 @@ namespace Entities.ViewModels.Sales
 {
    public class SalesVM
     {
+        public string CustomerName { get; set; }
+
         public CustomerVM CustomerVM { get; set; }
         public InvoiceTypeVM InvoiceType { get; set; }
         public IncomeTypeVM IncomeType { get; set; }

@@ -9,6 +9,7 @@ namespace Entities.ViewModels.Production
         public string Id { get; set; }
         public string FactoryId { get; set; }
 
+        public string InvoiceTypeId { get; set; }
         public string ExecutorId { get; set; }
         public string StaffId { get; set; }
         public string StaffName { get; set; }

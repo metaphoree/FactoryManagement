@@ -2,8 +2,10 @@
 using Contracts;
 using Contracts.ServiceContracts;
 using Entities.DbModels;
+using Entities.Enums;
 using Entities.ViewModels;
 using Entities.ViewModels.CustomerView;
+using Entities.ViewModels.Payment;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -26,8 +28,8 @@ namespace Service.BusinessServices
         public async Task<WrapperListCustomerVM> Add(CustomerVM addCustomerViewModel)
         {
             var CustomerDT = _utilService.GetMapper().Map<CustomerVM, Customer>(addCustomerViewModel);
-         //   var AddressDT = _mapper.Map<AddCustomerViewModel, Address>(addCustomerViewModel);
-          //  var PhoneDT = _mapper.Map<AddCustomerViewModel, Phone>(addCustomerViewModel);
+            //   var AddressDT = _mapper.Map<AddCustomerViewModel, Address>(addCustomerViewModel);
+            //  var PhoneDT = _mapper.Map<AddCustomerViewModel, Phone>(addCustomerViewModel);
 
             //Task<string> cusUnique = _repositoryWrapper.Customer.GetUniqueId();
             //Task<string> addressUnique = _repositoryWrapper.Address.GetUniqueId();
@@ -51,7 +53,7 @@ namespace Service.BusinessServices
             //// await _repositoryWrapper.SaveAsync();
             await Task.WhenAll(t1);
             this._utilService.Log("Successful In saving");
-           
+
             var dataParam = new GetDataListVM()
             {
                 FactoryId = addCustomerViewModel.FactoryId,
@@ -100,15 +102,15 @@ namespace Service.BusinessServices
             };
             WrapperListCustomerVM data = await GetListPaged(dataParam);
             return data;
-        }      
+        }
         public async Task<WrapperListCustomerVM> GetListPaged(GetDataListVM dataListVM)
         {
             IEnumerable<Customer> custListTask = await _repositoryWrapper.Customer.FindByConditionAsync(x => x.FactoryId == dataListVM.FactoryId);
             //Task<IEnumerable<Address>> addressListTask = _repositoryWrapper.Address.FindByConditionAsync(x => x.FactoryId == dataListVM.FactoryId);
             //Task<IEnumerable<Phone>> phoneListTask = _repositoryWrapper.Phone.FindByConditionAsync(x => x.FactoryId == dataListVM.FactoryId);
             long noOfRecordTask = await _repositoryWrapper.Customer.NumOfRecord();
-           // await Task.WhenAll(custListTask);
-           // await Task.WhenAll(noOfRecordTask);
+            // await Task.WhenAll(custListTask);
+            // await Task.WhenAll(noOfRecordTask);
 
             List<Customer> custList = custListTask.ToList().OrderByDescending(x => x.UpdatedDateTime).ToList();//.Skip((dataListVM.PageNumber - 1) * dataListVM.PageSize).Take(dataListVM.PageSize).OrderByDescending(x => x.CreatedDateTime).ToList();
             //List<Address> addressList = addressListTask.Result.ToList();
@@ -117,7 +119,8 @@ namespace Service.BusinessServices
             List<CustomerVM> outputList = new List<CustomerVM>();
 
             outputList = _utilService.GetMapper().Map<List<Customer>, List<CustomerVM>>(custList);
-            if (!string.IsNullOrEmpty(dataListVM.GlobalFilter) && !string.IsNullOrWhiteSpace(dataListVM.GlobalFilter)) {
+            if (!string.IsNullOrEmpty(dataListVM.GlobalFilter) && !string.IsNullOrWhiteSpace(dataListVM.GlobalFilter))
+            {
                 outputList = outputList.Where(output =>
                 output.AlternateCellNo != null ? output.AlternateCellNo.Contains(dataListVM.GlobalFilter, StringComparison.OrdinalIgnoreCase) : false
                             || output.CellNo != null ? output.CellNo.Contains(dataListVM.GlobalFilter, StringComparison.OrdinalIgnoreCase) : false
@@ -126,7 +129,7 @@ namespace Service.BusinessServices
                              || output.PermanentAddress != null ? output.PermanentAddress.Contains(dataListVM.GlobalFilter, StringComparison.OrdinalIgnoreCase) : false
                               || output.PresentAddress != null ? output.PresentAddress.Contains(dataListVM.GlobalFilter, StringComparison.OrdinalIgnoreCase) : false).ToList();
             }
-                //for (int i = 0; i < custList.Count(); i++)
+            //for (int i = 0; i < custList.Count(); i++)
             //{
             //    var tempCustomer = custList.ElementAt(i);
             //    //var tempAddress = addressList.Where(x => x.RelatedId == tempCustomer.Id).FirstOrDefault();
@@ -158,6 +161,8 @@ namespace Service.BusinessServices
             data.ListOfData = outputList;
             data.TotalRecoreds = noOfRecordTask;
 
+            data = await SetHistoryOverview(data);
+
             return data;
         }
         public async Task<WrapperListCustomerVM> Delete(CustomerVM customerTemp)
@@ -180,17 +185,6 @@ namespace Service.BusinessServices
             WrapperListCustomerVM data = await GetListPaged(dataParam);
             return data;
         }
-
-
-
-
-
-
-
-
-
-
-
 
         //public async Task<List<CustomerVM>> GetList(string FactoryId)
         //{
@@ -241,6 +235,236 @@ namespace Service.BusinessServices
         //    return _mapper.Map<ListCustomerVM, UpdateCustomerViewModel>(output);
 
         //}
+        public async Task<WrapperCustomerHistory> GetCustomerHistory(GetDataListHistory customerVM)
+        {
+            WrapperCustomerHistory custHist = new WrapperCustomerHistory();
+            WrapperCustomerHistory returnCustHist = new WrapperCustomerHistory();
+            // Sales -- Sales Invoice Generated
+            // Invoice
+            // Income -- Payment Invoice Generated
+            Task<List<Sales>> listSalesT =
+                _repositoryWrapper
+                .Sales
+                .FindAll()
+                .Where(x => x.FactoryId == customerVM.FactoryId
+                && x.ClientId == customerVM.ClientId)
+                .Include(x => x.Item)
+                .Include(x => x.Item.ItemCategory)
+                .ToListAsync();
+
+            Task<List<Invoice>> listInvoiceT =
+                _repositoryWrapper
+                .Invoice
+                .FindAll()
+                .Where(x => x.FactoryId == customerVM.FactoryId
+                && x.ClientId == customerVM.ClientId)
+                .Include(x => x.InvoiceType)
+                .Where(x => x.InvoiceType.Name == TypeInvoice.Sales.ToString())
+                .ToListAsync();
+
+            Task<List<Income>> listIncomeT =
+                _repositoryWrapper
+                .Income
+                .FindAll()
+                .Where(x => x.FactoryId == customerVM.FactoryId
+                 && x.ClientId == customerVM.ClientId)
+                .Include(x => x.IncomeType)
+                .Where(x => x.IncomeType.Name == TypeIncome.ClientPaymentRecieved.ToString())
+                .ToListAsync();
+
+            await Task.WhenAll(listSalesT, listInvoiceT, listIncomeT);
+
+            List<CustomerHistory> custHistInvoice = _utilService.Mapper.Map<List<Invoice>, List<CustomerHistory>>(listInvoiceT.Result.ToList());
+            List<CustomerHistory> custHistIncome = _utilService.Mapper.Map<List<Income>, List<CustomerHistory>>(listIncomeT.Result.ToList());
+            List<CustomerHistory> custHistSales = _utilService.Mapper.Map<List<Sales>, List<CustomerHistory>>(listSalesT.Result.ToList());
+
+
+            custHist.ListOfData.AddRange(custHistInvoice);
+            custHist.ListOfData.AddRange(custHistIncome);
+            custHist.ListOfData = custHist.ListOfData.OrderBy(x => x.OccurranceDate).ToList();
+            for (int i = 0; i < custHist.ListOfData.Count(); i++)
+            {
+                IEnumerable<CustomerHistory> tempList = new List<CustomerHistory>();
+                if (custHist.ListOfData.ElementAt(i).Type == "InvoiceItem")
+                {
+                    tempList = custHistSales.Where(x => x.InvoiceId == custHist.ListOfData.ElementAt(i).InvoiceId);
+                    returnCustHist.ListOfData.AddRange(tempList);
+                    returnCustHist.ListOfData.Add(custHist.ListOfData.ElementAt(i));
+
+
+                }
+                else
+                {
+                    returnCustHist.ListOfData.Add(custHist.ListOfData.ElementAt(i));
+                }
+            }
+            var staffHist = GetCustomerHistoryOverview(returnCustHist);
+            returnCustHist.ListOfData = returnCustHist.ListOfData
+                                    .Skip((customerVM.PageNumber - 1) * customerVM.PageSize)
+                                    .Take(customerVM.PageSize)
+                                    .ToList();
+            returnCustHist.ListOfData.Add(staffHist);
+            return returnCustHist;
+        }
+
+
+
+        public async Task<WrapperPaymentListVM> GetCustomerPaymentList(GetPaymentDataListVM vm)
+        {
+            Task<List<Invoice>> paymentInvoiceListT = _repositoryWrapper
+                       .Invoice
+                       .FindAll()
+                       .Include(x => x.InvoiceType)
+                       .Include(x => x.Customer)
+                       .Where(x =>
+                       (x.InvoiceType.Name == TypeInvoice.ClientPayment.ToString()
+                       || x.InvoiceType.Name == TypeInvoice.Sales.ToString())
+                        && x.ClientId == vm.ClientId
+                        && x.FactoryId == vm.FactoryId)
+                       .OrderByDescending(x => x.DateOfOcurrance)
+                       .Skip((vm.PageNumber - 1) * vm.PageSize)
+                       .Take(vm.PageSize)
+                       .ToListAsync();
+            await paymentInvoiceListT;
+            WrapperPaymentListVM wrapperPaymentListVM = new WrapperPaymentListVM();
+            wrapperPaymentListVM.ListOfData = _utilService.Mapper.Map<List<Invoice>, List<PaymentVM>>(paymentInvoiceListT.Result.ToList());
+            return wrapperPaymentListVM;
+        }
+        public async Task<WrapperPaymentListVM> RecieveFromCustomer(PaymentVM paymentVM)
+        {
+            Invoice invoiceToAdd = new Invoice();
+            invoiceToAdd = _utilService.Mapper.Map<PaymentVM, Invoice>(paymentVM);
+            _repositoryWrapper.Invoice.Create(invoiceToAdd);
+            paymentVM.InvoiceId = invoiceToAdd.Id;
+
+
+            Income incomeToAdd = new Income();
+            incomeToAdd = _utilService.Mapper.Map<PaymentVM, Income>(paymentVM);
+            _repositoryWrapper.Income.Create(incomeToAdd);
+
+            TblTransaction transactionToAdd = new TblTransaction();
+            transactionToAdd = _utilService.Mapper.Map<PaymentVM, TblTransaction>(paymentVM);
+            transactionToAdd.PaymentStatus = PAYMENT_STATUS.CASH_RECIEVED.ToString();
+            transactionToAdd.TransactionType = TRANSACTION_TYPE.CREDIT.ToString();
+            _repositoryWrapper.Transaction.Create(transactionToAdd);
+
+            Task<int> t1 = _repositoryWrapper.Invoice.SaveChangesAsync();
+            Task<int> t2 = _repositoryWrapper.Income.SaveChangesAsync();
+            Task<int> t3 = _repositoryWrapper.Transaction.SaveChangesAsync();
+
+            await Task.WhenAll(t1, t2, t3);
+
+            var item = new GetPaymentDataListVM();
+            item.ClientId = paymentVM.ClientId;
+            item.FactoryId = paymentVM.FactoryId;
+            item.PageNumber = 1;
+            item.PageSize = 10;
+
+            return await GetCustomerPaymentList(item);
+
+        }
+        public async Task<WrapperPaymentListVM> DeleteCustomerPayment(PaymentVM vm)
+        {
+            Task<List<Invoice>> paymentInvoiceListT = _repositoryWrapper
+              .Invoice
+              .FindAll()
+              .Include(x => x.InvoiceType)
+              .Where(x =>
+               x.InvoiceType.Name == TypeInvoice.ClientPayment.ToString()
+              && x.ClientId == vm.ClientId
+              && x.FactoryId == vm.FactoryId
+              && vm.InvoiceId == x.Id)
+              .ToListAsync();
+
+            Task<List<Income>> paymentIncomeListT = _repositoryWrapper
+              .Income
+              .FindAll()
+              .Where(x =>
+               x.ClientId == vm.ClientId
+              && x.FactoryId == vm.FactoryId
+              && x.InvoiceId == vm.InvoiceId)
+              .ToListAsync();
+
+            Task<List<TblTransaction>> paymentTransactionListT = _repositoryWrapper
+                  .Transaction
+                  .FindAll()
+                  .Where(x =>
+                   x.ClientId == vm.ClientId
+                  && x.FactoryId == vm.FactoryId
+                  && x.InvoiceId == vm.InvoiceId)
+                  .ToListAsync();
+
+            await Task.WhenAll(paymentInvoiceListT, paymentIncomeListT, paymentTransactionListT);
+
+
+            _repositoryWrapper.Transaction.Delete(paymentTransactionListT.Result.FirstOrDefault());
+            _repositoryWrapper.Invoice.Delete(paymentInvoiceListT.Result.FirstOrDefault());
+            _repositoryWrapper.Income.Delete(paymentIncomeListT.Result.FirstOrDefault());
+
+            Task<int> t1 = _repositoryWrapper.Transaction.SaveChangesAsync();
+            Task<int> t2 = _repositoryWrapper.Invoice.SaveChangesAsync();
+            Task<int> t3 = _repositoryWrapper.Income.SaveChangesAsync();
+
+            await Task.WhenAll(t1, t2, t3);
+
+            var item = new GetPaymentDataListVM();
+            item.ClientId = vm.ClientId;
+            item.FactoryId = vm.FactoryId;
+            item.PageNumber = 1;
+            item.PageSize = 10;
+
+            return await GetCustomerPaymentList(item);
+        }
+
+        public CustomerHistory GetCustomerHistoryOverview(WrapperCustomerHistory list)
+        {
+            CustomerHistory history = new CustomerHistory();
+            for (int i = 0; i < list.ListOfData.Count; i++)
+            {
+                CustomerHistory temp = list.ListOfData.ElementAt(i);
+                if (temp.Type == "InvoiceItem")
+                {
+                    history.RecievableAmount += temp.RecievableAmount;
+                    history.RecievedAmount += temp.RecievedAmount;
+                }
+                else if (temp.Type == "SaleItem")
+                {
+
+                }
+                else if (temp.Type == "IncomeItem")
+                {
+                    history.RecievedAmount += temp.RecievedAmount;
+                }
+            }
+            return history;
+        }
+
+
+        private async Task<WrapperListCustomerVM> SetHistoryOverview(WrapperListCustomerVM vm)
+        {
+            var data = new GetDataListHistory();
+            Task<WrapperCustomerHistory>[] listOftask = new Task<WrapperCustomerHistory>[vm.ListOfData.Count];
+            for (int i = 0; i < vm.ListOfData.Count; i++)
+            {
+                CustomerVM temp = vm.ListOfData.ElementAt(i);
+                data.ClientId = temp.CustomerId;
+                data.PageNumber = -1;
+                listOftask[i] = GetCustomerHistory(data);
+            }
+
+            await Task.WhenAll(listOftask);
+
+            for (int i = 0; i < vm.ListOfData.Count; i++)
+            {
+                CustomerHistory te = GetCustomerHistoryOverview(listOftask[i].Result);
+                vm.ListOfData.ElementAt(i).PaidAmount = te.PaidAmount;
+                vm.ListOfData.ElementAt(i).RecievableAmount = te.RecievableAmount;
+                vm.ListOfData.ElementAt(i).RecievedAmount = te.RecievedAmount;
+                vm.ListOfData.ElementAt(i).PayableAmount = te.PayableAmount;
+            }
+            return vm;
+        }
+
 
     }
 }
