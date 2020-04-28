@@ -5,10 +5,22 @@ using System.Text;
 namespace Entities.Enums
 {
 
+
+    public enum TransactionPurpose { 
+    SalesReturnPayment,
+    PurchaseReturnPayment,
+        SalesPayment,
+        PurchasePayment
+
+
+    }
+
     public enum PayablePurpose
     {
         StaffPaymentDue,
-        PurchaseDue
+        PurchaseDue,
+        PurchaseReturnDue,
+        SalesReturnDue
     }
 
     public enum StatusItem

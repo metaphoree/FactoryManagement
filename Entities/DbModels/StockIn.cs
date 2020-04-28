@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Entities.DbModels
 {
@@ -18,5 +19,12 @@ namespace Entities.DbModels
         public DateTime ExpiryDate { get; set; }
         public DateTime AddedDateTime { get; set; }
         public string ProductionId { get; set; }
+
+        [ForeignKey("ItemId")]
+        public virtual Item Item { get; set; }
+
+        [ForeignKey("ItemStatusId")]
+        public virtual ItemStatus ItemStatus { get; set; }
+
     }
 }

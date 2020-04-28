@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using CommonUtils.Exception.Sales;
 using Contracts;
 using Contracts.ServiceContracts;
 using Entities.DbModels;
@@ -131,7 +132,6 @@ namespace Service.BusinessServices
             return await GetAllPurchaseAsync(getDatalistVM);
 
         }
-
         public async Task<WrapperPurchaseListVM> GetAllPurchaseAsync(GetDataListVM getDataListVM)
         {
             WrapperPurchaseListVM vm = new WrapperPurchaseListVM();
@@ -173,6 +173,137 @@ namespace Service.BusinessServices
             vm.TotalRecoreds = invoicesT.Result.ToList().Count;
             return vm;
         }
+
+
+        public async Task AddPurchaseReturn(PurchaseReturnVM vm)
+        {
+            // StockOut
+            // Invoice
+            // Recievable
+            // Stock
+            Invoice invoiceToAdd = new Invoice();
+            invoiceToAdd = _utilService.Mapper.Map<PurchaseReturnVM, Invoice>(vm);
+            _repositoryWrapper.Invoice.Create(invoiceToAdd);
+            vm.InvoiceId = invoiceToAdd.Id;
+
+            Recievable RecievableToAdd = new Recievable();
+            RecievableToAdd = _utilService.Mapper.Map<PurchaseReturnVM, Recievable>(vm);
+
+
+            Stock stockToAdd = new Stock();
+            stockToAdd = _utilService.Mapper.Map<PurchaseReturnVM, Stock>(vm);
+
+            // Stock
+            IEnumerable<Stock> stockList = await _repositoryWrapper.Stock.FindByConditionAsync(x => x.FactoryId == vm.FactoryId);
+            Stock existingStock = stockList.ToList().Where(x => x.ItemId == vm.ItemId).FirstOrDefault();
+            // IF NOT PRESENT ADD
+            if (existingStock == null)
+            {
+                _utilService.Log("Stock Is Empty. Not Enough Stock available");
+                throw new StockEmptyException();
+                //stockToAdd = _utilService.Mapper.Map<SalesItemVM, Stock>(salesVM.ItemList[i]);
+                //_repositoryWrapper.Stock.Create(stockToAdd);
+            }
+            // IF PRESENT UPDATE
+            else
+            {
+                existingStock.Quantity -= vm.Quantity;
+                _repositoryWrapper.Stock.Update(existingStock);
+            }
+
+            StockOut stockOutToAdd = new StockOut();
+            stockOutToAdd = _utilService.Mapper.Map<PurchaseReturnVM, StockOut>(vm);
+
+            _repositoryWrapper.StockOut.Create(stockOutToAdd);
+            _repositoryWrapper.Recievable.Create(RecievableToAdd);
+
+            if (vm.AmountRecieved > 0)
+            {
+                TblTransaction tblTransactionToAdd = new TblTransaction();
+                tblTransactionToAdd = _utilService.Mapper.Map<PurchaseReturnVM, TblTransaction>(vm);
+                _repositoryWrapper.Transaction.Create(tblTransactionToAdd);
+            }
+
+
+
+
+            Task<int> invT = _repositoryWrapper.Invoice.SaveChangesAsync();
+            Task<int> stockInT = _repositoryWrapper.StockOut.SaveChangesAsync();
+            Task<int> stockT = _repositoryWrapper.Stock.SaveChangesAsync();
+            Task<int> payableT = _repositoryWrapper.Recievable.SaveChangesAsync();
+            Task<int> transactionT = _repositoryWrapper.Transaction.SaveChangesAsync();
+
+
+            await Task.WhenAll(invT, stockInT, stockT, payableT, transactionT);
+
+        }
+
+
+
+
+
+
+        public async Task<WrapperPurchaseReturnVM> GetAllPurchaseReturn(GetDataListVM getDataListVM)
+        {
+            // Invoice
+            // StockOut
+            WrapperPurchaseReturnVM vm = new WrapperPurchaseReturnVM();
+
+            List<PurchaseReturnVM> vmList = new List<PurchaseReturnVM>();
+
+            Task<List<Invoice>> invoicesT = _repositoryWrapper
+                .Invoice
+                .FindAll()
+                .Include(x => x.Supplier)
+                .Include(x => x.InvoiceType)
+                .Where(x => x.FactoryId == getDataListVM.FactoryId
+                && x.InvoiceType.Name == TypeInvoice.PurchaseReturn.ToString())
+                //.Skip((getDataListVM.PageNumber - 1) * (getDataListVM.PageSize))
+                //.Take(getDataListVM.PageSize)
+                .ToListAsync();
+
+            Task<List<StockOut>> stockOutT = _repositoryWrapper
+                .StockOut
+                .FindAll()
+                .Include(x => x.Item)
+                .ThenInclude(x => x.ItemCategory)
+                .Include(x => x.ItemStatus)
+                .Where(x => x.FactoryId == getDataListVM.FactoryId)
+                //.Skip((getDataListVM.PageNumber - 1) * (getDataListVM.PageSize))
+                //.Take(getDataListVM.PageSize)
+                .ToListAsync();
+
+            await Task.WhenAll(invoicesT, stockOutT);
+            List<Invoice> invoiceList = invoicesT.Result.ToList();
+            List<StockOut> stockOutList = stockOutT.Result.ToList();
+
+
+            PurchaseReturnVM vc = new PurchaseReturnVM();
+            for (int i = 0; i < invoiceList.Count; i++)
+            {
+                vc = new PurchaseReturnVM();
+                Invoice temp = invoiceList.ElementAt(i);
+                vc = _utilService.Mapper.Map<Invoice, PurchaseReturnVM>(temp,vc);
+                vc = _utilService.Mapper.Map<StockOut, PurchaseReturnVM>(stockOutList.Where(x => x.InvoiceId ==
+                temp.Id).ToList().FirstOrDefault(),vc);
+                vmList.Add(vc);
+            }
+
+            vm.NumberOfRecords = vmList.Count;
+            vm.ListOfData = 
+                vmList
+                .OrderByDescending(x => x.OccurranceDate) 
+                .Skip((getDataListVM.PageNumber - 1) * (getDataListVM.PageSize))
+                .Take(getDataListVM.PageSize)
+                .ToList();
+
+            return vm;
+        }
+
+
+
+
+
 
 
     }
