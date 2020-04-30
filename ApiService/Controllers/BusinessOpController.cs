@@ -7,9 +7,13 @@ using Contracts;
 using Entities.DbModels;
 using Entities.ViewModels;
 using Entities.ViewModels.CustomerView;
+using Entities.ViewModels.Expense;
+using Entities.ViewModels.Income;
+using Entities.ViewModels.Payable;
 using Entities.ViewModels.Payment;
 using Entities.ViewModels.Production;
 using Entities.ViewModels.Purchase;
+using Entities.ViewModels.Recievable;
 using Entities.ViewModels.Sales;
 using Entities.ViewModels.Staff;
 using Entities.ViewModels.Supplier;
@@ -102,19 +106,19 @@ namespace ApiService.Controllers
         [Route("supplier/payment")]
         public async Task<WrapperPaymentListVM> SupplierPay([FromBody]PaymentVM vm)
         {
-            return await _businessService.BusinessWrapperService.PayToSupplier(vm);
+            return await _serviceWrapper.SupplierService.PayToSupplier(vm);
         }
         [HttpPost]
         [Route("supplier/payment/list")]
         public async Task<WrapperPaymentListVM> SupplierPaymentList([FromBody]GetPaymentDataListVM vm)
         {
-            return await _businessService.BusinessWrapperService.GetSupplierPaymentList(vm);
+            return await _serviceWrapper.SupplierService.GetSupplierPaymentList(vm);
         }
         [HttpPost]
         [Route("supplier/payment/delete")]
         public async Task<WrapperPaymentListVM> SupplierPaymentDelete([FromBody]PaymentVM vm)
         {
-            return await _businessService.BusinessWrapperService.DeleteSupplierPayment(vm);
+            return await _serviceWrapper.SupplierService.DeleteSupplierPayment(vm);
         }
         #endregion
         #region Staff
@@ -122,7 +126,7 @@ namespace ApiService.Controllers
         [Route("staff/payment")]
         public async Task<WrapperPaymentListVM> StaffPay([FromBody]PaymentVM vm)
         {
-            return await _businessService.BusinessWrapperService.PayToStaff(vm);
+            return await _serviceWrapper.StaffService.PayToStaff(vm);
         }
 
         [HttpPost]
@@ -135,13 +139,13 @@ namespace ApiService.Controllers
         [Route("staff/payment/list")]
         public async Task<WrapperPaymentListVM> StaffPaymentList([FromBody]GetPaymentDataListVM vm)
         {
-            return await _businessService.BusinessWrapperService.GetStaffPaymentList(vm);
+            return await _serviceWrapper.StaffService.GetStaffPaymentList(vm);
         }
         [HttpPost]
         [Route("staff/payment/delete")]
         public async Task<WrapperPaymentListVM> StaffPaymentDelete([FromBody]PaymentVM vm)
         {
-            return await _businessService.BusinessWrapperService.DeleteStaffPayment(vm);
+            return await _serviceWrapper.StaffService.DeleteStaffPayment(vm);
         }
         #endregion
         #region Customer
@@ -149,19 +153,19 @@ namespace ApiService.Controllers
         [Route("customer/payment")]
         public async Task<WrapperPaymentListVM> CustomerCash([FromBody]PaymentVM vm)
         {
-            return await _businessService.BusinessWrapperService.RecieveFromCustomer(vm);
+            return await _serviceWrapper.CustomerService.RecieveFromCustomer(vm);
         }
         [HttpPost]
         [Route("customer/payment/list")]
         public async Task<WrapperPaymentListVM> CustomerPaymentList([FromBody]GetPaymentDataListVM vm)
         {
-            return await _businessService.BusinessWrapperService.GetCustomerPaymentList(vm);
+            return await _serviceWrapper.CustomerService.GetCustomerPaymentList(vm);
         }
         [HttpPost]
         [Route("customer/payment/delete")]
         public async Task<WrapperPaymentListVM> CustomerPaymentDelete([FromBody]PaymentVM vm)
         {
-            return await _businessService.BusinessWrapperService.DeleteCustomerPayment(vm);
+            return await _serviceWrapper.CustomerService.DeleteCustomerPayment(vm);
         }
         #endregion
 
@@ -175,7 +179,7 @@ namespace ApiService.Controllers
         [Route("supplier/history")]
         public async Task<WrapperSupplierHistory> SupplierHistory([FromBody]GetDataListHistory vm)
         {
-            return await _businessService.BusinessWrapperService.GetSupplierHistory(vm);
+            return await _serviceWrapper.SupplierService.GetSupplierHistory(vm);
         }
         #endregion
 
@@ -184,7 +188,7 @@ namespace ApiService.Controllers
         [Route("staff/history")]
         public async Task<WrapperStaffHistory> StaffHistory([FromBody]GetDataListHistory vm)
         {
-            return await _businessService.BusinessWrapperService.GetStaffHistory(vm);
+            return await _serviceWrapper.StaffService.GetStaffHistory(vm);
         }
         #endregion
         #region Supplier
@@ -192,7 +196,7 @@ namespace ApiService.Controllers
         [Route("customer/history")]
         public async Task<WrapperCustomerHistory> CustomerHistory([FromBody]GetDataListHistory vm)
         {
-            return await _businessService.BusinessWrapperService.GetCustomerHistory(vm);
+            return await _serviceWrapper.CustomerService.GetCustomerHistory(vm);
         }
         #endregion
         #endregion
@@ -208,6 +212,94 @@ namespace ApiService.Controllers
         }
 
         #endregion
+
+
+
+        #region SalesReturn
+        [HttpPost]
+        [Route("sales/return/add")]
+        public async Task<WrapperSalesReturnVM> AddSalesReturn([FromBody]SalesReturnVM sales)
+        {
+            return await _serviceWrapper.SalesService.AddSalesReturn(sales);
+        }
+        [HttpPost]
+        [Route("sales/return/getAll")]
+        public async Task<WrapperSalesReturnVM> GetAllSalesReturn([FromBody]GetDataListVM sales)
+        {
+            return await _serviceWrapper.SalesService.GetAllSalesReturn(sales);
+        }
+        [HttpPost]
+        [Route("sales/return/delete")]
+        public async Task<WrapperSalesReturnVM> DeleteSalesReturn([FromBody]SalesReturnVM sales)
+        {
+            return await _serviceWrapper.SalesService.DeleteSalesReturn(sales);
+        }
+        #endregion
+
+
+        #region PurchaseReturn
+        [HttpPost]
+        [Route("purchase/return/add")]
+        public async Task<WrapperPurchaseReturnVM> AddPurchaseReturn([FromBody]PurchaseReturnVM sales)
+        {
+            return await _serviceWrapper.PurchaseService.AddPurchaseReturnAsync(sales);
+        }
+        [HttpPost]
+        [Route("purchase/return/getAll")]
+        public async Task<WrapperPurchaseReturnVM> GetAllPurchaseReturn([FromBody]GetDataListVM sales)
+        {
+            return await _serviceWrapper.PurchaseService.GetAllPurchaseReturnAsync(sales);
+        }
+        [HttpPost]
+        [Route("purchase/return/delete")]
+        public async Task<WrapperPurchaseReturnVM> DeletePurchaseReturn([FromBody]PurchaseReturnVM sales)
+        {
+            return await _serviceWrapper.PurchaseService.DeletePurchaseReturnAsync(sales);
+        }
+        #endregion
+
+
+
+        #region Monthly Report
+        [HttpPost]
+        [Route("report/monthly/production")]
+        public async Task<WrapperMonthProductionListVM> MonthlyProduction([FromBody]MonthlyReport mp)
+        {
+            return await _businessService.BusinessWrapperService.MonthlyProduction(mp);
+        }
+        [HttpPost]
+        [Route("report/monthly/payable")]
+        public async Task<WrapperMonthRecievableListVM> MonthlyPayable([FromBody]MonthlyReport mp)
+        {
+            return await _businessService.BusinessWrapperService.MonthlyPayable(mp);
+        }
+        [HttpPost]
+        [Route("report/monthly/recievable")]
+        public async Task<WrapperMonthRecievableVM> MonthlyRecievable([FromBody]MonthlyReport mp)
+        {
+            return await _businessService.BusinessWrapperService.MonthlyRecievable(mp);
+        }
+
+        [HttpPost]
+        [Route("report/monthly/income")]
+        public async Task<WrapperMonthIncomeVM> MonthlyIncome([FromBody]MonthlyReport mp)
+        {
+            return await _businessService.BusinessWrapperService.MonthlyIncome(mp);
+        }
+
+        [HttpPost]
+        [Route("report/monthly/expense")]
+        public async Task<WrapperMonthExpenseVM> MonthlyExpense([FromBody]MonthlyReport mp)
+        {
+            return await _businessService.BusinessWrapperService.MonthlyExpense(mp);
+        }
+        #endregion
+
+
+
+
+
+
 
 
 

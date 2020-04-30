@@ -16,8 +16,16 @@ namespace Entities.DbModels
         public DateTime? OccurranceDate { get; set; }
         public string EmployeeId { get; set; }
 
+        public string Purpose { get; set; }
+
         [ForeignKey("IncomeTypeId")]
         public virtual IncomeType IncomeType { get; set; }
 
+
+        [ForeignKey("ClientId")]
+        public Supplier Supplier { get; set; }
+
+        [ForeignKey("ClientId")]
+        public Customer Customer { get; set; }
     }
 }

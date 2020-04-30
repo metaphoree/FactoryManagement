@@ -112,6 +112,30 @@ namespace Repository
             util.LogInfo("-------" + typeof(T).Name.ToUpper() + "-----Deleted-----");
             return entity;
         }
+        public List<T> DeleteAll(List<T> entityList)
+        {
+            for (int i = 0; i < entityList.Count; i++)
+            {
+                Type type = entityList[i].GetType();
+                type.GetProperty("UpdatedDateTime").SetValue(entityList[i], DateTime.Now);
+                type.GetProperty("RowStatus").SetValue(entityList[i], DB_ROW_STATUS.DELETED.ToString());
+                this.RepositoryContext.Set<T>().Update(entityList[i]);
+                util.LogInfo("-------" + typeof(T).Name.ToUpper() + "-----Deleted-----");
+                //Type type = entityList[i].GetType();
+
+                //PropertyInfo? prop = type.GetProperty("CreatedDateTime");
+                //PropertyInfo? prop8 = type.GetProperty("CreatedDateTime");
+
+                ////type.GetProperty()
+                //type.GetProperty("CreatedDateTime").SetValue(entityList[i], DateTime.Now);
+                //type.GetProperty("UpdatedDateTime").SetValue(entityList[i], DateTime.Now);
+                //type.GetProperty("Id").SetValue(entityList[i], Guid.NewGuid().ToString());
+                //type.GetProperty("RowStatus").SetValue(entityList[i], DB_ROW_STATUS.ADDED.ToString());
+                //this.RepositoryContext.Set<T>().Add(entityList[i]);
+            }
+            util.LogInfo("-------" + typeof(T).Name.ToUpper() + "-----All Deleted-----");
+            return entityList;
+        }
         public async Task<int> SaveChangesAsync()
         {
             Task<int>  tas =  RepositoryContext.SaveChangesAsync();

@@ -17,5 +17,17 @@ namespace Entities.DbModels
 
         [ForeignKey("ExpenseTypeId")]
         public virtual ExpenseType ExpenseType { get; set; }
+
+        public string Purpose { get; set; }
+
+
+
+        [ForeignKey("ClientId")]
+        public Supplier Supplier { get; set; }
+
+        [ForeignKey("ClientId")]
+        public Customer Customer { get; set; }
+
+
     }
 }

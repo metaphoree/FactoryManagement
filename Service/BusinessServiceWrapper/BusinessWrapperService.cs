@@ -5,7 +5,12 @@ using Entities.DbModels;
 using Entities.Enums;
 using Entities.ViewModels;
 using Entities.ViewModels.CustomerView;
+using Entities.ViewModels.Expense;
+using Entities.ViewModels.Income;
+using Entities.ViewModels.Payable;
 using Entities.ViewModels.Payment;
+using Entities.ViewModels.Production;
+using Entities.ViewModels.Recievable;
 using Entities.ViewModels.Staff;
 using Entities.ViewModels.Supplier;
 using Microsoft.EntityFrameworkCore;
@@ -31,21 +36,216 @@ namespace Service.BusinessServiceWrapper
             this._utilService = utilService;
         }
 
+        #region Monthly Report Region
+        public async Task<WrapperMonthProductionListVM> MonthlyProduction(MonthlyReport vm)
+        {
+
+            WrapperMonthProductionListVM returnData = new WrapperMonthProductionListVM();
+            Task<List<Production>> prodT = _repositoryWrapper
+                .Production
+                .FindAll()
+                .Where(x => x.FactoryId == vm.FactoryId)
+                .Where(x => x.EntryDate.ToString(MonthFormat.MMMM.ToString()) == vm.Month)
+                .Include(x => x.Item)
+                .Include(x => x.ItemCategory)
+                .Include(x => x.Staff)
+                .ToListAsync();
+
+            await Task.WhenAll(prodT);
+
+            List<MonthlyProduction> monthlyProductions = new List<MonthlyProduction>();
+            monthlyProductions = _utilService.Mapper.Map<List<Production>, List<MonthlyProduction>>(prodT.Result.ToList());
+
+
+            returnData.TotalRecoreds = prodT.Result.ToList().Count();
+            returnData.ListOfData = monthlyProductions
+                .Skip((vm.PageNumber - 1) * (vm.PageSize))
+                .Take(vm.PageSize)
+                .OrderByDescending(x => x.CreatedDateTime)
+                .ToList();
+
+            return returnData;
+        }
+        public async Task<WrapperMonthRecievableListVM> MonthlyPayable(MonthlyReport vm)
+        {
+
+            WrapperMonthRecievableListVM returnData = new WrapperMonthRecievableListVM();
+            Task<List<Payable>> payableT = _repositoryWrapper
+                .Payable
+                .FindAll()
+                .Where(x => x.FactoryId == vm.FactoryId)
+                .Where(x => x.CreatedDateTime.ToString(MonthFormat.MMMM.ToString()) == vm.Month)
+                .Include(x => x.Supplier)
+                //.Include(x => x.ItemCategory)
+                //.Include(x => x.Staff)  
+                .ToListAsync();
+
+            await Task.WhenAll(payableT);
+
+            List<MonthlyPayable> monthlyPayable = new List<MonthlyPayable>();
+            monthlyPayable = _utilService.Mapper.Map<List<Payable>, List<MonthlyPayable>>(payableT.Result.ToList());
+
+
+            returnData.TotalRecoreds = payableT.Result.ToList().Count();
+            returnData.ListOfData = monthlyPayable
+                .Skip((vm.PageNumber - 1) * (vm.PageSize))
+                .Take(vm.PageSize)
+                .OrderByDescending(x => x.CreatedDateTime)
+                .ToList();
+
+            return returnData;
+        }
+        public async Task<WrapperMonthRecievableVM> MonthlyRecievable(MonthlyReport vm)
+        {
+
+            WrapperMonthRecievableVM returnData = new WrapperMonthRecievableVM();
+            Task<List<Recievable>> RecievableT = _repositoryWrapper
+                .Recievable
+                .FindAll()
+                .Where(x => x.FactoryId == vm.FactoryId)
+                .Where(x => x.CreatedDateTime.ToString(MonthFormat.MMMM.ToString()) == vm.Month)
+                .Include(x => x.Customer)
+                //.Include(x => x.ItemCategory)
+                //.Include(x => x.Staff)  
+                .ToListAsync();
+
+            await Task.WhenAll(RecievableT);
+
+            List<MonthlyRecievable> monthlyRecievable = new List<MonthlyRecievable>();
+            monthlyRecievable = _utilService.Mapper.Map<List<Recievable>, List<MonthlyRecievable>>(RecievableT.Result.ToList());
+
+
+            returnData.TotalRecoreds = RecievableT
+                .Result
+                .ToList()
+                .Count();
+
+
+            returnData.ListOfData = monthlyRecievable
+                .Skip((vm.PageNumber - 1) * (vm.PageSize))
+                .Take(vm.PageSize)
+                .OrderByDescending(x => x.CreatedDateTime)
+                .ToList();
+
+            return returnData;
+        }
+        public async Task<WrapperMonthIncomeVM> MonthlyIncome(MonthlyReport vm)
+        {
+
+            WrapperMonthIncomeVM returnData = new WrapperMonthIncomeVM();
+            Task<List<Income>> IncomeT = _repositoryWrapper
+                .Income
+                .FindAll()
+                .Where(x => x.FactoryId == vm.FactoryId)
+                .Where(x => x.CreatedDateTime.ToString(MonthFormat.MMMM.ToString()) == vm.Month)
+                .Include(x => x.Customer)
+                //.Include(x => x.ItemCategory)
+                //.Include(x => x.Staff)  
+                .ToListAsync();
+
+            await Task.WhenAll(IncomeT);
+
+            List<MonthlyIncome> monthlyIncome = new List<MonthlyIncome>();
+            monthlyIncome = _utilService.Mapper.Map<List<Income>, List<MonthlyIncome>>(IncomeT.Result.ToList());
+
+
+            returnData.TotalRecoreds = IncomeT
+                .Result
+                .ToList()
+                .Count();
+
+
+            returnData.ListOfData = monthlyIncome
+                .Skip((vm.PageNumber - 1) * (vm.PageSize))
+                .Take(vm.PageSize)
+                .OrderByDescending(x => x.CreatedDateTime)
+                .ToList();
+
+            return returnData;
+        }
+        public async Task<WrapperMonthExpenseVM> MonthlyExpense(MonthlyReport vm)
+        {
+
+            WrapperMonthExpenseVM returnData = new WrapperMonthExpenseVM();
+            Task<List<Expense>> ExpenseT = _repositoryWrapper
+                .Expense
+                .FindAll()
+                .Where(x => x.FactoryId == vm.FactoryId)
+                .Where(x => x.CreatedDateTime.ToString(MonthFormat.MMMM.ToString()) == vm.Month)
+                .Include(x => x.Supplier)
+                //.Include(x => x.ItemCategory)
+                //.Include(x => x.Staff)  
+                .ToListAsync();
+
+            await Task.WhenAll(ExpenseT);
+
+            List<MonthlyExpense> monthlyExpense = new List<MonthlyExpense>();
+            monthlyExpense = _utilService.Mapper.Map<List<Expense>, List<MonthlyExpense>>(ExpenseT.Result.ToList());
+
+
+            returnData.TotalRecoreds = ExpenseT
+                .Result
+                .ToList()
+                .Count();
+
+
+            returnData.ListOfData = monthlyExpense
+                .Skip((vm.PageNumber - 1) * (vm.PageSize))
+                .Take(vm.PageSize)
+                .OrderByDescending(x => x.CreatedDateTime)
+                .ToList();
+
+            return returnData;
+        }
+
+        #endregion
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
         #region Payment
         #region Supplier
-   
+
         #endregion
         #region Staff
-     
+
 
         #endregion
         #region Customer
-            #endregion 
+        #endregion
         #endregion
         #region History
         #region Supplier
-     
+
         #endregion
 
         #region Customer
@@ -53,7 +253,7 @@ namespace Service.BusinessServiceWrapper
         #endregion
 
         #region Staff
-    
+
         #endregion
 
         #endregion

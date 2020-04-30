@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Entities.DbModels
 {
@@ -14,6 +15,13 @@ namespace Entities.DbModels
         public string Description { get; set; }
 
         public string ProductionId { get; set; }
+
+
+        [ForeignKey("ClientId")]
+        public Supplier Supplier { get; set; }
+
+        [ForeignKey("ClientId")]
+        public Customer Customer { get; set; }
 
 
     }

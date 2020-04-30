@@ -10,8 +10,10 @@ namespace Contracts.ServiceContracts
     public interface IPurchaseService
     {
         Task<WrapperPurchaseListVM> AddPurchaseAsync(PurchaseVM purchaseVM);
-        Task AddPurchaseReturn(PurchaseReturnVM vm);
+        Task<WrapperPurchaseReturnVM> AddPurchaseReturnAsync(PurchaseReturnVM vm);
+        Task<WrapperPurchaseListVM> DeletePurchaseAsync(PurchaseVM vm);
+        Task<WrapperPurchaseReturnVM> DeletePurchaseReturnAsync(PurchaseReturnVM vm);
         Task<WrapperPurchaseListVM> GetAllPurchaseAsync(GetDataListVM getDataListVM);
-        Task<WrapperPurchaseReturnVM> GetAllPurchaseReturn(GetDataListVM getDataListVM);
+        Task<WrapperPurchaseReturnVM> GetAllPurchaseReturnAsync(GetDataListVM getDataListVM);
     }
 }

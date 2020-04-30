@@ -13,6 +13,6 @@ namespace Contracts.ServiceContracts
         Task<WrapperStockListVM> Update(string id, StockVM ViewModel);
         Task<WrapperStockListVM> GetListPaged(GetDataListVM dataListVM);
         Task<WrapperStockListVM> Delete(StockVM customerTemp);
-
+        Task<WrapperStockListVM> AddItemChangedStatus(StockVM ViewModel);
     }
 }

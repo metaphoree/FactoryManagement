@@ -174,8 +174,115 @@ namespace Service.BusinessServices
             return vm;
         }
 
+        // Invoice
+        // Expense
+        // Payable
+        // Purchase
+        // Stock
+        // StockIn
+        // Transaction
+        public async Task<WrapperPurchaseListVM> DeletePurchaseAsync(PurchaseVM vm)
+        {
+            Task<List<Invoice>> invoiceToDelete = _repositoryWrapper
+                                .Invoice
+                                .FindAll()
+                                .Where(x => x.Id == vm.InvoiceId && x.FactoryId == vm.FactoryId)
+                                .ToListAsync();
+            Task<List<Expense>> expenseToDelete = _repositoryWrapper
+                                .Expense
+                                .FindAll()
+                                .Where(x => x.InvoiceId == vm.InvoiceId && x.FactoryId == vm.FactoryId)
+                                .ToListAsync();
+            Task<List<Payable>> payableToDelete = _repositoryWrapper
+                                .Payable
+                                .FindAll()
+                                .Where(x => x.InvoiceId == vm.InvoiceId && x.FactoryId == vm.FactoryId)
+                                .ToListAsync();
+            Task<List<Purchase>> purchaseToDelete = _repositoryWrapper
+                                .Purchase
+                                .FindAll()
+                                .Where(x => x.InvoiceId == vm.InvoiceId && x.FactoryId == vm.FactoryId)
+                                .ToListAsync();
 
-        public async Task AddPurchaseReturn(PurchaseReturnVM vm)
+            // Stock
+            IEnumerable<Stock> stockList = await _repositoryWrapper
+                .Stock
+                .FindByConditionAsync(
+                x => x.FactoryId == vm.FactoryId 
+                && purchaseToDelete
+                .Result
+                .ToList()
+                .FirstOrDefault(d => d.ItemId == x.ItemId) != null);
+
+            for (int i = 0;i< stockList.Count(); i++) {
+                //Stock existingStock = stockList.ToList().Where(x => x.ItemId == vm.ItemId).FirstOrDefault();
+                Stock existingStock = stockList.ElementAt(i);
+                Purchase purchase = purchaseToDelete.Result.ToList().Where(x => x.ItemId == existingStock.ItemId).FirstOrDefault();
+                // IF NOT PRESENT ADD
+                if (existingStock == null)
+                {
+                    _utilService.Log("Stock Is Empty. Not Enough Stock available");
+                    throw new StockEmptyException();
+                    //stockToAdd = _utilService.Mapper.Map<SalesItemVM, Stock>(salesVM.ItemList[i]);
+                    //_repositoryWrapper.Stock.Create(stockToAdd);
+                }
+                // IF PRESENT UPDATE
+                else
+                {
+                    existingStock.Quantity -= purchase.Quantity;
+                    _repositoryWrapper.Stock.Update(existingStock);
+                }
+            }
+
+
+            Task<List<StockIn>> stockInToDelete = _repositoryWrapper
+                                .StockIn
+                                .FindAll()
+                                .Where(x => x.InvoiceId == vm.InvoiceId && x.FactoryId == vm.FactoryId)
+                                .ToListAsync();
+
+            Task<List<TblTransaction>> transactionToDelete = _repositoryWrapper
+                                .Transaction
+                                .FindAll()
+                                .Where(x => x.InvoiceId == vm.InvoiceId && x.FactoryId == vm.FactoryId)
+                                .ToListAsync();
+
+
+
+            _repositoryWrapper.Invoice.DeleteAll(invoiceToDelete.Result.ToList());
+            _repositoryWrapper.Expense.DeleteAll(expenseToDelete.Result.ToList());
+            _repositoryWrapper.Payable.DeleteAll(payableToDelete.Result.ToList());
+            _repositoryWrapper.Purchase.DeleteAll(purchaseToDelete.Result.ToList());
+            _repositoryWrapper.StockIn.DeleteAll(stockInToDelete.Result.ToList());
+            _repositoryWrapper.Transaction.DeleteAll(transactionToDelete.Result.ToList());
+
+
+
+            Task<int> Invoice = _repositoryWrapper.Invoice.SaveChangesAsync();
+            Task<int> Expense = _repositoryWrapper.Expense.SaveChangesAsync();
+            Task<int> Payable = _repositoryWrapper.Payable.SaveChangesAsync();
+            Task<int> Purchase = _repositoryWrapper.Purchase.SaveChangesAsync();
+            Task<int> StockIn = _repositoryWrapper.StockIn.SaveChangesAsync();
+            Task<int> TblTransaction = _repositoryWrapper.Transaction.SaveChangesAsync();
+            Task<int> Stock = _repositoryWrapper.Stock.SaveChangesAsync();
+
+            await Task.WhenAll(Invoice, Expense, Payable, Purchase, StockIn, TblTransaction, Stock);
+
+
+            var getDatalistVM = new GetDataListVM()
+            {
+                FactoryId = vm.FactoryId,
+                PageNumber = 1,
+                PageSize = 10
+            };
+
+
+            return await GetAllPurchaseAsync(getDatalistVM);
+        }
+
+
+
+        public async Task<WrapperPurchaseReturnVM> AddPurchaseReturnAsync(PurchaseReturnVM vm)
         {
             // StockOut
             // Invoice
@@ -186,9 +293,11 @@ namespace Service.BusinessServices
             _repositoryWrapper.Invoice.Create(invoiceToAdd);
             vm.InvoiceId = invoiceToAdd.Id;
 
-            Recievable RecievableToAdd = new Recievable();
-            RecievableToAdd = _utilService.Mapper.Map<PurchaseReturnVM, Recievable>(vm);
-
+            if (!vm.IsFullyPaid) {
+                Recievable RecievableToAdd = new Recievable();
+                RecievableToAdd = _utilService.Mapper.Map<PurchaseReturnVM, Recievable>(vm);
+                _repositoryWrapper.Recievable.Create(RecievableToAdd);
+            }
 
             Stock stockToAdd = new Stock();
             stockToAdd = _utilService.Mapper.Map<PurchaseReturnVM, Stock>(vm);
@@ -215,9 +324,9 @@ namespace Service.BusinessServices
             stockOutToAdd = _utilService.Mapper.Map<PurchaseReturnVM, StockOut>(vm);
 
             _repositoryWrapper.StockOut.Create(stockOutToAdd);
-            _repositoryWrapper.Recievable.Create(RecievableToAdd);
+           
 
-            if (vm.AmountRecieved > 0)
+            if (vm.AmountRecieved > 0 && vm.IsFullyPaid)
             {
                 TblTransaction tblTransactionToAdd = new TblTransaction();
                 tblTransactionToAdd = _utilService.Mapper.Map<PurchaseReturnVM, TblTransaction>(vm);
@@ -236,14 +345,16 @@ namespace Service.BusinessServices
 
             await Task.WhenAll(invT, stockInT, stockT, payableT, transactionT);
 
+            var data = new GetDataListVM()
+            {
+                FactoryId = vm.FactoryId,
+                PageSize = 15,
+                PageNumber = 1
+
+            };
+            return await GetAllPurchaseReturnAsync(data);
         }
-
-
-
-
-
-
-        public async Task<WrapperPurchaseReturnVM> GetAllPurchaseReturn(GetDataListVM getDataListVM)
+        public async Task<WrapperPurchaseReturnVM> GetAllPurchaseReturnAsync(GetDataListVM getDataListVM)
         {
             // Invoice
             // StockOut
@@ -299,8 +410,70 @@ namespace Service.BusinessServices
 
             return vm;
         }
+        public async Task<WrapperPurchaseReturnVM> DeletePurchaseReturnAsync(PurchaseReturnVM vm)
+        {
+            // StockOut
+            // Invoice
+            // Recievable
+            // Stock
+            Task<List<Invoice>> invoiceToDelete = _repositoryWrapper
+                    .Invoice
+                    .FindAll()
+                    .Where(x => x.Id == vm.InvoiceId && x.FactoryId == vm.FactoryId)
+                    .ToListAsync();
+            Task<List<StockOut>> stockOutToDelete = _repositoryWrapper
+                    .StockOut
+                    .FindAll()
+                    .Where(x => x.InvoiceId == vm.InvoiceId && x.FactoryId == vm.FactoryId)
+                    .ToListAsync();
+            Task<List<Recievable>> recievableToDelete = _repositoryWrapper
+                    .Recievable
+                    .FindAll()
+                    .Where(x => x.InvoiceId == vm.InvoiceId && x.FactoryId == vm.FactoryId)
+                    .ToListAsync();
+
+            await Task.WhenAll(invoiceToDelete, stockOutToDelete, recievableToDelete);
+
+            // Stock
+            IEnumerable<Stock> stockList = await _repositoryWrapper.Stock.FindByConditionAsync(x => x.FactoryId == vm.FactoryId && x.ItemId == vm.ItemId);
+
+            Stock existingStock = stockList.ToList().Where(x => x.ItemId == vm.ItemId).FirstOrDefault();
+            // IF NOT PRESENT ADD
+            if (existingStock == null)
+            {
+                _utilService.Log("Stock Is Empty. Not Enough Stock available");
+                throw new StockEmptyException();
+                //stockToAdd = _utilService.Mapper.Map<SalesItemVM, Stock>(salesVM.ItemList[i]);
+                //_repositoryWrapper.Stock.Create(stockToAdd);
+            }
+            // IF PRESENT UPDATE
+            else
+            {
+                existingStock.Quantity += vm.Quantity;
+                _repositoryWrapper.Stock.Update(existingStock);
+            }
+
+                _repositoryWrapper.Invoice.Delete(invoiceToDelete.Result.ToList().FirstOrDefault());
+                _repositoryWrapper.StockOut.Delete(stockOutToDelete.Result.ToList().FirstOrDefault());
+                _repositoryWrapper.Recievable.Delete(recievableToDelete.Result.ToList().FirstOrDefault());
+
+            Task<int> inv = _repositoryWrapper.Invoice.SaveChangesAsync();
+            Task<int> StockIn = _repositoryWrapper.StockIn.SaveChangesAsync();
+            Task<int> Stock = _repositoryWrapper.Stock.SaveChangesAsync();
+            Task<int> Payable = _repositoryWrapper.Payable.SaveChangesAsync();
+
+            await Task.WhenAll(inv, StockIn, Payable, Stock);
 
 
+            var data = new GetDataListVM()
+            {
+                FactoryId = vm.FactoryId,
+                PageSize = 15,
+                PageNumber = 1
+
+            };
+            return await GetAllPurchaseReturnAsync(data);
+        }
 
 
 

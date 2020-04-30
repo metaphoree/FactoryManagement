@@ -20,5 +20,6 @@ namespace Contracts
         Task<long> NumOfRecord();
         Task<string> GetUniqueId();
         Task<int> SaveChangesAsync();
+        List<T> DeleteAll(List<T> entityList);
     }
 }

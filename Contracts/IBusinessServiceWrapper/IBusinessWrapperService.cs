@@ -1,7 +1,12 @@
 ﻿using CommonUtils;
 using Entities.ViewModels;
 using Entities.ViewModels.CustomerView;
+using Entities.ViewModels.Expense;
+using Entities.ViewModels.Income;
+using Entities.ViewModels.Payable;
 using Entities.ViewModels.Payment;
+using Entities.ViewModels.Production;
+using Entities.ViewModels.Recievable;
 using Entities.ViewModels.Staff;
 using Entities.ViewModels.Supplier;
 using System;
@@ -11,7 +16,7 @@ using System.Threading.Tasks;
 
 namespace Contracts.IBusinessServiceWrapper
 {
-   public interface IBusinessWrapperService
+    public interface IBusinessWrapperService
     {
         //Task<WrapperPaymentListVM> PayToSupplier(PaymentVM paymentVM);
         //Task<WrapperPaymentListVM> PayToStaff(PaymentVM paymentVM);
@@ -25,5 +30,10 @@ namespace Contracts.IBusinessServiceWrapper
         //Task<WrapperPaymentListVM> DeleteStaffPayment(PaymentVM vm);
         //Task<WrapperPaymentListVM> GetCustomerPaymentList(GetPaymentDataListVM vm);
         //Task<WrapperPaymentListVM> DeleteCustomerPayment(PaymentVM vm);
+        Task<WrapperMonthExpenseVM> MonthlyExpense(MonthlyReport vm);
+        Task<WrapperMonthIncomeVM> MonthlyIncome(MonthlyReport vm);
+        Task<WrapperMonthRecievableListVM> MonthlyPayable(MonthlyReport vm);
+        Task<WrapperMonthProductionListVM> MonthlyProduction(MonthlyReport vm);
+        Task<WrapperMonthRecievableVM> MonthlyRecievable(MonthlyReport vm);
     }
 }

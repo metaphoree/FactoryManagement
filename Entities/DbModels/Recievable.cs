@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Entities.DbModels
 {
@@ -13,5 +14,14 @@ namespace Entities.DbModels
         public string Month { get; set; }
         public decimal Amount { get; set; }
         public string Description { get; set; }
+
+
+        [ForeignKey("ClientId")]
+        public Supplier Supplier { get; set; }
+
+        [ForeignKey("ClientId")]
+        public Customer Customer { get; set; }
+
+
     }
 }
