@@ -12,6 +12,6 @@ namespace Entities.ViewModels.Recievable
         }
 
         public List<MonthlyRecievable> ListOfData { get; set; }
-        public long TotalRecoreds { get; set; }
+        public long TotalRecords { get; set; }
     }
 }

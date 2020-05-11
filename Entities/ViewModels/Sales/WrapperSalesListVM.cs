@@ -6,7 +6,7 @@ namespace Entities.ViewModels.Sales
 {
     public class WrapperSalesListVM
     {
-        public long TotalRecoreds { get; set; }
+        public long TotalRecords { get; set; }
         public List<SalesVM> ListOfData { get; set; }
     }
 }

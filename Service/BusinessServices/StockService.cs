@@ -25,7 +25,6 @@ namespace Service.BusinessServices
 
             this._utilService = utilService;
         }
-
         public async Task<WrapperStockListVM> Add(StockVM ViewModel)
         {
             var itemToAdd = _utilService.GetMapper().Map<StockVM, Stock>(ViewModel);
@@ -73,7 +72,7 @@ namespace Service.BusinessServices
         }
         public async Task<WrapperStockListVM> GetListPaged(GetDataListVM dataListVM)
         {
-            IEnumerable<Stock> ListTask = 
+            IEnumerable<Stock> ListTask =
                 await _repositoryWrapper.Stock
                 .FindByCondition(x => x.FactoryId == dataListVM.FactoryId)
                 .Include(x => x.Item)
@@ -94,13 +93,13 @@ namespace Service.BusinessServices
                              || output.ItemStatus != null ? output.ItemStatus.Contains(dataListVM.GlobalFilter, StringComparison.OrdinalIgnoreCase) : false
                              || output.Quantity.ToString() != null ? output.Quantity.ToString().Contains(dataListVM.GlobalFilter, StringComparison.OrdinalIgnoreCase) : false)
                                          .ToList();
-                
-                }
+
+            }
 
             outputList = outputList.Skip((dataListVM.PageNumber - 1) * dataListVM.PageSize).Take(dataListVM.PageSize).ToList();
             var data = new WrapperStockListVM();
             data.ListOfData = outputList;
-            data.TotalRecoreds = noOfRecordTask;
+            data.TotalRecords = noOfRecordTask;
             this._utilService.Log("Successful In Getting Data");
             return data;
         }
@@ -125,56 +124,68 @@ namespace Service.BusinessServices
             WrapperStockListVM data = await GetListPaged(dataParam);
             return data;
         }
-
-
-
-
-        public async Task<WrapperStockListVM> AddItemChangedStatus(StockVM ViewModel) {
-
+        public async Task<WrapperStockListVM> ChangeItemStatus(StockVM ViewModel)
+        {
+            var dataParam6 = new GetDataListVM()
+            {
+                FactoryId = ViewModel.FactoryId,
+                PageNumber = 1,
+                PageSize = 10,
+                TotalRows = 0
+            };
             Task<IEnumerable<Stock>> itemsDB = _repositoryWrapper.Stock.FindByConditionAsync(x => x.Id == ViewModel.Id && x.FactoryId == ViewModel.FactoryId);
-            await Task.WhenAll(itemsDB);
-
- 
+            Task<WrapperStockListVM> data1 = GetListPaged(dataParam6);
+            Task<IEnumerable<Stock>> stockDB = _repositoryWrapper.Stock.FindByConditionAsync(x => x.FactoryId == ViewModel.FactoryId && x.ItemStatusId == ViewModel.ItemStatusId);
+            await Task.WhenAll(itemsDB, data1, stockDB);
 
             Stock stock = itemsDB.Result.ToList().FirstOrDefault();
 
-            if (stock.Quantity <= ViewModel.Quantity)
+            if (stock.Quantity < ViewModel.Quantity || ViewModel.ItemStatusId == stock.ItemStatusId)
             {
-                var dataParam6 = new GetDataListVM()
-                {
-                    FactoryId = ViewModel.FactoryId,
-                    PageNumber = 1,
-                    PageSize = 10,
-                    TotalRows = 0
-                };
-                WrapperStockListVM data1 = await GetListPaged(dataParam6);
-                return data1;
+                return data1.Result;
             }
 
 
             stock.Quantity -= ViewModel.Quantity;
             _repositoryWrapper.Stock.Update(stock);
-            Task<int> t3 = _repositoryWrapper.Stock.SaveChangesAsync();
-            await Task.WhenAll(t3);
+           
+            // Task<int> t3 = _repositoryWrapper.Stock.SaveChangesAsync();
+            // await Task.WhenAll(t3);
 
 
-            var itemToAdd = _utilService.GetMapper().Map<StockVM, Stock>(ViewModel);
-            itemToAdd = _repositoryWrapper.Stock.Create(itemToAdd);
-            Task<int> t1 = _repositoryWrapper.Stock.SaveChangesAsync();
-            await Task.WhenAll(t1);
-            this._utilService.Log("Successful In Adding Data");
+            await stockDB;
 
-            var dataParam = new GetDataListVM()
+            Stock tempStock = stockDB.Result.ToList().FirstOrDefault();
+            if (tempStock == null)
             {
-                FactoryId = itemToAdd.FactoryId,
-                PageNumber = 1,
-                PageSize = 10,
-                TotalRows = 0
-            };
-            WrapperStockListVM data = await GetListPaged(dataParam);
-            return data;
+                return await Add(ViewModel);
+            }
+            else
+            {
+                tempStock.Quantity += ViewModel.Quantity;
+                _repositoryWrapper.Stock.Update(tempStock);
+            }
+            await _repositoryWrapper.Stock.SaveChangesAsync();
 
 
+
+            WrapperStockListVM data2 = await GetListPaged(dataParam6);
+            return data2;
+            //var itemToAdd = _utilService.GetMapper().Map<StockVM, Stock>(ViewModel);
+            //itemToAdd = _repositoryWrapper.Stock.Create(itemToAdd);
+            //Task<int> t1 = _repositoryWrapper.Stock.SaveChangesAsync();
+            //await Task.WhenAll(t1);
+            //this._utilService.Log("Successful In Adding Data");
+
+            //var dataParam = new GetDataListVM()
+            //{
+            //    FactoryId = itemToAdd.FactoryId,
+            //    PageNumber = 1,
+            //    PageSize = 10,
+            //    TotalRows = 0
+            //};
+            //WrapperStockListVM data = await GetListPaged(dataParam);
+            //return data;
         }
 
 

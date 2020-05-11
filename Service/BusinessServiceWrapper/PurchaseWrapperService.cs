@@ -34,7 +34,7 @@ namespace Service.BusinessServiceWrapper
 
             Task<WrapperItemListVM> itemListTask = _serviceWrapper.ItemService.GetListPaged(getDataListVM);
             Task<WrapperItemCategoryListVM> itemCategoryListTask = _serviceWrapper.ItemCategoryService.GetListPaged(getDataListVM);
-            Task<WrapperSupplierListVM> supplierListTask = _serviceWrapper.SupplierService.GetListPaged(getDataListVM);
+            Task<WrapperSupplierListVM> supplierListTask = _serviceWrapper.SupplierService.GetListPaged(getDataListVM,false);
             Task<WrapperExpenseTypeListVM> expenseTypeTask = _serviceWrapper.ExpenseTypeService.GetListPaged(getDataListVM);
             Task<WrapperItemStatusListVM> itemStatusListTask = _serviceWrapper.ItemStatusService.GetListPaged(getDataListVM);
             Task<WrapperInvoiceTypeListVM> invoiceTypeListTask = _serviceWrapper.InvoiceTypeService.GetListPaged(getDataListVM);
@@ -56,7 +56,7 @@ namespace Service.BusinessServiceWrapper
 
             Task<WrapperItemListVM> itemListTask = _serviceWrapper.ItemService.GetListPaged(getDataListVM);
             Task<WrapperItemCategoryListVM> itemCategoryListTask = _serviceWrapper.ItemCategoryService.GetListPaged(getDataListVM);
-            Task<WrapperListCustomerVM> customerListTask = _serviceWrapper.CustomerService.GetListPaged(getDataListVM);
+            Task<WrapperListCustomerVM> customerListTask = _serviceWrapper.CustomerService.GetListPaged(getDataListVM,false);
             Task<WrapperIncomeTypeListVM> incomeTypeListTask = _serviceWrapper.IncomeTypeService.GetListPaged(getDataListVM);
             Task<WrapperItemStatusListVM> itemStatusListTask = _serviceWrapper.ItemStatusService.GetListPaged(getDataListVM);
             Task<WrapperInvoiceTypeListVM> invoiceTypeListTask = _serviceWrapper.InvoiceTypeService.GetListPaged(getDataListVM);
@@ -74,18 +74,26 @@ namespace Service.BusinessServiceWrapper
         public async Task<InitialLoadDataVM> GetPaymentInitialData(GetDataListVM getDataListVM)
         {
             InitialLoadDataVM vm = new InitialLoadDataVM();
-            Task<WrapperListCustomerVM> customerListTask = _serviceWrapper.CustomerService.GetListPaged(getDataListVM);
+            Task<WrapperListCustomerVM> customerListTask = _serviceWrapper.CustomerService.GetListPaged(getDataListVM,false);
             Task<WrapperIncomeTypeListVM> incomeTypeListTask = _serviceWrapper.IncomeTypeService.GetListPaged(getDataListVM);
             Task<WrapperInvoiceTypeListVM> invoiceTypeListTask = _serviceWrapper.InvoiceTypeService.GetListPaged(getDataListVM);
             Task<WrapperExpenseTypeListVM> expenseTypeTask = _serviceWrapper.ExpenseTypeService.GetListPaged(getDataListVM);
-            Task<WrapperSupplierListVM> supplierListTask = _serviceWrapper.SupplierService.GetListPaged(getDataListVM);
+            Task<WrapperSupplierListVM> supplierListTask = _serviceWrapper.SupplierService.GetListPaged(getDataListVM,false);
             Task<WrapperStaffListVM> staffListTask = _serviceWrapper.StaffService.GetListPaged(getDataListVM);
+
+
+            Task<WrapperItemListVM> itemTask = _serviceWrapper.ItemService.GetListPaged(getDataListVM);
+            Task<WrapperItemCategoryListVM> itemCategoryTask = _serviceWrapper.ItemCategoryService.GetListPaged(getDataListVM);
+            Task<WrapperItemStatusListVM> itemStatusTask = _serviceWrapper.ItemStatusService.GetListPaged(getDataListVM);
+
+
 
 
 
 
             await Task.WhenAll(customerListTask, incomeTypeListTask, 
-                invoiceTypeListTask, expenseTypeTask, supplierListTask, staffListTask);
+                invoiceTypeListTask, expenseTypeTask, supplierListTask, staffListTask
+                , itemTask, itemCategoryTask, itemStatusTask);
 
 
             vm.CustomerVMs = customerListTask.Result.ListOfData;
@@ -94,6 +102,10 @@ namespace Service.BusinessServiceWrapper
             vm.ExpenseTypeVMs = expenseTypeTask.Result.ListOfData;
             vm.SupplierVMs = supplierListTask.Result.ListOfData;
             vm.StaffVMs = staffListTask.Result.ListOfData;
+
+            vm.ItemCategoryVMs = itemCategoryTask.Result.ListOfData;
+            vm.ItemVMs = itemTask.Result.ListOfData;
+            vm.ItemStatusVMs = itemStatusTask.Result.ListOfData;
             return vm;
         }
         public async Task<InitialLoadDataVM> GetProductionInitialData(GetDataListVM getDataListVM)
@@ -101,11 +113,11 @@ namespace Service.BusinessServiceWrapper
             InitialLoadDataVM vm = new InitialLoadDataVM();
             Task<WrapperItemListVM> itemListTask = _serviceWrapper.ItemService.GetListPaged(getDataListVM);
             Task<WrapperItemCategoryListVM> itemCategoryListTask = _serviceWrapper.ItemCategoryService.GetListPaged(getDataListVM);
-            Task<WrapperListCustomerVM> customerListTask = _serviceWrapper.CustomerService.GetListPaged(getDataListVM);
+            Task<WrapperListCustomerVM> customerListTask = _serviceWrapper.CustomerService.GetListPaged(getDataListVM,false);
             Task<WrapperIncomeTypeListVM> incomeTypeListTask = _serviceWrapper.IncomeTypeService.GetListPaged(getDataListVM);
             Task<WrapperInvoiceTypeListVM> invoiceTypeListTask = _serviceWrapper.InvoiceTypeService.GetListPaged(getDataListVM);
             Task<WrapperExpenseTypeListVM> expenseTypeTask = _serviceWrapper.ExpenseTypeService.GetListPaged(getDataListVM);
-            Task<WrapperSupplierListVM> supplierListTask = _serviceWrapper.SupplierService.GetListPaged(getDataListVM);
+            Task<WrapperSupplierListVM> supplierListTask = _serviceWrapper.SupplierService.GetListPaged(getDataListVM,false);
             Task<WrapperStaffListVM> staffListTask = _serviceWrapper.StaffService.GetListPaged(getDataListVM);
             Task<WrapperEquipmentListVM> equipmentListTask = _serviceWrapper.EquipmentService.GetListPaged(getDataListVM);
 

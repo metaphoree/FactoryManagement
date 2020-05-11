@@ -6,7 +6,7 @@ namespace Entities.ViewModels.IncomeType
 {
     public class WrapperIncomeTypeListVM
     {
-        public long TotalRecoreds { get; set; }
+        public long TotalRecords { get; set; }
         public List<IncomeTypeVM> ListOfData { get; set; }
     }
 }

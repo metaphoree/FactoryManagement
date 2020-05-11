@@ -12,7 +12,7 @@ namespace Entities.DbModels
         public string Month { get; set; }
         public decimal? Amount { get; set; }
         public string Description { get; set; }
-        public DateTime? OccurranceDate { get; set; }
+        public DateTime OccurranceDate { get; set; }
         public string EmployeeId { get; set; }
 
         [ForeignKey("ExpenseTypeId")]

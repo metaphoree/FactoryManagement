@@ -32,7 +32,7 @@ namespace Contracts.IBusinessServiceWrapper
         //Task<WrapperPaymentListVM> DeleteCustomerPayment(PaymentVM vm);
         Task<WrapperMonthExpenseVM> MonthlyExpense(MonthlyReport vm);
         Task<WrapperMonthIncomeVM> MonthlyIncome(MonthlyReport vm);
-        Task<WrapperMonthRecievableListVM> MonthlyPayable(MonthlyReport vm);
+        Task<WrapperMonthPayableListVM> MonthlyPayable(MonthlyReport vm);
         Task<WrapperMonthProductionListVM> MonthlyProduction(MonthlyReport vm);
         Task<WrapperMonthRecievableVM> MonthlyRecievable(MonthlyReport vm);
     }

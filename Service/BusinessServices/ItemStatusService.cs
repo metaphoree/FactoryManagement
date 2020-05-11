@@ -43,7 +43,7 @@ namespace Service.BusinessServices
             var wrapper = new WrapperItemStatusListVM()
             {
                 ListOfData = itemVMLists,
-                TotalRecoreds = dataRowCount
+                TotalRecords = dataRowCount
             };
             this._utilService.Log("Successful In Getting  Item Status");
             return wrapper;

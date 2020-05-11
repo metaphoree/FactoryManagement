@@ -14,7 +14,7 @@ namespace Contracts.ServiceContracts
         Task<WrapperListCustomerVM> Update(string id, CustomerVM updateCustomerViewModel);
         //Task<List<CustomerVM>> GetList(string FactoryId);
         //Task<CustomerVM> GetSingle(string cusId, string FactoryId);
-        Task<WrapperListCustomerVM> GetListPaged(GetDataListVM dataListVM);
+        Task<WrapperListCustomerVM> GetListPaged(GetDataListVM dataListVM, bool withHistory);
         Task<WrapperListCustomerVM> Delete(CustomerVM customerTemp);
         Task<WrapperCustomerHistory> GetCustomerHistory(GetDataListHistory customerVM);
         Task<WrapperPaymentListVM> GetCustomerPaymentList(Entities.ViewModels.Payment.GetPaymentDataListVM vm);

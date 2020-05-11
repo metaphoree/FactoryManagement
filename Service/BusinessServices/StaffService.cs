@@ -97,7 +97,7 @@ namespace Service.BusinessServices
             outputList = outputList.Skip((dataListVM.PageNumber - 1) * dataListVM.PageSize).Take(dataListVM.PageSize).ToList();
             var data = new WrapperStaffListVM();
             data.ListOfData = outputList;
-            data.TotalRecoreds = noOfRecordTask;
+            data.TotalRecords = noOfRecordTask;
             this._utilService.Log("Successful In Getting Data");
             data = await SetHistoryOverview(data);
             return data;

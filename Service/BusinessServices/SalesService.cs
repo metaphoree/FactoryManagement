@@ -20,7 +20,6 @@ namespace Service.BusinessServices
         private readonly IRepositoryWrapper _repositoryWrapper;
 
         private readonly IUtilService _utilService;
-
         public SalesService(IRepositoryWrapper repositoryWrapper, IUtilService utilService)
         {
             this._repositoryWrapper = repositoryWrapper;
@@ -181,11 +180,9 @@ namespace Service.BusinessServices
                 vmList.ElementAt(i).ItemList = _utilService.Mapper.Map<List<Sales>, List<SalesItemVM>>(temp);
             }
             vm.ListOfData = vmList;
-            vm.TotalRecoreds = invoicesT.Result.ToList().Count;
+            vm.TotalRecords = invoicesT.Result.ToList().Count;
             return vm;
         }
-
-
         // Invoice
         // Income
         // Recievable
@@ -291,10 +288,6 @@ namespace Service.BusinessServices
 
             return await GetAllSalesAsync(getDatalistVM);
         }
-      
-        
-        
-
         public async Task<WrapperSalesReturnVM> AddSalesReturn(SalesReturnVM vm)
         {
             // StockIn
@@ -306,9 +299,7 @@ namespace Service.BusinessServices
             _repositoryWrapper.Invoice.Create(invoiceToAdd);
             vm.InvoiceId = invoiceToAdd.Id;
 
-         
-
-
+        
             Stock stockToAdd = new Stock();
             stockToAdd = _utilService.Mapper.Map<SalesReturnVM, Stock>(vm);
 
@@ -342,19 +333,18 @@ namespace Service.BusinessServices
 
             }
 
-
             _repositoryWrapper.StockIn.Create(stockInToAdd);
 
-
-
-            if (vm.AmountPaid > 0 && vm.IsFullyPaid)
+            if (vm.AmountPaid > 0)
             {
                 TblTransaction tblTransactionToAdd = new TblTransaction();
                 tblTransactionToAdd = _utilService.Mapper.Map<SalesReturnVM, TblTransaction>(vm);
                 _repositoryWrapper.Transaction.Create(tblTransactionToAdd);
+
+                Expense expenseToAdd = new Expense();
+                expenseToAdd = _utilService.Mapper.Map<SalesReturnVM, Expense>(vm);
+                _repositoryWrapper.Expense.Create(expenseToAdd);
             }
-
-
 
 
             Task<int> invT = _repositoryWrapper.Invoice.SaveChangesAsync();
@@ -362,8 +352,9 @@ namespace Service.BusinessServices
             Task<int> stockT = _repositoryWrapper.Stock.SaveChangesAsync();
             Task<int> payableT = _repositoryWrapper.Payable.SaveChangesAsync();
             Task<int> transactionT = _repositoryWrapper.Transaction.SaveChangesAsync();
+            Task<int> expenseT = _repositoryWrapper.Expense.SaveChangesAsync();
 
-            await Task.WhenAll(invT, stockInT, stockT, payableT, transactionT);
+            await Task.WhenAll(invT, stockInT, stockT, payableT, transactionT, expenseT);
 
 
 
@@ -388,10 +379,10 @@ namespace Service.BusinessServices
             Task<List<Invoice>> invoicesT = _repositoryWrapper
                 .Invoice
                 .FindAll()
-                .Include(x => x.Supplier)
+                .Include(x => x.Customer)
                 .Include(x => x.InvoiceType)
                 .Where(x => x.FactoryId == getDataListVM.FactoryId
-                && x.InvoiceType.Name == TypeInvoice.PurchaseReturn.ToString())
+                && x.InvoiceType.Name == TypeInvoice.SalesReturn.ToString())
                 //.Skip((getDataListVM.PageNumber - 1) * (getDataListVM.PageSize))
                 //.Take(getDataListVM.PageSize)
                 .ToListAsync();
@@ -407,10 +398,20 @@ namespace Service.BusinessServices
                 //.Take(getDataListVM.PageSize)
                 .ToListAsync();
 
-            await Task.WhenAll(invoicesT, stockInT);
+
+            Task<List<Payable>> payableT = _repositoryWrapper
+                .Payable
+                .FindAll()
+                .Include(x => x.Customer)
+                .Where(x => x.FactoryId == getDataListVM.FactoryId)
+                //.Skip((getDataListVM.PageNumber - 1) * (getDataListVM.PageSize))
+                //.Take(getDataListVM.PageSize)
+                .ToListAsync();
+
+            await Task.WhenAll(invoicesT, stockInT, payableT);
             List<Invoice> invoiceList = invoicesT.Result.ToList();
             List<StockIn> stockInList = stockInT.Result.ToList();
-
+            List<Payable> payableList = payableT.Result.ToList();
 
             SalesReturnVM vc = new SalesReturnVM();
             for (int i = 0; i < invoiceList.Count; i++)
@@ -418,12 +419,22 @@ namespace Service.BusinessServices
                 vc = new SalesReturnVM();
                 Invoice temp = invoiceList.ElementAt(i);
                 vc = _utilService.Mapper.Map<Invoice, SalesReturnVM>(temp, vc);
-                vc = _utilService.Mapper.Map<StockIn, SalesReturnVM>(stockInList.Where(x => x.InvoiceId ==
-                temp.Id).ToList().FirstOrDefault(), vc);
+
+                var stockIn = stockInList.Where(x => x.InvoiceId ==
+                temp.Id).ToList().FirstOrDefault();
+                if (stockIn != null) {
+                    vc = _utilService.Mapper.Map<StockIn, SalesReturnVM>(stockIn, vc);
+                }
+                
+                var payable = payableList.Where(x => x.InvoiceId == temp.Id).ToList().FirstOrDefault();
+
+                if (payable != null) {
+                    vc = _utilService.Mapper.Map<Payable, SalesReturnVM>(payable, vc);
+                }
                 vmList.Add(vc);
             }
 
-            vm.NumberOfRecords = vmList.Count;
+            vm.TotalRecords = vmList.Count;
             vm.ListOfData =
                 vmList
                 .OrderByDescending(x => x.OccurranceDate)

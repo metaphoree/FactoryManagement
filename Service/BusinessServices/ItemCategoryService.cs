@@ -57,7 +57,7 @@ namespace Service.BusinessServices
             var wrapper = new WrapperItemCategoryListVM()
             {
                 ListOfData = itemCategoryVMLists,
-                TotalRecoreds = dataRowCount
+                TotalRecords = dataRowCount
             };
             this._utilService.LogInfo("Successful In Getting  Item Category");
 

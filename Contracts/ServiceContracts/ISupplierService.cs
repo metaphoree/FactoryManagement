@@ -12,7 +12,7 @@ namespace Contracts.ServiceContracts
     {
         Task<WrapperSupplierListVM> Add(SupplierVM ViewModel);
         Task<WrapperSupplierListVM> Update(string id, SupplierVM ViewModel);
-        Task<WrapperSupplierListVM> GetListPaged(GetDataListVM dataListVM);
+        Task<WrapperSupplierListVM> GetListPaged(GetDataListVM dataListVM, bool withHistory);
         Task<WrapperSupplierListVM> Delete(SupplierVM customerTemp);
 
 

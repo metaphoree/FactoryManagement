@@ -9,7 +9,8 @@ namespace Entities.ViewModels.CustomerView
         public WrapperCustomerHistory() {
             ListOfData = new List<CustomerHistory>();
         }
+        public long TotalRecords { get; set; }
 
-       public List<CustomerHistory> ListOfData { get; set; }
+        public List<CustomerHistory> ListOfData { get; set; }
     }
 }

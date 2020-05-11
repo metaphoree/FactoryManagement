@@ -59,7 +59,7 @@ namespace Service.BusinessServices
             var wrapper = new WrapperItemListVM()
             {
                 ListOfData = itemVMList,
-                TotalRecoreds = dataRowCount
+                TotalRecords = dataRowCount
             };
             return wrapper;
         }

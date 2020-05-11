@@ -14,7 +14,7 @@ namespace Entities.ViewModels.Expense
         }
 
         public List<MonthlyExpense> ListOfData { get; set; }
-        public long TotalRecoreds { get; set; }
+        public long TotalRecords { get; set; }
     }
 
 

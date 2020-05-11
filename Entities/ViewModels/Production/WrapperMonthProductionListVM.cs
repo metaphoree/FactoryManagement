@@ -10,7 +10,7 @@ namespace Entities.ViewModels.Production
         {
             ListOfData = new List<MonthlyProduction>();
         }
-        public long TotalRecoreds { get; set; }
+        public long TotalRecords { get; set; }
         public List<MonthlyProduction> ListOfData { get; set; }
 
     }

@@ -15,6 +15,7 @@ namespace Entities.ViewModels.Purchase
         public string ItemCategoryId { get; set; }
         public string ItemCategoryName { get; set; } //
         public long AmountRecieved { get; set; } // --
+        public long AmountRecievable { get; set; } // --
         public long UnitPrice { get; set; } //
         public long TotalAmount { get; set; } //--
         public long Quantity { get; set; } //
@@ -24,8 +25,7 @@ namespace Entities.ViewModels.Purchase
         public string InvoiceTypeId { get; set; }
         public string InvoiceTypeName { get; set; }// --
         public DateTime OccurranceDate { get; set; }
-
-
+        public string IncomeTypeId { get; set; }
         public bool IsFullyPaid { get; set; }
     }
 }

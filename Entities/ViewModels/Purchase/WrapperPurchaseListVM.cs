@@ -6,7 +6,7 @@ namespace Entities.ViewModels.Purchase
 {
    public class WrapperPurchaseListVM
     {
-        public long TotalRecoreds { get; set; }
+        public long TotalRecords { get; set; }
         public List<PurchaseVM> ListOfData { get; set; }
 
     }

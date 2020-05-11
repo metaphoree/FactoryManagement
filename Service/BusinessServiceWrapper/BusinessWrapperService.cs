@@ -57,19 +57,23 @@ namespace Service.BusinessServiceWrapper
             monthlyProductions = _utilService.Mapper.Map<List<Production>, List<MonthlyProduction>>(prodT.Result.ToList());
 
 
-            returnData.TotalRecoreds = prodT.Result.ToList().Count();
+            returnData.TotalRecords = prodT.Result.ToList().Count();
             returnData.ListOfData = monthlyProductions
                 .Skip((vm.PageNumber - 1) * (vm.PageSize))
                 .Take(vm.PageSize)
                 .OrderByDescending(x => x.CreatedDateTime)
                 .ToList();
 
+            MonthlyProduction lastRow = new MonthlyProduction();
+            lastRow.TotalAmount = returnData.ListOfData.Sum(x => (x.Quantity * x.Unitprice));
+            returnData.ListOfData.Add(lastRow);
+
             return returnData;
         }
-        public async Task<WrapperMonthRecievableListVM> MonthlyPayable(MonthlyReport vm)
+        public async Task<WrapperMonthPayableListVM> MonthlyPayable(MonthlyReport vm)
         {
 
-            WrapperMonthRecievableListVM returnData = new WrapperMonthRecievableListVM();
+            WrapperMonthPayableListVM returnData = new WrapperMonthPayableListVM();
             Task<List<Payable>> payableT = _repositoryWrapper
                 .Payable
                 .FindAll()
@@ -86,12 +90,18 @@ namespace Service.BusinessServiceWrapper
             monthlyPayable = _utilService.Mapper.Map<List<Payable>, List<MonthlyPayable>>(payableT.Result.ToList());
 
 
-            returnData.TotalRecoreds = payableT.Result.ToList().Count();
+            returnData.TotalRecords = payableT.Result.ToList().Count();
             returnData.ListOfData = monthlyPayable
                 .Skip((vm.PageNumber - 1) * (vm.PageSize))
                 .Take(vm.PageSize)
                 .OrderByDescending(x => x.CreatedDateTime)
                 .ToList();
+
+            MonthlyPayable lastRow = new MonthlyPayable();
+            lastRow.Amount = returnData.ListOfData.Sum(x => (x.Amount));
+            returnData.ListOfData.Add(lastRow);
+
+
 
             return returnData;
         }
@@ -115,7 +125,7 @@ namespace Service.BusinessServiceWrapper
             monthlyRecievable = _utilService.Mapper.Map<List<Recievable>, List<MonthlyRecievable>>(RecievableT.Result.ToList());
 
 
-            returnData.TotalRecoreds = RecievableT
+            returnData.TotalRecords = RecievableT
                 .Result
                 .ToList()
                 .Count();
@@ -126,6 +136,12 @@ namespace Service.BusinessServiceWrapper
                 .Take(vm.PageSize)
                 .OrderByDescending(x => x.CreatedDateTime)
                 .ToList();
+
+
+            MonthlyRecievable lastRow = new MonthlyRecievable();
+            lastRow.Amount = returnData.ListOfData.Sum(x => (x.Amount));
+            returnData.ListOfData.Add(lastRow);
+
 
             return returnData;
         }
@@ -149,7 +165,7 @@ namespace Service.BusinessServiceWrapper
             monthlyIncome = _utilService.Mapper.Map<List<Income>, List<MonthlyIncome>>(IncomeT.Result.ToList());
 
 
-            returnData.TotalRecoreds = IncomeT
+            returnData.TotalRecords = IncomeT
                 .Result
                 .ToList()
                 .Count();
@@ -160,6 +176,12 @@ namespace Service.BusinessServiceWrapper
                 .Take(vm.PageSize)
                 .OrderByDescending(x => x.CreatedDateTime)
                 .ToList();
+
+
+            MonthlyIncome lastRow = new MonthlyIncome();
+            lastRow.Amount = returnData.ListOfData.Sum(x => (x.Amount));
+            returnData.ListOfData.Add(lastRow);
+
 
             return returnData;
         }
@@ -183,7 +205,7 @@ namespace Service.BusinessServiceWrapper
             monthlyExpense = _utilService.Mapper.Map<List<Expense>, List<MonthlyExpense>>(ExpenseT.Result.ToList());
 
 
-            returnData.TotalRecoreds = ExpenseT
+            returnData.TotalRecords = ExpenseT
                 .Result
                 .ToList()
                 .Count();
@@ -194,6 +216,11 @@ namespace Service.BusinessServiceWrapper
                 .Take(vm.PageSize)
                 .OrderByDescending(x => x.CreatedDateTime)
                 .ToList();
+
+            MonthlyExpense lastRow = new MonthlyExpense();
+            lastRow.Amount = returnData.ListOfData.Sum(x => (x.Amount));
+            returnData.ListOfData.Add(lastRow);
+
 
             return returnData;
         }

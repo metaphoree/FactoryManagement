@@ -8,7 +8,7 @@ namespace Entities.ViewModels.Payable
     {
         public string ClientName { get; set; }
         public string InvoiceId { get; set; }
-        public string Amount { get; set; }
+        public decimal Amount { get; set; }
         public string Purpose { get; set; }
         public string Month { get; set; }
 

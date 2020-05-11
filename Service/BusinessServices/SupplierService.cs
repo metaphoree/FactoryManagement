@@ -43,7 +43,7 @@ namespace Service.BusinessServices
                 PageSize = 10,
                 TotalRows = 0
             };
-            WrapperSupplierListVM data = await GetListPaged(dataParam);
+            WrapperSupplierListVM data = await GetListPaged(dataParam, true);
             return data;
         }
         public async Task<WrapperSupplierListVM> Update(string id, SupplierVM ViewModel)
@@ -70,10 +70,10 @@ namespace Service.BusinessServices
                 PageSize = 10,
                 TotalRows = 0
             };
-            WrapperSupplierListVM data = await GetListPaged(dataParam);
+            WrapperSupplierListVM data = await GetListPaged(dataParam, true);
             return data;
         }
-        public async Task<WrapperSupplierListVM> GetListPaged(GetDataListVM dataListVM)
+        public async Task<WrapperSupplierListVM> GetListPaged(GetDataListVM dataListVM, bool withHistory)
         {
             IEnumerable<Supplier> ListTask = await _repositoryWrapper.Supplier.FindByConditionAsync(x => x.FactoryId == dataListVM.FactoryId);
             long noOfRecordTask = await _repositoryWrapper.Supplier.NumOfRecord();
@@ -98,9 +98,14 @@ namespace Service.BusinessServices
             outputList = outputList.Skip((dataListVM.PageNumber - 1) * dataListVM.PageSize).Take(dataListVM.PageSize).ToList();
             var data = new WrapperSupplierListVM();
             data.ListOfData = outputList;
-            data.TotalRecoreds = noOfRecordTask;
+            data.TotalRecords = noOfRecordTask;
             this._utilService.Log("Successful In Getting Data");
-            data = await SetHistoryOverview(data);
+            if (withHistory)
+            {
+                data = await SetHistoryOverview(data);
+            }
+
+
             return data;
         }
         public async Task<WrapperSupplierListVM> Delete(SupplierVM Temp)
@@ -121,7 +126,7 @@ namespace Service.BusinessServices
                 PageSize = 10,
                 TotalRows = 0
             };
-            WrapperSupplierListVM data = await GetListPaged(dataParam);
+            WrapperSupplierListVM data = await GetListPaged(dataParam, true);
             return data;
         }
         public async Task<WrapperPaymentListVM> GetSupplierPaymentList(GetPaymentDataListVM vm)
@@ -327,20 +332,22 @@ namespace Service.BusinessServices
         private async Task<WrapperSupplierListVM> SetHistoryOverview(WrapperSupplierListVM vm)
         {
             var data = new GetDataListHistory();
-            Task<WrapperSupplierHistory>[] listOftask = new Task<WrapperSupplierHistory>[vm.ListOfData.Count];
+            //Task<WrapperSupplierHistory>[] listOftask = new Task<WrapperSupplierHistory>[vm.ListOfData.Count];
+            WrapperSupplierHistory[] listOftask = new WrapperSupplierHistory[vm.ListOfData.Count];
             for (int i = 0; i < vm.ListOfData.Count; i++)
             {
                 SupplierVM temp = vm.ListOfData.ElementAt(i);
                 data.ClientId = temp.Id;
                 data.PageNumber = -1;
-                listOftask[i] = GetSupplierHistory(data);
+                listOftask[i] = await GetSupplierHistory(data);
             }
 
-            await Task.WhenAll(listOftask);
+            // await Task.WhenAll(listOftask);
 
             for (int i = 0; i < vm.ListOfData.Count; i++)
             {
-                SupplierHistory te = GetSupplierHistoryOverview(listOftask[i].Result);
+                //SupplierHistory te = GetSupplierHistoryOverview(listOftask[i].Result);
+                SupplierHistory te = GetSupplierHistoryOverview(listOftask[i]);
                 vm.ListOfData.ElementAt(i).PaidAmount = te.PaidAmount;
                 vm.ListOfData.ElementAt(i).RecievableAmount = te.RecievableAmount;
                 vm.ListOfData.ElementAt(i).RecievedAmount = te.RecievedAmount;

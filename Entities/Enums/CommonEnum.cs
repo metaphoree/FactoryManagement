@@ -10,8 +10,9 @@ namespace Entities.Enums
     SalesReturnPayment,
     PurchaseReturnPayment,
         SalesPayment,
-        PurchasePayment
-
+        PurchasePayment,
+        Income,
+        Expense
 
     }
 
@@ -41,13 +42,16 @@ namespace Entities.Enums
     public enum TypeIncome
     {
         Sales,
-        ClientPaymentRecieved
+        ClientPaymentRecieved,
+        PurchaseReturn
     }
     public enum TypeExpense
     {
         Purchase,
         StaffPayment,
-        SupplierPayment
+        SupplierPayment,
+        SalesReturn
+
     }
     public enum TypeInvoice
     {

@@ -12,6 +12,6 @@ namespace Entities.ViewModels.Income
         }
 
         public List<MonthlyIncome> ListOfData { get; set; }
-        public long TotalRecoreds { get; set; }
+        public long TotalRecords { get; set; }
     }
 }

@@ -21,9 +21,9 @@ namespace Entities.ViewModels.Sales
         public string ItemCategoryId { get; set; }
         public string ItemCategoryName { get; set; } //--
 
+        public string ExpenseTypeId { get; set; }
 
-
-
+        public long AmountPayable { get; set; } //--
         public long AmountPaid { get; set; } //--
         public long TotalAmount { get; set; } //--
         public long UnitPrice { get; set; } //--

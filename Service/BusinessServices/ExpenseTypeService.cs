@@ -53,7 +53,7 @@ namespace Service.BusinessServices
             var wrapper = new WrapperExpenseTypeListVM()
             {
                 ListOfData = ExpenseTypeVMLists,
-                TotalRecoreds = dataRowCount
+                TotalRecords = dataRowCount
             };
             this._utilService.LogInfo("Successful In Getting  Item Category");
 

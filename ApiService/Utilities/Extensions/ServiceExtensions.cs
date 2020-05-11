@@ -53,88 +53,181 @@ namespace ApiService.Utilities.Extensions
         }
         public static void ConfigureService(this IServiceCollection services)
         {
-            services.AddScoped<IAddressService, AddressService>();
-            services.AddScoped<ICustomerService, CustomerService>();
-            services.AddScoped<IDepartmentService, DepartmentService>();
-            services.AddScoped<IEquipmentService, EquipmentService>();
-            services.AddScoped<IEquipmentCategoryService, EquipmentCategoryService>();
-            services.AddScoped<IExpenseService, ExpenseService>();
-            services.AddScoped<IExpenseTypeService, ExpenseTypeService>();
-            services.AddScoped<IFactoryService, FactoryService>();
-            services.AddScoped<IIncomeService, IncomeService>();
-            services.AddScoped<IIncomeTypeService, IncomeTypeService>();
-            services.AddScoped<IInvoiceService, InvoiceService>();
-            services.AddScoped<IInvoiceTypeService, InvoiceTypeService>();
-            services.AddScoped<IItemService, ItemService>();
-            services.AddScoped<IItemCategoryService, ItemCategoryService>();
-            services.AddScoped<IItemStatusService, ItemStatusService>();
-            services.AddScoped<IPayableService, PayableService>();
-            services.AddScoped<IPaymentStatusService, PaymentStatusService>();
-            services.AddScoped<IPhoneService, PhoneService>();
-            services.AddScoped<IProductionService, ProductionService>();
-            services.AddScoped<IPurchaseService, PurchaseService>();
-            services.AddScoped<IPurchaseTypeService, PurchaseTypeService>();
-            services.AddScoped<IRecievableService, RecievableService>();
-            services.AddScoped<IRoleService, RoleService>();
-            services.AddScoped<ISalesService, SalesService>();
-            services.AddScoped<IStaffService, StaffService>();
-            services.AddScoped<IStockService, StockService>();
-            services.AddScoped<IStockInService, StockInService>();
-            services.AddScoped<IStockOutService, StockOutService>();
-            services.AddScoped<ISupplierService, SupplierService>();
-            services.AddScoped<ITransactionService, TransactionService>();
-            services.AddScoped<ITransactionTypeService, TransactionTypeService>();
-            services.AddScoped<IUserAuthInfoService, UserAuthInfoService>();
-            services.AddScoped<IUserRoleService, UserRoleService>();
-            services.AddScoped<IUtilService, UtilService>();
+            services.AddTransient<IAddressService, AddressService>();
+            services.AddTransient<ICustomerService, CustomerService>();
+            services.AddTransient<IDepartmentService, DepartmentService>();
+            services.AddTransient<IEquipmentService, EquipmentService>();
+            services.AddTransient<IEquipmentCategoryService, EquipmentCategoryService>();
+            services.AddTransient<IExpenseService, ExpenseService>();
+            services.AddTransient<IExpenseTypeService, ExpenseTypeService>();
+            services.AddTransient<IFactoryService, FactoryService>();
+            services.AddTransient<IIncomeService, IncomeService>();
+            services.AddTransient<IIncomeTypeService, IncomeTypeService>();
+            services.AddTransient<IInvoiceService, InvoiceService>();
+            services.AddTransient<IInvoiceTypeService, InvoiceTypeService>();
+            services.AddTransient<IItemService, ItemService>();
+            services.AddTransient<IItemCategoryService, ItemCategoryService>();
+            services.AddTransient<IItemStatusService, ItemStatusService>();
+            services.AddTransient<IPayableService, PayableService>();
+            services.AddTransient<IPaymentStatusService, PaymentStatusService>();
+            services.AddTransient<IPhoneService, PhoneService>();
+            services.AddTransient<IProductionService, ProductionService>();
+            services.AddTransient<IPurchaseService, PurchaseService>();
+            services.AddTransient<IPurchaseTypeService, PurchaseTypeService>();
+            services.AddTransient<IRecievableService, RecievableService>();
+            services.AddTransient<IRoleService, RoleService>();
+            services.AddTransient<ISalesService, SalesService>();
+            services.AddTransient<IStaffService, StaffService>();
+            services.AddTransient<IStockService, StockService>();
+            services.AddTransient<IStockInService, StockInService>();
+            services.AddTransient<IStockOutService, StockOutService>();
+            services.AddTransient<ISupplierService, SupplierService>();
+            services.AddTransient<ITransactionService, TransactionService>();
+            services.AddTransient<ITransactionTypeService, TransactionTypeService>();
+            services.AddTransient<IUserAuthInfoService, UserAuthInfoService>();
+            services.AddTransient<IUserRoleService, UserRoleService>();
+            services.AddTransient<IUtilService, UtilService>();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            //services.AddScoped<IAddressService, AddressService>();
+            //services.AddScoped<ICustomerService, CustomerService>();
+            //services.AddScoped<IDepartmentService, DepartmentService>();
+            //services.AddScoped<IEquipmentService, EquipmentService>();
+            //services.AddScoped<IEquipmentCategoryService, EquipmentCategoryService>();
+            //services.AddScoped<IExpenseService, ExpenseService>();
+            //services.AddScoped<IExpenseTypeService, ExpenseTypeService>();
+            //services.AddScoped<IFactoryService, FactoryService>();
+            //services.AddScoped<IIncomeService, IncomeService>();
+            //services.AddScoped<IIncomeTypeService, IncomeTypeService>();
+            //services.AddScoped<IInvoiceService, InvoiceService>();
+            //services.AddScoped<IInvoiceTypeService, InvoiceTypeService>();
+            //services.AddScoped<IItemService, ItemService>();
+            //services.AddScoped<IItemCategoryService, ItemCategoryService>();
+            //services.AddScoped<IItemStatusService, ItemStatusService>();
+            //services.AddScoped<IPayableService, PayableService>();
+            //services.AddScoped<IPaymentStatusService, PaymentStatusService>();
+            //services.AddScoped<IPhoneService, PhoneService>();
+            //services.AddScoped<IProductionService, ProductionService>();
+            //services.AddScoped<IPurchaseService, PurchaseService>();
+            //services.AddScoped<IPurchaseTypeService, PurchaseTypeService>();
+            //services.AddScoped<IRecievableService, RecievableService>();
+            //services.AddScoped<IRoleService, RoleService>();
+            //services.AddScoped<ISalesService, SalesService>();
+            //services.AddScoped<IStaffService, StaffService>();
+            //services.AddScoped<IStockService, StockService>();
+            //services.AddScoped<IStockInService, StockInService>();
+            //services.AddScoped<IStockOutService, StockOutService>();
+            //services.AddScoped<ISupplierService, SupplierService>();
+            //services.AddScoped<ITransactionService, TransactionService>();
+            //services.AddScoped<ITransactionTypeService, TransactionTypeService>();
+            //services.AddScoped<IUserAuthInfoService, UserAuthInfoService>();
+            //services.AddScoped<IUserRoleService, UserRoleService>();
+            //services.AddScoped<IUtilService, UtilService>();
         }
         public static void ConfigureRepository(this IServiceCollection services) {
-                                
-            services.AddScoped<IAddressRepository, AddressRepository>();
-            services.AddScoped<ICustomerRepository,CustomerRepository>();
-            services.AddScoped<IDepartmentRepository, DepartmentRepository>();
-            services.AddScoped<IEquipmentRepository, EquipmentRepository>();
-            services.AddScoped<IEquipmentCategoryRepository, EquipmentCategoryRepository>();
-            services.AddScoped<IExpenseRepository, ExpenseRepository>();
-            services.AddScoped<IExpenseTypeRepository, ExpenseTypeRepository>();
-            services.AddScoped<IFactoryRepository, FactoryRepository>();
-            services.AddScoped<IIncomeRepository, IncomeRepository>();
-            services.AddScoped<IIncomeTypeRepository, IncomeTypeRepository>();
-            services.AddScoped<IInvoiceRepository, InvoiceRepository>();
-            services.AddScoped<IInvoiceTypeRepository, InvoiceTypeRepository>();
-            services.AddScoped<IItemRepository, ItemRepository>();
-            services.AddScoped<IItemCategoryRepository, ItemCategoryRepository>();
-            services.AddScoped<IItemStatusRepository, ItemStatusRepository>();
-            services.AddScoped<IPayableRepository, PayableRepository>();
-            services.AddScoped<IPaymentStatusRepository, PaymentStatusRepository>();
-            services.AddScoped<IPhoneRepository, PhoneRepository>();
-            services.AddScoped<IProductionRepository, ProductionRepository>();
-            services.AddScoped<IPurchaseRepository, PurchaseRepository>();
-            services.AddScoped<IPurchaseTypeRepository, PurchaseTypeRepository>();
-            services.AddScoped<IRecievableRepository, RecievableRepository>();
-            services.AddScoped<IRoleRepository, RoleRepository>();
-            services.AddScoped<ISalesRepository, SalesRepository>();
-            services.AddScoped<IStaffRepository, StaffRepository>();
-            services.AddScoped<IStockRepository, StockRepository>();
-            services.AddScoped<IStockInRepository, StockInRepository>();
-            services.AddScoped<IStockOutRepository, StockOutRepository>();
-            services.AddScoped<ISupplierRepository, SupplierRepository>();
-            services.AddScoped<ITransactionRepository, TransactionRepository>();
-            services.AddScoped<ITransactionTypeRepository, TransactionTypeRepository>();
-            services.AddScoped<IUserAuthInfoRepository, UserAuthInfoRepository>();
-            services.AddScoped<IUserRoleRepository, UserRoleRepository>();
+
+
+            services.AddTransient<IAddressRepository, AddressRepository>();
+            services.AddTransient<ICustomerRepository, CustomerRepository>();
+            services.AddTransient<IDepartmentRepository, DepartmentRepository>();
+            services.AddTransient<IEquipmentRepository, EquipmentRepository>();
+            services.AddTransient<IEquipmentCategoryRepository, EquipmentCategoryRepository>();
+            services.AddTransient<IExpenseRepository, ExpenseRepository>();
+            services.AddTransient<IExpenseTypeRepository, ExpenseTypeRepository>();
+            services.AddTransient<IFactoryRepository, FactoryRepository>();
+            services.AddTransient<IIncomeRepository, IncomeRepository>();
+            services.AddTransient<IIncomeTypeRepository, IncomeTypeRepository>();
+            services.AddTransient<IInvoiceRepository, InvoiceRepository>();
+            services.AddTransient<IInvoiceTypeRepository, InvoiceTypeRepository>();
+            services.AddTransient<IItemRepository, ItemRepository>();
+            services.AddTransient<IItemCategoryRepository, ItemCategoryRepository>();
+            services.AddTransient<IItemStatusRepository, ItemStatusRepository>();
+            services.AddTransient<IPayableRepository, PayableRepository>();
+            services.AddTransient<IPaymentStatusRepository, PaymentStatusRepository>();
+            services.AddTransient<IPhoneRepository, PhoneRepository>();
+            services.AddTransient<IProductionRepository, ProductionRepository>();
+            services.AddTransient<IPurchaseRepository, PurchaseRepository>();
+            services.AddTransient<IPurchaseTypeRepository, PurchaseTypeRepository>();
+            services.AddTransient<IRecievableRepository, RecievableRepository>();
+            services.AddTransient<IRoleRepository, RoleRepository>();
+            services.AddTransient<ISalesRepository, SalesRepository>();
+            services.AddTransient<IStaffRepository, StaffRepository>();
+            services.AddTransient<IStockRepository, StockRepository>();
+            services.AddTransient<IStockInRepository, StockInRepository>();
+            services.AddTransient<IStockOutRepository, StockOutRepository>();
+            services.AddTransient<ISupplierRepository, SupplierRepository>();
+            services.AddTransient<ITransactionRepository, TransactionRepository>();
+            services.AddTransient<ITransactionTypeRepository, TransactionTypeRepository>();
+            services.AddTransient<IUserAuthInfoRepository, UserAuthInfoRepository>();
+            services.AddTransient<IUserRoleRepository, UserRoleRepository>();
+
+
+            //services.AddScoped<IAddressRepository, AddressRepository>();
+            //services.AddScoped<ICustomerRepository,CustomerRepository>();
+            //services.AddScoped<IDepartmentRepository, DepartmentRepository>();
+            //services.AddScoped<IEquipmentRepository, EquipmentRepository>();
+            //services.AddScoped<IEquipmentCategoryRepository, EquipmentCategoryRepository>();
+            //services.AddScoped<IExpenseRepository, ExpenseRepository>();
+            //services.AddScoped<IExpenseTypeRepository, ExpenseTypeRepository>();
+            //services.AddScoped<IFactoryRepository, FactoryRepository>();
+            //services.AddScoped<IIncomeRepository, IncomeRepository>();
+            //services.AddScoped<IIncomeTypeRepository, IncomeTypeRepository>();
+            //services.AddScoped<IInvoiceRepository, InvoiceRepository>();
+            //services.AddScoped<IInvoiceTypeRepository, InvoiceTypeRepository>();
+            //services.AddScoped<IItemRepository, ItemRepository>();
+            //services.AddScoped<IItemCategoryRepository, ItemCategoryRepository>();
+            //services.AddScoped<IItemStatusRepository, ItemStatusRepository>();
+            //services.AddScoped<IPayableRepository, PayableRepository>();
+            //services.AddScoped<IPaymentStatusRepository, PaymentStatusRepository>();
+            //services.AddScoped<IPhoneRepository, PhoneRepository>();
+            //services.AddScoped<IProductionRepository, ProductionRepository>();
+            //services.AddScoped<IPurchaseRepository, PurchaseRepository>();
+            //services.AddScoped<IPurchaseTypeRepository, PurchaseTypeRepository>();
+            //services.AddScoped<IRecievableRepository, RecievableRepository>();
+            //services.AddScoped<IRoleRepository, RoleRepository>();
+            //services.AddScoped<ISalesRepository, SalesRepository>();
+            //services.AddScoped<IStaffRepository, StaffRepository>();
+            //services.AddScoped<IStockRepository, StockRepository>();
+            //services.AddScoped<IStockInRepository, StockInRepository>();
+            //services.AddScoped<IStockOutRepository, StockOutRepository>();
+            //services.AddScoped<ISupplierRepository, SupplierRepository>();
+            //services.AddScoped<ITransactionRepository, TransactionRepository>();
+            //services.AddScoped<ITransactionTypeRepository, TransactionTypeRepository>();
+            //services.AddScoped<IUserAuthInfoRepository, UserAuthInfoRepository>();
+            //services.AddScoped<IUserRoleRepository, UserRoleRepository>();
         }
         
         public static void ConfigureRepositoryWrapper(this IServiceCollection services)
         {
-            services.AddScoped<IRepositoryWrapper, RepositoryWrapper>();
+            // services.AddScoped<IRepositoryWrapper, RepositoryWrapper>();
+             services.AddTransient<IRepositoryWrapper, RepositoryWrapper>();
         }
         public static void ConfigureServiceWrapper(this IServiceCollection services)
-        {        
-            services.AddScoped<IServiceWrapper, ServiceWrapper>();
-            services.AddScoped<IPurchaseWrapperService, PurchaseWrapperService>();
-            services.AddScoped<IBusinessWrapperService, BusinessWrapperService>();
-            services.AddScoped<IBusinessService, BusinessServices>();
+        {
+            //services.AddScoped<IServiceWrapper, ServiceWrapper>();
+            //services.AddScoped<IPurchaseWrapperService, PurchaseWrapperService>();
+            //services.AddScoped<IBusinessWrapperService, BusinessWrapperService>();
+            //services.AddScoped<IBusinessService, BusinessServices>();
+
+
+            services.AddTransient<IServiceWrapper, ServiceWrapper>();
+            services.AddTransient<IPurchaseWrapperService, PurchaseWrapperService>();
+            services.AddTransient<IBusinessWrapperService, BusinessWrapperService>();
+            services.AddTransient<IBusinessService, BusinessServices>();
         }
         public static void ConfigureAutoMapper(this IServiceCollection services)
         {

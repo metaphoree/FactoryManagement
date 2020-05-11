@@ -9,7 +9,9 @@ using Entities.ViewModels.CustomerView;
 using Entities.ViewModels.Department;
 using Entities.ViewModels.Equipment;
 using Entities.ViewModels.EquipmentCategory;
+using Entities.ViewModels.Expense;
 using Entities.ViewModels.ExpenseType;
+using Entities.ViewModels.Income;
 using Entities.ViewModels.IncomeType;
 using Entities.ViewModels.InvoiceType;
 using Entities.ViewModels.Item;
@@ -440,8 +442,6 @@ namespace ApiService.Controllers
         {
             return _context.Item.Any(e => e.CategoryId == CategoryId && e.UnitPrice == UnitPrice && e.Name == Name);
         }
-
-
         #endregion
         #region ItemStatus
 
@@ -460,23 +460,10 @@ namespace ApiService.Controllers
         [Route("Customer/getAll")]
         public async Task<ActionResult<WrapperListCustomerVM>> GetCustomer_4(GetDataListVM customer)
         {
-            var data = await _serviceWrapper.CustomerService.GetListPaged(customer);
+            var data = await _serviceWrapper.CustomerService.GetListPaged(customer,true);
             return Ok(data);
         }
-        // GET: api/Customers/5
-        //[HttpPost]
-        //[Route("getById")]
-        //public async Task<ActionResult<CustomerVM>> GetSingleCustomer(Customer customerTemp)
-        //{
-        //    //var customer = await _context.Customer.FindAsync(id);
-        //    var customer = await _serviceWrapper.CustomerService.GetSingle(customerTemp.Id, customerTemp.FactoryId);
-        //    if (customer == null)
-        //    {
-        //        return NotFound();
-        //    }
 
-        //    return customer;
-        //}
 
         // PUT: api/Customers/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for
@@ -513,8 +500,54 @@ namespace ApiService.Controllers
         {
             return _context.Customer.Any(e => e.Email == Email && e.Name == Name);
         }
-
         #endregion
+        #region Expense
+        [HttpPost]
+        [Route("Expense/getAll")]
+        public async Task<ActionResult<WrapperExpenseListVM>> GetExpenseList([FromBody]GetDataListVM dataParam)
+        {
+            var data = await _serviceWrapper.ExpenseService.GetListPaged(dataParam);
+            return Ok(data);
+        }
+        [HttpPost]
+        [Route("Expense/add")]
+        public async Task<ActionResult<WrapperExpenseListVM>> PostExpense([FromBody]ExpenseVM Expense)
+        {
 
+            return Ok(await _serviceWrapper.ExpenseService.Add(Expense));
+        }
+
+
+        [HttpPost]
+        [Route("Expense/delete")]
+        public async Task<ActionResult<WrapperExpenseListVM>> DeleteExpense([FromBody]ExpenseVM ExpenseVM)
+        {
+            return Ok(await _serviceWrapper.ExpenseService.Delete(ExpenseVM));
+        }
+        #endregion
+        #region Income
+        [HttpPost]
+        [Route("Income/getAll")]
+        public async Task<ActionResult<WrapperIncomeListVM>> GetIncomeList([FromBody]GetDataListVM dataParam)
+        {
+            var data = await _serviceWrapper.IncomeService.GetListPaged(dataParam);
+            return Ok(data);
+        }
+        [HttpPost]
+        [Route("Income/add")]
+        public async Task<ActionResult<WrapperIncomeListVM>> PostIncome([FromBody]IncomeVM Income)
+        {
+
+            return Ok(await _serviceWrapper.IncomeService.Add(Income));
+        }
+
+
+        [HttpPost]
+        [Route("Income/delete")]
+        public async Task<ActionResult<WrapperIncomeListVM>> DeleteIncome([FromBody]IncomeVM IncomeVM)
+        {
+            return Ok(await _serviceWrapper.IncomeService.Delete(IncomeVM));
+        }
+        #endregion
     }
 }

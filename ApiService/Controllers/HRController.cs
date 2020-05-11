@@ -36,7 +36,7 @@ namespace ApiService.Controllers
         [Route("customer/getAll")]
         public async Task<ActionResult<WrapperListCustomerVM>> GetCustomer(GetDataListVM customer)
         {
-            var data = await _serviceWrapper.CustomerService.GetListPaged(customer);
+            var data = await _serviceWrapper.CustomerService.GetListPaged(customer,true);
             _utilService.Log("Customer Successfully Getted");
             return Ok(data);
         }
@@ -123,7 +123,7 @@ namespace ApiService.Controllers
         [Route("supplier/getAll")]
         public async Task<ActionResult<WrapperSupplierListVM>> GetSupplier(GetDataListVM temp)
         {
-            var data = await _serviceWrapper.SupplierService.GetListPaged(temp);
+            var data = await _serviceWrapper.SupplierService.GetListPaged(temp,true);
             _utilService.Log("Supplier Successfully Getted");
             return Ok(data);
         }

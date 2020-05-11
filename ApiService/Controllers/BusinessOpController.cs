@@ -16,6 +16,7 @@ using Entities.ViewModels.Purchase;
 using Entities.ViewModels.Recievable;
 using Entities.ViewModels.Sales;
 using Entities.ViewModels.Staff;
+using Entities.ViewModels.Stock;
 using Entities.ViewModels.Supplier;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -73,7 +74,6 @@ namespace ApiService.Controllers
         }
         #endregion
 
-
         #region Sales
         [HttpPost]
         [Route("sales/getInitData")]
@@ -97,7 +97,6 @@ namespace ApiService.Controllers
         }
 
         #endregion
-
 
         #region Payment
 
@@ -172,7 +171,6 @@ namespace ApiService.Controllers
 
         #endregion
 
-
         #region History
         #region Customer
         [HttpPost]
@@ -201,7 +199,6 @@ namespace ApiService.Controllers
         #endregion
         #endregion
 
-
         #region Production
 
         [HttpPost]
@@ -212,8 +209,6 @@ namespace ApiService.Controllers
         }
 
         #endregion
-
-
 
         #region SalesReturn
         [HttpPost]
@@ -236,7 +231,6 @@ namespace ApiService.Controllers
         }
         #endregion
 
-
         #region PurchaseReturn
         [HttpPost]
         [Route("purchase/return/add")]
@@ -258,8 +252,6 @@ namespace ApiService.Controllers
         }
         #endregion
 
-
-
         #region Monthly Report
         [HttpPost]
         [Route("report/monthly/production")]
@@ -269,7 +261,7 @@ namespace ApiService.Controllers
         }
         [HttpPost]
         [Route("report/monthly/payable")]
-        public async Task<WrapperMonthRecievableListVM> MonthlyPayable([FromBody]MonthlyReport mp)
+        public async Task<WrapperMonthPayableListVM> MonthlyPayable([FromBody]MonthlyReport mp)
         {
             return await _businessService.BusinessWrapperService.MonthlyPayable(mp);
         }
@@ -279,7 +271,6 @@ namespace ApiService.Controllers
         {
             return await _businessService.BusinessWrapperService.MonthlyRecievable(mp);
         }
-
         [HttpPost]
         [Route("report/monthly/income")]
         public async Task<WrapperMonthIncomeVM> MonthlyIncome([FromBody]MonthlyReport mp)
@@ -295,13 +286,14 @@ namespace ApiService.Controllers
         }
         #endregion
 
-
-
-
-
-
-
-
+        #region Change Item Status
+        [HttpPost]
+        [Route("item/status/change")]
+        public async Task<WrapperStockListVM> AddSalesReturn([FromBody]StockVM sales)
+        {
+            return await _serviceWrapper.StockService.ChangeItemStatus(sales);
+        }
+        #endregion
 
     }
 }

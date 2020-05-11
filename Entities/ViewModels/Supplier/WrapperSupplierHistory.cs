@@ -8,9 +8,9 @@ namespace Entities.ViewModels.Supplier
     {
         public WrapperSupplierHistory() {
             ListOfData = new List<SupplierHistory>();
-            TotalRecoreds = 0;
+            TotalRecords = 0;
         }
-        public long TotalRecoreds { get; set; }
+        public long TotalRecords { get; set; }
         public List<SupplierHistory> ListOfData { get; set; }
     }
 }

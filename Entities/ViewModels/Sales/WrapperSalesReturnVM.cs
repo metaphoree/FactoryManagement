@@ -12,6 +12,6 @@ namespace Entities.ViewModels.Sales
 
         }
         public List<SalesReturnVM> ListOfData { get; set; }
-        public int NumberOfRecords { get; set; }
+        public long TotalRecords { get; set; }
     }
 }

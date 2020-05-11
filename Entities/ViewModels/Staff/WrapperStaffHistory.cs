@@ -10,9 +10,9 @@ namespace Entities.ViewModels.Staff
         public WrapperStaffHistory()
         {
             ListOfData = new List<StaffHistory>();
-            TotalRecoreds = 0;
+            TotalRecords = 0;
         }
-        public long TotalRecoreds { get; set; }
+        public long TotalRecords { get; set; }
         public List<StaffHistory> ListOfData { get; set; }
     }
 }
