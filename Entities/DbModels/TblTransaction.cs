@@ -13,6 +13,7 @@ namespace Entities.DbModels
         //  public string Amount { get; set; }
         public string ExecutorId { get; set; }
         public string ClientId { get; set; }
+
         // public string PaymentStatusId { get; set; }
 
         public string PaymentStatus { get; set; }
@@ -22,5 +23,15 @@ namespace Entities.DbModels
         public string Month { get; set; }
         public string Purpose { get; set; }
         public string TransactionId { get; set; }
+
+
+        [ForeignKey("ClientId")]
+        public Supplier Supplier { get; set; }
+
+        [ForeignKey("ClientId")]
+        public Customer Customer { get; set; }
+
+        [ForeignKey("ClientId")]
+        public Staff Staff { get; set; }
     }
 }

@@ -32,7 +32,7 @@ namespace Entities.DbModels
         [ForeignKey("ClientId")]
         public Customer Customer { get; set; }
 
-        //[ForeignKey("StaffId")]
-        //public Staff Staff { get; set; }
+        [ForeignKey("ClientId")]
+        public Staff Staff { get; set; }
     }
 }

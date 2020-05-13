@@ -22,6 +22,7 @@ namespace Entities.DbModels
         [ForeignKey("ClientId")]
         public Customer Customer { get; set; }
 
-
+        [ForeignKey("ClientId")]
+        public Staff Staff { get; set; }
     }
 }

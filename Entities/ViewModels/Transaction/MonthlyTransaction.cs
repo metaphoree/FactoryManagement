@@ -14,7 +14,7 @@ namespace Entities.ViewModels.Transaction
         //  public string Amount { get; set; }
         public string ExecutorId { get; set; }
         public string ClientId { get; set; }
-        
+        public string ClientName { get; set; }
         // public string PaymentStatusId { get; set; }
 
         public string PaymentStatus { get; set; }
