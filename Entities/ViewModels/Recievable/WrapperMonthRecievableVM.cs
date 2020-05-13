@@ -11,6 +11,8 @@ namespace Entities.ViewModels.Recievable
             ListOfData = new List<MonthlyRecievable>();
         }
 
+        public decimal Total_TillNow { get; set; }
+        public decimal Total_Monthly { get; set; }
         public List<MonthlyRecievable> ListOfData { get; set; }
         public long TotalRecords { get; set; }
     }

@@ -11,6 +11,9 @@ namespace Entities.ViewModels.Production
             ListOfData = new List<MonthlyProduction>();
         }
         public long TotalRecords { get; set; }
+
+        public long Total_TillNow { get; set; }
+        public long Total_Monthly { get; set; }
         public List<MonthlyProduction> ListOfData { get; set; }
 
     }

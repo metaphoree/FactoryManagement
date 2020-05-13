@@ -35,5 +35,6 @@ namespace Contracts.IBusinessServiceWrapper
         Task<WrapperMonthPayableListVM> MonthlyPayable(MonthlyReport vm);
         Task<WrapperMonthProductionListVM> MonthlyProduction(MonthlyReport vm);
         Task<WrapperMonthRecievableVM> MonthlyRecievable(MonthlyReport vm);
+        Task<Entities.ViewModels.Transaction.WrapperMonthTransactionVM> MonthlyTransaction(MonthlyReport vm);
     }
 }

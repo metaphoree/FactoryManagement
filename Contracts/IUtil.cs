@@ -21,6 +21,6 @@ namespace Contracts
         void LogWarn(string message);
         void LogError(string message);
 
-
+        List<T> ConcatList<T>(List<T> list1, List<T> list2);
     }
 }

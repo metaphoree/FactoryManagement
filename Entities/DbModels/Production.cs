@@ -18,6 +18,7 @@ namespace Entities.DbModels
         public decimal TotalAmount { get; set; }
         public bool? IsMadeJointly { get; set; }
         public string ProductionId { get; set; }
+        public string Month { get; set; }
 
 
         [ForeignKey("ItemId")]

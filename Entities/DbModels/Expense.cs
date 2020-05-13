@@ -7,7 +7,11 @@ namespace Entities.DbModels
     public  class Expense : BaseEntity
     {
         public string ExpenseTypeId { get; set; }
-        public string ClientId { get; set; }
+         public string ClientId { get; set; }
+
+        //public string CustomerId { get; set; }
+        //public string SupplierId { get; set; }
+        //public string StaffId { get; set; }
         public string InvoiceId { get; set; }
         public string Month { get; set; }
         public decimal? Amount { get; set; }
@@ -28,6 +32,7 @@ namespace Entities.DbModels
         [ForeignKey("ClientId")]
         public Customer Customer { get; set; }
 
-
+        //[ForeignKey("StaffId")]
+        //public Staff Staff { get; set; }
     }
 }

@@ -6,9 +6,10 @@ namespace Entities.Enums
 {
 
 
-    public enum TransactionPurpose { 
-    SalesReturnPayment,
-    PurchaseReturnPayment,
+    public enum TransactionPurpose
+    {
+        SalesReturnPayment,
+        PurchaseReturnPayment,
         SalesPayment,
         PurchasePayment,
         Income,

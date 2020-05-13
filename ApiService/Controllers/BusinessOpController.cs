@@ -18,6 +18,7 @@ using Entities.ViewModels.Sales;
 using Entities.ViewModels.Staff;
 using Entities.ViewModels.Stock;
 using Entities.ViewModels.Supplier;
+using Entities.ViewModels.Transaction;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -283,6 +284,15 @@ namespace ApiService.Controllers
         public async Task<WrapperMonthExpenseVM> MonthlyExpense([FromBody]MonthlyReport mp)
         {
             return await _businessService.BusinessWrapperService.MonthlyExpense(mp);
+        }
+
+
+
+        [HttpPost]
+        [Route("report/monthly/transaction")]
+        public async Task<WrapperMonthTransactionVM> MonthlyTransaction([FromBody]MonthlyReport mp)
+        {
+            return await _businessService.BusinessWrapperService.MonthlyTransaction(mp);
         }
         #endregion
 

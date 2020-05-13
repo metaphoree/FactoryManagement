@@ -212,6 +212,7 @@ namespace Service.BusinessServices
 
             Expense expenseToAdd = new Expense();
             expenseToAdd = _utilService.Mapper.Map<PaymentVM, Expense>(paymentVM);
+            //expenseToAdd.SupplierId = paymentVM.ClientId;
             _repositoryWrapper.Expense.Create(expenseToAdd);
 
             TblTransaction transactionToAdd = new TblTransaction();

@@ -11,7 +11,7 @@ namespace Entities.ViewModels.Production
         public string ItemCategoryName { get; set; }
         public long Quantity { get; set; }
         public decimal Unitprice { get; set; }
-        public decimal TotalAmount { get; set; }
+        public long TotalAmount { get; set; }
         public DateTime CreatedDateTime { get; set; }
 
         public string Month { get; set; }

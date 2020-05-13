@@ -99,5 +99,15 @@ namespace Service
             }        
         }
 
+        public List<T> ConcatList<T>(List<T> list1,List<T> list2) {
+
+            for (int i = 0; i < list2.Count; i++ ) {
+                list1.Add(list2[i]);
+            }
+            return list1;
+
+        }
+
+
     }
 }

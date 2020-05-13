@@ -17,9 +17,10 @@ namespace Entities.DbModels.EntityWiseConfiguration
 
                 builder.Property(e => e.Amount).HasColumnType("decimal(18, 0)");
 
-                builder.Property(e => e.ClientId).HasMaxLength(50);
+               // builder.Property(e => e.SupplierId).HasMaxLength(50);
+            builder.Property(e => e.ClientId).HasMaxLength(50);
 
-                builder.Property(e => e.Description).HasMaxLength(50);
+            builder.Property(e => e.Description).HasMaxLength(50);
 
                 builder.Property(e => e.EmployeeId).HasMaxLength(50);
 
