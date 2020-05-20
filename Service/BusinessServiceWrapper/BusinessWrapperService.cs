@@ -29,17 +29,14 @@ namespace Service.BusinessServiceWrapper
         private readonly IServiceWrapper _serviceWrapper;
         private readonly IRepositoryWrapper _repositoryWrapper;
         private readonly IUtilService _utilService;
-        private readonly FactoryManagementContext _context;
 
         public BusinessWrapperService(IServiceWrapper serviceWrapper,
             IRepositoryWrapper repositoryWrapper,
-            IUtilService utilService,
-            FactoryManagementContext context)
+            IUtilService utilService)
         {
             this._repositoryWrapper = repositoryWrapper;
             this._serviceWrapper = serviceWrapper;
             this._utilService = utilService;
-            this._context = context;
         }
 
         #region Monthly Report Region
@@ -69,9 +66,10 @@ namespace Service.BusinessServiceWrapper
             lastRow.TotalAmount = returnData.ListOfData.Sum(x => (x.Quantity));
 
             returnData.ListOfData = monthlyProductions
+                 .OrderByDescending(x => x.CreatedDateTime)
                 .Skip((vm.PageNumber - 1) * (vm.PageSize))
                 .Take(vm.PageSize)
-                .OrderByDescending(x => x.CreatedDateTime)
+               
                 .ToList();
 
             returnData.Total_TillNow = lastRow.TotalAmount;
@@ -93,6 +91,7 @@ namespace Service.BusinessServiceWrapper
                 .Where(x => x.Month == vm.Month)
                 .Include(x => x.Supplier)
                 .ToListAsync();
+            await payableT;
             Task<List<Payable>> payableT_1 = _repositoryWrapper
                 .Payable
                 .FindAll()
@@ -100,6 +99,7 @@ namespace Service.BusinessServiceWrapper
                 .Where(x => x.Month == vm.Month)
                 .Include(x => x.Customer)
                 .ToListAsync();
+            await payableT_1;
             Task<List<Payable>> payableT_2 = _repositoryWrapper
                 .Payable
                 .FindAll()
@@ -107,9 +107,8 @@ namespace Service.BusinessServiceWrapper
                 .Where(x => x.Month == vm.Month)
                 .Include(x => x.Staff)
                 .ToListAsync();
-
-
-            await Task.WhenAll(payableT, payableT_1, payableT_2);
+            await payableT_2;
+            //await Task.WhenAll(payableT, payableT_1, payableT_2);
             List<Payable> lst = payableT.Result.ToList();
             lst = _utilService.ConcatList<Payable>(payableT.Result.ToList(), _utilService.ConcatList<Payable>(payableT_1.Result.ToList(), payableT_2.Result.ToList()));
             List<MonthlyPayable> monthlyPayable = new List<MonthlyPayable>();
@@ -123,9 +122,10 @@ namespace Service.BusinessServiceWrapper
             lastRow.Amount = returnData.ListOfData.Sum(x => (x.Amount));
 
             returnData.ListOfData = monthlyPayable
+                .OrderByDescending(x => x.CreatedDateTime)
                 .Skip((vm.PageNumber - 1) * (vm.PageSize))
                 .Take(vm.PageSize)
-                .OrderByDescending(x => x.CreatedDateTime)
+                
                 .ToList();
 
             returnData.Total_TillNow = lastRow.Amount;
@@ -148,7 +148,7 @@ namespace Service.BusinessServiceWrapper
                 .Where(x => x.Month == vm.Month)
                 .Include(x => x.Staff)
                 .ToListAsync();
-
+            await RecievableT;
             Task<List<Recievable>> RecievableT_1 = _repositoryWrapper
                 .Recievable
                 .FindAll()
@@ -156,7 +156,7 @@ namespace Service.BusinessServiceWrapper
                 .Where(x => x.Month == vm.Month)
                 .Include(x => x.Supplier)
                 .ToListAsync();
-
+            await RecievableT_1;
 
             Task<List<Recievable>> RecievableT_2 = _repositoryWrapper
                 .Recievable
@@ -165,9 +165,10 @@ namespace Service.BusinessServiceWrapper
                 .Where(x => x.Month == vm.Month)
                 .Include(x => x.Customer)
                 .ToListAsync();
-
-
-            await Task.WhenAll(RecievableT, RecievableT_1, RecievableT_2);
+            await RecievableT_2;
+            
+            // await Task.WhenAll(RecievableT, RecievableT_1, RecievableT_2);
+            
             List<Recievable> lst = RecievableT.Result.ToList();
             lst = _utilService.ConcatList<Recievable>(RecievableT.Result.ToList(), _utilService.ConcatList<Recievable>(RecievableT_1.Result.ToList(), RecievableT_2.Result.ToList()));
 
@@ -186,9 +187,10 @@ namespace Service.BusinessServiceWrapper
             lastRow.Amount = returnData.ListOfData.Sum(x => (x.Amount));
 
             returnData.ListOfData = monthlyRecievable
+                .OrderByDescending(x => x.CreatedDateTime)
                 .Skip((vm.PageNumber - 1) * (vm.PageSize))
                 .Take(vm.PageSize)
-                .OrderByDescending(x => x.CreatedDateTime)
+                
                 .ToList();
 
             returnData.Total_TillNow = lastRow.Amount;
@@ -209,27 +211,30 @@ namespace Service.BusinessServiceWrapper
                 .Where(x => x.FactoryId == vm.FactoryId)
                 .Where(x => x.Month == vm.Month)
                 .Include(x => x.Staff)
-                .ToListAsync();
-            Task<List<Income>> IncomeT_1 = _repositoryWrapper
-                .Income
-                .FindAll()
-                .Where(x => x.FactoryId == vm.FactoryId)
-                .Where(x => x.Month == vm.Month)
+                .Include(x => x.Supplier)
                 .Include(x => x.Customer)
                 .ToListAsync();
-
-            Task<List<Income>> IncomeT_2 = _repositoryWrapper
-                .Income
-                .FindAll()
-                .Where(x => x.FactoryId == vm.FactoryId)
-                .Where(x => x.Month == vm.Month)
-                .Include(x => x.Supplier)
-                .ToListAsync();
-
-            await Task.WhenAll(IncomeT, IncomeT_1, IncomeT_2);
+            await IncomeT;
+            //Task<List<Income>> IncomeT_1 = _repositoryWrapper
+            //    .Income
+            //    .FindAll()
+            //    .Where(x => x.FactoryId == vm.FactoryId)
+            //    .Where(x => x.Month == vm.Month)
+            //    .Include(x => x.Customer)
+            //    .ToListAsync();
+            //await IncomeT_1;
+            //Task<List<Income>> IncomeT_2 = _repositoryWrapper
+            //    .Income
+            //    .FindAll()
+            //    .Where(x => x.FactoryId == vm.FactoryId)
+            //    .Where(x => x.Month == vm.Month)
+            //    .Include(x => x.Supplier)
+            //    .ToListAsync();
+            //await IncomeT_2;
+            // await Task.WhenAll(IncomeT, IncomeT_1, IncomeT_2);
 
             List<Income> lst = IncomeT.Result.ToList();
-            lst = _utilService.ConcatList<Income>(IncomeT.Result.ToList(), _utilService.ConcatList<Income>(IncomeT_1.Result.ToList(), IncomeT_2.Result.ToList()));
+          //  lst = _utilService.ConcatList<Income>(IncomeT.Result.ToList(), _utilService.ConcatList<Income>(IncomeT_1.Result.ToList(), IncomeT_2.Result.ToList()));
 
 
 
@@ -247,9 +252,10 @@ namespace Service.BusinessServiceWrapper
             lastRow.Amount = returnData.ListOfData.Sum(x => (x.Amount));
 
             returnData.ListOfData = monthlyIncome
+                .OrderByDescending(x => x.CreatedDateTime)
                 .Skip((vm.PageNumber - 1) * (vm.PageSize))
                 .Take(vm.PageSize)
-                .OrderByDescending(x => x.CreatedDateTime)
+                
                 .ToList();
 
 
@@ -269,31 +275,35 @@ namespace Service.BusinessServiceWrapper
                 .FindAll()
                 .Where(x => x.FactoryId == vm.FactoryId)
                 .Where(x => x.Month == vm.Month)
+                .Include(x => x.Staff)
+                .Include(x => x.Supplier)
                 .Include(x => x.Customer)
                 .ToListAsync();
+            await ExpenseT;
+            //Task<List<Expense>> ExpenseT_1 = _repositoryWrapper
+            //      .Expense
+            //      .FindAll()
+            //      .Where(x => x.FactoryId == vm.FactoryId)
+            //      .Where(x => x.Month == vm.Month)
+            //      .Include(x => x.Supplier)
+            //      .ToListAsync();
+            //await ExpenseT_1;
+            //Task<List<Expense>> ExpenseT_2 = _repositoryWrapper
+            //        .Expense
+            //        .FindAll()
+            //        .Where(x => x.FactoryId == vm.FactoryId)
+            //        .Where(x => x.Month == vm.Month)
+            //        .Include(x => x.Staff)
+            //        .ToListAsync();
 
-            Task<List<Expense>> ExpenseT_1 = _repositoryWrapper
-                  .Expense
-                  .FindAll()
-                  .Where(x => x.FactoryId == vm.FactoryId)
-                  .Where(x => x.Month == vm.Month)
-                  .Include(x => x.Supplier)
-                  .ToListAsync();
-
-            Task<List<Expense>> ExpenseT_2 = _repositoryWrapper
-                    .Expense
-                    .FindAll()
-                    .Where(x => x.FactoryId == vm.FactoryId)
-                    .Where(x => x.Month == vm.Month)
-                    .Include(x => x.Staff)
-                    .ToListAsync();
-
-
-            await Task.WhenAll(ExpenseT);
+           
+           
+            //await ExpenseT_2;
+            // await Task.WhenAll(ExpenseT);
 
 
             List<Expense> lst = ExpenseT.Result.ToList();
-            lst = _utilService.ConcatList<Expense>(ExpenseT.Result.ToList(), _utilService.ConcatList<Expense>(ExpenseT_1.Result.ToList(), ExpenseT_2.Result.ToList()));
+           // lst = _utilService.ConcatList<Expense>(ExpenseT.Result.ToList(), _utilService.ConcatList<Expense>(ExpenseT_1.Result.ToList(), ExpenseT_2.Result.ToList()));
 
             List<MonthlyExpense> monthlyExpense = new List<MonthlyExpense>();
             monthlyExpense = _utilService.Mapper.Map<List<Expense>, List<MonthlyExpense>>(lst);
@@ -309,9 +319,10 @@ namespace Service.BusinessServiceWrapper
             lastRow.Amount = returnData.ListOfData.Sum(x => (x.Amount));
 
             returnData.ListOfData = monthlyExpense
+                .OrderByDescending(x => x.CreatedDateTime)
                 .Skip((vm.PageNumber - 1) * (vm.PageSize))
                 .Take(vm.PageSize)
-                .OrderByDescending(x => x.CreatedDateTime)
+                
                 .ToList();
 
             returnData.Total_TillNow = lastRow.Amount;
@@ -330,8 +341,9 @@ namespace Service.BusinessServiceWrapper
                 .FindAll()
                 .Where(x => x.FactoryId == vm.FactoryId)
                 .Where(x => x.Month == vm.Month)
-                .Include(x => x.Supplier) 
+                .Include(x => x.Supplier)
                 .ToListAsync();
+            await ExpenseT;
 
             Task<List<TblTransaction>> ExpenseT_1 = _repositoryWrapper
                 .Transaction
@@ -340,6 +352,7 @@ namespace Service.BusinessServiceWrapper
                 .Where(x => x.Month == vm.Month)
                 .Include(x => x.Customer)
                 .ToListAsync();
+            await ExpenseT_1;
 
             Task<List<TblTransaction>> ExpenseT_2 = _repositoryWrapper
                 .Transaction
@@ -348,9 +361,9 @@ namespace Service.BusinessServiceWrapper
                 .Where(x => x.Month == vm.Month)
                 .Include(x => x.Staff)
                 .ToListAsync();
+            await ExpenseT_2;
 
-
-            await Task.WhenAll(ExpenseT, ExpenseT_1, ExpenseT_2);
+            // await Task.WhenAll(ExpenseT, ExpenseT_1, ExpenseT_2);
             List<TblTransaction> lst = ExpenseT.Result.ToList();
             lst = _utilService.ConcatList<TblTransaction>(ExpenseT.Result.ToList(), _utilService.ConcatList<TblTransaction>(ExpenseT_1.Result.ToList(), ExpenseT_2.Result.ToList()));
 
@@ -369,9 +382,11 @@ namespace Service.BusinessServiceWrapper
             returnData.TotalTillNow_Debit = returnData.ListOfData.Where(x => x.TransactionType == TRANSACTION_TYPE.DEBIT.ToString()).Sum(x => x.Amount);
 
             returnData.ListOfData = monthlyExpense
-                .Skip((vm.PageNumber - 1) * (vm.PageSize))
+
+                 .OrderByDescending(x => x.CreatedDateTime)
+                 .Skip((vm.PageNumber - 1) * (vm.PageSize))
                 .Take(vm.PageSize)
-                .OrderByDescending(x => x.CreatedDateTime)
+               
                 .ToList();
 
             returnData.TotalMonthly_Credit = returnData.ListOfData.Where(x => x.TransactionType == TRANSACTION_TYPE.CREDIT.ToString()).Sum(x => x.Amount);

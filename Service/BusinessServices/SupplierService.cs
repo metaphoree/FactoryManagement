@@ -28,6 +28,8 @@ namespace Service.BusinessServices
             this._utilService = utilService;
 
         }
+
+        #region Db Operation
         public async Task<WrapperSupplierListVM> Add(SupplierVM ViewModel)
         {
             var itemToAdd = _utilService.GetMapper().Map<SupplierVM, Supplier>(ViewModel);
@@ -102,7 +104,7 @@ namespace Service.BusinessServices
             this._utilService.Log("Successful In Getting Data");
             if (withHistory)
             {
-                data = await SetHistoryOverview(data);
+                data = await SetHistoryOverview(data,dataListVM.FactoryId);
             }
 
 
@@ -129,6 +131,12 @@ namespace Service.BusinessServices
             WrapperSupplierListVM data = await GetListPaged(dataParam, true);
             return data;
         }
+        #endregion
+
+
+
+
+        #region Payment
         public async Task<WrapperPaymentListVM> GetSupplierPaymentList(GetPaymentDataListVM vm)
         {
             Task<List<Invoice>> paymentInvoiceListT = _repositoryWrapper
@@ -219,6 +227,7 @@ namespace Service.BusinessServices
             transactionToAdd = _utilService.Mapper.Map<PaymentVM, TblTransaction>(paymentVM);
             transactionToAdd.PaymentStatus = PAYMENT_STATUS.CASH_PAID.ToString();
             transactionToAdd.TransactionType = TRANSACTION_TYPE.DEBIT.ToString();
+            transactionToAdd.Description = "Paid to " + paymentVM.ClientName;
             _repositoryWrapper.Transaction.Create(transactionToAdd);
 
             Task<int> t1 = _repositoryWrapper.Invoice.SaveChangesAsync();
@@ -235,6 +244,12 @@ namespace Service.BusinessServices
             return await GetSupplierPaymentList(item);
 
         }
+        #endregion
+
+
+
+
+        #region Supplier
         public async Task<WrapperSupplierHistory> GetSupplierHistory(GetDataListHistory supplierVM)
         {
 
@@ -251,7 +266,7 @@ namespace Service.BusinessServices
                 .Where(x => x.FactoryId == supplierVM.FactoryId
                 && x.ClientId == supplierVM.ClientId)
                 .Include(x => x.Item)
-                .Include(x => x.Item.ItemCategory)
+                .ThenInclude(x => x.ItemCategory)
                 .ToListAsync();
 
             Task<List<Invoice>> listInvoiceT =
@@ -271,18 +286,53 @@ namespace Service.BusinessServices
                 .Where(x => x.FactoryId == supplierVM.FactoryId
                  && x.ClientId == supplierVM.ClientId)
                 .Include(x => x.ExpenseType)
-                .Where(x => x.ExpenseType.Name == TypeExpense.SupplierPayment.ToString())
+                //.Where(x => x.ExpenseType.Name == TypeExpense.SupplierPayment.ToString())
                 .ToListAsync();
 
-            await Task.WhenAll(listPurchaseT, listInvoiceT, listExpenseT);
+            Task<List<Income>> listIncomeT =
+                        _repositoryWrapper
+                        .Income
+                        .FindAll()
+                        .Where(x => x.FactoryId == supplierVM.FactoryId
+                         && x.ClientId == supplierVM.ClientId)
+                        .Include(x => x.IncomeType)
+                        //.Where(x => x.ExpenseType.Name == TypeExpense.StaffPayment.ToString())
+                        .ToListAsync();
+
+            Task<List<Payable>> listPayableT =
+                        _repositoryWrapper
+                        .Payable
+                        .FindAll()
+                        .Where(x => x.FactoryId == supplierVM.FactoryId
+                         && x.ClientId == supplierVM.ClientId)
+                        .ToListAsync();
+
+            Task<List<Recievable>> listRecievableT =
+                        _repositoryWrapper
+                        .Recievable
+                        .FindAll()
+                        .Where(x => x.FactoryId == supplierVM.FactoryId
+                         && x.ClientId == supplierVM.ClientId)
+                        .ToListAsync();
+
+            await Task.WhenAll(listPurchaseT, listInvoiceT, listExpenseT, listPayableT, listRecievableT);
 
             List<SupplierHistory> custHistInvoice = _utilService.Mapper.Map<List<Invoice>, List<SupplierHistory>>(listInvoiceT.Result.ToList());
             List<SupplierHistory> custHistExpense = _utilService.Mapper.Map<List<Expense>, List<SupplierHistory>>(listExpenseT.Result.ToList());
             List<SupplierHistory> custHistPurchase = _utilService.Mapper.Map<List<Purchase>, List<SupplierHistory>>(listPurchaseT.Result.ToList());
+            List<SupplierHistory> custHistIncome = _utilService.Mapper.Map<List<Income>, List<SupplierHistory>>(listIncomeT.Result.ToList());
+
+
+            List<SupplierHistory> custHistPayable = _utilService.Mapper.Map<List<Payable>, List<SupplierHistory>>(listPayableT.Result.ToList());
+            List<SupplierHistory> custHistRecievable = _utilService.Mapper.Map<List<Recievable>, List<SupplierHistory>>(listRecievableT.Result.ToList());
 
 
             custHist.ListOfData.AddRange(custHistInvoice);
             custHist.ListOfData.AddRange(custHistExpense);
+            custHist.ListOfData.AddRange(custHistIncome);
+
+            custHist.ListOfData.AddRange(custHistPayable);
+            custHist.ListOfData.AddRange(custHistRecievable);
             custHist.ListOfData.OrderByDescending(x => x.OccurranceDate);
             for (int i = 0; i < custHist.ListOfData.Count(); i++)
             {
@@ -301,10 +351,13 @@ namespace Service.BusinessServices
             }
 
             var staffHist = GetSupplierHistoryOverview(returnCustHist);
-            returnCustHist.ListOfData = returnCustHist.ListOfData
-                                    .Skip((supplierVM.PageNumber - 1) * supplierVM.PageSize)
-                                    .Take(supplierVM.PageSize)
-                                    .ToList();
+
+            if (supplierVM.PageSize != -1) {
+                returnCustHist.ListOfData = returnCustHist.ListOfData
+                        .Skip((supplierVM.PageNumber - 1) * supplierVM.PageSize)
+                        .Take(supplierVM.PageSize)
+                        .ToList();
+            } 
             returnCustHist.ListOfData.Add(staffHist);
             return returnCustHist;
         }
@@ -316,8 +369,8 @@ namespace Service.BusinessServices
                 SupplierHistory temp = list.ListOfData.ElementAt(i);
                 if (temp.Type == "InvoiceItem")
                 {
-                    history.PaidAmount += temp.PaidAmount;
-                    history.PayableAmount += temp.PayableAmount;
+                  //  history.PaidAmount += temp.PaidAmount;
+                  //  history.PayableAmount += temp.PayableAmount;
                 }
                 else if (temp.Type == "PurchaseItem")
                 {
@@ -327,10 +380,22 @@ namespace Service.BusinessServices
                 {
                     history.PaidAmount += temp.PaidAmount;
                 }
+                else if (temp.Type == "IncomeItem")
+                {
+                    history.RecievedAmount += temp.RecievedAmount;
+                }
+                else if (temp.Type == "PayableItem")
+                {
+                    history.PayableAmount += temp.PayableAmount;
+                }
+                else if (temp.Type == "RecievableItem")
+                {
+                    history.RecievableAmount += temp.RecievableAmount;
+                }
             }
             return history;
         }
-        private async Task<WrapperSupplierListVM> SetHistoryOverview(WrapperSupplierListVM vm)
+        private async Task<WrapperSupplierListVM> SetHistoryOverview(WrapperSupplierListVM vm, string FactoryId)
         {
             var data = new GetDataListHistory();
             //Task<WrapperSupplierHistory>[] listOftask = new Task<WrapperSupplierHistory>[vm.ListOfData.Count];
@@ -340,21 +405,31 @@ namespace Service.BusinessServices
                 SupplierVM temp = vm.ListOfData.ElementAt(i);
                 data.ClientId = temp.Id;
                 data.PageNumber = -1;
+                data.PageSize = -1;
+                data.FactoryId = FactoryId;
                 listOftask[i] = await GetSupplierHistory(data);
+
+                int len = listOftask[i].ListOfData.Count - 1;
+                vm.ListOfData.ElementAt(i).PaidAmount = listOftask[i].ListOfData[len].PaidAmount;
+                vm.ListOfData.ElementAt(i).RecievableAmount = listOftask[i].ListOfData[len].RecievableAmount;
+                vm.ListOfData.ElementAt(i).RecievedAmount = listOftask[i].ListOfData[len].RecievedAmount;
+                vm.ListOfData.ElementAt(i).PayableAmount = listOftask[i].ListOfData[len].PayableAmount;
             }
 
             // await Task.WhenAll(listOftask);
 
-            for (int i = 0; i < vm.ListOfData.Count; i++)
-            {
-                //SupplierHistory te = GetSupplierHistoryOverview(listOftask[i].Result);
-                SupplierHistory te = GetSupplierHistoryOverview(listOftask[i]);
-                vm.ListOfData.ElementAt(i).PaidAmount = te.PaidAmount;
-                vm.ListOfData.ElementAt(i).RecievableAmount = te.RecievableAmount;
-                vm.ListOfData.ElementAt(i).RecievedAmount = te.RecievedAmount;
-                vm.ListOfData.ElementAt(i).PayableAmount = te.PayableAmount;
-            }
+            //for (int i = 0; i < vm.ListOfData.Count; i++)
+            //{
+            //    //SupplierHistory te = GetSupplierHistoryOverview(listOftask[i].Result);
+            //    SupplierHistory te = GetSupplierHistoryOverview(listOftask[i]);
+            //    vm.ListOfData.ElementAt(i).PaidAmount = te.PaidAmount;
+            //    vm.ListOfData.ElementAt(i).RecievableAmount = te.RecievableAmount;
+            //    vm.ListOfData.ElementAt(i).RecievedAmount = te.RecievedAmount;
+            //    vm.ListOfData.ElementAt(i).PayableAmount = te.PayableAmount;
+            //}
             return vm;
         }
+        #endregion
+
     }
 }

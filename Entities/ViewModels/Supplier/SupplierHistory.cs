@@ -7,6 +7,7 @@ namespace Entities.ViewModels.Supplier
   public  class SupplierHistory
     {
 
+        public string Purpose { get; set; }
         public string CustomerId { get; set; }
         public string InvoiceId { get; set; }
         public string ItemId { get; set; }

@@ -11,12 +11,14 @@ using Entities.ViewModels.Equipment;
 using Entities.ViewModels.EquipmentCategory;
 using Entities.ViewModels.Expense;
 using Entities.ViewModels.ExpenseType;
+using Entities.ViewModels.Factory;
 using Entities.ViewModels.Income;
 using Entities.ViewModels.IncomeType;
 using Entities.ViewModels.InvoiceType;
 using Entities.ViewModels.Item;
 using Entities.ViewModels.ItemCategoryView;
 using Entities.ViewModels.ItemStatus;
+using Entities.ViewModels.PaymentStatus;
 using Entities.ViewModels.Production;
 using Entities.ViewModels.Stock;
 using Microsoft.AspNetCore.Http;
@@ -269,9 +271,9 @@ namespace ApiService.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         [HttpPost]
         [Route("Production/add")]
-        public async Task<ActionResult<WrapperProductionListVM>> PostProduction([FromBody]AddProductionVM Production)
+        public async Task<ActionResult<WrapperProductionListVM>> PostProduction([FromBody]List<AddProductionVM> Production)
         {
-            return await _serviceWrapper.ProductionService.Add(Production);
+            return await _serviceWrapper.ProductionService.AddProductions(Production);
         }
 
         [HttpPost]
@@ -453,6 +455,51 @@ namespace ApiService.Controllers
             return Ok(data);
         }
 
+
+        // GET: api/ItemCategories/5
+        [HttpPost]
+        [Route("Item/status/getById")]
+        public async Task<ActionResult<ItemStatus>> GetItemStatus(string id)
+        {
+            //var ItemStatus = await _context.ItemStatus.FindAsync(id);
+            var enumerables = await _repositoryWrapper.ItemStatus.FindByConditionAsync(x => x.Id == id);
+            var ItemStatus = enumerables.ToList().FirstOrDefault();
+            if (ItemStatus == null)
+            {
+                return NotFound();
+            }
+
+            return ItemStatus;
+        }
+
+        // PUT: api/ItemCategories/5
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for
+        // more details see https://aka.ms/RazorPagesCRUD.
+        [Route("Item/status/update/{id}")]
+        [HttpPost]
+        public async Task<ActionResult<WrapperItemStatusListVM>> PutItemStatus(string id, [FromBody]ItemStatusVM ItemStatus)
+        {
+            return await _serviceWrapper.ItemStatusService.Update(id, ItemStatus);
+        }
+
+        // POST: api/ItemCategories
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for
+        // more details see https://aka.ms/RazorPagesCRUD.
+        [HttpPost]
+        [Route("Item/status/add")]
+        public async Task<ActionResult<WrapperItemStatusListVM>> PostItemStatus([FromBody]ItemStatusVM ItemStatus)
+        {
+            return await _serviceWrapper.ItemStatusService.Add(ItemStatus);
+        }
+
+        // DELETE: api/ItemCategories/5
+        [HttpPost]
+        [Route("Item/status/delete")]
+        public async Task<ActionResult<WrapperItemStatusListVM>> DeleteItemStatus([FromBody]ItemStatusVM itemVM)
+        {
+            return await _serviceWrapper.ItemStatusService.Delete(itemVM);
+        }
+
         #endregion
         #region Customer
         // GET: api/Customers/ii
@@ -547,6 +594,115 @@ namespace ApiService.Controllers
         public async Task<ActionResult<WrapperIncomeListVM>> DeleteIncome([FromBody]IncomeVM IncomeVM)
         {
             return Ok(await _serviceWrapper.IncomeService.Delete(IncomeVM));
+        }
+        #endregion
+        #region PaymentStatus
+
+        [HttpPost]
+        [Route("payment/status/getAll")]
+        public async Task<ActionResult<WrapperPaymentStatusListVM>> GetPaymentStatus([FromBody]GetDataListVM dataParam)
+        {
+            var data = await _serviceWrapper.PaymentStatusService.GetListPaged(dataParam);
+            return Ok(data);
+        }
+
+
+        // GET: api/ItemCategories/5
+        [HttpPost]
+        [Route("payment/status/getById")]
+        public async Task<ActionResult<PaymentStatus>> GetPaymentStatus(string id)
+        {
+            //var PaymentStatus = await _context.PaymentStatus.FindAsync(id);
+            var enumerables = await _repositoryWrapper.PaymentStatus.FindByConditionAsync(x => x.Id == id);
+            var PaymentStatus = enumerables.ToList().FirstOrDefault();
+            if (PaymentStatus == null)
+            {
+                return NotFound();
+            }
+
+            return PaymentStatus;
+        }
+
+        // PUT: api/ItemCategories/5
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for
+        // more details see https://aka.ms/RazorPagesCRUD.
+        [Route("payment/status/update/{id}")]
+        [HttpPost]
+        public async Task<ActionResult<WrapperPaymentStatusListVM>> PutPaymentStatus(string id, [FromBody]PaymentStatusVM PaymentStatus)
+        {
+            return await _serviceWrapper.PaymentStatusService.Update(id, PaymentStatus);
+        }
+
+        // POST: api/ItemCategories
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for
+        // more details see https://aka.ms/RazorPagesCRUD.
+        [HttpPost]
+        [Route("payment/status/add")]
+        public async Task<ActionResult<WrapperPaymentStatusListVM>> PostPaymentStatus([FromBody]PaymentStatusVM PaymentStatus)
+        {
+            return await _serviceWrapper.PaymentStatusService.Add(PaymentStatus);
+        }
+
+        // DELETE: api/ItemCategories/5
+        [HttpPost]
+        [Route("payment/status/delete")]
+        public async Task<ActionResult<WrapperPaymentStatusListVM>> DeletePaymentStatus([FromBody]PaymentStatusVM itemVM)
+        {
+            return await _serviceWrapper.PaymentStatusService.Delete(itemVM);
+        }
+
+        #endregion
+        #region Factory
+
+        [HttpPost]
+        [Route("factory/getAll")]
+        public async Task<ActionResult<WrapperFactoryListVM>> GetFactory([FromBody]GetDataListVM dataParam)
+        {
+            var data = await _serviceWrapper.FactoryService.GetListPaged(dataParam);
+            return Ok(data);
+        }
+        // GET: api/ItemCategories/5
+        [HttpPost]
+        [Route("factory/getById")]
+        public async Task<ActionResult<Factory>> GetFactory(string id)
+        {
+            //var Factory = await _context.Factory.FindAsync(id);
+            var enumerables = await _repositoryWrapper.Factory.FindByConditionAsync(x => x.Id == id);
+            var Factory = enumerables.ToList().FirstOrDefault();
+            if (Factory == null)
+            {
+                return NotFound();
+            }
+
+            return Factory;
+        }
+
+        // PUT: api/ItemCategories/5
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for
+        // more details see https://aka.ms/RazorPagesCRUD.
+        [Route("factory/update/{id}")]
+        [HttpPost]
+        public async Task<ActionResult<WrapperFactoryListVM>> PutFactory(string id, [FromBody]FactoryVM Factory)
+        {
+            return await _serviceWrapper.FactoryService.Update(id, Factory);
+        }
+
+        // POST: api/ItemCategories
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for
+        // more details see https://aka.ms/RazorPagesCRUD.
+        [HttpPost]
+        [Route("factory/add")]
+        public async Task<ActionResult<WrapperFactoryListVM>> PostFactory([FromBody]FactoryVM Factory)
+        {
+            return await _serviceWrapper.FactoryService.Add(Factory);
+        }
+
+        // DELETE: api/ItemCategories/5
+        [HttpPost]
+        [Route("factory/delete")]
+        public async Task<ActionResult<WrapperFactoryListVM>> DeleteFactory([FromBody]FactoryVM itemVM)
+        {
+            return await _serviceWrapper.FactoryService.Delete(itemVM);
         }
         #endregion
     }

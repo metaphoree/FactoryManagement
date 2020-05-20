@@ -27,6 +27,8 @@ namespace Service.BusinessServices
 
             this._utilService = utilService;
         }
+
+        #region Db Operation
         public async Task<WrapperStaffListVM> Add(StaffVM ViewModel)
         {
             var itemToAdd = _utilService.GetMapper().Map<StaffVM, Staff>(ViewModel);
@@ -42,7 +44,7 @@ namespace Service.BusinessServices
                 PageSize = 10,
                 TotalRows = 0
             };
-            WrapperStaffListVM data = await GetListPaged(dataParam);
+            WrapperStaffListVM data = await GetListPaged(dataParam, true);
             return data;
         }
         public async Task<WrapperStaffListVM> Update(string id, StaffVM ViewModel)
@@ -69,10 +71,10 @@ namespace Service.BusinessServices
                 PageSize = 10,
                 TotalRows = 0
             };
-            WrapperStaffListVM data = await GetListPaged(dataParam);
+            WrapperStaffListVM data = await GetListPaged(dataParam, true);
             return data;
         }
-        public async Task<WrapperStaffListVM> GetListPaged(GetDataListVM dataListVM)
+        public async Task<WrapperStaffListVM> GetListPaged(GetDataListVM dataListVM, bool withHistory)
         {
             IEnumerable<Staff> ListTask = await _repositoryWrapper.Staff.FindByConditionAsync(x => x.FactoryId == dataListVM.FactoryId);
             long noOfRecordTask = await _repositoryWrapper.Staff.NumOfRecord();
@@ -99,7 +101,10 @@ namespace Service.BusinessServices
             data.ListOfData = outputList;
             data.TotalRecords = noOfRecordTask;
             this._utilService.Log("Successful In Getting Data");
-            data = await SetHistoryOverview(data);
+            if (withHistory)
+            {
+                data = await SetHistoryOverview(data, dataListVM.FactoryId);
+            }
             return data;
         }
         public async Task<WrapperStaffListVM> Delete(StaffVM Temp)
@@ -120,81 +125,14 @@ namespace Service.BusinessServices
                 PageSize = 10,
                 TotalRows = 0
             };
-            WrapperStaffListVM data = await GetListPaged(dataParam);
+            WrapperStaffListVM data = await GetListPaged(dataParam, true);
             return data;
         }
-
-        public async Task<WrapperStaffHistory> GetStaffHistory(GetDataListHistory staffVM)
-        {
-            // Production
-            // Expense -- Payment Invoice Generated
-            // Invoice
-
-            WrapperStaffHistory wrapperStaffHistory = new WrapperStaffHistory();
-            WrapperStaffHistory returnWrapperStaffHistory = new WrapperStaffHistory();
-            Task<List<Production>> listProductionT =
-                                    _repositoryWrapper
-                                    .Production
-                                    .FindAll()
-                                    .Where(x => x.FactoryId == staffVM.FactoryId
-                                    && x.StaffId == staffVM.ClientId)
-                                    .Include(x => x.Item)
-                                    .Include(x => x.Item.ItemCategory)
-                                    .ToListAsync();
-
-            Task<List<Invoice>> listInvoiceT =
-                                    _repositoryWrapper
-                                    .Invoice
-                                    .FindAll()
-                                    .Where(x => x.FactoryId == staffVM.FactoryId
-                                    && x.ClientId == staffVM.ClientId)
-                                    .Include(x => x.InvoiceType)
-                                    .Where(x => x.InvoiceType.Name == TypeInvoice.StaffProduction.ToString())
-                                    .ToListAsync();
-            Task<List<Expense>> listExpenseT =
-                                    _repositoryWrapper
-                                    .Expense
-                                    .FindAll()
-                                    .Where(x => x.FactoryId == staffVM.FactoryId
-                                     && x.ClientId == staffVM.ClientId)
-                                    .Include(x => x.ExpenseType)
-                                    .Where(x => x.ExpenseType.Name == TypeExpense.StaffPayment.ToString())
-                                    .ToListAsync();
-            await Task.WhenAll(listProductionT, listExpenseT);
-
-            List<StaffHistory> production = _utilService.Mapper.Map<List<Production>, List<StaffHistory>>(listProductionT.Result.ToList());
-            List<StaffHistory> expense = _utilService.Mapper.Map<List<Expense>, List<StaffHistory>>(listExpenseT.Result.ToList());
-            List<StaffHistory> invoice = _utilService.Mapper.Map<List<Invoice>, List<StaffHistory>>(listInvoiceT.Result.ToList());
-            wrapperStaffHistory.ListOfData.AddRange(invoice);
-            wrapperStaffHistory.ListOfData.AddRange(expense);
-            wrapperStaffHistory.ListOfData = wrapperStaffHistory.ListOfData.OrderBy(x => x.OccurranceDate).ToList();
-            for (int i = 0; i < wrapperStaffHistory.ListOfData.Count(); i++)
-            {
-                List<StaffHistory> tempList = new List<StaffHistory>();
-                if (wrapperStaffHistory.ListOfData.ElementAt(i).Type == "InvoiceItem")
-                {
-                    tempList = production.Where(x => x.InvoiceId == wrapperStaffHistory.ListOfData.ElementAt(i).InvoiceId).ToList();
-                    returnWrapperStaffHistory.ListOfData.AddRange(tempList);
-                    returnWrapperStaffHistory.ListOfData.Add(wrapperStaffHistory.ListOfData.ElementAt(i));
-                }
-                else
-                {
-                    returnWrapperStaffHistory.ListOfData.Add(wrapperStaffHistory.ListOfData.ElementAt(i));
-                }
-            }
+        #endregion
 
 
-            var staffHist = GetStaffHistoryOverview(returnWrapperStaffHistory);
-            returnWrapperStaffHistory.ListOfData = returnWrapperStaffHistory.ListOfData
-                          .Skip((staffVM.PageNumber - 1) * staffVM.PageSize)
-                          .Take(staffVM.PageSize)
-                          .ToList();
-            returnWrapperStaffHistory.ListOfData.Add(staffHist);
-            return returnWrapperStaffHistory;
-        }
-   
-        
-        
+
+        #region Payment
         public async Task<WrapperPaymentListVM> GetStaffPaymentList(GetPaymentDataListVM vm)
         {
             Task<List<Invoice>> paymentInvoiceListT = _repositoryWrapper
@@ -230,6 +168,7 @@ namespace Service.BusinessServices
             transactionToAdd = _utilService.Mapper.Map<PaymentVM, TblTransaction>(paymentVM);
             transactionToAdd.PaymentStatus = PAYMENT_STATUS.CASH_PAID.ToString();
             transactionToAdd.TransactionType = TRANSACTION_TYPE.DEBIT.ToString();
+            transactionToAdd.Description = "Paid to " + paymentVM.ClientName;
             _repositoryWrapper.Transaction.Create(transactionToAdd);
 
             Task<int> t1 = _repositoryWrapper.Invoice.SaveChangesAsync();
@@ -299,8 +238,12 @@ namespace Service.BusinessServices
 
             return await GetStaffPaymentList(item);
         }
+        #endregion
 
 
+
+
+        #region History
         public StaffHistory GetStaffHistoryOverview(WrapperStaffHistory list)
         {
             StaffHistory history = new StaffHistory();
@@ -309,8 +252,8 @@ namespace Service.BusinessServices
                 StaffHistory temp = list.ListOfData.ElementAt(i);
                 if (temp.Type == "InvoiceItem")
                 {
-                    history.PaidAmount += temp.PaidAmount;
-                    history.PayableAmount += temp.PayableAmount;
+                   // history.PaidAmount += temp.PaidAmount;
+                   // history.PayableAmount += temp.PayableAmount;
                 }
                 else if (temp.Type == "ProductionItem")
                 {
@@ -320,37 +263,163 @@ namespace Service.BusinessServices
                 {
                     history.PaidAmount += temp.PaidAmount;
                 }
+                else if (temp.Type == "IncomeItem")
+                {
+                    history.RecievedAmount += temp.RecievedAmount;
+                }
+                else if (temp.Type == "PayableItem")
+                {
+                    history.PayableAmount += temp.PayableAmount;
+                }
+                else if (temp.Type == "RecievableItem")
+                {
+                    history.RecievableAmount += temp.RecievableAmount;
+                }
             }
             return history;
         }
-
-
-        private async Task<WrapperStaffListVM> SetHistoryOverview(WrapperStaffListVM vm)
+        private async Task<WrapperStaffListVM> SetHistoryOverview(WrapperStaffListVM vm, string factoryId)
         {
             var data = new GetDataListHistory();
-            Task<WrapperStaffHistory>[] listOftask = new Task<WrapperStaffHistory>[vm.ListOfData.Count];
+            //Task<WrapperStaffHistory>[] listOftask = new Task<WrapperStaffHistory>[vm.ListOfData.Count];
+            WrapperStaffHistory[] listOftask = new WrapperStaffHistory[vm.ListOfData.Count];
             for (int i = 0; i < vm.ListOfData.Count; i++)
             {
                 StaffVM temp = vm.ListOfData.ElementAt(i);
                 data.ClientId = temp.Id;
                 data.PageNumber = -1;
-                listOftask[i] = GetStaffHistory(data);
+                data.FactoryId = factoryId;
+                data.PageSize = -1;
+                listOftask[i] = await GetStaffHistory(data);
+                // StaffHistory te = GetStaffHistoryOverview(listOftask[i]);
+                int len = listOftask[i].ListOfData.Count - 1;
+                vm.ListOfData.ElementAt(i).PaidAmount = listOftask[i].ListOfData[len].PaidAmount;
+                vm.ListOfData.ElementAt(i).RecievableAmount = listOftask[i].ListOfData[len].RecievableAmount;
+                vm.ListOfData.ElementAt(i).RecievedAmount = listOftask[i].ListOfData[len].RecievedAmount;
+                vm.ListOfData.ElementAt(i).PayableAmount = listOftask[i].ListOfData[len].PayableAmount;
             }
 
-            await Task.WhenAll(listOftask);
+           // await Task.WhenAll(listOftask);
+            //for (int i = 0; i < vm.ListOfData.Count; i++)
+            //{
+               
+            //}
 
-            for (int i = 0; i < vm.ListOfData.Count; i++)
-            {
-                StaffHistory te = GetStaffHistoryOverview(listOftask[i].Result);
-                vm.ListOfData.ElementAt(i).PaidAmount = te.PaidAmount;
-                vm.ListOfData.ElementAt(i).RecievableAmount = te.RecievableAmount;
-                vm.ListOfData.ElementAt(i).RecievedAmount = te.RecievedAmount;
-                vm.ListOfData.ElementAt(i).PayableAmount = te.PayableAmount;
-            }
             return vm;
         }
+        public async Task<WrapperStaffHistory> GetStaffHistory(GetDataListHistory staffVM)
+        {
+            // Production
+            // Expense -- Payment Invoice Generated
+            // Invoice
+
+            WrapperStaffHistory wrapperStaffHistory = new WrapperStaffHistory();
+            WrapperStaffHistory returnWrapperStaffHistory = new WrapperStaffHistory();
+            Task<List<Production>> listProductionT =
+                                    _repositoryWrapper
+                                    .Production
+                                    .FindAll()
+                                    .Where(x => x.FactoryId == staffVM.FactoryId
+                                    && x.StaffId == staffVM.ClientId)
+                                    .Include(x => x.Item)
+                                    .ThenInclude(x => x.ItemCategory)
+                                    .ToListAsync();
+
+            Task<List<Invoice>> listInvoiceT =
+                                    _repositoryWrapper
+                                    .Invoice
+                                    .FindAll()
+                                    .Where(x => x.FactoryId == staffVM.FactoryId
+                                    && x.ClientId == staffVM.ClientId)
+                                    .Include(x => x.InvoiceType)
+                                    .Where(x => x.InvoiceType.Name == TypeInvoice.StaffProduction.ToString())
+                                    .ToListAsync();
+            Task<List<Expense>> listExpenseT =
+                                    _repositoryWrapper
+                                    .Expense
+                                    .FindAll()
+                                    .Where(x => x.FactoryId == staffVM.FactoryId
+                                     && x.ClientId == staffVM.ClientId)
+                                    .Include(x => x.ExpenseType)
+                                    //.Where(x => x.ExpenseType.Name == TypeExpense.StaffPayment.ToString())
+                                    .ToListAsync();
+            Task<List<Income>> listIncomeT =
+                                    _repositoryWrapper
+                                    .Income
+                                    .FindAll()
+                                    .Where(x => x.FactoryId == staffVM.FactoryId
+                                     && x.ClientId == staffVM.ClientId)
+                                    .Include(x => x.IncomeType)
+                                    //.Where(x => x.ExpenseType.Name == TypeExpense.StaffPayment.ToString())
+                                    .ToListAsync();
+
+             Task<List<Payable>> listPayableT =
+                                    _repositoryWrapper
+                                    .Payable
+                                    .FindAll()
+                                    .Where(x => x.FactoryId == staffVM.FactoryId
+                                     && x.ClientId == staffVM.ClientId)
+                                    .ToListAsync();
+
+            Task<List<Recievable>> listRecievableT =
+                                    _repositoryWrapper
+                                    .Recievable
+                                    .FindAll()
+                                    .Where(x => x.FactoryId == staffVM.FactoryId
+                                     && x.ClientId == staffVM.ClientId)
+                                    .ToListAsync();
 
 
+
+
+            await Task.WhenAll(listProductionT, listExpenseT, listInvoiceT, listIncomeT, listPayableT, listRecievableT);
+
+            List<StaffHistory> production = _utilService.Mapper.Map<List<Production>, List<StaffHistory>>(listProductionT.Result.ToList());
+            List<StaffHistory> expense = _utilService.Mapper.Map<List<Expense>, List<StaffHistory>>(listExpenseT.Result.ToList());
+            List<StaffHistory> invoice = _utilService.Mapper.Map<List<Invoice>, List<StaffHistory>>(listInvoiceT.Result.ToList());
+            List<StaffHistory> income = _utilService.Mapper.Map<List<Income>, List<StaffHistory>>(listIncomeT.Result.ToList());
+            List<StaffHistory> payable = _utilService.Mapper.Map<List<Payable>, List<StaffHistory>>(listPayableT.Result.ToList());
+            List<StaffHistory> recievable = _utilService.Mapper.Map<List<Recievable>, List<StaffHistory>>(listRecievableT.Result.ToList());
+
+
+
+            wrapperStaffHistory.ListOfData.AddRange(invoice);
+            wrapperStaffHistory.ListOfData.AddRange(expense);
+            wrapperStaffHistory.ListOfData.AddRange(income);
+            wrapperStaffHistory.ListOfData.AddRange(payable);
+            wrapperStaffHistory.ListOfData.AddRange(recievable);
+  
+            wrapperStaffHistory.ListOfData = wrapperStaffHistory.ListOfData.OrderByDescending(x => x.OccurranceDate).ToList();
+            for (int i = 0; i < wrapperStaffHistory.ListOfData.Count(); i++)
+            {
+                List<StaffHistory> tempList = new List<StaffHistory>();
+                if (wrapperStaffHistory.ListOfData.ElementAt(i).Type == "InvoiceItem")
+                {
+                    tempList = production.Where(x => x.InvoiceId == wrapperStaffHistory.ListOfData.ElementAt(i).InvoiceId).ToList();
+                    returnWrapperStaffHistory.ListOfData.AddRange(tempList);
+                    returnWrapperStaffHistory.ListOfData.Add(wrapperStaffHistory.ListOfData.ElementAt(i));
+                }
+                else
+                {
+                    returnWrapperStaffHistory.ListOfData.Add(wrapperStaffHistory.ListOfData.ElementAt(i));
+                }
+            }
+
+
+            var staffHist = GetStaffHistoryOverview(returnWrapperStaffHistory);
+          //  returnWrapperStaffHistory.ListOfData = returnWrapperStaffHistory.ListOfData.OrderByDescending(x => x.OccurranceDate).ToList();
+            if (staffVM.PageSize != -1) {
+                returnWrapperStaffHistory.ListOfData = returnWrapperStaffHistory.ListOfData
+                  .Skip((staffVM.PageNumber - 1) * staffVM.PageSize)
+                  .Take(staffVM.PageSize)
+                  .ToList();
+            }
+
+
+            returnWrapperStaffHistory.ListOfData.Add(staffHist);
+            return returnWrapperStaffHistory;
+        }
+        #endregion
 
     }
 }

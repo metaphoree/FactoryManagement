@@ -73,7 +73,7 @@ namespace Service.BusinessServices
             for (int i = 0; i < purchaseVM.ItemList.Count; i++)
             {
 
-                Stock existingStock = stockList.ToList().Where(x => x.ItemId == purchaseVM.ItemList[i].Item.Id).FirstOrDefault();
+                Stock existingStock = stockList.ToList().Where(x => x.ItemId == purchaseVM.ItemList[i].Item.Id && x.ItemStatusId == purchaseVM.ItemList[i].ItemStatus.Id).FirstOrDefault();
 
                 // IF NOT PRESENT ADD
                 if (existingStock == null)

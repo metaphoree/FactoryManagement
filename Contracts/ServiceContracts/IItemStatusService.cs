@@ -9,6 +9,9 @@ namespace Contracts.ServiceContracts
 {
     public interface IItemStatusService
     {
+        Task<WrapperItemStatusListVM> Add(ItemStatusVM vm);
+        Task<WrapperItemStatusListVM> Delete(ItemStatusVM itemTemp);
         Task<WrapperItemStatusListVM> GetListPaged(GetDataListVM dataListVM);
+        Task<WrapperItemStatusListVM> Update(string id, ItemStatusVM vm);
     }
 }

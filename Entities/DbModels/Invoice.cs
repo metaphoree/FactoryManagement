@@ -39,5 +39,8 @@ namespace Entities.DbModels
         [ForeignKey("ClientId")]
         public virtual Customer Customer { get; set; }
 
+
+        [ForeignKey("ClientId")]
+        public virtual Staff Staff { get; set; }
     }
 }

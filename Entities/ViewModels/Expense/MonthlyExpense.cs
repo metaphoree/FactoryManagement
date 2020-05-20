@@ -13,6 +13,7 @@ namespace Entities.ViewModels.Expense
         public string ClientName { get; set; }
         public string Month { get; set; }
         public decimal Amount { get; set; }
+        public string Description { get; set; }
         public string Purpose { get; set; }
     }
 }

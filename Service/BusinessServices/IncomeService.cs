@@ -40,13 +40,44 @@ namespace Service.BusinessServices
                 .Income
                 .FindAll()
                 .Where(x => x.FactoryId == dataListVM.FactoryId)
+                 .Include(x => x.Supplier)
                 .Include(x => x.Customer)
+                .Include(x => x.Staff)
                 .Include(x => x.IncomeType)
                 //.Where(globalFilterExpression)
                 .OrderByDescending(x => x.UpdatedDateTime)
                 .Skip((dataListVM.PageNumber - 1) * (dataListVM.PageSize))
                 .Take(dataListVM.PageSize)
                 .ToListAsync();
+            //var incomeList_1 = await _repositoryWrapper
+            //    .Income
+            //    .FindAll()
+            //    .Where(x => x.FactoryId == dataListVM.FactoryId)
+            //    .Include(x => x.Staff)
+            //    .Include(x => x.IncomeType)
+            //    //.Where(globalFilterExpression)
+            //    .OrderByDescending(x => x.UpdatedDateTime)
+            //    .Skip((dataListVM.PageNumber - 1) * (dataListVM.PageSize))
+            //    .Take(dataListVM.PageSize)
+            //    .ToListAsync();
+
+            //var incomeList_2 = await _repositoryWrapper
+            //    .Income
+            //    .FindAll()
+            //    .Where(x => x.FactoryId == dataListVM.FactoryId)
+            //    .Include(x => x.Supplier)
+            //    .Include(x => x.IncomeType)
+            //    //.Where(globalFilterExpression)
+            //    .OrderByDescending(x => x.UpdatedDateTime)
+            //    .Skip((dataListVM.PageNumber - 1) * (dataListVM.PageSize))
+            //    .Take(dataListVM.PageSize)
+            //    .ToListAsync();
+
+
+            //incomeList = _utilService.ConcatList<Income>(incomeList.ToList(), _utilService.ConcatList<Income>(incomeList_1, incomeList_2));
+
+
+
 
             var dataRowCount = await _repositoryWrapper.Income.NumOfRecord();
             List<IncomeVM> IncomeVMLists = new List<IncomeVM>();

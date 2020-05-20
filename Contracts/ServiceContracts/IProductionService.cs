@@ -13,5 +13,6 @@ namespace Contracts.ServiceContracts
          Task<WrapperProductionListVM> Add(AddProductionVM vm);
          Task<WrapperProductionListVM> Update(string id, EditProductionVM vm);
          Task<WrapperProductionListVM> Delete(AddProductionVM itemTemp);
+        Task<WrapperProductionListVM> AddProductions(List<AddProductionVM> vmList);
     }
 }

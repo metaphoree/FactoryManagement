@@ -48,7 +48,7 @@ namespace Repository
         public IQueryable<T> FindByCondition(Expression<Func<T, bool>> expression)
         {
             util.LogInfo("---STARTED FINDING ----" + typeof(T).Name.ToUpper() + "----------");
-            return this.RepositoryContext.Set<T>().Where(expression).AsNoTracking();
+            return this.RepositoryContext.Set<T>().AsNoTracking().Where(expression);// .AsNoTracking();
         }
 
         public async Task<IEnumerable<T>> FindByConditionAsync(Expression<Func<T, bool>> expression)
@@ -57,7 +57,12 @@ namespace Repository
             util.LogInfo(expression.ToString());
             return await this.FindByCondition(expression).ToListAsync();
         }
-
+        public async Task<IEnumerable<T>> FindByConditionAsyncNoTracking(Expression<Func<T, bool>> expression)
+        {
+            util.LogInfo("---STARTED FINDING ----" + typeof(T).Name.ToUpper() + "----------");
+            util.LogInfo(expression.ToString());
+            return await this.FindByCondition(expression).ToListAsync();
+        }
         public T Create(T entity)
         {
 

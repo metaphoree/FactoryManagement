@@ -25,6 +25,8 @@ namespace Service.BusinessServices
             this._utilService = utilService;
         }
 
+
+        #region Db Opeartion
         public async Task<WrapperListCustomerVM> Add(CustomerVM addCustomerViewModel)
         {
             var CustomerDT = _utilService.GetMapper().Map<CustomerVM, Customer>(addCustomerViewModel);
@@ -61,7 +63,7 @@ namespace Service.BusinessServices
                 PageSize = 10,
                 TotalRows = 0
             };
-            WrapperListCustomerVM data = await GetListPaged(dataParam,true);
+            WrapperListCustomerVM data = await GetListPaged(dataParam, true);
             return data;
         }
         public async Task<WrapperListCustomerVM> Update(string id, CustomerVM updateCustomerViewModel)
@@ -100,10 +102,10 @@ namespace Service.BusinessServices
                 PageSize = 10,
                 TotalRows = 0
             };
-            WrapperListCustomerVM data = await GetListPaged(dataParam,true);
+            WrapperListCustomerVM data = await GetListPaged(dataParam, true);
             return data;
         }
-        public async Task<WrapperListCustomerVM> GetListPaged(GetDataListVM dataListVM,bool withHistory)
+        public async Task<WrapperListCustomerVM> GetListPaged(GetDataListVM dataListVM, bool withHistory)
         {
             IEnumerable<Customer> custListTask = await _repositoryWrapper.Customer.FindByConditionAsync(x => x.FactoryId == dataListVM.FactoryId);
             //Task<IEnumerable<Address>> addressListTask = _repositoryWrapper.Address.FindByConditionAsync(x => x.FactoryId == dataListVM.FactoryId);
@@ -160,8 +162,9 @@ namespace Service.BusinessServices
             var data = new WrapperListCustomerVM();
             data.ListOfData = outputList;
             data.TotalRecords = noOfRecordTask;
-            if (withHistory) {
-                data = await SetHistoryOverview(data);
+            if (withHistory)
+            {
+                data = await SetHistoryOverview(data, dataListVM.FactoryId);
             }
 
             return data;
@@ -183,133 +186,15 @@ namespace Service.BusinessServices
                 PageSize = 10,
                 TotalRows = 0
             };
-            WrapperListCustomerVM data = await GetListPaged(dataParam,true);
+            WrapperListCustomerVM data = await GetListPaged(dataParam, true);
             return data;
         }
-
-        //public async Task<List<CustomerVM>> GetList(string FactoryId)
-        //{
-
-        //    Task<IEnumerable<Customer>> custListTask = _repositoryWrapper.Customer.FindByConditionAsync(x => x.FactoryId == FactoryId);
-        //    ////Task<IEnumerable<Address>> addressListTask = _repositoryWrapper.Address.FindByConditionAsync(x => x.FactoryId == FactoryId);
-        //    ////Task<IEnumerable<Phone>> phoneListTask = _repositoryWrapper.Phone.FindByConditionAsync(x => x.FactoryId == FactoryId);
-
-        //    await Task.WhenAll(custListTask);
-
-        //    List<Customer> custList = custListTask.Result.ToList();
-        //    //List<Address> addressList = addressListTask.Result.ToList();
-        //    //List<Phone> phoneList = phoneListTask.Result.ToList();
-        //    List<ListCustomerVM> outputList = new List<ListCustomerVM>();
-
-        //    for (int i = 0; i < custList.Count(); i++)
-        //    {
-        //        var tempCustomer = custList.ElementAt(i);
-        //        //var tempAddress = addressList.Where(x => x.RelatedId == tempCustomer.Id).FirstOrDefault();
-        //        //var tempPhone = phoneList.Where(x => x.RelatedId == tempCustomer.Id).FirstOrDefault();
-        //        var output = new ListCustomerVM();
-        //        output = _mapper.Map<Customer, ListCustomerVM>(tempCustomer, output);
-        //        //output = _mapper.Map<Address, ListCustomerVM>(tempAddress, output);
-        //        //output = _mapper.Map<Phone, ListCustomerVM>(tempPhone, output);
-        //        outputList.Add(output);
-        //    }
-
-        //    return outputList;
-        //}
-        //public async Task<CustomerVM> GetSingle(string cusId, string FactoryId)
-        //{
-        //    Task<IEnumerable<Customer>> CustomersDB = _repositoryWrapper.Customer.FindByConditionAsync(x => x.Id == cusId && x.FactoryId == FactoryId);
-        //    //Task<IEnumerable<Address>> AddressesDB = _repositoryWrapper.Address.FindByConditionAsync(x => x.Id == cusId && x.FactoryId == FactoryId);
-        //    //Task<IEnumerable<Phone>> PhonesDB = _repositoryWrapper.Phone.FindByConditionAsync(x => x.Id == cusId && x.FactoryId == FactoryId);
-
-        //    await Task.WhenAll(CustomersDB);
-
-        //    Customer cust = CustomersDB.Result.ToList().FirstOrDefault();
-        //    //Address address = AddressesDB.Result.ToList().FirstOrDefault();
-        //    //Phone phone = PhonesDB.Result.ToList().FirstOrDefault();
+        #endregion
 
 
 
-        //    ListCustomerVM output = new ListCustomerVM();
-        //    output = _mapper.Map<Customer, ListCustomerVM>(cust, output);
-        //    //output = _mapper.Map<Address, ListCustomerVM>(address, output);
-        //    //output = _mapper.Map<Phone, ListCustomerVM>(phone, output);
-        //    return _mapper.Map<ListCustomerVM, UpdateCustomerViewModel>(output);
 
-        //}
-        public async Task<WrapperCustomerHistory> GetCustomerHistory(GetDataListHistory customerVM)
-        {
-            WrapperCustomerHistory custHist = new WrapperCustomerHistory();
-            WrapperCustomerHistory returnCustHist = new WrapperCustomerHistory();
-            // Sales -- Sales Invoice Generated
-            // Invoice
-            // Income -- Payment Invoice Generated
-            Task<List<Sales>> listSalesT =
-                _repositoryWrapper
-                .Sales
-                .FindAll()
-                .Where(x => x.FactoryId == customerVM.FactoryId
-                && x.ClientId == customerVM.ClientId)
-                .Include(x => x.Item)
-                .Include(x => x.Item.ItemCategory)
-                .ToListAsync();
-
-            Task<List<Invoice>> listInvoiceT =
-                _repositoryWrapper
-                .Invoice
-                .FindAll()
-                .Where(x => x.FactoryId == customerVM.FactoryId
-                && x.ClientId == customerVM.ClientId)
-                .Include(x => x.InvoiceType)
-                .Where(x => x.InvoiceType.Name == TypeInvoice.Sales.ToString())
-                .ToListAsync();
-
-            Task<List<Income>> listIncomeT =
-                _repositoryWrapper
-                .Income
-                .FindAll()
-                .Where(x => x.FactoryId == customerVM.FactoryId
-                 && x.ClientId == customerVM.ClientId)
-                .Include(x => x.IncomeType)
-                .Where(x => x.IncomeType.Name == TypeIncome.ClientPaymentRecieved.ToString())
-                .ToListAsync();
-
-            await Task.WhenAll(listSalesT, listInvoiceT, listIncomeT);
-
-            List<CustomerHistory> custHistInvoice = _utilService.Mapper.Map<List<Invoice>, List<CustomerHistory>>(listInvoiceT.Result.ToList());
-            List<CustomerHistory> custHistIncome = _utilService.Mapper.Map<List<Income>, List<CustomerHistory>>(listIncomeT.Result.ToList());
-            List<CustomerHistory> custHistSales = _utilService.Mapper.Map<List<Sales>, List<CustomerHistory>>(listSalesT.Result.ToList());
-
-
-            custHist.ListOfData.AddRange(custHistInvoice);
-            custHist.ListOfData.AddRange(custHistIncome);
-            custHist.ListOfData = custHist.ListOfData.OrderBy(x => x.OccurranceDate).ToList();
-            for (int i = 0; i < custHist.ListOfData.Count(); i++)
-            {
-                IEnumerable<CustomerHistory> tempList = new List<CustomerHistory>();
-                if (custHist.ListOfData.ElementAt(i).Type == "InvoiceItem")
-                {
-                    tempList = custHistSales.Where(x => x.InvoiceId == custHist.ListOfData.ElementAt(i).InvoiceId);
-                    returnCustHist.ListOfData.AddRange(tempList);
-                    returnCustHist.ListOfData.Add(custHist.ListOfData.ElementAt(i));
-
-
-                }
-                else
-                {
-                    returnCustHist.ListOfData.Add(custHist.ListOfData.ElementAt(i));
-                }
-            }
-            var staffHist = GetCustomerHistoryOverview(returnCustHist);
-            returnCustHist.ListOfData = returnCustHist.ListOfData
-                                    .Skip((customerVM.PageNumber - 1) * customerVM.PageSize)
-                                    .Take(customerVM.PageSize)
-                                    .ToList();
-            returnCustHist.ListOfData.Add(staffHist);
-            return returnCustHist;
-        }
-
-
-
+        #region Payment
         public async Task<WrapperPaymentListVM> GetCustomerPaymentList(GetPaymentDataListVM vm)
         {
             Task<List<Invoice>> paymentInvoiceListT = _repositoryWrapper
@@ -346,6 +231,7 @@ namespace Service.BusinessServices
             TblTransaction transactionToAdd = new TblTransaction();
             transactionToAdd = _utilService.Mapper.Map<PaymentVM, TblTransaction>(paymentVM);
             transactionToAdd.PaymentStatus = PAYMENT_STATUS.CASH_RECIEVED.ToString();
+            transactionToAdd.Description = " Recieved from " + paymentVM.ClientName;
             transactionToAdd.TransactionType = TRANSACTION_TYPE.CREDIT.ToString();
             _repositoryWrapper.Transaction.Create(transactionToAdd);
 
@@ -416,7 +302,10 @@ namespace Service.BusinessServices
 
             return await GetCustomerPaymentList(item);
         }
+        #endregion
 
+
+        #region History
         public CustomerHistory GetCustomerHistoryOverview(WrapperCustomerHistory list)
         {
             CustomerHistory history = new CustomerHistory();
@@ -425,8 +314,8 @@ namespace Service.BusinessServices
                 CustomerHistory temp = list.ListOfData.ElementAt(i);
                 if (temp.Type == "InvoiceItem")
                 {
-                    history.RecievableAmount += temp.RecievableAmount;
-                    history.RecievedAmount += temp.RecievedAmount;
+                  //  history.RecievableAmount += temp.RecievableAmount;
+                  //  history.RecievedAmount += temp.RecievedAmount;
                 }
                 else if (temp.Type == "SaleItem")
                 {
@@ -436,12 +325,22 @@ namespace Service.BusinessServices
                 {
                     history.RecievedAmount += temp.RecievedAmount;
                 }
+                else if (temp.Type == "ExpenseItem")
+                {
+                    history.PaidAmount += temp.PaidAmount;
+                }
+                else if (temp.Type == "PayableItem")
+                {
+                    history.PayableAmount += temp.PayableAmount;
+                }
+                else if (temp.Type == "RecievableItem")
+                {
+                    history.RecievableAmount += temp.RecievableAmount;
+                }
             }
             return history;
         }
-
-
-        private async Task<WrapperListCustomerVM> SetHistoryOverview(WrapperListCustomerVM vm)
+        private async Task<WrapperListCustomerVM> SetHistoryOverview(WrapperListCustomerVM vm, string FactoryId)
         {
             var data = new GetDataListHistory();
             //Task<WrapperCustomerHistory>[] listOftask = new Task<WrapperCustomerHistory>[vm.ListOfData.Count];
@@ -451,22 +350,150 @@ namespace Service.BusinessServices
                 CustomerVM temp = vm.ListOfData.ElementAt(i);
                 data.ClientId = temp.CustomerId;
                 data.PageNumber = -1;
+                data.PageSize = -1;
+                data.FactoryId = FactoryId;
                 listOftask[i] = await GetCustomerHistory(data);
+
+                int len = listOftask[i].ListOfData.Count - 1;
+                vm.ListOfData.ElementAt(i).PaidAmount = listOftask[i].ListOfData[len].PaidAmount;
+                vm.ListOfData.ElementAt(i).RecievableAmount = listOftask[i].ListOfData[len].RecievableAmount;
+                vm.ListOfData.ElementAt(i).RecievedAmount = listOftask[i].ListOfData[len].RecievedAmount;
+                vm.ListOfData.ElementAt(i).PayableAmount = listOftask[i].ListOfData[len].PayableAmount;
+
             }
 
-//            await Task.WhenAll(listOftask);
+            //            await Task.WhenAll(listOftask);
 
-            for (int i = 0; i < vm.ListOfData.Count; i++)
-            {
-                //CustomerHistory te = GetCustomerHistoryOverview(listOftask[i].Result);
-                CustomerHistory te = GetCustomerHistoryOverview(listOftask[i]);
-                vm.ListOfData.ElementAt(i).PaidAmount = te.PaidAmount;
-                vm.ListOfData.ElementAt(i).RecievableAmount = te.RecievableAmount;
-                vm.ListOfData.ElementAt(i).RecievedAmount = te.RecievedAmount;
-                vm.ListOfData.ElementAt(i).PayableAmount = te.PayableAmount;
-            }
+            //for (int i = 0; i < vm.ListOfData.Count; i++)
+            //{
+            //    //CustomerHistory te = GetCustomerHistoryOverview(listOftask[i].Result);
+            //    CustomerHistory te = GetCustomerHistoryOverview(listOftask[i]);
+            //    vm.ListOfData.ElementAt(i).PaidAmount = te.PaidAmount;
+            //    vm.ListOfData.ElementAt(i).RecievableAmount = te.RecievableAmount;
+            //    vm.ListOfData.ElementAt(i).RecievedAmount = te.RecievedAmount;
+            //    vm.ListOfData.ElementAt(i).PayableAmount = te.PayableAmount;
+            //}
             return vm;
         }
+        public async Task<WrapperCustomerHistory> GetCustomerHistory(GetDataListHistory customerVM)
+        {
+            WrapperCustomerHistory custHist = new WrapperCustomerHistory();
+            WrapperCustomerHistory returnCustHist = new WrapperCustomerHistory();
+            // Sales -- Sales Invoice Generated
+            // Invoice
+            // Income -- Payment Invoice Generated
+            Task<List<Sales>> listSalesT =
+                _repositoryWrapper
+                .Sales
+                .FindAll()
+                .Where(x => x.FactoryId == customerVM.FactoryId
+                && x.ClientId == customerVM.ClientId)
+                .Include(x => x.Item)
+                .ThenInclude(x => x.ItemCategory)
+                .ToListAsync();
+
+            Task<List<Invoice>> listInvoiceT =
+                _repositoryWrapper
+                .Invoice
+                .FindAll()
+                .Where(x => x.FactoryId == customerVM.FactoryId
+                && x.ClientId == customerVM.ClientId)
+                .Include(x => x.InvoiceType)
+                .Where(x => x.InvoiceType.Name == TypeInvoice.Sales.ToString())
+                .ToListAsync();
+
+            Task<List<Income>> listIncomeT =
+                _repositoryWrapper
+                .Income
+                .FindAll()
+                .Where(x => x.FactoryId == customerVM.FactoryId
+                 && x.ClientId == customerVM.ClientId)
+                .Include(x => x.IncomeType)
+                //.Where(x => x.IncomeType.Name == TypeIncome.ClientPaymentRecieved.ToString())
+                .ToListAsync();
+
+
+            Task<List<Expense>> listExpenseT =
+                _repositoryWrapper
+                .Expense
+                .FindAll()
+                .Where(x => x.FactoryId == customerVM.FactoryId
+                 && x.ClientId == customerVM.ClientId)
+                .Include(x => x.ExpenseType)
+                //.Where(x => x.IncomeType.Name == TypeIncome.ClientPaymentRecieved.ToString())
+                .ToListAsync();
+
+
+            Task<List<Payable>> listPayableT =
+  _repositoryWrapper
+  .Payable
+  .FindAll()
+  .Where(x => x.FactoryId == customerVM.FactoryId
+   && x.ClientId == customerVM.ClientId)
+  .ToListAsync();
+
+            Task<List<Recievable>> listRecievableT =
+                        _repositoryWrapper
+                        .Recievable
+                        .FindAll()
+                        .Where(x => x.FactoryId == customerVM.FactoryId
+                         && x.ClientId == customerVM.ClientId)
+                        .ToListAsync();
+
+
+
+
+            await Task.WhenAll(listSalesT, listInvoiceT, listIncomeT, listExpenseT, listPayableT, listRecievableT);
+
+            List<CustomerHistory> custHistInvoice = _utilService.Mapper.Map<List<Invoice>, List<CustomerHistory>>(listInvoiceT.Result.ToList());
+            List<CustomerHistory> custHistIncome = _utilService.Mapper.Map<List<Income>, List<CustomerHistory>>(listIncomeT.Result.ToList());
+            List<CustomerHistory> custHistSales = _utilService.Mapper.Map<List<Sales>, List<CustomerHistory>>(listSalesT.Result.ToList());
+            List<CustomerHistory> custHistExpense = _utilService.Mapper.Map<List<Expense>, List<CustomerHistory>>(listExpenseT.Result.ToList());
+
+
+            List<CustomerHistory> custHistPayable = _utilService.Mapper.Map<List<Payable>, List<CustomerHistory>>(listPayableT.Result.ToList());
+            List<CustomerHistory> custHistRecievable = _utilService.Mapper.Map<List<Recievable>, List<CustomerHistory>>(listRecievableT.Result.ToList());
+
+
+
+
+            custHist.ListOfData.AddRange(custHistInvoice);
+            custHist.ListOfData.AddRange(custHistIncome);
+            custHist.ListOfData.AddRange(custHistExpense);
+            custHist.ListOfData.AddRange(custHistPayable);
+            custHist.ListOfData.AddRange(custHistRecievable);
+            custHist.ListOfData = custHist.ListOfData.OrderBy(x => x.OccurranceDate).ToList();
+            for (int i = 0; i < custHist.ListOfData.Count(); i++)
+            {
+                IEnumerable<CustomerHistory> tempList = new List<CustomerHistory>();
+                if (custHist.ListOfData.ElementAt(i).Type == "InvoiceItem")
+                {
+                    tempList = custHistSales.Where(x => x.InvoiceId == custHist.ListOfData.ElementAt(i).InvoiceId);
+                    returnCustHist.ListOfData.AddRange(tempList);
+                    returnCustHist.ListOfData.Add(custHist.ListOfData.ElementAt(i));
+
+
+                }
+                else
+                {
+                    returnCustHist.ListOfData.Add(custHist.ListOfData.ElementAt(i));
+                }
+            }
+            var staffHist = GetCustomerHistoryOverview(returnCustHist);
+
+
+            if (customerVM.PageSize != -1)
+            {
+                returnCustHist.ListOfData = returnCustHist.ListOfData
+                                        .Skip((customerVM.PageNumber - 1) * customerVM.PageSize)
+                                        .Take(customerVM.PageSize)
+                                        .ToList();
+            }
+
+            returnCustHist.ListOfData.Add(staffHist);
+            return returnCustHist;
+        }
+        #endregion
 
 
     }

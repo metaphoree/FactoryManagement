@@ -13,8 +13,9 @@ namespace Entities.ViewModels.Income
         public string IncomeTypeId { get; set; }
         public string ClientName { get; set; }
         public string Month { get; set; }
-        public decimal Amount { get; set; }
         public string Purpose { get; set; }
+        public decimal Amount { get; set; }
+        public string Description { get; set; }
 
     }
 }

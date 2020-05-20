@@ -21,5 +21,6 @@ namespace Contracts
         Task<string> GetUniqueId();
         Task<int> SaveChangesAsync();
         List<T> DeleteAll(List<T> entityList);
+        Task<IEnumerable<T>> FindByConditionAsyncNoTracking(Expression<Func<T, bool>> expression);
     }
 }

@@ -6,6 +6,7 @@ namespace Entities.ViewModels.Staff
 {
     public class StaffHistory
     {
+        public string Purpose { get; set; }
         public string StaffId { get; set; }
         public string StaffName { get; set; }
         public string InvoiceId { get; set; }

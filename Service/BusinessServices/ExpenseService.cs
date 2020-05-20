@@ -45,11 +45,40 @@ namespace Service.BusinessServices
                 .Where(x => x.FactoryId == dataListVM.FactoryId)
                 .Include(x => x.ExpenseType)
                 .Include(x => x.Supplier)
+                .Include(x => x.Customer)
+                .Include(x => x.Staff)
                 //.Where(globalFilterExpression)
                 .OrderByDescending(x => x.UpdatedDateTime)
                 .Skip((dataListVM.PageNumber - 1) * (dataListVM.PageSize))
                 .Take(dataListVM.PageSize)
                 .ToListAsync();
+
+            //var ExpenseList_1 = await _repositoryWrapper
+            //    .Expense
+            //    .FindAll()
+            //    .Where(x => x.FactoryId == dataListVM.FactoryId)
+            //    .Include(x => x.ExpenseType)
+            //    .Include(x => x.Staff)
+            //    //.Where(globalFilterExpression)
+            //    .OrderByDescending(x => x.UpdatedDateTime)
+            //    .Skip((dataListVM.PageNumber - 1) * (dataListVM.PageSize))
+            //    .Take(dataListVM.PageSize)
+            //    .ToListAsync();
+
+            //var ExpenseList_2 = await _repositoryWrapper
+            //    .Expense
+            //    .FindAll()
+            //    .Where(x => x.FactoryId == dataListVM.FactoryId)
+            //    .Include(x => x.ExpenseType)
+            //    .Include(x => x.Customer)
+            //    //.Where(globalFilterExpression)
+            //    .OrderByDescending(x => x.UpdatedDateTime)
+            //    .Skip((dataListVM.PageNumber - 1) * (dataListVM.PageSize))
+            //    .Take(dataListVM.PageSize)
+            //    .ToListAsync();
+
+          //  ExpenseList = _utilService.ConcatList<Expense>(ExpenseList, _utilService.ConcatList<Expense>(ExpenseList_1, ExpenseList_2));
+
 
             var dataRowCount = await _repositoryWrapper.Expense.NumOfRecord();
             List<ExpenseVM> ExpenseVMLists = new List<ExpenseVM>();

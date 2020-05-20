@@ -80,7 +80,7 @@ namespace ApiService.Controllers
         [Route("staff/getAll")]
         public async Task<ActionResult<WrapperStaffListVM>> GetStaff(GetDataListVM temp)
         {
-            var data = await _serviceWrapper.StaffService.GetListPaged(temp);
+            var data = await _serviceWrapper.StaffService.GetListPaged(temp,true);
             _utilService.Log("Staff Successfully Getted");
             return Ok(data);
         }

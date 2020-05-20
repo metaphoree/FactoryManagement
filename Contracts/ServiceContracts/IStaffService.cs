@@ -12,7 +12,7 @@ namespace Contracts.ServiceContracts
     {
         Task<WrapperStaffListVM> Add(StaffVM addCustomerViewModel);
         Task<WrapperStaffListVM> Update(string id, StaffVM updateCustomerViewModel);
-        Task<WrapperStaffListVM> GetListPaged(GetDataListVM dataListVM);
+        Task<WrapperStaffListVM> GetListPaged(GetDataListVM dataListVM, bool withHistory);
         Task<WrapperStaffListVM> Delete(StaffVM customerTemp);
         Task<WrapperStaffHistory> GetStaffHistory(GetDataListHistory staffVM);
 

@@ -4,8 +4,6 @@ using System.Text;
 
 namespace Entities.Enums
 {
-
-
     public enum TransactionPurpose
     {
         SalesReturnPayment,

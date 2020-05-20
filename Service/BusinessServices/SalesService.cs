@@ -68,7 +68,7 @@ namespace Service.BusinessServices
             IEnumerable<Stock> stockList = await _repositoryWrapper.Stock.FindByConditionAsync(x => x.FactoryId == salesVM.FactoryId);
             for (int i = 0; i < salesVM.ItemList.Count; i++)
             {
-                Stock existingStock = stockList.ToList().Where(x => x.ItemId == salesVM.ItemList[i].Item.Id).FirstOrDefault();
+                Stock existingStock = stockList.ToList().Where(x => x.ItemId == salesVM.ItemList[i].Item.Id && x.ItemStatusId == salesVM.ItemList[i].ItemStatus.Id).FirstOrDefault();
                 // IF NOT PRESENT ADD
                 if (existingStock == null)
                 {

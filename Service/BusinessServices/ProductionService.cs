@@ -47,7 +47,7 @@ namespace Service.BusinessServices
             {
                 ProductionVMLists =
                      ProductionVMLists
-                    .OrderByDescending(x => x.UpdatedDateTime)
+                    .OrderByDescending(x => x.EntryDate)
                     .Skip((dataListVM.PageNumber - 1) * (dataListVM.PageSize))
                     .Take(dataListVM.PageSize)
                     .ToList();
@@ -61,7 +61,7 @@ namespace Service.BusinessServices
                          !string.IsNullOrEmpty(x.ItemCategoryName) && !string.IsNullOrWhiteSpace(x.ItemCategoryName) && x.ItemCategoryName.Contains(dataListVM.GlobalFilter)
                         || !string.IsNullOrEmpty(x.ItemName) && !string.IsNullOrWhiteSpace(x.ItemName) && x.ItemName.Contains(dataListVM.GlobalFilter)
                         || !string.IsNullOrEmpty(x.StaffName) && !string.IsNullOrWhiteSpace(x.StaffName) && x.StaffName.Contains(dataListVM.GlobalFilter))
-                    .OrderByDescending(x => x.UpdatedDateTime)
+                    .OrderByDescending(x => x.EntryDate)
                     .Skip((dataListVM.PageNumber - 1) * (dataListVM.PageSize))
                     .Take(dataListVM.PageSize)
                     .ToList();
@@ -78,13 +78,86 @@ namespace Service.BusinessServices
 
             return wrapper;
         }
-      
-        
-        
+
+
+
         // Stock -- decrease
         // StockIn -- not
         // Payable -- 
         // Production
+        public async Task<WrapperProductionListVM> AddProductions(List<AddProductionVM> vmList)
+        {
+
+            for (int i = 0; i < vmList.Count; i++)
+            {
+                await AddSingleProduction(vmList.ElementAt(i));
+                Console.WriteLine("dd");
+            }
+
+            var dataParam = new GetDataListVM()
+            {
+                FactoryId = vmList.ElementAt(0).FactoryId,
+                PageNumber = 1,
+                PageSize = 10,
+                TotalRows = 0
+            };
+            WrapperProductionListVM data = await GetListPaged(dataParam);
+            return data;
+        }
+        private async Task AddSingleProduction(AddProductionVM vm)
+        {
+            var productionToAdd = _utilService.GetMapper().Map<AddProductionVM, Production>(vm);
+            var stockInToAdd = _utilService.GetMapper().Map<AddProductionVM, StockIn>(vm);
+            var payableToAdd = _utilService.GetMapper().Map<AddProductionVM, Payable>(vm);
+            var invoiceToAdd = _utilService.GetMapper().Map<AddProductionVM, Invoice>(vm);
+            //string uniqueIdTask =await _repositoryWrapper.Production.GetUniqueId();
+
+            //// Todo  need to aandle unique id from db
+            //entityToAdd.UniqueId = uniqueIdTask;
+            invoiceToAdd = _repositoryWrapper.Invoice.Create(invoiceToAdd);
+
+            productionToAdd.InvoiceId = invoiceToAdd.Id;
+            stockInToAdd.InvoiceId = invoiceToAdd.Id;
+            payableToAdd.InvoiceId = invoiceToAdd.Id;
+
+            productionToAdd = _repositoryWrapper.Production.Create(productionToAdd);
+            stockInToAdd.ProductionId = productionToAdd.Id;
+            payableToAdd.ProductionId = productionToAdd.Id;
+
+
+            stockInToAdd = _repositoryWrapper.StockIn.Create(stockInToAdd);
+            payableToAdd = _repositoryWrapper.Payable.Create(payableToAdd);
+
+
+
+            Stock stockToAdd = new Stock();
+            IEnumerable<Stock> stockList = await _repositoryWrapper.Stock.FindByConditionAsync(x => x.FactoryId == vm.FactoryId && x.ItemId == vm.ItemId);
+
+            Stock existingStock = stockList.ToList().FirstOrDefault();
+
+            // IF NOT PRESENT ADD
+            if (existingStock == null)
+            {
+                stockToAdd = _utilService.Mapper.Map<AddProductionVM, Stock>(vm);
+                _repositoryWrapper.Stock.Create(stockToAdd);
+            }
+            // IF PRESENT UPDATE
+            else
+            {
+                existingStock.Quantity += vm.Quantity;
+                _repositoryWrapper.Stock.Update(existingStock);
+            }
+
+            Task<int> productionToAddT = _repositoryWrapper.Production.SaveChangesAsync();
+            Task<int> stockInToAddT = _repositoryWrapper.StockIn.SaveChangesAsync();
+            Task<int> payableToAddT = _repositoryWrapper.Payable.SaveChangesAsync();
+            Task<int> stockToAddT = _repositoryWrapper.Stock.SaveChangesAsync();
+            Task<int> incoiceToAddT = _repositoryWrapper.Invoice.SaveChangesAsync();
+
+            await Task.WhenAll(productionToAddT, stockInToAddT, payableToAddT, stockToAddT, incoiceToAddT);
+
+            Console.WriteLine("khan");
+        }
         public async Task<WrapperProductionListVM> Add(AddProductionVM vm)
         {
             var productionToAdd = _utilService.GetMapper().Map<AddProductionVM, Production>(vm);
@@ -104,7 +177,7 @@ namespace Service.BusinessServices
             productionToAdd = _repositoryWrapper.Production.Create(productionToAdd);
             stockInToAdd.ProductionId = productionToAdd.Id;
             payableToAdd.ProductionId = productionToAdd.Id;
-          
+
 
             stockInToAdd = _repositoryWrapper.StockIn.Create(stockInToAdd);
             payableToAdd = _repositoryWrapper.Payable.Create(payableToAdd);
@@ -114,21 +187,21 @@ namespace Service.BusinessServices
             Stock stockToAdd = new Stock();
             IEnumerable<Stock> stockList = await _repositoryWrapper.Stock.FindByConditionAsync(x => x.FactoryId == vm.FactoryId && x.ItemId == vm.ItemId);
 
-                Stock existingStock = stockList.ToList().FirstOrDefault();
+            Stock existingStock = stockList.ToList().FirstOrDefault();
 
-                // IF NOT PRESENT ADD
-                if (existingStock == null)
-                {
-                    stockToAdd = _utilService.Mapper.Map<AddProductionVM, Stock>(vm);
-                    _repositoryWrapper.Stock.Create(stockToAdd);
-                }
-                // IF PRESENT UPDATE
-                else
-                {
-                    existingStock.Quantity += vm.Quantity;
-                    _repositoryWrapper.Stock.Update(existingStock);
-                }
-            
+            // IF NOT PRESENT ADD
+            if (existingStock == null)
+            {
+                stockToAdd = _utilService.Mapper.Map<AddProductionVM, Stock>(vm);
+                _repositoryWrapper.Stock.Create(stockToAdd);
+            }
+            // IF PRESENT UPDATE
+            else
+            {
+                existingStock.Quantity += vm.Quantity;
+                _repositoryWrapper.Stock.Update(existingStock);
+            }
+
             Task<int> productionToAddT = _repositoryWrapper.Production.SaveChangesAsync();
             Task<int> stockInToAddT = _repositoryWrapper.StockIn.SaveChangesAsync();
             Task<int> payableToAddT = _repositoryWrapper.Payable.SaveChangesAsync();
@@ -167,18 +240,18 @@ namespace Service.BusinessServices
             WrapperProductionListVM data = await GetListPaged(dataParam);
             return data;
         }
-      
-        
-        
+
+
+
         // Stock -- decrease
         // StockIn --  deleted
         // Payable -- deleted
         // Production -- deleted
         public async Task<WrapperProductionListVM> Delete(AddProductionVM itemTemp)
         {
-            Task<IEnumerable<Production>> productionT =  _repositoryWrapper.Production.FindByConditionAsync(x => x.Id == itemTemp.Id && x.FactoryId == itemTemp.FactoryId);
-            Task<IEnumerable<Stock>> stockT =  _repositoryWrapper.Stock.FindByConditionAsync(x => x.FactoryId == itemTemp.FactoryId && x.ItemId == itemTemp.ItemId);
-            Task<IEnumerable<Payable>> payableT =  _repositoryWrapper.Payable.FindByConditionAsync(x => x.FactoryId == itemTemp.FactoryId && x.ClientId == itemTemp.StaffId && x.Amount == itemTemp.TotalAmount && x.ProductionId == itemTemp.Id);
+            Task<IEnumerable<Production>> productionT = _repositoryWrapper.Production.FindByConditionAsync(x => x.Id == itemTemp.Id && x.FactoryId == itemTemp.FactoryId);
+            Task<IEnumerable<Stock>> stockT = _repositoryWrapper.Stock.FindByConditionAsync(x => x.FactoryId == itemTemp.FactoryId && x.ItemId == itemTemp.ItemId);
+            Task<IEnumerable<Payable>> payableT = _repositoryWrapper.Payable.FindByConditionAsync(x => x.FactoryId == itemTemp.FactoryId && x.ClientId == itemTemp.StaffId && x.Amount == itemTemp.TotalAmount && x.ProductionId == itemTemp.Id);
             Task<IEnumerable<StockIn>> stockInT = _repositoryWrapper.StockIn.FindByConditionAsync(x => x.FactoryId == itemTemp.FactoryId && x.SupplierId == itemTemp.StaffId && x.ProductionId == itemTemp.Id);
 
             await Task.WhenAll(productionT, stockT, payableT, stockInT);
@@ -194,7 +267,7 @@ namespace Service.BusinessServices
             _repositoryWrapper.StockIn.Delete(stockInT.Result.ToList().FirstOrDefault());
             Stock existingStock = stockT.Result.ToList().FirstOrDefault();
             // IF NOT PRESENT ADD
-            if (existingStock == null){}
+            if (existingStock == null) { }
             // IF PRESENT UPDATE
             else
             {

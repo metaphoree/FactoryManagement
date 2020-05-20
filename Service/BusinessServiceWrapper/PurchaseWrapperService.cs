@@ -79,17 +79,12 @@ namespace Service.BusinessServiceWrapper
             Task<WrapperInvoiceTypeListVM> invoiceTypeListTask = _serviceWrapper.InvoiceTypeService.GetListPaged(getDataListVM);
             Task<WrapperExpenseTypeListVM> expenseTypeTask = _serviceWrapper.ExpenseTypeService.GetListPaged(getDataListVM);
             Task<WrapperSupplierListVM> supplierListTask = _serviceWrapper.SupplierService.GetListPaged(getDataListVM,false);
-            Task<WrapperStaffListVM> staffListTask = _serviceWrapper.StaffService.GetListPaged(getDataListVM);
+            Task<WrapperStaffListVM> staffListTask = _serviceWrapper.StaffService.GetListPaged(getDataListVM,false);
 
 
             Task<WrapperItemListVM> itemTask = _serviceWrapper.ItemService.GetListPaged(getDataListVM);
             Task<WrapperItemCategoryListVM> itemCategoryTask = _serviceWrapper.ItemCategoryService.GetListPaged(getDataListVM);
             Task<WrapperItemStatusListVM> itemStatusTask = _serviceWrapper.ItemStatusService.GetListPaged(getDataListVM);
-
-
-
-
-
 
             await Task.WhenAll(customerListTask, incomeTypeListTask, 
                 invoiceTypeListTask, expenseTypeTask, supplierListTask, staffListTask
@@ -118,7 +113,7 @@ namespace Service.BusinessServiceWrapper
             Task<WrapperInvoiceTypeListVM> invoiceTypeListTask = _serviceWrapper.InvoiceTypeService.GetListPaged(getDataListVM);
             Task<WrapperExpenseTypeListVM> expenseTypeTask = _serviceWrapper.ExpenseTypeService.GetListPaged(getDataListVM);
             Task<WrapperSupplierListVM> supplierListTask = _serviceWrapper.SupplierService.GetListPaged(getDataListVM,false);
-            Task<WrapperStaffListVM> staffListTask = _serviceWrapper.StaffService.GetListPaged(getDataListVM);
+            Task<WrapperStaffListVM> staffListTask = _serviceWrapper.StaffService.GetListPaged(getDataListVM,false);
             Task<WrapperEquipmentListVM> equipmentListTask = _serviceWrapper.EquipmentService.GetListPaged(getDataListVM);
 
             Task<WrapperItemStatusListVM> itemStatusListTask = _serviceWrapper.ItemStatusService.GetListPaged(getDataListVM);
