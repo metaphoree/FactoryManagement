@@ -36,6 +36,7 @@ namespace Service.BusinessServices
                 .Include(x => x.ItemCategory)
                 .Include(x => x.Equipment)
                 .Include(x => x.Staff)
+                .Include(x => x.ItemStatus)
                 .Where(x => x.FactoryId == dataListVM.FactoryId)
                 .ToListAsync();
 
@@ -131,7 +132,12 @@ namespace Service.BusinessServices
 
 
             Stock stockToAdd = new Stock();
-            IEnumerable<Stock> stockList = await _repositoryWrapper.Stock.FindByConditionAsync(x => x.FactoryId == vm.FactoryId && x.ItemId == vm.ItemId);
+            IEnumerable<Stock> stockList = await _repositoryWrapper
+                .Stock
+                .FindByConditionAsync
+                (x => x.FactoryId == vm.FactoryId 
+                && x.ItemId == vm.ItemId
+                && x.ItemStatusId == vm.ItemStatusId);
 
             Stock existingStock = stockList.ToList().FirstOrDefault();
 
@@ -156,7 +162,7 @@ namespace Service.BusinessServices
 
             await Task.WhenAll(productionToAddT, stockInToAddT, payableToAddT, stockToAddT, incoiceToAddT);
 
-            Console.WriteLine("khan");
+           
         }
         public async Task<WrapperProductionListVM> Add(AddProductionVM vm)
         {
@@ -250,11 +256,12 @@ namespace Service.BusinessServices
         public async Task<WrapperProductionListVM> Delete(AddProductionVM itemTemp)
         {
             Task<IEnumerable<Production>> productionT = _repositoryWrapper.Production.FindByConditionAsync(x => x.Id == itemTemp.Id && x.FactoryId == itemTemp.FactoryId);
-            Task<IEnumerable<Stock>> stockT = _repositoryWrapper.Stock.FindByConditionAsync(x => x.FactoryId == itemTemp.FactoryId && x.ItemId == itemTemp.ItemId);
+            Task<IEnumerable<Stock>> stockT = _repositoryWrapper.Stock.FindByConditionAsync(x => x.FactoryId == itemTemp.FactoryId && x.ItemId == itemTemp.ItemId && x.ItemStatusId == itemTemp.ItemStatusId);
             Task<IEnumerable<Payable>> payableT = _repositoryWrapper.Payable.FindByConditionAsync(x => x.FactoryId == itemTemp.FactoryId && x.ClientId == itemTemp.StaffId && x.Amount == itemTemp.TotalAmount && x.ProductionId == itemTemp.Id);
             Task<IEnumerable<StockIn>> stockInT = _repositoryWrapper.StockIn.FindByConditionAsync(x => x.FactoryId == itemTemp.FactoryId && x.SupplierId == itemTemp.StaffId && x.ProductionId == itemTemp.Id);
+            Task<IEnumerable<Invoice>> invoiceT = _repositoryWrapper.Invoice.FindByConditionAsync(x => x.FactoryId == itemTemp.FactoryId && x.Id == itemTemp.InvoiceId);
 
-            await Task.WhenAll(productionT, stockT, payableT, stockInT);
+            await Task.WhenAll(productionT, stockT, payableT, stockInT, invoiceT);
 
             var item = productionT.Result.ToList().FirstOrDefault();
             if (item == null)
@@ -265,23 +272,45 @@ namespace Service.BusinessServices
             _repositoryWrapper.Production.Delete(item);
             _repositoryWrapper.Payable.Delete(payableT.Result.ToList().FirstOrDefault());
             _repositoryWrapper.StockIn.Delete(stockInT.Result.ToList().FirstOrDefault());
+            _repositoryWrapper.Invoice.Delete(invoiceT.Result.ToList().FirstOrDefault());
             Stock existingStock = stockT.Result.ToList().FirstOrDefault();
-            // IF NOT PRESENT ADD
-            if (existingStock == null) { }
-            // IF PRESENT UPDATE
+
+
+            if (existingStock == null) { 
+            
+            }
+
             else
             {
-                existingStock.Quantity -= itemTemp.Quantity;
-                _repositoryWrapper.Stock.Update(existingStock);
+                if (existingStock.Quantity < itemTemp.Quantity)
+                {
+                    var dataParam1 = new GetDataListVM()
+                    {
+                        FactoryId = itemTemp.FactoryId,
+                        PageNumber = 1,
+                        PageSize = 10,
+                        TotalRows = 0
+                    };
+                    WrapperProductionListVM data2 = await GetListPaged(dataParam1);
+                    data2.HasMessage = true;
+                    data2.Message = "There is not enough item to remove";
+                    return data2;
+                }
+                else
+                {
+                    existingStock.Quantity -= itemTemp.Quantity;
+                    _repositoryWrapper.Stock.Update(existingStock);
+                }
             }
 
             Task<int> productionToAddT = _repositoryWrapper.Production.SaveChangesAsync();
             Task<int> payableToAddT = _repositoryWrapper.Payable.SaveChangesAsync();
             Task<int> stockToAddT = _repositoryWrapper.Stock.SaveChangesAsync();
             Task<int> stockInToAddT = _repositoryWrapper.StockIn.SaveChangesAsync();
+            Task<int> invoiceToAdd = _repositoryWrapper.Invoice.SaveChangesAsync();
 
 
-            await Task.WhenAll(productionToAddT, payableToAddT, stockToAddT, stockInToAddT);
+            await Task.WhenAll(productionToAddT, payableToAddT, stockToAddT, stockInToAddT, invoiceToAdd);
 
             var dataParam = new GetDataListVM()
             {

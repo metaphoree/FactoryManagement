@@ -48,6 +48,7 @@ namespace Service
         IMapper _mapper;
         ILoggerManager _loggerManager;
         IUtilService _utilService;
+        IApiResourceMappingService _ApiResourceMappingService;
         public ServiceWrapper(
              IAddressService AddressService,
              ICustomerService CustomerService,
@@ -85,7 +86,8 @@ namespace Service
              IRepositoryWrapper repositoryWrapper,
              IMapper mapper,
              ILoggerManager loggerManager,
-             IUtilService utilService
+             IUtilService utilService,
+             IApiResourceMappingService ApiResourceMappingService
              )
         {
             this._AddressService = AddressService;
@@ -125,10 +127,22 @@ namespace Service
             this._mapper = mapper;
             this._loggerManager = loggerManager;
             this._utilService = utilService;
+            this._ApiResourceMappingService = ApiResourceMappingService;
         }
 
 
-
+        public IApiResourceMappingService ApiResourceMappingService
+        {
+            get
+            {
+                if (_ApiResourceMappingService == null)
+                {
+                    //return new AddressRepository(dbContext);
+                    _ApiResourceMappingService = new ApiResourceMappingService(_repositoryWrapper, _utilService);
+                }
+                return _ApiResourceMappingService;
+            }
+        }
 
 
         public ICustomerService CustomerService

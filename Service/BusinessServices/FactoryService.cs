@@ -49,12 +49,146 @@ namespace Service.BusinessServices
         public async Task<WrapperFactoryListVM> Add(FactoryVM vm)
         {
             var entityToAdd = _utilService.GetMapper().Map<FactoryVM, Factory>(vm);
-            //string uniqueIdTask =await _repositoryWrapper.Factory.GetUniqueId();
 
-            //// Todo  need to aandle unique id from db
-            //entityToAdd.UniqueId = uniqueIdTask;
-            entityToAdd = _repositoryWrapper.Factory.Create(entityToAdd);
-            await _repositoryWrapper.Factory.SaveChangesAsync();
+
+            entityToAdd = this._repositoryWrapper.Factory.Create(entityToAdd);
+
+
+            #region Invoice Type
+            this._repositoryWrapper.InvoiceType.Create(new InvoiceType()
+            {
+                FactoryId = entityToAdd.Id,
+                Name = "Expense",
+            });
+            this._repositoryWrapper.InvoiceType.Create(new InvoiceType()
+            {
+                FactoryId = entityToAdd.Id,
+                Name = "Income",
+            });
+            this._repositoryWrapper.InvoiceType.Create(new InvoiceType()
+            {
+                FactoryId = entityToAdd.Id,
+                Name = "SalesReturn",
+            });
+            this._repositoryWrapper.InvoiceType.Create(new InvoiceType()
+            {
+                FactoryId = entityToAdd.Id,
+                Name = "PurchaseReturn",
+            });
+            this._repositoryWrapper.InvoiceType.Create(new InvoiceType()
+            {
+                FactoryId = entityToAdd.Id,
+                Name = "StaffProduction",
+            });
+            this._repositoryWrapper.InvoiceType.Create(new InvoiceType()
+            {
+                FactoryId = entityToAdd.Id,
+                Name = "StaffPayment",
+            });
+            this._repositoryWrapper.InvoiceType.Create(new InvoiceType()
+            {
+                FactoryId = entityToAdd.Id,
+                Name = "SupplierPayment",
+            });
+            this._repositoryWrapper.InvoiceType.Create(new InvoiceType()
+            {
+                FactoryId = entityToAdd.Id,
+                Name = "ClientPayment",
+            });
+            this._repositoryWrapper.InvoiceType.Create(new InvoiceType()
+            {
+                FactoryId = entityToAdd.Id,
+                Name = "Purchase",
+            });
+            this._repositoryWrapper.InvoiceType.Create(new InvoiceType()
+            {
+                FactoryId = entityToAdd.Id,
+                Name = "Sales",
+            });
+            #endregion
+            #region Income  Type
+            this._repositoryWrapper.IncomeType.Create(new IncomeType()
+            {
+                FactoryId = entityToAdd.Id,
+                Name = "PurchaseReturn"
+            });
+            this._repositoryWrapper.IncomeType.Create(new IncomeType()
+            {
+                FactoryId = entityToAdd.Id,
+                Name = "ClientPaymentRecieved"
+            });
+            this._repositoryWrapper.IncomeType.Create(new IncomeType()
+            {
+                FactoryId = entityToAdd.Id,
+                Name = "Sales"
+            });
+            #endregion
+            #region Expense Type
+            this._repositoryWrapper.ExpenseType.Create(new ExpenseType()
+            {
+                FactoryId = entityToAdd.Id,
+                Name = "SalesReturn"
+            });
+            this._repositoryWrapper.ExpenseType.Create(new ExpenseType()
+            {
+                FactoryId = entityToAdd.Id,
+                Name = "StaffPayment"
+            });
+            this._repositoryWrapper.ExpenseType.Create(new ExpenseType()
+            {
+                FactoryId = entityToAdd.Id,
+                Name = "SupplierPayment"
+            });
+            this._repositoryWrapper.ExpenseType.Create(new ExpenseType()
+            {
+                FactoryId = entityToAdd.Id,
+                Name = "Purchase"
+            });
+            #endregion
+            #region Payment Status
+            this._repositoryWrapper.PaymentStatus.Create(new PaymentStatus()
+            {
+                FactoryId = entityToAdd.Id,
+                Status = "CASH_PAID"
+            });
+            this._repositoryWrapper.PaymentStatus.Create(new PaymentStatus()
+            {
+                FactoryId = entityToAdd.Id,
+                Status = "CASH_RECIEVABLE"
+            });
+            this._repositoryWrapper.PaymentStatus.Create(new PaymentStatus()
+            {
+                FactoryId = entityToAdd.Id,
+                Status = "CASH_PAYABLE"
+            });
+            this._repositoryWrapper.PaymentStatus.Create(new PaymentStatus()
+            {
+                FactoryId = entityToAdd.Id,
+                Status = "CASH_RECIEVED"
+            });
+            #endregion
+            #region Item    Status
+            this._repositoryWrapper.ItemStatus.Create(new ItemStatus()
+            {
+                FactoryId = entityToAdd.Id,
+                Name = "BAD"
+            });
+            this._repositoryWrapper.ItemStatus.Create(new ItemStatus()
+            {
+                FactoryId = entityToAdd.Id,
+                Name = "GOOD"
+            }); 
+            #endregion
+
+
+            Task<int> t1 =  _repositoryWrapper.Factory.SaveChangesAsync();
+            Task<int> t2 =  _repositoryWrapper.InvoiceType.SaveChangesAsync();
+            Task<int> t3 =  _repositoryWrapper.ExpenseType.SaveChangesAsync();
+            Task<int> t4 =  _repositoryWrapper.PaymentStatus.SaveChangesAsync();
+            Task<int> t5 =  _repositoryWrapper.ItemStatus.SaveChangesAsync();
+            Task<int> t6 =  _repositoryWrapper.IncomeType.SaveChangesAsync();
+
+            await Task.WhenAll(t1,t2,t3,t4,t5,t6);
 
             var dataParam = new GetDataListVM()
             {

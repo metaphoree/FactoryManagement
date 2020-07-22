@@ -9,6 +9,7 @@ using Entities.ViewModels.InvoiceType;
 using Entities.ViewModels.Item;
 using Entities.ViewModels.ItemCategoryView;
 using Entities.ViewModels.ItemStatus;
+using Entities.ViewModels.Role;
 using Entities.ViewModels.Staff;
 using Entities.ViewModels.Supplier;
 using System;
@@ -135,5 +136,23 @@ namespace Service.BusinessServiceWrapper
             vm.ItemStatusVMs = itemStatusListTask.Result.ListOfData;
             return vm;
         }
+
+
+        public async Task<InitialLoadDataVM> GetStaffInitialData(GetDataListVM getDataListVM)
+        {
+            InitialLoadDataVM vm = new InitialLoadDataVM();
+            Task<WrapperRoleListVM> roleListTask = _serviceWrapper.RoleService.GetListPaged(getDataListVM); 
+            await Task.WhenAll(roleListTask);
+            vm.RoleVMs = roleListTask.Result.ListOfData;
+            return vm;
+        }
+
+
+
+
+
+
+
+
     }
 }

@@ -1,0 +1,361 @@
+2020-05-27 00:01:35.7235 INFO ---------------------------------------------------------------------------------------------------------
+2020-05-27 00:01:35.8405 INFO --------------------------27-May-20 12:01:35 AM------------------------------------------------
+2020-05-27 00:01:35.8660 INFO ---STARTED FINDING ----USERAUTHINFO----------
+2020-05-27 00:25:30.1291 INFO ---------------------------------------------------------------------------------------------------------
+2020-05-27 00:25:30.2807 INFO --------------------------27-May-20 12:25:30 AM------------------------------------------------
+2020-05-27 00:25:30.3873 INFO ---STARTED FINDING ----USERAUTHINFO----------
+2020-05-27 00:42:58.7739 INFO ---------------------------------------------------------------------------------------------------------
+2020-05-27 00:42:58.8411 INFO --------------------------27-May-20 12:42:58 AM------------------------------------------------
+2020-05-27 00:42:58.8669 INFO ---STARTED FINDING ----USERAUTHINFO----------
+2020-05-27 00:43:45.8419 ERROR Something went wrong: System.NullReferenceException: Object reference not set to an instance of an object.
+   at ApiService.Utilities.Auth.FactoryAuthorize.OnAuthorization(AuthorizationFilterContext filterContext) in D:\Projects\ApiService\ApiService\Utilities\Auth\FactoryAuthorize.cs:line 45
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.InvokeFilterPipelineAsync()
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|6_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Swashbuckle.AspNetCore.SwaggerUI.SwaggerUIMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at ApiService.Utilities.ExceptionHandler.ExceptionMiddleware.InvokeAsync(HttpContext httpContext) in D:\Projects\ApiService\ApiService\Utilities\ExceptionHandler\ExceptionMiddleware.cs:line 26
+2020-05-27 00:43:45.8419 ERROR Something went wrong: System.NullReferenceException: Object reference not set to an instance of an object.
+   at ApiService.Utilities.Auth.FactoryAuthorize.OnAuthorization(AuthorizationFilterContext filterContext) in D:\Projects\ApiService\ApiService\Utilities\Auth\FactoryAuthorize.cs:line 45
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.InvokeFilterPipelineAsync()
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|6_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Swashbuckle.AspNetCore.SwaggerUI.SwaggerUIMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at ApiService.Utilities.ExceptionHandler.ExceptionMiddleware.InvokeAsync(HttpContext httpContext) in D:\Projects\ApiService\ApiService\Utilities\ExceptionHandler\ExceptionMiddleware.cs:line 26
+2020-05-27 00:43:45.8419 ERROR Something went wrong: System.NullReferenceException: Object reference not set to an instance of an object.
+   at ApiService.Utilities.Auth.FactoryAuthorize.OnAuthorization(AuthorizationFilterContext filterContext) in D:\Projects\ApiService\ApiService\Utilities\Auth\FactoryAuthorize.cs:line 45
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.InvokeFilterPipelineAsync()
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|6_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Swashbuckle.AspNetCore.SwaggerUI.SwaggerUIMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at ApiService.Utilities.ExceptionHandler.ExceptionMiddleware.InvokeAsync(HttpContext httpContext) in D:\Projects\ApiService\ApiService\Utilities\ExceptionHandler\ExceptionMiddleware.cs:line 26
+2020-05-27 00:43:45.9119 ERROR -------------------------------------------------------------------------------
+2020-05-27 00:43:45.9679 ERROR -------------------------------------------------------------------------------
+2020-05-27 00:43:45.9497 ERROR -------------------------------------------------------------------------------
+2020-05-27 00:43:45.8790 ERROR -------------------------------------------------------------------------------
+2020-05-27 00:43:46.0002 ERROR -------------------------------------------------------------------------------
+2020-05-27 00:43:46.0165 ERROR -------------------------------------------------------------------------------
+2020-05-27 00:45:21.2693 ERROR Something went wrong: System.NullReferenceException: Object reference not set to an instance of an object.
+   at ApiService.Utilities.Auth.FactoryAuthorize.OnAuthorization(AuthorizationFilterContext filterContext) in D:\Projects\ApiService\ApiService\Utilities\Auth\FactoryAuthorize.cs:line 45
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.InvokeFilterPipelineAsync()
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|6_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Swashbuckle.AspNetCore.SwaggerUI.SwaggerUIMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at ApiService.Utilities.ExceptionHandler.ExceptionMiddleware.InvokeAsync(HttpContext httpContext) in D:\Projects\ApiService\ApiService\Utilities\ExceptionHandler\ExceptionMiddleware.cs:line 26
+2020-05-27 00:45:23.2182 ERROR -------------------------------------------------------------------------------
+2020-05-27 00:45:23.2975 ERROR -------------------------------------------------------------------------------
+2020-05-27 00:45:23.2721 ERROR Something went wrong: System.NullReferenceException: Object reference not set to an instance of an object.
+   at ApiService.Utilities.Auth.FactoryAuthorize.OnAuthorization(AuthorizationFilterContext filterContext) in D:\Projects\ApiService\ApiService\Utilities\Auth\FactoryAuthorize.cs:line 45
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.InvokeFilterPipelineAsync()
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|6_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Swashbuckle.AspNetCore.SwaggerUI.SwaggerUIMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at ApiService.Utilities.ExceptionHandler.ExceptionMiddleware.InvokeAsync(HttpContext httpContext) in D:\Projects\ApiService\ApiService\Utilities\ExceptionHandler\ExceptionMiddleware.cs:line 26
+2020-05-27 00:45:23.3341 ERROR -------------------------------------------------------------------------------
+2020-05-27 00:45:23.3500 ERROR -------------------------------------------------------------------------------
+2020-05-27 00:55:32.6830 INFO ---------------------------------------------------------------------------------------------------------
+2020-05-27 00:55:32.8422 INFO --------------------------27-May-20 12:55:32 AM------------------------------------------------
+2020-05-27 00:55:32.8871 INFO ---STARTED FINDING ----USERAUTHINFO----------
+2020-05-27 00:56:09.0345 ERROR Something went wrong: System.ArgumentNullException: IDX10000: The parameter 'token' cannot be a 'null' or an empty object. (Parameter 'token')
+   at System.IdentityModel.Tokens.Jwt.JwtSecurityTokenHandler.ReadJwtToken(String token)
+   at System.IdentityModel.Tokens.Jwt.JwtSecurityTokenHandler.ReadToken(String token)
+   at Service.BusinessServices.UserAuthInfoService.DecodeJwtToken(String token) in D:\Projects\ApiService\Service\BusinessServices\UserAuthInfoService.cs:line 241
+   at ApiService.Utilities.Auth.FactoryAuthorize.OnAuthorization(AuthorizationFilterContext filterContext) in D:\Projects\ApiService\ApiService\Utilities\Auth\FactoryAuthorize.cs:line 47
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.InvokeFilterPipelineAsync()
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|6_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Swashbuckle.AspNetCore.SwaggerUI.SwaggerUIMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at ApiService.Utilities.ExceptionHandler.ExceptionMiddleware.InvokeAsync(HttpContext httpContext) in D:\Projects\ApiService\ApiService\Utilities\ExceptionHandler\ExceptionMiddleware.cs:line 26
+2020-05-27 00:56:09.0345 ERROR Something went wrong: System.ArgumentNullException: IDX10000: The parameter 'token' cannot be a 'null' or an empty object. (Parameter 'token')
+   at System.IdentityModel.Tokens.Jwt.JwtSecurityTokenHandler.ReadJwtToken(String token)
+   at System.IdentityModel.Tokens.Jwt.JwtSecurityTokenHandler.ReadToken(String token)
+   at Service.BusinessServices.UserAuthInfoService.DecodeJwtToken(String token) in D:\Projects\ApiService\Service\BusinessServices\UserAuthInfoService.cs:line 241
+   at ApiService.Utilities.Auth.FactoryAuthorize.OnAuthorization(AuthorizationFilterContext filterContext) in D:\Projects\ApiService\ApiService\Utilities\Auth\FactoryAuthorize.cs:line 47
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.InvokeFilterPipelineAsync()
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|6_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Swashbuckle.AspNetCore.SwaggerUI.SwaggerUIMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at ApiService.Utilities.ExceptionHandler.ExceptionMiddleware.InvokeAsync(HttpContext httpContext) in D:\Projects\ApiService\ApiService\Utilities\ExceptionHandler\ExceptionMiddleware.cs:line 26
+2020-05-27 00:56:09.0798 ERROR -------------------------------------------------------------------------------
+2020-05-27 00:56:09.1118 ERROR -------------------------------------------------------------------------------
+2020-05-27 00:56:09.1369 ERROR -------------------------------------------------------------------------------
+2020-05-27 00:56:09.1562 ERROR -------------------------------------------------------------------------------
+2020-05-27 01:06:58.2147 ERROR Something went wrong: System.ArgumentNullException: IDX10000: The parameter 'token' cannot be a 'null' or an empty object. (Parameter 'token')
+   at System.IdentityModel.Tokens.Jwt.JwtSecurityTokenHandler.ReadJwtToken(String token)
+   at System.IdentityModel.Tokens.Jwt.JwtSecurityTokenHandler.ReadToken(String token)
+   at Service.BusinessServices.UserAuthInfoService.DecodeJwtToken(String token) in D:\Projects\ApiService\Service\BusinessServices\UserAuthInfoService.cs:line 241
+   at ApiService.Utilities.Auth.FactoryAuthorize.OnAuthorization(AuthorizationFilterContext filterContext) in D:\Projects\ApiService\ApiService\Utilities\Auth\FactoryAuthorize.cs:line 47
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.InvokeFilterPipelineAsync()
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|6_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Swashbuckle.AspNetCore.SwaggerUI.SwaggerUIMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at ApiService.Utilities.ExceptionHandler.ExceptionMiddleware.InvokeAsync(HttpContext httpContext) in D:\Projects\ApiService\ApiService\Utilities\ExceptionHandler\ExceptionMiddleware.cs:line 26
+2020-05-27 01:06:58.2833 ERROR Something went wrong: System.ArgumentNullException: IDX10000: The parameter 'token' cannot be a 'null' or an empty object. (Parameter 'token')
+   at System.IdentityModel.Tokens.Jwt.JwtSecurityTokenHandler.ReadJwtToken(String token)
+   at System.IdentityModel.Tokens.Jwt.JwtSecurityTokenHandler.ReadToken(String token)
+   at Service.BusinessServices.UserAuthInfoService.DecodeJwtToken(String token) in D:\Projects\ApiService\Service\BusinessServices\UserAuthInfoService.cs:line 241
+   at ApiService.Utilities.Auth.FactoryAuthorize.OnAuthorization(AuthorizationFilterContext filterContext) in D:\Projects\ApiService\ApiService\Utilities\Auth\FactoryAuthorize.cs:line 47
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.InvokeFilterPipelineAsync()
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|6_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Swashbuckle.AspNetCore.SwaggerUI.SwaggerUIMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at ApiService.Utilities.ExceptionHandler.ExceptionMiddleware.InvokeAsync(HttpContext httpContext) in D:\Projects\ApiService\ApiService\Utilities\ExceptionHandler\ExceptionMiddleware.cs:line 26
+2020-05-27 01:06:58.2833 ERROR -------------------------------------------------------------------------------
+2020-05-27 01:06:58.4078 ERROR Something went wrong: System.ArgumentNullException: IDX10000: The parameter 'token' cannot be a 'null' or an empty object. (Parameter 'token')
+   at System.IdentityModel.Tokens.Jwt.JwtSecurityTokenHandler.ReadJwtToken(String token)
+   at System.IdentityModel.Tokens.Jwt.JwtSecurityTokenHandler.ReadToken(String token)
+   at Service.BusinessServices.UserAuthInfoService.DecodeJwtToken(String token) in D:\Projects\ApiService\Service\BusinessServices\UserAuthInfoService.cs:line 241
+   at ApiService.Utilities.Auth.FactoryAuthorize.OnAuthorization(AuthorizationFilterContext filterContext) in D:\Projects\ApiService\ApiService\Utilities\Auth\FactoryAuthorize.cs:line 47
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.InvokeFilterPipelineAsync()
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|6_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Swashbuckle.AspNetCore.SwaggerUI.SwaggerUIMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at ApiService.Utilities.ExceptionHandler.ExceptionMiddleware.InvokeAsync(HttpContext httpContext) in D:\Projects\ApiService\ApiService\Utilities\ExceptionHandler\ExceptionMiddleware.cs:line 26
+2020-05-27 01:06:58.4078 ERROR -------------------------------------------------------------------------------
+2020-05-27 01:06:58.4629 ERROR -------------------------------------------------------------------------------
+2020-05-27 01:06:58.4884 ERROR -------------------------------------------------------------------------------
+2020-05-27 01:06:58.5146 ERROR -------------------------------------------------------------------------------
+2020-05-27 01:06:58.5724 ERROR -------------------------------------------------------------------------------
+2020-05-27 01:09:31.3755 INFO ---------------------------------------------------------------------------------------------------------
+2020-05-27 01:09:31.4014 INFO --------------------------27-May-20 1:09:31 AM------------------------------------------------
+2020-05-27 01:09:31.4301 INFO ---STARTED FINDING ----USERAUTHINFO----------
+2020-05-27 01:11:30.4381 ERROR Something went wrong: System.ArgumentNullException: IDX10000: The parameter 'token' cannot be a 'null' or an empty object. (Parameter 'token')
+   at System.IdentityModel.Tokens.Jwt.JwtSecurityTokenHandler.ReadJwtToken(String token)
+   at System.IdentityModel.Tokens.Jwt.JwtSecurityTokenHandler.ReadToken(String token)
+   at Service.BusinessServices.UserAuthInfoService.DecodeJwtToken(String token) in D:\Projects\ApiService\Service\BusinessServices\UserAuthInfoService.cs:line 241
+   at ApiService.Utilities.Auth.FactoryAuthorize.OnAuthorization(AuthorizationFilterContext filterContext) in D:\Projects\ApiService\ApiService\Utilities\Auth\FactoryAuthorize.cs:line 47
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.InvokeFilterPipelineAsync()
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|6_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Swashbuckle.AspNetCore.SwaggerUI.SwaggerUIMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at ApiService.Utilities.ExceptionHandler.ExceptionMiddleware.InvokeAsync(HttpContext httpContext) in D:\Projects\ApiService\ApiService\Utilities\ExceptionHandler\ExceptionMiddleware.cs:line 26
+2020-05-27 01:11:31.3728 ERROR -------------------------------------------------------------------------------
+2020-05-27 01:11:31.9670 ERROR -------------------------------------------------------------------------------
+2020-05-27 01:11:34.4735 ERROR Something went wrong: System.ArgumentNullException: IDX10000: The parameter 'token' cannot be a 'null' or an empty object. (Parameter 'token')
+   at System.IdentityModel.Tokens.Jwt.JwtSecurityTokenHandler.ReadJwtToken(String token)
+   at System.IdentityModel.Tokens.Jwt.JwtSecurityTokenHandler.ReadToken(String token)
+   at Service.BusinessServices.UserAuthInfoService.DecodeJwtToken(String token) in D:\Projects\ApiService\Service\BusinessServices\UserAuthInfoService.cs:line 241
+   at ApiService.Utilities.Auth.FactoryAuthorize.OnAuthorization(AuthorizationFilterContext filterContext) in D:\Projects\ApiService\ApiService\Utilities\Auth\FactoryAuthorize.cs:line 47
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.InvokeFilterPipelineAsync()
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|6_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Swashbuckle.AspNetCore.SwaggerUI.SwaggerUIMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at ApiService.Utilities.ExceptionHandler.ExceptionMiddleware.InvokeAsync(HttpContext httpContext) in D:\Projects\ApiService\ApiService\Utilities\ExceptionHandler\ExceptionMiddleware.cs:line 26
+2020-05-27 01:11:35.8698 ERROR -------------------------------------------------------------------------------
+2020-05-27 01:11:35.9139 ERROR Something went wrong: System.ArgumentNullException: IDX10000: The parameter 'token' cannot be a 'null' or an empty object. (Parameter 'token')
+   at System.IdentityModel.Tokens.Jwt.JwtSecurityTokenHandler.ReadJwtToken(String token)
+   at System.IdentityModel.Tokens.Jwt.JwtSecurityTokenHandler.ReadToken(String token)
+   at Service.BusinessServices.UserAuthInfoService.DecodeJwtToken(String token) in D:\Projects\ApiService\Service\BusinessServices\UserAuthInfoService.cs:line 241
+   at ApiService.Utilities.Auth.FactoryAuthorize.OnAuthorization(AuthorizationFilterContext filterContext) in D:\Projects\ApiService\ApiService\Utilities\Auth\FactoryAuthorize.cs:line 47
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.InvokeFilterPipelineAsync()
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|6_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Swashbuckle.AspNetCore.SwaggerUI.SwaggerUIMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at ApiService.Utilities.ExceptionHandler.ExceptionMiddleware.InvokeAsync(HttpContext httpContext) in D:\Projects\ApiService\ApiService\Utilities\ExceptionHandler\ExceptionMiddleware.cs:line 26
+2020-05-27 01:11:35.9244 ERROR -------------------------------------------------------------------------------
+2020-05-27 01:11:35.9492 ERROR -------------------------------------------------------------------------------
+2020-05-27 01:11:35.9953 ERROR -------------------------------------------------------------------------------
+2020-05-27 01:14:29.8019 INFO ---------------------------------------------------------------------------------------------------------
+2020-05-27 01:14:29.9236 INFO --------------------------27-May-20 1:14:29 AM------------------------------------------------
+2020-05-27 01:14:29.9518 INFO ---STARTED FINDING ----USERAUTHINFO----------
+2020-05-27 01:22:07.5182 INFO ---------------------------------------------------------------------------------------------------------
+2020-05-27 01:22:07.6006 INFO --------------------------27-May-20 1:22:07 AM------------------------------------------------
+2020-05-27 01:22:07.6166 INFO ---STARTED FINDING ----USERAUTHINFO----------
+2020-05-27 01:28:43.0640 INFO ---------------------------------------------------------------------------------------------------------
+2020-05-27 01:28:43.1882 INFO --------------------------27-May-20 1:28:43 AM------------------------------------------------
+2020-05-27 01:28:43.2125 INFO ---STARTED FINDING ----USERAUTHINFO----------
+2020-05-27 01:29:13.2685 INFO ---------------------------------------------------------------------------------------------------------
+2020-05-27 01:29:13.2953 INFO ---------------------------------------------------------------------------------------------------------
+2020-05-27 01:29:13.3263 INFO --------------------------27-May-20 1:29:13 AM------------------------------------------------
+2020-05-27 01:29:13.3662 INFO --------------------------27-May-20 1:29:13 AM------------------------------------------------
+2020-05-27 01:29:13.2953 INFO ---------------------------------------------------------------------------------------------------------
+2020-05-27 01:29:13.3997 INFO ---STARTED FINDING ----APIRESOURCEMAPPING----------
+2020-05-27 01:29:13.4322 INFO ---STARTED FINDING ----APIRESOURCEMAPPING----------
+2020-05-27 01:29:13.4597 INFO --------------------------27-May-20 1:29:13 AM------------------------------------------------
+2020-05-27 01:29:13.5447 INFO ---STARTED FINDING ----APIRESOURCEMAPPING----------
+2020-05-27 01:29:13.9172 INFO ---------------------------------------------------------------------------------------------------------
+2020-05-27 01:30:04.7697 INFO --------------------------27-May-20 1:30:04 AM------------------------------------------------
+2020-05-27 01:30:04.7697 INFO ---------------------------------------------------------------------------------------------------------
+2020-05-27 01:30:04.7974 INFO ---STARTED FINDING ----USERROLE----------
+2020-05-27 01:30:04.8287 INFO --------------------------27-May-20 1:30:04 AM------------------------------------------------
+2020-05-27 01:30:04.9011 INFO ---STARTED FINDING ----USERROLE----------
+2020-05-27 01:30:47.9010 ERROR Something went wrong: System.NullReferenceException: Object reference not set to an instance of an object.
+   at ApiService.Utilities.Auth.FactoryAuthorize.OnAuthorization(AuthorizationFilterContext filterContext) in D:\Projects\ApiService\ApiService\Utilities\Auth\FactoryAuthorize.cs:line 65
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.InvokeFilterPipelineAsync()
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|6_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Swashbuckle.AspNetCore.SwaggerUI.SwaggerUIMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at ApiService.Utilities.ExceptionHandler.ExceptionMiddleware.InvokeAsync(HttpContext httpContext) in D:\Projects\ApiService\ApiService\Utilities\ExceptionHandler\ExceptionMiddleware.cs:line 26
+2020-05-27 01:30:47.9010 ERROR Something went wrong: System.NullReferenceException: Object reference not set to an instance of an object.
+   at ApiService.Utilities.Auth.FactoryAuthorize.OnAuthorization(AuthorizationFilterContext filterContext) in D:\Projects\ApiService\ApiService\Utilities\Auth\FactoryAuthorize.cs:line 65
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.InvokeFilterPipelineAsync()
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|6_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Swashbuckle.AspNetCore.SwaggerUI.SwaggerUIMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at ApiService.Utilities.ExceptionHandler.ExceptionMiddleware.InvokeAsync(HttpContext httpContext) in D:\Projects\ApiService\ApiService\Utilities\ExceptionHandler\ExceptionMiddleware.cs:line 26
+2020-05-27 01:30:47.9010 ERROR Something went wrong: System.InvalidOperationException: A second operation started on this context before a previous operation completed. This is usually caused by different threads using the same instance of DbContext. For more information on how to avoid threading issues with DbContext, see https://go.microsoft.com/fwlink/?linkid=2097913.
+   at Microsoft.EntityFrameworkCore.Internal.ConcurrencyDetector.EnterCriticalSection()
+   at Microsoft.EntityFrameworkCore.Query.Internal.QueryingEnumerable`1.Enumerator.MoveNext()
+   at System.Collections.Generic.List`1..ctor(IEnumerable`1 collection)
+   at System.Linq.Enumerable.ToList[TSource](IEnumerable`1 source)
+   at Service.BusinessServices.ApiResourceMappingService.GetApiResourceMapping(String Controller, String ActionMethod) in D:\Projects\ApiService\Service\BusinessServices\ApiResourceMappingService.cs:line 40
+   at ApiService.Utilities.Auth.FactoryAuthorize.OnAuthorization(AuthorizationFilterContext filterContext) in D:\Projects\ApiService\ApiService\Utilities\Auth\FactoryAuthorize.cs:line 62
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.InvokeFilterPipelineAsync()
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|6_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Swashbuckle.AspNetCore.SwaggerUI.SwaggerUIMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at ApiService.Utilities.ExceptionHandler.ExceptionMiddleware.InvokeAsync(HttpContext httpContext) in D:\Projects\ApiService\ApiService\Utilities\ExceptionHandler\ExceptionMiddleware.cs:line 26
+2020-05-27 01:30:47.9206 ERROR -------------------------------------------------------------------------------
+2020-05-27 01:30:47.9575 ERROR -------------------------------------------------------------------------------
+2020-05-27 01:30:48.0292 ERROR -------------------------------------------------------------------------------
+2020-05-27 01:30:48.0881 ERROR -------------------------------------------------------------------------------
+2020-05-27 01:30:48.1244 ERROR -------------------------------------------------------------------------------
+2020-05-27 01:30:48.1577 ERROR -------------------------------------------------------------------------------
+2020-05-27 01:45:35.5307 INFO ---------------------------------------------------------------------------------------------------------
+2020-05-27 01:45:35.6151 INFO --------------------------27-May-20 1:45:35 AM------------------------------------------------
+2020-05-27 01:45:35.6332 INFO ---STARTED FINDING ----USERAUTHINFO----------
+2020-05-27 01:46:11.7634 INFO ---------------------------------------------------------------------------------------------------------
+2020-05-27 01:46:11.7924 INFO --------------------------27-May-20 1:46:11 AM------------------------------------------------
+2020-05-27 01:46:11.8603 INFO ---STARTED FINDING ----APIRESOURCEMAPPING----------
+2020-05-27 01:46:12.0457 INFO ---------------------------------------------------------------------------------------------------------
+2020-05-27 01:46:12.0703 INFO --------------------------27-May-20 1:46:12 AM------------------------------------------------
+2020-05-27 01:46:12.0956 INFO ---STARTED FINDING ----USERROLE----------
+2020-05-27 01:46:31.9284 INFO ---------------------------------------------------------------------------------------------------------
+2020-05-27 01:46:34.9030 INFO ---------------------------------------------------------------------------------------------------------
+2020-05-27 01:46:34.9365 INFO --------------------------27-May-20 1:46:34 AM------------------------------------------------
+2020-05-27 01:46:34.9600 ERROR Something went wrong: System.NullReferenceException: Object reference not set to an instance of an object.
+   at ApiService.Utilities.Auth.FactoryAuthorize.OnAuthorization(AuthorizationFilterContext filterContext) in D:\Projects\ApiService\ApiService\Utilities\Auth\FactoryAuthorize.cs:line 63
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.InvokeFilterPipelineAsync()
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|6_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Swashbuckle.AspNetCore.SwaggerUI.SwaggerUIMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at ApiService.Utilities.ExceptionHandler.ExceptionMiddleware.InvokeAsync(HttpContext httpContext) in D:\Projects\ApiService\ApiService\Utilities\ExceptionHandler\ExceptionMiddleware.cs:line 26
+2020-05-27 01:46:34.9600 INFO --------------------------27-May-20 1:46:34 AM------------------------------------------------
+2020-05-27 01:46:34.9912 INFO ---STARTED FINDING ----APIRESOURCEMAPPING----------
+2020-05-27 01:46:35.0178 ERROR -------------------------------------------------------------------------------
+2020-05-27 01:46:35.0378 INFO ---STARTED FINDING ----APIRESOURCEMAPPING----------
+2020-05-27 01:46:35.0778 INFO ---------------------------------------------------------------------------------------------------------
+2020-05-27 01:46:35.0816 ERROR -------------------------------------------------------------------------------
+2020-05-27 01:46:35.1015 INFO ---------------------------------------------------------------------------------------------------------
+2020-05-27 01:46:35.1223 INFO --------------------------27-May-20 1:46:35 AM------------------------------------------------
+2020-05-27 01:46:35.1691 INFO --------------------------27-May-20 1:46:35 AM------------------------------------------------
+2020-05-27 01:46:35.1977 INFO ---STARTED FINDING ----USERROLE----------
+2020-05-27 01:46:35.2159 INFO ---STARTED FINDING ----USERROLE----------

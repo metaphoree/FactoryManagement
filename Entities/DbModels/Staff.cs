@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Entities.DbModels
 {
-    public  class Staff : BaseEntity
+    public class Staff : BaseEntity
     {
-    
+
         public string Name { get; set; }
         public string ImageUrl { get; set; }
         public string Designation { get; set; }
@@ -16,10 +17,17 @@ namespace Entities.DbModels
         public string BirthRegistrationNo { get; set; }
         public string NationalIdNo { get; set; }
 
+        public string RoleId { get; set; }
+
         public string PermanentAddress { get; set; }
         public string PresentAddress { get; set; }
         public string Number { get; set; }
         public string AlternateNumber_1 { get; set; }
         public string AlternateNumber_2 { get; set; }
+
+
+        [ForeignKey("RoleId")]
+        public Role Role { get; set; }
+
     }
 }

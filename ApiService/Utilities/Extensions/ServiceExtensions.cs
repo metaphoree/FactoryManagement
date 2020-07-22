@@ -20,6 +20,10 @@ using Service.BusinessServiceWrapper;
 using Service.BusinessWrapper;
 using Contracts.ServiceContracts;
 using Service.BusinessServices;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace ApiService.Utilities.Extensions
 {
@@ -87,7 +91,7 @@ namespace ApiService.Utilities.Extensions
             services.AddTransient<IUserAuthInfoService, UserAuthInfoService>();
             services.AddTransient<IUserRoleService, UserRoleService>();
             services.AddTransient<IUtilService, UtilService>();
-
+            services.AddTransient<IApiResourceMappingService, ApiResourceMappingService>();
 
 
 
@@ -138,7 +142,8 @@ namespace ApiService.Utilities.Extensions
             //services.AddScoped<IUserRoleService, UserRoleService>();
             //services.AddScoped<IUtilService, UtilService>();
         }
-        public static void ConfigureRepository(this IServiceCollection services) {
+        public static void ConfigureRepository(this IServiceCollection services)
+        {
 
 
             services.AddTransient<IAddressRepository, AddressRepository>();
@@ -174,7 +179,7 @@ namespace ApiService.Utilities.Extensions
             services.AddTransient<ITransactionTypeRepository, TransactionTypeRepository>();
             services.AddTransient<IUserAuthInfoRepository, UserAuthInfoRepository>();
             services.AddTransient<IUserRoleRepository, UserRoleRepository>();
-
+            services.AddTransient<IApiResourceMappingRepository, ApiResourceMappingRepository>();
 
             //services.AddScoped<IAddressRepository, AddressRepository>();
             //services.AddScoped<ICustomerRepository,CustomerRepository>();
@@ -210,11 +215,11 @@ namespace ApiService.Utilities.Extensions
             //services.AddScoped<IUserAuthInfoRepository, UserAuthInfoRepository>();
             //services.AddScoped<IUserRoleRepository, UserRoleRepository>();
         }
-        
+
         public static void ConfigureRepositoryWrapper(this IServiceCollection services)
         {
             // services.AddScoped<IRepositoryWrapper, RepositoryWrapper>();
-             services.AddTransient<IRepositoryWrapper, RepositoryWrapper>();
+            services.AddTransient<IRepositoryWrapper, RepositoryWrapper>();
         }
         public static void ConfigureServiceWrapper(this IServiceCollection services)
         {
@@ -238,14 +243,15 @@ namespace ApiService.Utilities.Extensions
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "My API", Version = "v1" });
-                
+
                 // Set the comments path for the Swagger JSON and UI.
                 var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
                 var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
                 c.IncludeXmlComments(xmlPath);
             });
         }
-        public static void ConfigureCustomSwaggerGenerator(this IServiceCollection services) {
+        public static void ConfigureCustomSwaggerGenerator(this IServiceCollection services)
+        {
             // Register the Swagger generator, defining 1 or more Swagger documents
             services.AddSwaggerGen(c =>
             {
@@ -270,8 +276,55 @@ namespace ApiService.Utilities.Extensions
             });
 
         }
+
+
+
+
+
+
+
+
+        public static void ConfigureJwtAuth(this IServiceCollection services)
+        {
+
+            services.AddAuthentication(opt =>
+            {
+                opt.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                opt.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            })
+    .AddJwtBearer(options =>
+    {
+        options.TokenValidationParameters = new TokenValidationParameters
+        {
+            ValidateIssuer = true,
+            ValidateAudience = true,
+            ValidateLifetime = true,
+            ValidateIssuerSigningKey = true,
+
+            ValidIssuer = "http://localhost:63048",
+            ValidAudience = "http://localhost:4200",
+            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("superSecretKey@345"))
+        };
+        options.Events = new JwtBearerEvents
+        {
+            OnAuthenticationFailed = context =>
+            {
+                if (context.Exception.GetType() == typeof(SecurityTokenExpiredException))
+                {
+                    context.Response.Headers.Add("Token-Expired", "true");
+                }
+                return Task.CompletedTask;
+            }
+        };
+    });
+
+        }
+
+
+
     }
-    public static class MiddlewareExtension {
+    public static class MiddlewareExtension
+    {
         public static void UseExceptionMiddleware(this IApplicationBuilder app)
         {
             app.UseMiddleware<ExceptionMiddleware>();

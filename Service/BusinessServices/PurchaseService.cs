@@ -204,34 +204,51 @@ namespace Service.BusinessServices
                                 .Where(x => x.InvoiceId == vm.InvoiceId && x.FactoryId == vm.FactoryId)
                                 .ToListAsync();
 
+            await Task.WhenAll(invoiceToDelete, expenseToDelete, payableToDelete, purchaseToDelete);
             // Stock
             IEnumerable<Stock> stockList = await _repositoryWrapper
                 .Stock
                 .FindByConditionAsync(
-                x => x.FactoryId == vm.FactoryId
-                && purchaseToDelete
-                .Result
-                .ToList()
-                .FirstOrDefault(d => d.ItemId == x.ItemId) != null);
+                x => x.FactoryId == vm.FactoryId);
+            //&& purchaseToDelete
+            //.Result
+            //.ToList()
+            //.FirstOrDefault(d => d.ItemId == x.ItemId) != null);
 
-            for (int i = 0; i < stockList.Count(); i++)
+            for (int i = 0; i < purchaseToDelete.Result.Count(); i++)
             {
-                //Stock existingStock = stockList.ToList().Where(x => x.ItemId == vm.ItemId).FirstOrDefault();
-                Stock existingStock = stockList.ElementAt(i);
-                Purchase purchase = purchaseToDelete.Result.ToList().Where(x => x.ItemId == existingStock.ItemId).FirstOrDefault();
-                // IF NOT PRESENT ADD
+
+                Purchase purchaseItem = purchaseToDelete.Result.ElementAt(i);
+                Stock existingStock = stockList.ToList().Where(x => x.ItemId == purchaseItem.ItemId).FirstOrDefault();
                 if (existingStock == null)
                 {
-                    _utilService.Log("Stock Is Empty. Not Enough Stock available");
-                    throw new StockEmptyException();
-                    //stockToAdd = _utilService.Mapper.Map<SalesItemVM, Stock>(salesVM.ItemList[i]);
-                    //_repositoryWrapper.Stock.Create(stockToAdd);
+                    // _utilService.Log("Stock Is Empty. Not Enough Stock available");
+                    // throw new StockEmptyException();
+
                 }
-                // IF PRESENT UPDATE
                 else
                 {
-                    existingStock.Quantity -= purchase.Quantity;
-                    _repositoryWrapper.Stock.Update(existingStock);
+                    if (existingStock.Quantity < purchaseItem.Quantity)
+                    {
+                        var getDatalistVM2 = new GetDataListVM()
+                        {
+                            FactoryId = vm.FactoryId,
+                            PageNumber = 1,
+                            PageSize = 10
+                        };
+
+
+                        WrapperPurchaseListVM vm2 = await GetAllPurchaseAsync(getDatalistVM2);
+                        vm2.HasMessage = true;
+                        vm2.Message = "Stock hasn't enough item";
+                        return vm2;
+
+                    }
+                    else
+                    {
+                        existingStock.Quantity -= purchaseItem.Quantity;
+                        _repositoryWrapper.Stock.Update(existingStock);
+                    }
                 }
             }
 

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using ApiService.Utilities.Auth;
 using Contracts;
 using Entities.DbModels;
 using Entities.ViewModels;
@@ -26,6 +27,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace ApiService.Controllers
 {
+    [FactoryAuthorize]
     [Route("api")]
     [ApiController]
     public class MassCrudController : ControllerBase
@@ -46,7 +48,7 @@ namespace ApiService.Controllers
         #region ExpenseType
         [HttpPost]
         [Route("ExpenseType/getAll")]
-        public async Task<ActionResult<WrapperExpenseTypeListVM>> GetExpenseType([FromBody]GetDataListVM customer)
+        public async Task<ActionResult<WrapperExpenseTypeListVM>> GetAllExpenseType([FromBody]GetDataListVM customer)
         {
             return await _serviceWrapper.ExpenseTypeService.GetListPaged(customer);
         }
@@ -56,7 +58,7 @@ namespace ApiService.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         [Route("ExpenseType/update/{id}")]
         [HttpPost]
-        public async Task<ActionResult<WrapperExpenseTypeListVM>> PutExpenseType(string id, [FromBody]ExpenseTypeVM ExpenseType)
+        public async Task<ActionResult<WrapperExpenseTypeListVM>> UpdateExpenseType(string id, [FromBody]ExpenseTypeVM ExpenseType)
         {
             return await _serviceWrapper.ExpenseTypeService.Update(id, ExpenseType);
         }
@@ -65,7 +67,7 @@ namespace ApiService.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         [HttpPost]
         [Route("ExpenseType/add")]
-        public async Task<ActionResult<WrapperExpenseTypeListVM>> PostExpenseType([FromBody]ExpenseTypeVM ExpenseType)
+        public async Task<ActionResult<WrapperExpenseTypeListVM>> AddExpenseType([FromBody]ExpenseTypeVM ExpenseType)
         {
             return await _serviceWrapper.ExpenseTypeService.Add(ExpenseType);
         }
@@ -81,7 +83,7 @@ namespace ApiService.Controllers
         #region IncomeType
         [HttpPost]
         [Route("IncomeType/getAll")]
-        public async Task<ActionResult<WrapperIncomeTypeListVM>> GetCustomer([FromBody]GetDataListVM customer)
+        public async Task<ActionResult<WrapperIncomeTypeListVM>> GetAllIncomeType([FromBody]GetDataListVM customer)
         {
             return await _serviceWrapper.IncomeTypeService.GetListPaged(customer);
         }
@@ -91,7 +93,7 @@ namespace ApiService.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         [Route("IncomeType/update/{id}")]
         [HttpPost]
-        public async Task<ActionResult<WrapperIncomeTypeListVM>> PutIncomeType(string id, [FromBody]IncomeTypeVM IncomeType)
+        public async Task<ActionResult<WrapperIncomeTypeListVM>> UpdateIncomeType(string id, [FromBody]IncomeTypeVM IncomeType)
         {
             return await _serviceWrapper.IncomeTypeService.Update(id, IncomeType);
         }
@@ -100,7 +102,7 @@ namespace ApiService.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         [HttpPost]
         [Route("IncomeType/add")]
-        public async Task<ActionResult<WrapperIncomeTypeListVM>> PostIncomeType([FromBody]IncomeTypeVM IncomeType)
+        public async Task<ActionResult<WrapperIncomeTypeListVM>> AddIncomeType([FromBody]IncomeTypeVM IncomeType)
         {
             return await _serviceWrapper.IncomeTypeService.Add(IncomeType);
         }
@@ -116,7 +118,7 @@ namespace ApiService.Controllers
         #region InvoiceType
         [HttpPost]
         [Route("InvoiceType/getAll")]
-        public async Task<ActionResult<WrapperInvoiceTypeListVM>> GetInvoiceType([FromBody]GetDataListVM customer)
+        public async Task<ActionResult<WrapperInvoiceTypeListVM>> GetAllInvoiceType([FromBody]GetDataListVM customer)
         {
             return await _serviceWrapper.InvoiceTypeService.GetListPaged(customer);
         }
@@ -126,7 +128,7 @@ namespace ApiService.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         [Route("InvoiceType/update/{id}")]
         [HttpPost]
-        public async Task<ActionResult<WrapperInvoiceTypeListVM>> PutInvoiceType(string id, [FromBody]InvoiceTypeVM InvoiceType)
+        public async Task<ActionResult<WrapperInvoiceTypeListVM>> UpdateInvoiceType(string id, [FromBody]InvoiceTypeVM InvoiceType)
         {
             return await _serviceWrapper.InvoiceTypeService.Update(id, InvoiceType);
         }
@@ -135,7 +137,7 @@ namespace ApiService.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         [HttpPost]
         [Route("InvoiceType/add")]
-        public async Task<ActionResult<WrapperInvoiceTypeListVM>> PostInvoiceType([FromBody]InvoiceTypeVM InvoiceType)
+        public async Task<ActionResult<WrapperInvoiceTypeListVM>> AddInvoiceType([FromBody]InvoiceTypeVM InvoiceType)
         {
             return await _serviceWrapper.InvoiceTypeService.Add(InvoiceType);
         }
@@ -151,7 +153,7 @@ namespace ApiService.Controllers
         #region Department
         [HttpPost]
         [Route("Department/getAll")]
-        public async Task<ActionResult<WrapperDepartmentListVM>> GetDepartment([FromBody]GetDataListVM customer)
+        public async Task<ActionResult<WrapperDepartmentListVM>> GetAllDepartment([FromBody]GetDataListVM customer)
         {
             return await _serviceWrapper.DepartmentService.GetListPaged(customer);
         }
@@ -161,7 +163,7 @@ namespace ApiService.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         [Route("Department/update/{id}")]
         [HttpPost]
-        public async Task<ActionResult<WrapperDepartmentListVM>> PutDepartment(string id, [FromBody]DepartmentVM Department)
+        public async Task<ActionResult<WrapperDepartmentListVM>> UpdateDepartment(string id, [FromBody]DepartmentVM Department)
         {
             return await _serviceWrapper.DepartmentService.Update(id, Department);
         }
@@ -170,7 +172,7 @@ namespace ApiService.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         [HttpPost]
         [Route("Department/add")]
-        public async Task<ActionResult<WrapperDepartmentListVM>> PostDepartment([FromBody]DepartmentVM Department)
+        public async Task<ActionResult<WrapperDepartmentListVM>> AddDepartment([FromBody]DepartmentVM Department)
         {
             return await _serviceWrapper.DepartmentService.Add(Department);
         }
@@ -186,7 +188,7 @@ namespace ApiService.Controllers
         #region Equipment
         [HttpPost]
         [Route("Equipment/getAll")]
-        public async Task<ActionResult<WrapperEquipmentListVM>> GetEquipment([FromBody]GetDataListVM customer)
+        public async Task<ActionResult<WrapperEquipmentListVM>> GetAllEquipment([FromBody]GetDataListVM customer)
         {
             return await _serviceWrapper.EquipmentService.GetListPaged(customer);
         }
@@ -196,7 +198,7 @@ namespace ApiService.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         [Route("Equipment/update/{id}")]
         [HttpPost]
-        public async Task<ActionResult<WrapperEquipmentListVM>> PutEquipment(string id, [FromBody]EquipmentVM Equipment)
+        public async Task<ActionResult<WrapperEquipmentListVM>> UpdateEquipment(string id, [FromBody]EquipmentVM Equipment)
         {
             return await _serviceWrapper.EquipmentService.Update(id, Equipment);
         }
@@ -205,7 +207,7 @@ namespace ApiService.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         [HttpPost]
         [Route("Equipment/add")]
-        public async Task<ActionResult<WrapperEquipmentListVM>> PostEquipment([FromBody]EquipmentVM Equipment)
+        public async Task<ActionResult<WrapperEquipmentListVM>> AddEquipment([FromBody]EquipmentVM Equipment)
         {
             return await _serviceWrapper.EquipmentService.Add(Equipment);
         }
@@ -221,7 +223,7 @@ namespace ApiService.Controllers
         #region EquipmentCategory
         [HttpPost]
         [Route("EquipmentCategory/getAll")]
-        public async Task<ActionResult<WrapperEquipmentCategoryListVM>> GetEquipmentCategory([FromBody]GetDataListVM customer)
+        public async Task<ActionResult<WrapperEquipmentCategoryListVM>> GetAllEquipmentCategory([FromBody]GetDataListVM customer)
         {
             return await _serviceWrapper.EquipmentCategoryService.GetListPaged(customer);
         }
@@ -229,7 +231,7 @@ namespace ApiService.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         [Route("EquipmentCategory/update/{id}")]
         [HttpPost]
-        public async Task<ActionResult<WrapperEquipmentCategoryListVM>> PutEquipmentCategory(string id, [FromBody]EquipmentCategoryVM EquipmentCategory)
+        public async Task<ActionResult<WrapperEquipmentCategoryListVM>> UpdateEquipmentCategory(string id, [FromBody]EquipmentCategoryVM EquipmentCategory)
         {
             return await _serviceWrapper.EquipmentCategoryService.Update(id, EquipmentCategory);
         }
@@ -238,7 +240,7 @@ namespace ApiService.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         [HttpPost]
         [Route("EquipmentCategory/add")]
-        public async Task<ActionResult<WrapperEquipmentCategoryListVM>> PostEquipmentCategory([FromBody]EquipmentCategoryVM EquipmentCategory)
+        public async Task<ActionResult<WrapperEquipmentCategoryListVM>> AddEquipmentCategory([FromBody]EquipmentCategoryVM EquipmentCategory)
         {
             return await _serviceWrapper.EquipmentCategoryService.Add(EquipmentCategory);
         }
@@ -254,7 +256,7 @@ namespace ApiService.Controllers
         #region Production
         [HttpPost]
         [Route("Production/getAll")]
-        public async Task<ActionResult<WrapperProductionListVM>> GetProduction([FromBody]GetDataListVM customer)
+        public async Task<ActionResult<WrapperProductionListVM>> GetAllProduction([FromBody]GetDataListVM customer)
         {
             return await _serviceWrapper.ProductionService.GetListPaged(customer);
         }
@@ -262,7 +264,7 @@ namespace ApiService.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         [Route("Production/update/{id}")]
         [HttpPost]
-        public async Task<ActionResult<WrapperProductionListVM>> PutProduction(string id, [FromBody]EditProductionVM Production)
+        public async Task<ActionResult<WrapperProductionListVM>> UpdateProduction(string id, [FromBody]EditProductionVM Production)
         {
             return await _serviceWrapper.ProductionService.Update(id, Production);
         }
@@ -271,7 +273,7 @@ namespace ApiService.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         [HttpPost]
         [Route("Production/add")]
-        public async Task<ActionResult<WrapperProductionListVM>> PostProduction([FromBody]List<AddProductionVM> Production)
+        public async Task<ActionResult<WrapperProductionListVM>> AddProduction([FromBody]List<AddProductionVM> Production)
         {
             return await _serviceWrapper.ProductionService.AddProductions(Production);
         }
@@ -287,7 +289,7 @@ namespace ApiService.Controllers
         #region Stock
         [HttpPost]
         [Route("stock/getAll")]
-        public async Task<ActionResult<WrapperStockListVM>> GetSupplier(GetDataListVM temp)
+        public async Task<ActionResult<WrapperStockListVM>> GetAllStock(GetDataListVM temp)
         {
             var data = await _serviceWrapper.StockService.GetListPaged(temp);
             _utilService.Log("Stock Successfully Getted");
@@ -297,7 +299,7 @@ namespace ApiService.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         [Route("stock/update/{id}")]
         [HttpPost]
-        public async Task<ActionResult<WrapperStockListVM>> PutSupplier(string id, [FromBody]StockVM temp)
+        public async Task<ActionResult<WrapperStockListVM>> UpdateStock(string id, [FromBody]StockVM temp)
         {
             WrapperStockListVM result = new WrapperStockListVM();
             result = await _serviceWrapper.StockService.Update(id, temp);
@@ -308,7 +310,7 @@ namespace ApiService.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         [Route("stock/add")]
         [HttpPost]
-        public async Task<ActionResult<WrapperStockListVM>> PostSupplier([FromBody]StockVM VM)
+        public async Task<ActionResult<WrapperStockListVM>> AddStock([FromBody]StockVM VM)
         {
             WrapperStockListVM result = new WrapperStockListVM();
             VM.ExpiryDate = VM.ExpiryDate.ToLocalTime();
@@ -319,7 +321,7 @@ namespace ApiService.Controllers
 
         [HttpPost]
         [Route("stock/delete")]
-        public async Task<ActionResult<WrapperStockListVM>> DeleteSupplier([FromBody]StockVM Temp)
+        public async Task<ActionResult<WrapperStockListVM>> DeleteStock([FromBody]StockVM Temp)
         {
             WrapperStockListVM vb = new WrapperStockListVM();
             vb = await _serviceWrapper.StockService.Delete(Temp);
@@ -332,7 +334,7 @@ namespace ApiService.Controllers
         // GET: api/ItemCategories
         [HttpPost]
         [Route("ItemCategory/getAll")]
-        public async Task<ActionResult<WrapperItemCategoryListVM>> GetCustomer_2([FromBody]GetDataListVM customer)
+        public async Task<ActionResult<WrapperItemCategoryListVM>> GetAllItemCategory([FromBody]GetDataListVM customer)
         {
             return await _serviceWrapper.ItemCategoryService.GetListPaged(customer);
         }
@@ -358,7 +360,7 @@ namespace ApiService.Controllers
         // more details see https://aka.ms/RazorPagesCRUD.
         [Route("ItemCategory/update/{id}")]
         [HttpPost]
-        public async Task<ActionResult<WrapperItemCategoryListVM>> PutItemCategory(string id, [FromBody]ItemCategoryVM itemCategory)
+        public async Task<ActionResult<WrapperItemCategoryListVM>> UpdateItemCategory(string id, [FromBody]ItemCategoryVM itemCategory)
         {
             return await _serviceWrapper.ItemCategoryService.Update(id, itemCategory);
         }
@@ -368,7 +370,7 @@ namespace ApiService.Controllers
         // more details see https://aka.ms/RazorPagesCRUD.
         [HttpPost]
         [Route("ItemCategory/add")]
-        public async Task<ActionResult<WrapperItemCategoryListVM>> PostItemCategory([FromBody]ItemCategoryVM itemCategory)
+        public async Task<ActionResult<WrapperItemCategoryListVM>> AddItemCategory([FromBody]ItemCategoryVM itemCategory)
         {
             return await _serviceWrapper.ItemCategoryService.Add(itemCategory);
         }
@@ -390,7 +392,7 @@ namespace ApiService.Controllers
         #region Item
         [HttpPost]
         [Route("Item/getAll")]
-        public async Task<ActionResult<WrapperItemListVM>> GetCustomer_3([FromBody]GetDataListVM dataParam)
+        public async Task<ActionResult<WrapperItemListVM>> GetAllItem([FromBody]GetDataListVM dataParam)
         {
             var data = await _serviceWrapper.ItemService.GetListPaged(dataParam);
             return Ok(data);
@@ -417,16 +419,15 @@ namespace ApiService.Controllers
         // more details see https://aka.ms/RazorPagesCRUD.
         [Route("Item/update/{id}")]
         [HttpPost]
-        public async Task<ActionResult<WrapperItemListVM>> PutItem(string id, [FromBody]ItemVM item)
+        public async Task<ActionResult<WrapperItemListVM>> UpdateItem(string id, [FromBody]ItemVM item)
         {
             return Ok(await _serviceWrapper.ItemService.Update(id, item));
         }
 
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for
-        // more details see https://aka.ms/RazorPagesCRUD.
+
         [HttpPost]
         [Route("Item/add")]
-        public async Task<ActionResult<WrapperItemListVM>> PostItem([FromBody]ItemVM item)
+        public async Task<ActionResult<WrapperItemListVM>> AddItem([FromBody]ItemVM item)
         {
 
             return Ok(await _serviceWrapper.ItemService.Add(item));
@@ -449,14 +450,13 @@ namespace ApiService.Controllers
 
         [HttpPost]
         [Route("Item/status/getAll")]
-        public async Task<ActionResult<WrapperItemStatusListVM>> GetItemStatus([FromBody]GetDataListVM dataParam)
+        public async Task<ActionResult<WrapperItemStatusListVM>> GetAllItemStatus([FromBody]GetDataListVM dataParam)
         {
             var data = await _serviceWrapper.ItemStatusService.GetListPaged(dataParam);
             return Ok(data);
         }
 
 
-        // GET: api/ItemCategories/5
         [HttpPost]
         [Route("Item/status/getById")]
         public async Task<ActionResult<ItemStatus>> GetItemStatus(string id)
@@ -472,22 +472,18 @@ namespace ApiService.Controllers
             return ItemStatus;
         }
 
-        // PUT: api/ItemCategories/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for
-        // more details see https://aka.ms/RazorPagesCRUD.
+
         [Route("Item/status/update/{id}")]
         [HttpPost]
-        public async Task<ActionResult<WrapperItemStatusListVM>> PutItemStatus(string id, [FromBody]ItemStatusVM ItemStatus)
+        public async Task<ActionResult<WrapperItemStatusListVM>> UpdateItemStatus(string id, [FromBody]ItemStatusVM ItemStatus)
         {
             return await _serviceWrapper.ItemStatusService.Update(id, ItemStatus);
         }
 
-        // POST: api/ItemCategories
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for
-        // more details see https://aka.ms/RazorPagesCRUD.
+
         [HttpPost]
         [Route("Item/status/add")]
-        public async Task<ActionResult<WrapperItemStatusListVM>> PostItemStatus([FromBody]ItemStatusVM ItemStatus)
+        public async Task<ActionResult<WrapperItemStatusListVM>> AddItemStatus([FromBody]ItemStatusVM ItemStatus)
         {
             return await _serviceWrapper.ItemStatusService.Add(ItemStatus);
         }
@@ -505,31 +501,27 @@ namespace ApiService.Controllers
         // GET: api/Customers/ii
         [HttpPost]
         [Route("Customer/getAll")]
-        public async Task<ActionResult<WrapperListCustomerVM>> GetCustomer_4(GetDataListVM customer)
+        public async Task<ActionResult<WrapperListCustomerVM>> GetAllCustomer(GetDataListVM customer)
         {
             var data = await _serviceWrapper.CustomerService.GetListPaged(customer,true);
             return Ok(data);
         }
 
 
-        // PUT: api/Customers/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for
-        // more details see https://aka.ms/RazorPagesCRUD.
+
         [Route("Customer/update/{id}")]
         [HttpPost]
-        public async Task<ActionResult<WrapperListCustomerVM>> PutCustomer(string id, [FromBody]CustomerVM customer)
+        public async Task<ActionResult<WrapperListCustomerVM>> UpdateCustomer(string id, [FromBody]CustomerVM customer)
         {
             WrapperListCustomerVM result = new WrapperListCustomerVM();
             result = await _serviceWrapper.CustomerService.Update(id, customer);
             _logger.LogInfo("Customer Successfully Updated");
             return Ok(result);
         }
-        // POST: api/Customers
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for
-        // more details see https://aka.ms/RazorPagesCRUD.
+
         [Route("Customer/add")]
         [HttpPost]
-        public async Task<ActionResult<WrapperListCustomerVM>> PostCustomer([FromBody]CustomerVM customerVM)
+        public async Task<ActionResult<WrapperListCustomerVM>> AddCustomer([FromBody]CustomerVM customerVM)
         {
             WrapperListCustomerVM result = new WrapperListCustomerVM();
             result = await _serviceWrapper.CustomerService.Add(customerVM);
@@ -551,14 +543,14 @@ namespace ApiService.Controllers
         #region Expense
         [HttpPost]
         [Route("Expense/getAll")]
-        public async Task<ActionResult<WrapperExpenseListVM>> GetExpenseList([FromBody]GetDataListVM dataParam)
+        public async Task<ActionResult<WrapperExpenseListVM>> GetAllExpense([FromBody]GetDataListVM dataParam)
         {
             var data = await _serviceWrapper.ExpenseService.GetListPaged(dataParam);
             return Ok(data);
         }
         [HttpPost]
         [Route("Expense/add")]
-        public async Task<ActionResult<WrapperExpenseListVM>> PostExpense([FromBody]ExpenseVM Expense)
+        public async Task<ActionResult<WrapperExpenseListVM>> AddExpense([FromBody]ExpenseVM Expense)
         {
 
             return Ok(await _serviceWrapper.ExpenseService.Add(Expense));
@@ -575,14 +567,14 @@ namespace ApiService.Controllers
         #region Income
         [HttpPost]
         [Route("Income/getAll")]
-        public async Task<ActionResult<WrapperIncomeListVM>> GetIncomeList([FromBody]GetDataListVM dataParam)
+        public async Task<ActionResult<WrapperIncomeListVM>> GetAllIncome([FromBody]GetDataListVM dataParam)
         {
             var data = await _serviceWrapper.IncomeService.GetListPaged(dataParam);
             return Ok(data);
         }
         [HttpPost]
         [Route("Income/add")]
-        public async Task<ActionResult<WrapperIncomeListVM>> PostIncome([FromBody]IncomeVM Income)
+        public async Task<ActionResult<WrapperIncomeListVM>> AddIncome([FromBody]IncomeVM Income)
         {
 
             return Ok(await _serviceWrapper.IncomeService.Add(Income));
@@ -600,7 +592,7 @@ namespace ApiService.Controllers
 
         [HttpPost]
         [Route("payment/status/getAll")]
-        public async Task<ActionResult<WrapperPaymentStatusListVM>> GetPaymentStatus([FromBody]GetDataListVM dataParam)
+        public async Task<ActionResult<WrapperPaymentStatusListVM>> GetAllPaymentStatus([FromBody]GetDataListVM dataParam)
         {
             var data = await _serviceWrapper.PaymentStatusService.GetListPaged(dataParam);
             return Ok(data);
@@ -623,12 +615,10 @@ namespace ApiService.Controllers
             return PaymentStatus;
         }
 
-        // PUT: api/ItemCategories/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for
-        // more details see https://aka.ms/RazorPagesCRUD.
+
         [Route("payment/status/update/{id}")]
         [HttpPost]
-        public async Task<ActionResult<WrapperPaymentStatusListVM>> PutPaymentStatus(string id, [FromBody]PaymentStatusVM PaymentStatus)
+        public async Task<ActionResult<WrapperPaymentStatusListVM>> UpdatePaymentStatus(string id, [FromBody]PaymentStatusVM PaymentStatus)
         {
             return await _serviceWrapper.PaymentStatusService.Update(id, PaymentStatus);
         }
@@ -638,12 +628,12 @@ namespace ApiService.Controllers
         // more details see https://aka.ms/RazorPagesCRUD.
         [HttpPost]
         [Route("payment/status/add")]
-        public async Task<ActionResult<WrapperPaymentStatusListVM>> PostPaymentStatus([FromBody]PaymentStatusVM PaymentStatus)
+        public async Task<ActionResult<WrapperPaymentStatusListVM>> AddPaymentStatus([FromBody]PaymentStatusVM PaymentStatus)
         {
             return await _serviceWrapper.PaymentStatusService.Add(PaymentStatus);
         }
 
-        // DELETE: api/ItemCategories/5
+
         [HttpPost]
         [Route("payment/status/delete")]
         public async Task<ActionResult<WrapperPaymentStatusListVM>> DeletePaymentStatus([FromBody]PaymentStatusVM itemVM)
@@ -656,12 +646,12 @@ namespace ApiService.Controllers
 
         [HttpPost]
         [Route("factory/getAll")]
-        public async Task<ActionResult<WrapperFactoryListVM>> GetFactory([FromBody]GetDataListVM dataParam)
+        public async Task<ActionResult<WrapperFactoryListVM>> GetAllFactory([FromBody]GetDataListVM dataParam)
         {
             var data = await _serviceWrapper.FactoryService.GetListPaged(dataParam);
             return Ok(data);
         }
-        // GET: api/ItemCategories/5
+
         [HttpPost]
         [Route("factory/getById")]
         public async Task<ActionResult<Factory>> GetFactory(string id)
@@ -677,27 +667,22 @@ namespace ApiService.Controllers
             return Factory;
         }
 
-        // PUT: api/ItemCategories/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for
-        // more details see https://aka.ms/RazorPagesCRUD.
         [Route("factory/update/{id}")]
         [HttpPost]
-        public async Task<ActionResult<WrapperFactoryListVM>> PutFactory(string id, [FromBody]FactoryVM Factory)
+        public async Task<ActionResult<WrapperFactoryListVM>> UpdateFactory(string id, [FromBody]FactoryVM Factory)
         {
             return await _serviceWrapper.FactoryService.Update(id, Factory);
         }
 
-        // POST: api/ItemCategories
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for
-        // more details see https://aka.ms/RazorPagesCRUD.
+
         [HttpPost]
         [Route("factory/add")]
-        public async Task<ActionResult<WrapperFactoryListVM>> PostFactory([FromBody]FactoryVM Factory)
+        public async Task<ActionResult<WrapperFactoryListVM>> AddFactory([FromBody]FactoryVM Factory)
         {
             return await _serviceWrapper.FactoryService.Add(Factory);
         }
 
-        // DELETE: api/ItemCategories/5
+
         [HttpPost]
         [Route("factory/delete")]
         public async Task<ActionResult<WrapperFactoryListVM>> DeleteFactory([FromBody]FactoryVM itemVM)

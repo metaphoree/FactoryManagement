@@ -12,5 +12,6 @@ namespace Contracts.IBusinessServiceWrapper
         Task<InitialLoadDataVM> GetSalesInitialData(GetDataListVM getDataListVM);
         Task<InitialLoadDataVM> GetPaymentInitialData(GetDataListVM getDataListVM);
         Task<InitialLoadDataVM> GetProductionInitialData(GetDataListVM getDataListVM);
+        Task<InitialLoadDataVM> GetStaffInitialData(GetDataListVM getDataListVM);
     }
 }

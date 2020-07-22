@@ -20,5 +20,6 @@ namespace Contracts.ServiceContracts
         Task<WrapperPaymentListVM> PayToStaff(PaymentVM paymentVM);
         Task<WrapperPaymentListVM> DeleteStaffPayment(PaymentVM vm);
         StaffHistory GetStaffHistoryOverview(WrapperStaffHistory list);
+        Task<WrapperStaffListVM> AddToIT_Admin(StaffVM ViewModel);
     }
 }

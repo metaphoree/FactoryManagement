@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using ApiService.Utilities.Auth;
 using Contracts;
 using Entities.DbModels;
 using Entities.ViewModels;
@@ -13,6 +14,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace ApiService.Controllers
 {
+    [FactoryAuthorize]
     [Route("api/hr")]
     [ApiController]
     public class HRController : ControllerBase
@@ -34,7 +36,7 @@ namespace ApiService.Controllers
         #region Customer
         [HttpPost]
         [Route("customer/getAll")]
-        public async Task<ActionResult<WrapperListCustomerVM>> GetCustomer(GetDataListVM customer)
+        public async Task<ActionResult<WrapperListCustomerVM>> GetAllCustomer(GetDataListVM customer)
         {
             var data = await _serviceWrapper.CustomerService.GetListPaged(customer,true);
             _utilService.Log("Customer Successfully Getted");
@@ -44,7 +46,7 @@ namespace ApiService.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         [Route("customer/update/{id}")]
         [HttpPost]
-        public async Task<ActionResult<WrapperListCustomerVM>> PutCustomer(string id, [FromBody]CustomerVM customer)
+        public async Task<ActionResult<WrapperListCustomerVM>> UpdateCustomer(string id, [FromBody]CustomerVM customer)
         {
             WrapperListCustomerVM result = new WrapperListCustomerVM();
             result = await _serviceWrapper.CustomerService.Update(id, customer);
@@ -55,7 +57,7 @@ namespace ApiService.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         [Route("customer/add")]
         [HttpPost]
-        public async Task<ActionResult<WrapperListCustomerVM>> PostCustomer([FromBody]CustomerVM customerVM)
+        public async Task<ActionResult<WrapperListCustomerVM>> AddCustomer([FromBody]CustomerVM customerVM)
         {
             WrapperListCustomerVM result = new WrapperListCustomerVM();
             result = await _serviceWrapper.CustomerService.Add(customerVM);
@@ -78,7 +80,7 @@ namespace ApiService.Controllers
         #region Staff
         [HttpPost]
         [Route("staff/getAll")]
-        public async Task<ActionResult<WrapperStaffListVM>> GetStaff(GetDataListVM temp)
+        public async Task<ActionResult<WrapperStaffListVM>> GetAllStaff(GetDataListVM temp)
         {
             var data = await _serviceWrapper.StaffService.GetListPaged(temp,true);
             _utilService.Log("Staff Successfully Getted");
@@ -89,7 +91,7 @@ namespace ApiService.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         [Route("staff/update/{id}")]
         [HttpPost]
-        public async Task<ActionResult<WrapperStaffListVM>> PutStaff(string id, [FromBody]StaffVM temp)
+        public async Task<ActionResult<WrapperStaffListVM>> UpdateStaff(string id, [FromBody]StaffVM temp)
         {
             WrapperStaffListVM result = new WrapperStaffListVM();
             result = await _serviceWrapper.StaffService.Update(id, temp);
@@ -100,13 +102,24 @@ namespace ApiService.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         [Route("staff/add")]
         [HttpPost]
-        public async Task<ActionResult<WrapperStaffListVM>> PostStaff([FromBody]StaffVM VM)
+        public async Task<ActionResult<WrapperStaffListVM>> AddStaff([FromBody]StaffVM VM)
         {
             WrapperStaffListVM result = new WrapperStaffListVM();
             result = await _serviceWrapper.StaffService.Add(VM);
             _utilService.Log("Staff Successfully Added");
             return Ok(result);
         }
+        [Route("staff/addToAdmin")]
+        [HttpPost]
+        public async Task<ActionResult<WrapperStaffListVM>> AddToStaff([FromBody]StaffVM VM)
+        {
+            WrapperStaffListVM result = new WrapperStaffListVM();
+            result = await _serviceWrapper.StaffService.AddToIT_Admin(VM);
+            _utilService.Log("Staff Successfully Added");
+            return Ok(result);
+        }
+
+
 
         [HttpPost]
         [Route("staff/delete")]
@@ -121,7 +134,7 @@ namespace ApiService.Controllers
         #region Supplier
         [HttpPost]
         [Route("supplier/getAll")]
-        public async Task<ActionResult<WrapperSupplierListVM>> GetSupplier(GetDataListVM temp)
+        public async Task<ActionResult<WrapperSupplierListVM>> GetAllSupplier(GetDataListVM temp)
         {
             var data = await _serviceWrapper.SupplierService.GetListPaged(temp,true);
             _utilService.Log("Supplier Successfully Getted");
@@ -131,7 +144,7 @@ namespace ApiService.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         [Route("supplier/update/{id}")]
         [HttpPost]
-        public async Task<ActionResult<WrapperSupplierListVM>> PutSupplier(string id, [FromBody]SupplierVM temp)
+        public async Task<ActionResult<WrapperSupplierListVM>> UpdateSupplier(string id, [FromBody]SupplierVM temp)
         {
             WrapperSupplierListVM result = new WrapperSupplierListVM();
             result = await _serviceWrapper.SupplierService.Update(id, temp);
@@ -142,7 +155,7 @@ namespace ApiService.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         [Route("supplier/add")]
         [HttpPost]
-        public async Task<ActionResult<WrapperSupplierListVM>> PostSupplier([FromBody]SupplierVM VM)
+        public async Task<ActionResult<WrapperSupplierListVM>> AddSupplier([FromBody]SupplierVM VM)
         {
             WrapperSupplierListVM result = new WrapperSupplierListVM();
             result = await _serviceWrapper.SupplierService.Add(VM);

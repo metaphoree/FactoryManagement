@@ -42,13 +42,16 @@ namespace Service.BusinessServiceWrapper
         #region Monthly Report Region
         public async Task<WrapperMonthProductionListVM> MonthlyProduction(MonthlyReport vm)
         {
-
+            vm.To = vm.To.ToLocalTime();
+            vm.From = vm.From.ToLocalTime();
             WrapperMonthProductionListVM returnData = new WrapperMonthProductionListVM();
             Task<List<Production>> prodT = _repositoryWrapper
                 .Production
                 .FindAll()
+                .Where(x => x.EntryDate >= vm.From)
+                .Where(x => x.EntryDate <= vm.To)
                 .Where(x => x.FactoryId == vm.FactoryId)
-                .Where(x => x.Month == vm.Month)
+                // .Where(x => x.Month == vm.Month)
                 .Include(x => x.Item)
                 .Include(x => x.ItemCategory)
                 .Include(x => x.Staff)
@@ -69,7 +72,7 @@ namespace Service.BusinessServiceWrapper
                  .OrderByDescending(x => x.CreatedDateTime)
                 .Skip((vm.PageNumber - 1) * (vm.PageSize))
                 .Take(vm.PageSize)
-               
+
                 .ToList();
 
             returnData.Total_TillNow = lastRow.TotalAmount;
@@ -82,13 +85,18 @@ namespace Service.BusinessServiceWrapper
         public async Task<WrapperMonthPayableListVM> MonthlyPayable(MonthlyReport vm)
         {
 
+            vm.To = vm.To.ToLocalTime();
+            vm.From = vm.From.ToLocalTime();
+
             WrapperMonthPayableListVM returnData = new WrapperMonthPayableListVM();
 
             Task<List<Payable>> payableT = _repositoryWrapper
                 .Payable
                 .FindAll()
                 .Where(x => x.FactoryId == vm.FactoryId)
-                .Where(x => x.Month == vm.Month)
+                //.Where(x => x.Month == vm.Month)
+                .Where(x => x.CreatedDateTime >= vm.From)
+                .Where(x => x.CreatedDateTime <= vm.To)
                 .Include(x => x.Supplier)
                 .ToListAsync();
             await payableT;
@@ -96,7 +104,9 @@ namespace Service.BusinessServiceWrapper
                 .Payable
                 .FindAll()
                 .Where(x => x.FactoryId == vm.FactoryId)
-                .Where(x => x.Month == vm.Month)
+                //.Where(x => x.Month == vm.Month)
+                .Where(x => x.CreatedDateTime >= vm.From)
+                .Where(x => x.CreatedDateTime <= vm.To)
                 .Include(x => x.Customer)
                 .ToListAsync();
             await payableT_1;
@@ -104,7 +114,9 @@ namespace Service.BusinessServiceWrapper
                 .Payable
                 .FindAll()
                 .Where(x => x.FactoryId == vm.FactoryId)
-                .Where(x => x.Month == vm.Month)
+                .Where(x => x.CreatedDateTime >= vm.From)
+                .Where(x => x.CreatedDateTime <= vm.To)
+                //.Where(x => x.Month == vm.Month)
                 .Include(x => x.Staff)
                 .ToListAsync();
             await payableT_2;
@@ -125,7 +137,7 @@ namespace Service.BusinessServiceWrapper
                 .OrderByDescending(x => x.CreatedDateTime)
                 .Skip((vm.PageNumber - 1) * (vm.PageSize))
                 .Take(vm.PageSize)
-                
+
                 .ToList();
 
             returnData.Total_TillNow = lastRow.Amount;
@@ -139,13 +151,16 @@ namespace Service.BusinessServiceWrapper
         }
         public async Task<WrapperMonthRecievableVM> MonthlyRecievable(MonthlyReport vm)
         {
-
+            vm.To = vm.To.ToLocalTime();
+            vm.From = vm.From.ToLocalTime();
             WrapperMonthRecievableVM returnData = new WrapperMonthRecievableVM();
             Task<List<Recievable>> RecievableT = _repositoryWrapper
                 .Recievable
                 .FindAll()
                 .Where(x => x.FactoryId == vm.FactoryId)
-                .Where(x => x.Month == vm.Month)
+                //.Where(x => x.Month == vm.Month)
+                .Where(x => x.CreatedDateTime >= vm.From)
+                .Where(x => x.CreatedDateTime <= vm.To)
                 .Include(x => x.Staff)
                 .ToListAsync();
             await RecievableT;
@@ -153,7 +168,9 @@ namespace Service.BusinessServiceWrapper
                 .Recievable
                 .FindAll()
                 .Where(x => x.FactoryId == vm.FactoryId)
-                .Where(x => x.Month == vm.Month)
+                .Where(x => x.CreatedDateTime >= vm.From)
+                .Where(x => x.CreatedDateTime <= vm.To)
+                // .Where(x => x.Month == vm.Month)
                 .Include(x => x.Supplier)
                 .ToListAsync();
             await RecievableT_1;
@@ -162,13 +179,15 @@ namespace Service.BusinessServiceWrapper
                 .Recievable
                 .FindAll()
                 .Where(x => x.FactoryId == vm.FactoryId)
-                .Where(x => x.Month == vm.Month)
+                .Where(x => x.CreatedDateTime >= vm.From)
+                .Where(x => x.CreatedDateTime <= vm.To)
+                // .Where(x => x.Month == vm.Month)
                 .Include(x => x.Customer)
                 .ToListAsync();
             await RecievableT_2;
-            
+
             // await Task.WhenAll(RecievableT, RecievableT_1, RecievableT_2);
-            
+
             List<Recievable> lst = RecievableT.Result.ToList();
             lst = _utilService.ConcatList<Recievable>(RecievableT.Result.ToList(), _utilService.ConcatList<Recievable>(RecievableT_1.Result.ToList(), RecievableT_2.Result.ToList()));
 
@@ -177,7 +196,7 @@ namespace Service.BusinessServiceWrapper
 
 
             returnData.TotalRecords = monthlyRecievable
-                
+
                 .ToList()
                 .Count();
 
@@ -190,7 +209,7 @@ namespace Service.BusinessServiceWrapper
                 .OrderByDescending(x => x.CreatedDateTime)
                 .Skip((vm.PageNumber - 1) * (vm.PageSize))
                 .Take(vm.PageSize)
-                
+
                 .ToList();
 
             returnData.Total_TillNow = lastRow.Amount;
@@ -203,13 +222,16 @@ namespace Service.BusinessServiceWrapper
         }
         public async Task<WrapperMonthIncomeVM> MonthlyIncome(MonthlyReport vm)
         {
-
+            vm.To = vm.To.ToLocalTime();
+            vm.From = vm.From.ToLocalTime();
             WrapperMonthIncomeVM returnData = new WrapperMonthIncomeVM();
             Task<List<Income>> IncomeT = _repositoryWrapper
                 .Income
                 .FindAll()
                 .Where(x => x.FactoryId == vm.FactoryId)
-                .Where(x => x.Month == vm.Month)
+                //.Where(x => x.Month == vm.Month)
+                .Where(x => x.CreatedDateTime >= vm.From)
+                .Where(x => x.CreatedDateTime <= vm.To)
                 .Include(x => x.Staff)
                 .Include(x => x.Supplier)
                 .Include(x => x.Customer)
@@ -234,7 +256,7 @@ namespace Service.BusinessServiceWrapper
             // await Task.WhenAll(IncomeT, IncomeT_1, IncomeT_2);
 
             List<Income> lst = IncomeT.Result.ToList();
-          //  lst = _utilService.ConcatList<Income>(IncomeT.Result.ToList(), _utilService.ConcatList<Income>(IncomeT_1.Result.ToList(), IncomeT_2.Result.ToList()));
+            //  lst = _utilService.ConcatList<Income>(IncomeT.Result.ToList(), _utilService.ConcatList<Income>(IncomeT_1.Result.ToList(), IncomeT_2.Result.ToList()));
 
 
 
@@ -243,7 +265,7 @@ namespace Service.BusinessServiceWrapper
 
 
             returnData.TotalRecords = monthlyIncome
-                
+
                 .ToList()
                 .Count();
 
@@ -255,7 +277,7 @@ namespace Service.BusinessServiceWrapper
                 .OrderByDescending(x => x.CreatedDateTime)
                 .Skip((vm.PageNumber - 1) * (vm.PageSize))
                 .Take(vm.PageSize)
-                
+
                 .ToList();
 
 
@@ -268,17 +290,34 @@ namespace Service.BusinessServiceWrapper
         }
         public async Task<WrapperMonthExpenseVM> MonthlyExpense(MonthlyReport vm)
         {
-
+            vm.To = vm.To.ToLocalTime();
+            vm.From = vm.From.ToLocalTime();
             WrapperMonthExpenseVM returnData = new WrapperMonthExpenseVM();
+            //Task<List<Expense>> ExpenseT = _repositoryWrapper
+            //    .Expense
+            //    .FindAll()
+            //    .Where(x => x.FactoryId == vm.FactoryId)
+            //    .Where(x => x.Month == vm.Month)
+            //    .Include(x => x.Staff)
+            //    .Include(x => x.Supplier)
+            //    .Include(x => x.Customer)
+            //    .ToListAsync();
             Task<List<Expense>> ExpenseT = _repositoryWrapper
-                .Expense
-                .FindAll()
-                .Where(x => x.FactoryId == vm.FactoryId)
-                .Where(x => x.Month == vm.Month)
-                .Include(x => x.Staff)
-                .Include(x => x.Supplier)
-                .Include(x => x.Customer)
-                .ToListAsync();
+                    .Expense
+                    .FindAll()
+                    .Where(x => x.FactoryId == vm.FactoryId)
+                    .Where(x => x.OccurranceDate >= vm.From)
+                    .Where(x => x.OccurranceDate <= vm.To)
+                    .Include(x => x.Staff)
+                    .Include(x => x.Supplier)
+                    .Include(x => x.Customer)
+                    .ToListAsync();
+
+
+
+
+
+
             await ExpenseT;
             //Task<List<Expense>> ExpenseT_1 = _repositoryWrapper
             //      .Expense
@@ -296,21 +335,21 @@ namespace Service.BusinessServiceWrapper
             //        .Include(x => x.Staff)
             //        .ToListAsync();
 
-           
-           
+
+
             //await ExpenseT_2;
             // await Task.WhenAll(ExpenseT);
 
 
             List<Expense> lst = ExpenseT.Result.ToList();
-           // lst = _utilService.ConcatList<Expense>(ExpenseT.Result.ToList(), _utilService.ConcatList<Expense>(ExpenseT_1.Result.ToList(), ExpenseT_2.Result.ToList()));
+            // lst = _utilService.ConcatList<Expense>(ExpenseT.Result.ToList(), _utilService.ConcatList<Expense>(ExpenseT_1.Result.ToList(), ExpenseT_2.Result.ToList()));
 
             List<MonthlyExpense> monthlyExpense = new List<MonthlyExpense>();
             monthlyExpense = _utilService.Mapper.Map<List<Expense>, List<MonthlyExpense>>(lst);
 
 
             returnData.TotalRecords = monthlyExpense
-                
+
                 .ToList()
                 .Count();
 
@@ -322,7 +361,7 @@ namespace Service.BusinessServiceWrapper
                 .OrderByDescending(x => x.CreatedDateTime)
                 .Skip((vm.PageNumber - 1) * (vm.PageSize))
                 .Take(vm.PageSize)
-                
+
                 .ToList();
 
             returnData.Total_TillNow = lastRow.Amount;
@@ -334,13 +373,16 @@ namespace Service.BusinessServiceWrapper
         }
         public async Task<WrapperMonthTransactionVM> MonthlyTransaction(MonthlyReport vm)
         {
-
+            vm.To = vm.To.ToLocalTime();
+            vm.From = vm.From.ToLocalTime();
             WrapperMonthTransactionVM returnData = new WrapperMonthTransactionVM();
             Task<List<TblTransaction>> ExpenseT = _repositoryWrapper
                 .Transaction
                 .FindAll()
                 .Where(x => x.FactoryId == vm.FactoryId)
-                .Where(x => x.Month == vm.Month)
+                //.Where(x => x.Month == vm.Month)
+                .Where(x => x.CreatedDateTime >= vm.From)
+                .Where(x => x.CreatedDateTime <= vm.To)
                 .Include(x => x.Supplier)
                 .ToListAsync();
             await ExpenseT;
@@ -349,7 +391,9 @@ namespace Service.BusinessServiceWrapper
                 .Transaction
                 .FindAll()
                 .Where(x => x.FactoryId == vm.FactoryId)
-                .Where(x => x.Month == vm.Month)
+                .Where(x => x.CreatedDateTime >= vm.From)
+                .Where(x => x.CreatedDateTime <= vm.To)
+                // .Where(x => x.Month == vm.Month)
                 .Include(x => x.Customer)
                 .ToListAsync();
             await ExpenseT_1;
@@ -358,7 +402,9 @@ namespace Service.BusinessServiceWrapper
                 .Transaction
                 .FindAll()
                 .Where(x => x.FactoryId == vm.FactoryId)
-                .Where(x => x.Month == vm.Month)
+                .Where(x => x.CreatedDateTime >= vm.From)
+                .Where(x => x.CreatedDateTime <= vm.To)
+                // .Where(x => x.Month == vm.Month)
                 .Include(x => x.Staff)
                 .ToListAsync();
             await ExpenseT_2;
@@ -386,7 +432,7 @@ namespace Service.BusinessServiceWrapper
                  .OrderByDescending(x => x.CreatedDateTime)
                  .Skip((vm.PageNumber - 1) * (vm.PageSize))
                 .Take(vm.PageSize)
-               
+
                 .ToList();
 
             returnData.TotalMonthly_Credit = returnData.ListOfData.Where(x => x.TransactionType == TRANSACTION_TYPE.CREDIT.ToString()).Sum(x => x.Amount);

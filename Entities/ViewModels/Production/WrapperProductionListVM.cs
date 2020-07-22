@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Entities.ViewModels.Production
 {
-    public class WrapperProductionListVM
+    public class WrapperProductionListVM : CommonVM
     {
         public WrapperProductionListVM()
         {

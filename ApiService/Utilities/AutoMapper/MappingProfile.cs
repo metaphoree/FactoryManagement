@@ -2,6 +2,7 @@
 using Entities.DbModels;
 using Entities.Enums;
 using Entities.ViewModels;
+using Entities.ViewModels.ApiResourceMapping;
 using Entities.ViewModels.CustomerView;
 using Entities.ViewModels.Department;
 using Entities.ViewModels.Equipment;
@@ -21,11 +22,13 @@ using Entities.ViewModels.PaymentStatus;
 using Entities.ViewModels.Production;
 using Entities.ViewModels.Purchase;
 using Entities.ViewModels.Recievable;
+using Entities.ViewModels.Role;
 using Entities.ViewModels.Sales;
 using Entities.ViewModels.Staff;
 using Entities.ViewModels.Stock;
 using Entities.ViewModels.Supplier;
 using Entities.ViewModels.Transaction;
+using Entities.ViewModels.UserAuthInfo;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -61,10 +64,13 @@ namespace ApiService.Utilities.AutoMapper
             Mapping_PurchaseReturn();
             Mapping_MonthlyReport();
             Mapping_Income();
-            Mapping_Expense(); 
+            Mapping_Expense();
             Mapping_Factory();
             Mapping_ItemStatus();
             Mapping_PaymentStatus();
+            Mapping_Role();
+            Mapping_UserAuthInfo();
+            Mapping_ApiResourceMapping();
         }
         public void Mapping_CustomerVM()
         {
@@ -123,26 +129,36 @@ namespace ApiService.Utilities.AutoMapper
             // GET
             CreateMap<Staff, StaffVM>()
                    .ForMember(dest => dest.Email, act => act.MapFrom(src => src.Email))
-                    .ForMember(dest => dest.ImageUrl, act => act.MapFrom(src => src.ImageUrl))
-                     .ForMember(dest => dest.FactoryId, act => act.MapFrom(src => src.FactoryId))
-                     .ForMember(dest => dest.Name, act => act.MapFrom(src => src.Name))
-                         .ForMember(dest => dest.PresentAddress, act => act.MapFrom(src => src.PresentAddress))
-                         .ForMember(dest => dest.PermanentAddress, act => act.MapFrom(src => src.PermanentAddress))
-                         .ForMember(dest => dest.CellNo, act => act.MapFrom(src => src.Number))
-                         .ForMember(dest => dest.AlternateCellNo, act => act.MapFrom(src => src.AlternateNumber_1))
-                          .ForMember(dest => dest.Id, act => act.MapFrom(src => src.Id))
-                     .ForAllOtherMembers(act => act.Ignore());
+                   .ForMember(dest => dest.ImageUrl, act => act.MapFrom(src => src.ImageUrl))
+                   .ForMember(dest => dest.FactoryId, act => act.MapFrom(src => src.FactoryId))
+                   .ForMember(dest => dest.Name, act => act.MapFrom(src => src.Name))
+                   .ForMember(dest => dest.PresentAddress, act => act.MapFrom(src => src.PresentAddress))
+                   .ForMember(dest => dest.PermanentAddress, act => act.MapFrom(src => src.PermanentAddress))
+                   .ForMember(dest => dest.CellNo, act => act.MapFrom(src => src.Number))
+                   .ForMember(dest => dest.AlternateCellNo, act => act.MapFrom(src => src.AlternateNumber_1))
+                   .ForMember(dest => dest.RoleId, act => act.MapFrom(src => src.RoleId))
+                   .ForMember(dest => dest.Id, act => act.MapFrom(src => src.Id))
+                   .ForAllOtherMembers(act => act.Ignore());
             // UPDATE + ADDITION
             CreateMap<StaffVM, Staff>()
                    .ForMember(dest => dest.Email, act => act.MapFrom(src => src.Email))
-                    .ForMember(dest => dest.ImageUrl, act => act.MapFrom(src => src.ImageUrl))
-                     .ForMember(dest => dest.FactoryId, act => act.MapFrom(src => src.FactoryId))
-                     .ForMember(dest => dest.Name, act => act.MapFrom(src => src.Name))
-                         .ForMember(dest => dest.PresentAddress, act => act.MapFrom(src => src.PresentAddress))
-                         .ForMember(dest => dest.PermanentAddress, act => act.MapFrom(src => src.PermanentAddress))
-                         .ForMember(dest => dest.Number, act => act.MapFrom(src => src.CellNo))
-                         .ForMember(dest => dest.AlternateNumber_1, act => act.MapFrom(src => src.AlternateCellNo))
-                     .ForAllOtherMembers(act => act.Ignore());
+                   .ForMember(dest => dest.ImageUrl, act => act.MapFrom(src => src.ImageUrl))
+                   .ForMember(dest => dest.FactoryId, act => act.MapFrom(src => src.FactoryId))
+                   .ForMember(dest => dest.Name, act => act.MapFrom(src => src.Name))
+                   .ForMember(dest => dest.PresentAddress, act => act.MapFrom(src => src.PresentAddress))
+                   .ForMember(dest => dest.PermanentAddress, act => act.MapFrom(src => src.PermanentAddress))
+                   .ForMember(dest => dest.Number, act => act.MapFrom(src => src.CellNo))
+                   .ForMember(dest => dest.AlternateNumber_1, act => act.MapFrom(src => src.AlternateCellNo))
+                   .ForMember(dest => dest.RoleId, act => act.MapFrom(src => src.RoleId))
+                   .ForMember(dest => dest.Id, act => act.MapFrom(src => src.Id))
+                   .ForAllOtherMembers(act => act.Ignore());
+
+
+            CreateMap<StaffVM, UserAuthInfo>()
+                  .ForMember(dest => dest.UserName, act => act.MapFrom(src => src.UserName))
+                  .ForMember(dest => dest.Password, act => act.MapFrom(src => src.Password))
+                  .ForMember(dest => dest.FactoryId, act => act.MapFrom(src => src.FactoryId))
+                  .ForAllOtherMembers(act => act.Ignore());
         }
         public void Mapping_SupplierVM()
         {
@@ -922,6 +938,7 @@ namespace ApiService.Utilities.AutoMapper
                   .ForMember(dest => dest.FactoryId, act => act.MapFrom(src => src.FactoryId))
                   .ForMember(dest => dest.ItemCategoryId, act => act.MapFrom(src => src.ItemCategoryId))
                   .ForMember(dest => dest.ItemId, act => act.MapFrom(src => src.ItemId))
+                   .ForMember(dest => dest.ItemStatusId, act => act.MapFrom(src => src.ItemStatusId))
                   .ForMember(dest => dest.ProductionId, act => act.MapFrom(src => Guid.NewGuid()))
                   .ForMember(dest => dest.Quantity, act => act.MapFrom(src => src.Quantity))
                   .ForMember(dest => dest.StaffId, act => act.MapFrom(src => src.StaffId))
@@ -953,9 +970,12 @@ namespace ApiService.Utilities.AutoMapper
                     .ForMember(dest => dest.ItemCategoryName, act => act.MapFrom(src => src.ItemCategory.Name))
                     .ForMember(dest => dest.ItemId, act => act.MapFrom(src => src.ItemId))
                     .ForMember(dest => dest.ItemName, act => act.MapFrom(src => src.Item.Name))
+                    .ForMember(dest => dest.ItemStatusName, act => act.MapFrom(src => src.ItemStatus.Name))
+                    .ForMember(dest => dest.ItemStatusId, act => act.MapFrom(src => src.ItemStatus.Id))
                     .ForMember(dest => dest.ProductionId, act => act.MapFrom(src => src.ProductionId))
                     .ForMember(dest => dest.Quantity, act => act.MapFrom(src => src.Quantity))
                     .ForMember(dest => dest.StaffId, act => act.MapFrom(src => src.StaffId))
+                    .ForMember(dest => dest.InvoiceId, act => act.MapFrom(src => src.InvoiceId))
                     .ForMember(dest => dest.StaffName, act => act.MapFrom(src => src.Staff.Name))
                     .ForMember(dest => dest.TotalAmount, act => act.MapFrom(src => (src.Quantity * src.UnitPrice)))
                     .ForMember(dest => dest.UnitPrice, act => act.MapFrom(src => src.UnitPrice))
@@ -1677,10 +1697,6 @@ namespace ApiService.Utilities.AutoMapper
 
 
         }
-
-
-
-
         public void Mapping_Factory()
         {
             CreateMap<Factory, FactoryVM>()
@@ -1719,7 +1735,6 @@ namespace ApiService.Utilities.AutoMapper
                   .ForMember(dest => dest.Id, act => act.MapFrom(src => src.Id))
                   .ForMember(dest => dest.FactoryId, act => act.MapFrom(src => src.FactoryId))
                   .ForAllOtherMembers(act => act.Ignore());
-
         }
         public void Mapping_ItemStatus()
         {
@@ -1735,8 +1750,127 @@ namespace ApiService.Utilities.AutoMapper
                   .ForAllOtherMembers(act => act.Ignore());
 
         }
+        public void Mapping_UserAuthInfo()
+        {
+            CreateMap<UserAuthInfo, UserAuthInfoVM>()
+                     .ForMember(dest => dest.UserId, act => act.MapFrom(src => src.UserId))
+                     .ForMember(dest => dest.UserName, act => act.MapFrom(src => src.UserName))
+                     .ForMember(dest => dest.Password, act => act.MapFrom(src => src.Password))
+                     .ForMember(dest => dest.Id, act => act.MapFrom(src => src.Id))
+                     .ForMember(dest => dest.FactoryId, act => act.MapFrom(src => src.FactoryId))
+                     .ForAllOtherMembers(act => act.Ignore());
+
+            CreateMap<UserAuthInfoVM, UserAuthInfo>()
+                     .ForMember(dest => dest.UserId, act => act.MapFrom(src => src.UserId))
+                     .ForMember(dest => dest.UserName, act => act.MapFrom(src => src.UserName))
+                     .ForMember(dest => dest.Password, act => act.MapFrom(src => src.Password))
+                     .ForMember(dest => dest.Id, act => act.MapFrom(src => src.Id))
+                     .ForMember(dest => dest.FactoryId, act => act.MapFrom(src => src.FactoryId))
+                     .ForAllOtherMembers(act => act.Ignore());
 
 
+        }
+        public void Mapping_Role()
+        {
+            CreateMap<RoleVM, Role>()
+                     .ForMember(dest => dest.Id, act => act.MapFrom(src => src.Id))
+                     .ForMember(dest => dest.FactoryId, act => act.MapFrom(src => src.FactoryId))
+                     .ForMember(dest => dest.Name, act => act.MapFrom(src => src.Name))
+                     .ForMember(dest => dest.Item, act => act.MapFrom(src => src.Item))
+                     .ForMember(dest => dest.ItemCategory, act => act.MapFrom(src => src.ItemCategory))
+                     .ForMember(dest => dest.Equipment, act => act.MapFrom(src => src.Equipment))
+                     .ForMember(dest => dest.EquipmentCategory, act => act.MapFrom(src => src.EquipmentCategory))
+                     .ForMember(dest => dest.Stock, act => act.MapFrom(src => src.Stock))
+                     .ForMember(dest => dest.PurchaseReturn, act => act.MapFrom(src => src.PurchaseReturn))
+                     .ForMember(dest => dest.SalesReturn, act => act.MapFrom(src => src.SalesReturn))
+                     .ForMember(dest => dest.Staff, act => act.MapFrom(src => src.Staff))
+                     .ForMember(dest => dest.Customer, act => act.MapFrom(src => src.Customer))
+                     .ForMember(dest => dest.Supplier, act => act.MapFrom(src => src.Supplier))
+                     .ForMember(dest => dest.StaffHistory, act => act.MapFrom(src => src.StaffHistory))
+                     .ForMember(dest => dest.Production, act => act.MapFrom(src => src.Production))
+                     .ForMember(dest => dest.CustomerHistory, act => act.MapFrom(src => src.CustomerHistory))
+                     .ForMember(dest => dest.SupplierHistory, act => act.MapFrom(src => src.SupplierHistory))
+                     .ForMember(dest => dest.MonthlyIncomeReport, act => act.MapFrom(src => src.MonthlyIncomeReport))
+                     .ForMember(dest => dest.MonthlyExpenseReport, act => act.MapFrom(src => src.MonthlyExpenseReport))
+                     .ForMember(dest => dest.MonthlyPayableReport, act => act.MapFrom(src => src.MonthlyPayableReport))
+                     .ForMember(dest => dest.MonthlyRecievableReport, act => act.MapFrom(src => src.MonthlyRecievableReport))
+                     .ForMember(dest => dest.MonthlyAccountReport, act => act.MapFrom(src => src.MonthlyAccountReport))
+                     .ForMember(dest => dest.MonthlyProductionReport, act => act.MapFrom(src => src.MonthlyProductionReport))
+                     .ForMember(dest => dest.StaffPayment, act => act.MapFrom(src => src.StaffPayment))
+                     .ForMember(dest => dest.CustomerPayment, act => act.MapFrom(src => src.CustomerPayment))
+                     .ForMember(dest => dest.SupplierPayment, act => act.MapFrom(src => src.SupplierPayment))
+                     .ForMember(dest => dest.Department, act => act.MapFrom(src => src.Department))
+                     .ForMember(dest => dest.Sales, act => act.MapFrom(src => src.Sales))
+                     .ForMember(dest => dest.Purchase, act => act.MapFrom(src => src.Purchase))
+                     .ForMember(dest => dest.Income, act => act.MapFrom(src => src.Income))
+                     .ForMember(dest => dest.Expense, act => act.MapFrom(src => src.Expense))
+                     .ForMember(dest => dest.IncomeType, act => act.MapFrom(src => src.IncomeType))
+                     .ForMember(dest => dest.ExpenseType, act => act.MapFrom(src => src.ExpenseType))
+                     .ForMember(dest => dest.InvoiceType, act => act.MapFrom(src => src.InvoiceType))
+                     .ForMember(dest => dest.PaymentStatus, act => act.MapFrom(src => src.PaymentStatus))
+                     .ForMember(dest => dest.ItemStatus, act => act.MapFrom(src => src.ItemStatus))
+                     .ForMember(dest => dest.Factory, act => act.MapFrom(src => src.Factory))
+                     .ForMember(dest => dest.Registration, act => act.MapFrom(src => src.Registration))
+                     .ForAllOtherMembers(act => act.Ignore());
+
+            CreateMap<Role, RoleVM>()
+                     .ForMember(dest => dest.Id, act => act.MapFrom(src => src.Id))
+                     .ForMember(dest => dest.FactoryId, act => act.MapFrom(src => src.FactoryId))
+                     .ForMember(dest => dest.Name, act => act.MapFrom(src => src.Name))
+                     .ForMember(dest => dest.Item, act => act.MapFrom(src => src.Item))
+                     .ForMember(dest => dest.ItemCategory, act => act.MapFrom(src => src.ItemCategory))
+                     .ForMember(dest => dest.Equipment, act => act.MapFrom(src => src.Equipment))
+                     .ForMember(dest => dest.EquipmentCategory, act => act.MapFrom(src => src.EquipmentCategory))
+                     .ForMember(dest => dest.Stock, act => act.MapFrom(src => src.Stock))
+                     .ForMember(dest => dest.PurchaseReturn, act => act.MapFrom(src => src.PurchaseReturn))
+                     .ForMember(dest => dest.SalesReturn, act => act.MapFrom(src => src.SalesReturn))
+                     .ForMember(dest => dest.Staff, act => act.MapFrom(src => src.Staff))
+                     .ForMember(dest => dest.Customer, act => act.MapFrom(src => src.Customer))
+                     .ForMember(dest => dest.Supplier, act => act.MapFrom(src => src.Supplier))
+                     .ForMember(dest => dest.StaffHistory, act => act.MapFrom(src => src.StaffHistory))
+                     .ForMember(dest => dest.Production, act => act.MapFrom(src => src.Production))
+                     .ForMember(dest => dest.CustomerHistory, act => act.MapFrom(src => src.CustomerHistory))
+                     .ForMember(dest => dest.SupplierHistory, act => act.MapFrom(src => src.SupplierHistory))
+                     .ForMember(dest => dest.MonthlyIncomeReport, act => act.MapFrom(src => src.MonthlyIncomeReport))
+                     .ForMember(dest => dest.MonthlyExpenseReport, act => act.MapFrom(src => src.MonthlyExpenseReport))
+                     .ForMember(dest => dest.MonthlyPayableReport, act => act.MapFrom(src => src.MonthlyPayableReport))
+                     .ForMember(dest => dest.MonthlyRecievableReport, act => act.MapFrom(src => src.MonthlyRecievableReport))
+                     .ForMember(dest => dest.MonthlyAccountReport, act => act.MapFrom(src => src.MonthlyAccountReport))
+                     .ForMember(dest => dest.MonthlyProductionReport, act => act.MapFrom(src => src.MonthlyProductionReport))
+                     .ForMember(dest => dest.StaffPayment, act => act.MapFrom(src => src.StaffPayment))
+                     .ForMember(dest => dest.CustomerPayment, act => act.MapFrom(src => src.CustomerPayment))
+                     .ForMember(dest => dest.SupplierPayment, act => act.MapFrom(src => src.SupplierPayment))
+                     .ForMember(dest => dest.Department, act => act.MapFrom(src => src.Department))
+                     .ForMember(dest => dest.Sales, act => act.MapFrom(src => src.Sales))
+                     .ForMember(dest => dest.Purchase, act => act.MapFrom(src => src.Purchase))
+                     .ForMember(dest => dest.Income, act => act.MapFrom(src => src.Income))
+                     .ForMember(dest => dest.Expense, act => act.MapFrom(src => src.Expense))
+                     .ForMember(dest => dest.IncomeType, act => act.MapFrom(src => src.IncomeType))
+                     .ForMember(dest => dest.ExpenseType, act => act.MapFrom(src => src.ExpenseType))
+                     .ForMember(dest => dest.InvoiceType, act => act.MapFrom(src => src.InvoiceType))
+                     .ForMember(dest => dest.PaymentStatus, act => act.MapFrom(src => src.PaymentStatus))
+                     .ForMember(dest => dest.ItemStatus, act => act.MapFrom(src => src.ItemStatus))
+                     .ForMember(dest => dest.Factory, act => act.MapFrom(src => src.Factory))
+                     .ForMember(dest => dest.Registration, act => act.MapFrom(src => src.Registration))
+                     .ForAllOtherMembers(act => act.Ignore());
+        }
+        public void Mapping_ApiResourceMapping()
+        {
+
+            CreateMap<ApiResourceMapping, ApiResourceMappingVM>()
+                        .ForMember(dest => dest.Controller, act => act.MapFrom(src => src.Controller))
+                        .ForMember(dest => dest.Resource, act => act.MapFrom(src => src.Resource))
+                        .ForMember(dest => dest.Action, act => act.MapFrom(src => src.Action))
+                        .ForMember(dest => dest.Id, act => act.MapFrom(src => src.Id))
+                        .ForAllOtherMembers(act => act.Ignore());
+            CreateMap<ApiResourceMappingVM, ApiResourceMapping>()
+                        .ForMember(dest => dest.Controller, act => act.MapFrom(src => src.Controller))
+                        .ForMember(dest => dest.Resource, act => act.MapFrom(src => src.Resource))
+                        .ForMember(dest => dest.Action, act => act.MapFrom(src => src.Action))
+                        .ForMember(dest => dest.Id, act => act.MapFrom(src => src.Id))
+                        .ForAllOtherMembers(act => act.Ignore());
+
+        }
 
     }
 }

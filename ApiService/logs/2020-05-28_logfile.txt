@@ -1,0 +1,377 @@
+2020-05-28 16:21:08.8130 INFO ---------------------------------------------------------------------------------------------------------
+2020-05-28 16:21:09.3517 INFO --------------------------28-May-20 4:21:09 PM------------------------------------------------
+2020-05-28 16:21:09.3680 INFO ---STARTED FINDING ----USERAUTHINFO----------
+2020-05-28 16:53:58.8879 INFO ---------------------------------------------------------------------------------------------------------
+2020-05-28 16:53:58.9846 INFO --------------------------28-May-20 4:53:58 PM------------------------------------------------
+2020-05-28 16:53:59.0070 INFO ---STARTED FINDING ----USERAUTHINFO----------
+2020-05-28 16:54:53.0460 INFO ---------------------------------------------------------------------------------------------------------
+2020-05-28 16:54:53.0460 INFO ---------------------------------------------------------------------------------------------------------
+2020-05-28 16:54:53.0460 INFO ---------------------------------------------------------------------------------------------------------
+2020-05-28 16:54:53.0460 INFO ---------------------------------------------------------------------------------------------------------
+2020-05-28 16:54:53.1000 INFO --------------------------28-May-20 4:54:53 PM------------------------------------------------
+2020-05-28 16:54:53.1233 INFO --------------------------28-May-20 4:54:53 PM------------------------------------------------
+2020-05-28 16:54:53.1462 INFO --------------------------28-May-20 4:54:53 PM------------------------------------------------
+2020-05-28 16:54:53.1705 INFO --------------------------28-May-20 4:54:53 PM------------------------------------------------
+2020-05-28 16:54:53.2114 INFO ---STARTED FINDING ----APIRESOURCEMAPPING----------
+2020-05-28 16:54:53.2331 INFO ---STARTED FINDING ----APIRESOURCEMAPPING----------
+2020-05-28 16:54:53.2506 INFO ---STARTED FINDING ----APIRESOURCEMAPPING----------
+2020-05-28 16:54:53.2649 INFO ---STARTED FINDING ----APIRESOURCEMAPPING----------
+2020-05-28 16:54:53.4457 INFO ---------------------------------------------------------------------------------------------------------
+2020-05-28 16:54:53.4587 INFO --------------------------28-May-20 4:54:53 PM------------------------------------------------
+2020-05-28 16:54:53.4587 INFO ---STARTED FINDING ----USERROLE----------
+2020-05-28 16:54:53.4815 INFO ---------------------------------------------------------------------------------------------------------
+2020-05-28 16:54:53.5604 INFO --------------------------28-May-20 4:54:53 PM------------------------------------------------
+2020-05-28 16:55:23.3044 INFO ---STARTED FINDING ----USERROLE----------
+2020-05-28 17:35:44.8076 INFO ---------------------------------------------------------------------------------------------------------
+2020-05-28 17:35:44.9078 INFO --------------------------28-May-20 5:35:44 PM------------------------------------------------
+2020-05-28 17:35:44.9268 INFO ---STARTED FINDING ----USERAUTHINFO----------
+2020-05-28 17:36:47.2486 INFO ---------------------------------------------------------------------------------------------------------
+2020-05-28 17:36:47.2681 INFO --------------------------28-May-20 5:36:47 PM------------------------------------------------
+2020-05-28 17:36:47.2874 INFO ---STARTED FINDING ----USERAUTHINFO----------
+2020-05-28 17:55:33.7025 INFO ---------------------------------------------------------------------------------------------------------
+2020-05-28 17:55:33.7803 INFO --------------------------28-May-20 5:55:33 PM------------------------------------------------
+2020-05-28 17:55:33.7965 INFO ---STARTED FINDING ----USERAUTHINFO----------
+2020-05-28 17:56:35.0928 INFO ---------------------------------------------------------------------------------------------------------
+2020-05-28 17:56:35.1092 INFO --------------------------28-May-20 5:56:35 PM------------------------------------------------
+2020-05-28 17:56:35.1621 INFO ---STARTED FINDING ----USERAUTHINFO----------
+2020-05-28 18:02:43.8977 INFO ---------------------------------------------------------------------------------------------------------
+2020-05-28 18:02:43.9971 INFO --------------------------28-May-20 6:02:43 PM------------------------------------------------
+2020-05-28 18:02:44.0150 INFO ---STARTED FINDING ----USERAUTHINFO----------
+2020-05-28 18:44:45.6884 INFO ---------------------------------------------------------------------------------------------------------
+2020-05-28 18:44:45.8170 INFO --------------------------28-May-20 6:44:45 PM------------------------------------------------
+2020-05-28 18:44:45.8343 INFO ---STARTED FINDING ----USERAUTHINFO----------
+2020-05-28 18:44:47.0117 INFO ---------------------------------------------------------------------------------------------------------
+2020-05-28 18:44:47.0117 INFO ---------------------------------------------------------------------------------------------------------
+2020-05-28 18:44:47.0529 INFO --------------------------28-May-20 6:44:47 PM------------------------------------------------
+2020-05-28 18:44:47.0335 INFO --------------------------28-May-20 6:44:47 PM------------------------------------------------
+2020-05-28 18:44:47.0117 INFO ---------------------------------------------------------------------------------------------------------
+2020-05-28 18:44:47.1219 INFO --------------------------28-May-20 6:44:47 PM------------------------------------------------
+2020-05-28 18:44:47.1428 INFO ---STARTED FINDING ----APIRESOURCEMAPPING----------
+2020-05-28 18:44:47.0898 INFO ---STARTED FINDING ----APIRESOURCEMAPPING----------
+2020-05-28 18:44:47.0712 INFO ---STARTED FINDING ----APIRESOURCEMAPPING----------
+2020-05-28 18:44:47.0529 INFO ---------------------------------------------------------------------------------------------------------
+2020-05-28 18:44:47.2737 INFO --------------------------28-May-20 6:44:47 PM------------------------------------------------
+2020-05-28 18:44:47.2964 INFO ---STARTED FINDING ----APIRESOURCEMAPPING----------
+2020-05-28 18:44:47.3153 INFO ---------------------------------------------------------------------------------------------------------
+2020-05-28 18:44:47.3153 INFO ---------------------------------------------------------------------------------------------------------
+2020-05-28 18:44:47.3664 INFO --------------------------28-May-20 6:44:47 PM------------------------------------------------
+2020-05-28 18:44:47.3806 INFO --------------------------28-May-20 6:44:47 PM------------------------------------------------
+2020-05-28 18:44:47.3806 INFO ---STARTED FINDING ----USERROLE----------
+2020-05-28 18:44:47.3999 INFO ---------------------------------------------------------------------------------------------------------
+2020-05-28 18:44:47.3999 INFO ---STARTED FINDING ----USERROLE----------
+2020-05-28 18:44:47.7713 INFO --------------------------28-May-20 6:44:47 PM------------------------------------------------
+2020-05-28 18:45:45.5780 INFO ---STARTED FINDING ----USERROLE----------
+2020-05-28 18:46:18.9788 ERROR Something went wrong: System.InvalidOperationException: A second operation started on this context before a previous operation completed. This is usually caused by different threads using the same instance of DbContext. For more information on how to avoid threading issues with DbContext, see https://go.microsoft.com/fwlink/?linkid=2097913.
+   at Microsoft.EntityFrameworkCore.Internal.ConcurrencyDetector.EnterCriticalSection()
+   at Microsoft.EntityFrameworkCore.Query.Internal.QueryingEnumerable`1.Enumerator.MoveNext()
+   at System.Collections.Generic.List`1..ctor(IEnumerable`1 collection)
+   at System.Linq.Enumerable.ToList[TSource](IEnumerable`1 source)
+   at Service.BusinessServices.UserRoleService.GetUserRole(String UserId) in D:\Projects\ApiService\Service\BusinessServices\UserRoleService.cs:line 29
+   at ApiService.Utilities.Auth.FactoryAuthorize.OnAuthorization(AuthorizationFilterContext filterContext) in D:\Projects\ApiService\ApiService\Utilities\Auth\FactoryAuthorize.cs:line 68
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.InvokeFilterPipelineAsync()
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|6_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Swashbuckle.AspNetCore.SwaggerUI.SwaggerUIMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at ApiService.Utilities.ExceptionHandler.ExceptionMiddleware.InvokeAsync(HttpContext httpContext) in D:\Projects\ApiService\ApiService\Utilities\ExceptionHandler\ExceptionMiddleware.cs:line 26
+2020-05-28 18:46:18.9788 ERROR Something went wrong: System.NullReferenceException: Object reference not set to an instance of an object.
+   at ApiService.Utilities.Auth.FactoryAuthorize.OnAuthorization(AuthorizationFilterContext filterContext) in D:\Projects\ApiService\ApiService\Utilities\Auth\FactoryAuthorize.cs:line 70
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.InvokeFilterPipelineAsync()
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|6_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Swashbuckle.AspNetCore.SwaggerUI.SwaggerUIMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at ApiService.Utilities.ExceptionHandler.ExceptionMiddleware.InvokeAsync(HttpContext httpContext) in D:\Projects\ApiService\ApiService\Utilities\ExceptionHandler\ExceptionMiddleware.cs:line 26
+2020-05-28 18:46:18.9788 ERROR Something went wrong: System.InvalidOperationException: A second operation started on this context before a previous operation completed. This is usually caused by different threads using the same instance of DbContext. For more information on how to avoid threading issues with DbContext, see https://go.microsoft.com/fwlink/?linkid=2097913.
+   at Microsoft.EntityFrameworkCore.Internal.ConcurrencyDetector.EnterCriticalSection()
+   at Microsoft.EntityFrameworkCore.Query.Internal.QueryingEnumerable`1.Enumerator.MoveNext()
+   at System.Collections.Generic.List`1..ctor(IEnumerable`1 collection)
+   at System.Linq.Enumerable.ToList[TSource](IEnumerable`1 source)
+   at Service.BusinessServices.ApiResourceMappingService.GetApiResourceMapping(String Controller, String ActionMethod) in D:\Projects\ApiService\Service\BusinessServices\ApiResourceMappingService.cs:line 40
+   at ApiService.Utilities.Auth.FactoryAuthorize.OnAuthorization(AuthorizationFilterContext filterContext) in D:\Projects\ApiService\ApiService\Utilities\Auth\FactoryAuthorize.cs:line 67
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.InvokeFilterPipelineAsync()
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|6_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Swashbuckle.AspNetCore.SwaggerUI.SwaggerUIMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at ApiService.Utilities.ExceptionHandler.ExceptionMiddleware.InvokeAsync(HttpContext httpContext) in D:\Projects\ApiService\ApiService\Utilities\ExceptionHandler\ExceptionMiddleware.cs:line 26
+2020-05-28 18:46:19.0139 ERROR -------------------------------------------------------------------------------
+2020-05-28 18:46:18.9788 ERROR Something went wrong: System.NullReferenceException: Object reference not set to an instance of an object.
+   at ApiService.Utilities.Auth.FactoryAuthorize.OnAuthorization(AuthorizationFilterContext filterContext) in D:\Projects\ApiService\ApiService\Utilities\Auth\FactoryAuthorize.cs:line 70
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.InvokeFilterPipelineAsync()
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|6_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Swashbuckle.AspNetCore.SwaggerUI.SwaggerUIMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at ApiService.Utilities.ExceptionHandler.ExceptionMiddleware.InvokeAsync(HttpContext httpContext) in D:\Projects\ApiService\ApiService\Utilities\ExceptionHandler\ExceptionMiddleware.cs:line 26
+2020-05-28 18:46:19.0348 ERROR -------------------------------------------------------------------------------
+2020-05-28 18:46:19.0507 ERROR -------------------------------------------------------------------------------
+2020-05-28 18:46:19.0660 ERROR -------------------------------------------------------------------------------
+2020-05-28 18:46:19.0805 ERROR -------------------------------------------------------------------------------
+2020-05-28 18:46:19.1082 ERROR -------------------------------------------------------------------------------
+2020-05-28 18:46:19.0941 ERROR -------------------------------------------------------------------------------
+2020-05-28 18:46:19.1371 ERROR -------------------------------------------------------------------------------
+2020-05-28 19:23:13.4734 INFO ---------------------------------------------------------------------------------------------------------
+2020-05-28 19:23:13.4840 INFO ---------------------------------------------------------------------------------------------------------
+2020-05-28 19:23:13.6612 INFO --------------------------28-May-20 7:23:13 PM------------------------------------------------
+2020-05-28 19:23:13.6083 INFO --------------------------28-May-20 7:23:13 PM------------------------------------------------
+2020-05-28 19:23:13.6644 INFO ---------------------------------------------------------------------------------------------------------
+2020-05-28 19:23:13.6952 INFO ---STARTED FINDING ----APIRESOURCEMAPPING----------
+2020-05-28 19:23:13.7257 INFO ---STARTED FINDING ----APIRESOURCEMAPPING----------
+2020-05-28 19:23:13.7664 INFO --------------------------28-May-20 7:23:13 PM------------------------------------------------
+2020-05-28 19:23:13.7257 INFO ---------------------------------------------------------------------------------------------------------
+2020-05-28 19:23:13.8603 INFO ---STARTED FINDING ----APIRESOURCEMAPPING----------
+2020-05-28 19:23:13.8896 INFO --------------------------28-May-20 7:23:13 PM------------------------------------------------
+2020-05-28 19:23:13.9239 INFO ---STARTED FINDING ----APIRESOURCEMAPPING----------
+2020-05-28 19:23:14.2177 INFO ---------------------------------------------------------------------------------------------------------
+2020-05-28 19:23:14.2354 INFO --------------------------28-May-20 7:23:14 PM------------------------------------------------
+2020-05-28 19:23:14.2410 INFO ---------------------------------------------------------------------------------------------------------
+2020-05-28 19:23:14.2994 INFO --------------------------28-May-20 7:23:14 PM------------------------------------------------
+2020-05-28 19:23:14.2410 INFO ---------------------------------------------------------------------------------------------------------
+2020-05-28 19:23:14.3281 INFO --------------------------28-May-20 7:23:14 PM------------------------------------------------
+2020-05-28 19:23:14.3429 INFO ---STARTED FINDING ----USERROLE----------
+2020-05-28 19:23:14.3141 INFO ---STARTED FINDING ----USERROLE----------
+2020-05-28 19:23:14.2838 INFO ---STARTED FINDING ----USERROLE----------
+2020-05-28 19:23:14.2354 INFO ---------------------------------------------------------------------------------------------------------
+2020-05-28 21:35:34.8194 INFO ---------------------------------------------------------------------------------------------------------
+2020-05-28 21:35:34.9913 INFO --------------------------28-May-20 9:35:34 PM------------------------------------------------
+2020-05-28 21:35:35.0178 INFO ---STARTED FINDING ----USERAUTHINFO----------
+2020-05-28 21:46:42.8259 INFO ---------------------------------------------------------------------------------------------------------
+2020-05-28 21:46:42.9044 INFO --------------------------28-May-20 9:46:42 PM------------------------------------------------
+2020-05-28 21:46:42.9185 INFO ---STARTED FINDING ----USERAUTHINFO----------
+2020-05-28 22:04:27.5939 INFO ---------------------------------------------------------------------------------------------------------
+2020-05-28 22:04:27.6902 INFO --------------------------28-May-20 10:04:27 PM------------------------------------------------
+2020-05-28 22:04:27.7043 INFO ---STARTED FINDING ----USERAUTHINFO----------
+2020-05-28 22:05:24.9863 ERROR Something went wrong: System.NullReferenceException: Object reference not set to an instance of an object.
+   at ApiService.Utilities.Auth.FactoryAuthorize.OnAuthorization(AuthorizationFilterContext filterContext) in D:\Projects\ApiService\ApiService\Utilities\Auth\FactoryAuthorize.cs:line 74
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.InvokeFilterPipelineAsync()
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|6_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Swashbuckle.AspNetCore.SwaggerUI.SwaggerUIMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at ApiService.Utilities.ExceptionHandler.ExceptionMiddleware.InvokeAsync(HttpContext httpContext) in D:\Projects\ApiService\ApiService\Utilities\ExceptionHandler\ExceptionMiddleware.cs:line 26
+2020-05-28 22:05:24.9862 ERROR Something went wrong: System.NullReferenceException: Object reference not set to an instance of an object.
+   at ApiService.Utilities.Auth.FactoryAuthorize.OnAuthorization(AuthorizationFilterContext filterContext) in D:\Projects\ApiService\ApiService\Utilities\Auth\FactoryAuthorize.cs:line 74
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.InvokeFilterPipelineAsync()
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|6_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Swashbuckle.AspNetCore.SwaggerUI.SwaggerUIMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at ApiService.Utilities.ExceptionHandler.ExceptionMiddleware.InvokeAsync(HttpContext httpContext) in D:\Projects\ApiService\ApiService\Utilities\ExceptionHandler\ExceptionMiddleware.cs:line 26
+2020-05-28 22:05:24.9863 ERROR Something went wrong: System.NullReferenceException: Object reference not set to an instance of an object.
+   at ApiService.Utilities.Auth.FactoryAuthorize.OnAuthorization(AuthorizationFilterContext filterContext) in D:\Projects\ApiService\ApiService\Utilities\Auth\FactoryAuthorize.cs:line 74
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.InvokeFilterPipelineAsync()
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|6_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Swashbuckle.AspNetCore.SwaggerUI.SwaggerUIMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at ApiService.Utilities.ExceptionHandler.ExceptionMiddleware.InvokeAsync(HttpContext httpContext) in D:\Projects\ApiService\ApiService\Utilities\ExceptionHandler\ExceptionMiddleware.cs:line 26
+2020-05-28 22:05:24.9863 ERROR Something went wrong: System.NullReferenceException: Object reference not set to an instance of an object.
+   at ApiService.Utilities.Auth.FactoryAuthorize.OnAuthorization(AuthorizationFilterContext filterContext) in D:\Projects\ApiService\ApiService\Utilities\Auth\FactoryAuthorize.cs:line 74
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.InvokeFilterPipelineAsync()
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|6_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Swashbuckle.AspNetCore.SwaggerUI.SwaggerUIMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at ApiService.Utilities.ExceptionHandler.ExceptionMiddleware.InvokeAsync(HttpContext httpContext) in D:\Projects\ApiService\ApiService\Utilities\ExceptionHandler\ExceptionMiddleware.cs:line 26
+2020-05-28 22:05:25.0316 ERROR -------------------------------------------------------------------------------
+2020-05-28 22:05:25.0502 ERROR -------------------------------------------------------------------------------
+2020-05-28 22:05:25.0062 ERROR -------------------------------------------------------------------------------
+2020-05-28 22:05:25.0716 ERROR -------------------------------------------------------------------------------
+2020-05-28 22:05:25.0890 ERROR -------------------------------------------------------------------------------
+2020-05-28 22:05:25.1064 ERROR -------------------------------------------------------------------------------
+2020-05-28 22:05:25.1359 ERROR -------------------------------------------------------------------------------
+2020-05-28 22:05:25.1209 ERROR -------------------------------------------------------------------------------
+2020-05-28 22:12:40.4305 INFO ---------------------------------------------------------------------------------------------------------
+2020-05-28 22:12:40.4612 INFO --------------------------28-May-20 10:12:40 PM------------------------------------------------
+2020-05-28 22:12:40.4889 INFO ---STARTED FINDING ----USERAUTHINFO----------
+2020-05-28 22:27:29.5183 INFO ---------------------------------------------------------------------------------------------------------
+2020-05-28 22:27:29.6802 INFO --------------------------28-May-20 10:27:29 PM------------------------------------------------
+2020-05-28 22:27:29.7131 INFO ---STARTED FINDING ----USERAUTHINFO----------
+2020-05-28 22:30:14.1778 INFO ---------------------------------------------------------------------------------------------------------
+2020-05-28 22:30:14.2779 INFO --------------------------28-May-20 10:30:14 PM------------------------------------------------
+2020-05-28 22:30:14.2927 INFO ---STARTED FINDING ----USERAUTHINFO----------
+2020-05-28 22:37:18.6430 ERROR Something went wrong: System.NullReferenceException: Object reference not set to an instance of an object.
+   at ApiService.Utilities.Auth.FactoryAuthorize.OnAuthorization(AuthorizationFilterContext filterContext) in D:\Projects\ApiService\ApiService\Utilities\Auth\FactoryAuthorize.cs:line 74
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.InvokeFilterPipelineAsync()
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|6_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Swashbuckle.AspNetCore.SwaggerUI.SwaggerUIMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at ApiService.Utilities.ExceptionHandler.ExceptionMiddleware.InvokeAsync(HttpContext httpContext) in D:\Projects\ApiService\ApiService\Utilities\ExceptionHandler\ExceptionMiddleware.cs:line 26
+2020-05-28 22:37:18.6430 ERROR Something went wrong: System.NullReferenceException: Object reference not set to an instance of an object.
+   at ApiService.Utilities.Auth.FactoryAuthorize.OnAuthorization(AuthorizationFilterContext filterContext) in D:\Projects\ApiService\ApiService\Utilities\Auth\FactoryAuthorize.cs:line 74
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.InvokeFilterPipelineAsync()
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|6_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Swashbuckle.AspNetCore.SwaggerUI.SwaggerUIMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at ApiService.Utilities.ExceptionHandler.ExceptionMiddleware.InvokeAsync(HttpContext httpContext) in D:\Projects\ApiService\ApiService\Utilities\ExceptionHandler\ExceptionMiddleware.cs:line 26
+2020-05-28 22:37:18.6722 ERROR -------------------------------------------------------------------------------
+2020-05-28 22:37:18.6430 ERROR Something went wrong: System.NullReferenceException: Object reference not set to an instance of an object.
+   at ApiService.Utilities.Auth.FactoryAuthorize.OnAuthorization(AuthorizationFilterContext filterContext) in D:\Projects\ApiService\ApiService\Utilities\Auth\FactoryAuthorize.cs:line 74
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.InvokeFilterPipelineAsync()
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|6_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Swashbuckle.AspNetCore.SwaggerUI.SwaggerUIMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at ApiService.Utilities.ExceptionHandler.ExceptionMiddleware.InvokeAsync(HttpContext httpContext) in D:\Projects\ApiService\ApiService\Utilities\ExceptionHandler\ExceptionMiddleware.cs:line 26
+2020-05-28 22:37:18.7076 ERROR -------------------------------------------------------------------------------
+2020-05-28 22:37:18.7957 ERROR -------------------------------------------------------------------------------
+2020-05-28 22:37:18.7733 ERROR -------------------------------------------------------------------------------
+2020-05-28 22:37:18.7397 ERROR -------------------------------------------------------------------------------
+2020-05-28 22:37:18.8438 ERROR -------------------------------------------------------------------------------
+2020-05-28 22:37:39.4973 INFO ---------------------------------------------------------------------------------------------------------
+2020-05-28 22:37:39.5359 INFO --------------------------28-May-20 10:37:39 PM------------------------------------------------
+2020-05-28 22:37:39.5651 INFO ---STARTED FINDING ----USERAUTHINFO----------
+2020-05-28 22:40:22.7490 ERROR Something went wrong: System.NullReferenceException: Object reference not set to an instance of an object.
+   at ApiService.Utilities.Auth.FactoryAuthorize.OnAuthorization(AuthorizationFilterContext filterContext) in D:\Projects\ApiService\ApiService\Utilities\Auth\FactoryAuthorize.cs:line 74
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.InvokeFilterPipelineAsync()
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|6_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Swashbuckle.AspNetCore.SwaggerUI.SwaggerUIMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at ApiService.Utilities.ExceptionHandler.ExceptionMiddleware.InvokeAsync(HttpContext httpContext) in D:\Projects\ApiService\ApiService\Utilities\ExceptionHandler\ExceptionMiddleware.cs:line 26
+2020-05-28 22:40:22.7967 ERROR -------------------------------------------------------------------------------
+2020-05-28 22:40:22.8306 ERROR Something went wrong: System.NullReferenceException: Object reference not set to an instance of an object.
+   at ApiService.Utilities.Auth.FactoryAuthorize.OnAuthorization(AuthorizationFilterContext filterContext) in D:\Projects\ApiService\ApiService\Utilities\Auth\FactoryAuthorize.cs:line 74
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.InvokeFilterPipelineAsync()
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|6_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Swashbuckle.AspNetCore.SwaggerUI.SwaggerUIMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at ApiService.Utilities.ExceptionHandler.ExceptionMiddleware.InvokeAsync(HttpContext httpContext) in D:\Projects\ApiService\ApiService\Utilities\ExceptionHandler\ExceptionMiddleware.cs:line 26
+2020-05-28 22:40:22.8626 ERROR -------------------------------------------------------------------------------
+2020-05-28 22:40:22.8962 ERROR Something went wrong: System.NullReferenceException: Object reference not set to an instance of an object.
+   at ApiService.Utilities.Auth.FactoryAuthorize.OnAuthorization(AuthorizationFilterContext filterContext) in D:\Projects\ApiService\ApiService\Utilities\Auth\FactoryAuthorize.cs:line 74
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.InvokeFilterPipelineAsync()
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|6_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Swashbuckle.AspNetCore.SwaggerUI.SwaggerUIMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at ApiService.Utilities.ExceptionHandler.ExceptionMiddleware.InvokeAsync(HttpContext httpContext) in D:\Projects\ApiService\ApiService\Utilities\ExceptionHandler\ExceptionMiddleware.cs:line 26
+2020-05-28 22:40:22.8962 ERROR -------------------------------------------------------------------------------
+2020-05-28 22:40:22.9392 ERROR -------------------------------------------------------------------------------
+2020-05-28 22:40:22.9539 ERROR -------------------------------------------------------------------------------
+2020-05-28 22:40:22.9715 ERROR -------------------------------------------------------------------------------
+2020-05-28 22:40:34.4003 INFO ---------------------------------------------------------------------------------------------------------
+2020-05-28 22:40:34.4219 INFO --------------------------28-May-20 10:40:34 PM------------------------------------------------
+2020-05-28 22:40:34.4415 INFO ---STARTED FINDING ----USERAUTHINFO----------
+2020-05-28 22:53:10.2245 INFO ---------------------------------------------------------------------------------------------------------
+2020-05-28 22:53:10.3247 INFO --------------------------28-May-20 10:53:10 PM------------------------------------------------
+2020-05-28 22:53:10.3389 INFO ---STARTED FINDING ----USERAUTHINFO----------
+2020-05-28 22:53:56.9952 ERROR Something went wrong: System.NullReferenceException: Object reference not set to an instance of an object.
+   at ApiService.Utilities.Auth.FactoryAuthorize.OnAuthorization(AuthorizationFilterContext filterContext) in D:\Projects\ApiService\ApiService\Utilities\Auth\FactoryAuthorize.cs:line 74
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.InvokeFilterPipelineAsync()
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|6_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Swashbuckle.AspNetCore.SwaggerUI.SwaggerUIMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at ApiService.Utilities.ExceptionHandler.ExceptionMiddleware.InvokeAsync(HttpContext httpContext) in D:\Projects\ApiService\ApiService\Utilities\ExceptionHandler\ExceptionMiddleware.cs:line 26
+2020-05-28 22:53:57.0218 ERROR -------------------------------------------------------------------------------
+2020-05-28 22:53:57.0554 ERROR -------------------------------------------------------------------------------
+2020-05-28 22:54:08.1237 INFO ---------------------------------------------------------------------------------------------------------
+2020-05-28 22:54:08.1411 INFO --------------------------28-May-20 10:54:08 PM------------------------------------------------
+2020-05-28 22:54:08.1593 INFO ---STARTED FINDING ----USERAUTHINFO----------
+2020-05-28 23:12:26.1687 INFO ---------------------------------------------------------------------------------------------------------
+2020-05-28 23:12:26.2991 INFO --------------------------28-May-20 11:12:26 PM------------------------------------------------
+2020-05-28 23:12:26.3174 INFO ---STARTED FINDING ----USERAUTHINFO----------
+2020-05-28 23:12:40.6347 INFO ---------------------------------------------------------------------------------------------------------
+2020-05-28 23:12:40.6524 INFO --------------------------28-May-20 11:12:40 PM------------------------------------------------
+2020-05-28 23:12:40.6719 INFO ---STARTED FINDING ----USERAUTHINFO----------
+2020-05-28 23:13:03.4454 INFO ---------------------------------------------------------------------------------------------------------
+2020-05-28 23:13:03.4811 INFO --------------------------28-May-20 11:13:03 PM------------------------------------------------
+2020-05-28 23:13:03.5154 INFO ---STARTED FINDING ----USERAUTHINFO----------
+2020-05-28 23:13:13.8719 INFO ---------------------------------------------------------------------------------------------------------
+2020-05-28 23:13:13.8947 INFO --------------------------28-May-20 11:13:13 PM------------------------------------------------
+2020-05-28 23:13:13.9192 INFO ---STARTED FINDING ----USERAUTHINFO----------

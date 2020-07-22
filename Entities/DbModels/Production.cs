@@ -7,7 +7,8 @@ namespace Entities.DbModels
     public  class Production : BaseEntity
     {
         public string StaffId { get; set; }
-        public string ItemId { get; set; }
+        public string ItemId {  get; set; }
+        public string ItemStatusId { get; set; }
         public string InvoiceId { get; set; }
         public string ItemCategoryId { get; set; }
         public long Quantity { get; set; }
@@ -32,6 +33,14 @@ namespace Entities.DbModels
 
         [ForeignKey("EquipmentId")]
         public virtual Equipment Equipment { get; set; }
+
+
+        [ForeignKey("InvoiceId")]
+        public virtual Invoice Invoice { get; set; }
+
+
+        [ForeignKey("ItemStatusId")]
+        public virtual ItemStatus ItemStatus { get; set; }
 
     }
 }

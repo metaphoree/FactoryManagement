@@ -10,10 +10,13 @@ namespace Entities.ViewModels.Production
         public string FactoryId { get; set; }
 
         public string InvoiceTypeId { get; set; }
+        public string InvoiceId { get; set; }
         public string ExecutorId { get; set; }
         public string StaffId { get; set; }
         public string StaffName { get; set; }
         public string ItemId { get; set; }
+        public string ItemStatusName { get; set; }
+   //     public string ItemStatusId { get; set; }
         public string ItemName { get; set; }
         public string ItemCategoryId { get; set; }
         public string ItemCategoryName { get; set; }

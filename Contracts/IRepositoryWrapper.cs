@@ -43,6 +43,7 @@ namespace Contracts
         ITransactionTypeRepository TransactionType { get; }
         IUserAuthInfoRepository UserAuthInfo { get; }
         IUserRoleRepository UserRole { get; }
+        IApiResourceMappingRepository ApiResourceMapping { get; }
         #endregion
 
         void Save();

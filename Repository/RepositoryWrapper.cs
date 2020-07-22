@@ -46,6 +46,7 @@ namespace Repository
         ITransactionTypeRepository _TransactionType;
         IUserAuthInfoRepository _UserAuthInfo;
         IUserRoleRepository _UserRole;
+        IApiResourceMappingRepository _ApiResourceMappingRepository;
         IUtilService _util;
         #endregion
         public RepositoryWrapper(
@@ -83,7 +84,8 @@ namespace Repository
          ITransactionTypeRepository TransactionType,
          IUserAuthInfoRepository UserAuthInfo,
          IUserRoleRepository UserRole,
-         IUtilService util)
+         IUtilService util,
+         IApiResourceMappingRepository ApiResourceMappingRepository)
         {
             this.dbContext = dbContext;
             this._Address = Address;
@@ -119,9 +121,21 @@ namespace Repository
             this._UserAuthInfo = UserAuthInfo;
             this._UserRole = UserRole;
             this._util = util;
+            this._ApiResourceMappingRepository = ApiResourceMappingRepository;
         }
 
-
+        public IApiResourceMappingRepository ApiResourceMapping
+        {
+            get
+            {
+                if (_ApiResourceMappingRepository == null)
+                {
+                    //return new AddressRepository(dbContext,_util);
+                    _ApiResourceMappingRepository = new ApiResourceMappingRepository(dbContext, _util);
+                }
+                return _ApiResourceMappingRepository;
+            }
+        }
         public IAddressRepository Address
         {
             get

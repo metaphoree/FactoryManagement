@@ -6,6 +6,7 @@ using Entities.ViewModels.InvoiceType;
 using Entities.ViewModels.Item;
 using Entities.ViewModels.ItemCategoryView;
 using Entities.ViewModels.ItemStatus;
+using Entities.ViewModels.Role;
 using Entities.ViewModels.Staff;
 using Entities.ViewModels.Supplier;
 using System;
@@ -27,9 +28,9 @@ namespace Entities.ViewModels
         public List<IncomeTypeVM> IncomeTypeVMs { get; set; }
 
         public List<InvoiceTypeVM> InvoiceTypeVMs { get; set; }
-
-
         public List<EquipmentVM> EquipmentVMs { get; set; }
+
+        public List<RoleVM> RoleVMs { get; set; }
 
     }
 }

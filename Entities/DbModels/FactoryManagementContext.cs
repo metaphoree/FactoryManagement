@@ -48,7 +48,9 @@ namespace Entities.DbModels
         public virtual DbSet<TblTransaction> Transaction { get; set; }
         public virtual DbSet<TransactionType> TransactionType { get; set; }
         public virtual DbSet<UserAuthInfo> UserAuthInfo { get; set; }
-        public virtual DbSet<UserRole> UserRole { get; set; } 
+        public virtual DbSet<UserRole> UserRole { get; set; }
+
+        public virtual DbSet<ApiResourceMapping> ApiResourceMapping { get; set; }
         #endregion
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -100,7 +102,8 @@ namespace Entities.DbModels
             modelBuilder.ApplyConfiguration(new TblTransactionConfiguration());
             modelBuilder.ApplyConfiguration(new TransactionTypeConfiguration());
             modelBuilder.ApplyConfiguration(new UserAuthInfoConfiguration());
-            modelBuilder.ApplyConfiguration(new UserRoleConfiguration()); 
+            modelBuilder.ApplyConfiguration(new UserRoleConfiguration());
+            modelBuilder.ApplyConfiguration(new ApiResourceMappingConfiguration());
             #endregion
             OnModelCreatingPartial(modelBuilder);
         }

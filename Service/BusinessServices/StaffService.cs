@@ -34,6 +34,36 @@ namespace Service.BusinessServices
             var itemToAdd = _utilService.GetMapper().Map<StaffVM, Staff>(ViewModel);
             itemToAdd = _repositoryWrapper.Staff.Create(itemToAdd);
             Task<int> t1 = _repositoryWrapper.Staff.SaveChangesAsync();
+
+
+            if (ViewModel.IsManager)
+            {
+
+                UserAuthInfo infoToAdd = new UserAuthInfo()
+                {
+                    FactoryId = ViewModel.FactoryId,
+                    Password = ViewModel.Password,
+                    UserId = itemToAdd.Id,
+                    UserName = ViewModel.UserName,
+                };
+                infoToAdd = _repositoryWrapper.UserAuthInfo.Create(infoToAdd);
+
+                UserRole userRoleToAdd = new UserRole()
+                {
+                    FactoryId = ViewModel.FactoryId,
+                    RoleId = ViewModel.RoleId,
+                    UserId = infoToAdd.Id
+                };
+                userRoleToAdd = _repositoryWrapper.UserRole.Create(userRoleToAdd);
+                Task<int> t2 = _repositoryWrapper.UserAuthInfo.SaveChangesAsync();
+                Task<int> t3 = _repositoryWrapper.UserRole.SaveChangesAsync();
+                await Task.WhenAll(t2, t3);
+            }
+
+
+
+
+
             await Task.WhenAll(t1);
             this._utilService.Log("Successful In Adding Data");
 
@@ -47,6 +77,52 @@ namespace Service.BusinessServices
             WrapperStaffListVM data = await GetListPaged(dataParam, true);
             return data;
         }
+        public async Task<WrapperStaffListVM> AddToIT_Admin(StaffVM ViewModel)
+        {
+            //var itemToAdd = _utilService.GetMapper().Map<StaffVM, Staff>(ViewModel);
+            //itemToAdd = _repositoryWrapper.Staff.Create(itemToAdd);
+            //Task<int> t1 = _repositoryWrapper.Staff.SaveChangesAsync();
+
+
+            //if (ViewModel.IsManager)
+            //{
+
+                UserAuthInfo infoToAdd = new UserAuthInfo()
+                {
+                    FactoryId = ViewModel.FactoryId,
+                    Password = ViewModel.Password,
+                    UserId = ViewModel.Id,
+                    UserName = ViewModel.UserName,
+                };
+                infoToAdd = _repositoryWrapper.UserAuthInfo.Create(infoToAdd);
+
+                UserRole userRoleToAdd = new UserRole()
+                {
+                    FactoryId = ViewModel.FactoryId,
+                    RoleId = ViewModel.RoleId,
+                    UserId = infoToAdd.Id
+                };
+                userRoleToAdd = _repositoryWrapper.UserRole.Create(userRoleToAdd);
+                Task<int> t2 = _repositoryWrapper.UserAuthInfo.SaveChangesAsync();
+                Task<int> t3 = _repositoryWrapper.UserRole.SaveChangesAsync();
+                await Task.WhenAll(t2, t3);
+           // }
+            //await Task.WhenAll(t1);
+            this._utilService.Log("Successful In Adding Data");
+
+            var dataParam = new GetDataListVM()
+            {
+                FactoryId = ViewModel.FactoryId,
+                PageNumber = 1,
+                PageSize = 10,
+                TotalRows = 0
+            };
+            WrapperStaffListVM data = await GetListPaged(dataParam, true);
+            return data;
+        }
+
+
+
         public async Task<WrapperStaffListVM> Update(string id, StaffVM ViewModel)
         {
             if (id != ViewModel.Id)
@@ -84,6 +160,35 @@ namespace Service.BusinessServices
             List<StaffVM> outputList = new List<StaffVM>();
 
             outputList = _utilService.GetMapper().Map<List<Staff>, List<StaffVM>>(List);
+
+
+
+            List<UserRole> userRoleListT = await
+                _repositoryWrapper
+                .UserRole
+                .FindAll()
+                .Where(x => x.FactoryId == dataListVM.FactoryId)
+                .Include(x => x.Role)
+                .Include(x => x.UserAuthInfo)
+                .ToListAsync();
+            for (int i = 0; i < userRoleListT.Count(); i++)
+            {
+                StaffVM staff = outputList.Where(x => x.Id == userRoleListT.ElementAt(i).UserAuthInfo.UserId).FirstOrDefault();
+                if (staff != null)
+                {
+                    staff.Role = userRoleListT.ElementAt(i).Role.Name;
+                    staff.UserName = userRoleListT.ElementAt(i).UserAuthInfo.UserName;
+                }
+            }
+
+
+
+
+
+
+
+
+
 
             if (!string.IsNullOrEmpty(dataListVM.GlobalFilter) && !string.IsNullOrWhiteSpace(dataListVM.GlobalFilter))
             {
@@ -240,9 +345,6 @@ namespace Service.BusinessServices
         }
         #endregion
 
-
-
-
         #region History
         public StaffHistory GetStaffHistoryOverview(WrapperStaffHistory list)
         {
@@ -252,8 +354,8 @@ namespace Service.BusinessServices
                 StaffHistory temp = list.ListOfData.ElementAt(i);
                 if (temp.Type == "InvoiceItem")
                 {
-                   // history.PaidAmount += temp.PaidAmount;
-                   // history.PayableAmount += temp.PayableAmount;
+                    // history.PaidAmount += temp.PaidAmount;
+                    // history.PayableAmount += temp.PayableAmount;
                 }
                 else if (temp.Type == "ProductionItem")
                 {
@@ -299,10 +401,10 @@ namespace Service.BusinessServices
                 vm.ListOfData.ElementAt(i).PayableAmount = listOftask[i].ListOfData[len].PayableAmount;
             }
 
-           // await Task.WhenAll(listOftask);
+            // await Task.WhenAll(listOftask);
             //for (int i = 0; i < vm.ListOfData.Count; i++)
             //{
-               
+
             //}
 
             return vm;
@@ -353,13 +455,13 @@ namespace Service.BusinessServices
                                     //.Where(x => x.ExpenseType.Name == TypeExpense.StaffPayment.ToString())
                                     .ToListAsync();
 
-             Task<List<Payable>> listPayableT =
-                                    _repositoryWrapper
-                                    .Payable
-                                    .FindAll()
-                                    .Where(x => x.FactoryId == staffVM.FactoryId
-                                     && x.ClientId == staffVM.ClientId)
-                                    .ToListAsync();
+            Task<List<Payable>> listPayableT =
+                                   _repositoryWrapper
+                                   .Payable
+                                   .FindAll()
+                                   .Where(x => x.FactoryId == staffVM.FactoryId
+                                    && x.ClientId == staffVM.ClientId)
+                                   .ToListAsync();
 
             Task<List<Recievable>> listRecievableT =
                                     _repositoryWrapper
@@ -388,7 +490,7 @@ namespace Service.BusinessServices
             wrapperStaffHistory.ListOfData.AddRange(income);
             wrapperStaffHistory.ListOfData.AddRange(payable);
             wrapperStaffHistory.ListOfData.AddRange(recievable);
-  
+
             wrapperStaffHistory.ListOfData = wrapperStaffHistory.ListOfData.OrderByDescending(x => x.OccurranceDate).ToList();
             for (int i = 0; i < wrapperStaffHistory.ListOfData.Count(); i++)
             {
@@ -407,8 +509,9 @@ namespace Service.BusinessServices
 
 
             var staffHist = GetStaffHistoryOverview(returnWrapperStaffHistory);
-          //  returnWrapperStaffHistory.ListOfData = returnWrapperStaffHistory.ListOfData.OrderByDescending(x => x.OccurranceDate).ToList();
-            if (staffVM.PageSize != -1) {
+            //  returnWrapperStaffHistory.ListOfData = returnWrapperStaffHistory.ListOfData.OrderByDescending(x => x.OccurranceDate).ToList();
+            if (staffVM.PageSize != -1)
+            {
                 returnWrapperStaffHistory.ListOfData = returnWrapperStaffHistory.ListOfData
                   .Skip((staffVM.PageNumber - 1) * staffVM.PageSize)
                   .Take(staffVM.PageSize)

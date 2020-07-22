@@ -204,7 +204,8 @@ namespace Service.BusinessServices
                        .Include(x => x.Customer)
                        .Where(x =>
                        (x.InvoiceType.Name == TypeInvoice.ClientPayment.ToString()
-                       || x.InvoiceType.Name == TypeInvoice.Sales.ToString())
+                       || x.InvoiceType.Name == TypeInvoice.Sales.ToString()
+                       || x.InvoiceType.Name == TypeInvoice.SalesReturn.ToString())
                         && x.ClientId == vm.ClientId
                         && x.FactoryId == vm.FactoryId)
                        .OrderByDescending(x => x.DateOfOcurrance)

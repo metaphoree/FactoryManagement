@@ -40,5 +40,6 @@ namespace Contracts
         ITransactionTypeService TransactionTypeService { get; }
         IUserAuthInfoService UserAuthInfoService { get; }
         IUserRoleService UserRoleService { get; }
+        IApiResourceMappingService ApiResourceMappingService { get; }
     }
 }

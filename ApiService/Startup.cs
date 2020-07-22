@@ -37,16 +37,12 @@ namespace ApiService
             services.ConfigureDBContext(Configuration);
             services.ConfigureLoggerService();
             services.ConfigureAutoMapper();
-
             services.ConfigureRepository();
             services.ConfigureRepositoryWrapper();
             services.ConfigureService();
             services.ConfigureServiceWrapper();
      
-          
-
-
-
+        
             // Register the Swagger generator, defining 1 or more Swagger documents
             services.ConfigureSwagger();
             services.AddDistributedMemoryCache();
@@ -56,6 +52,7 @@ namespace ApiService
                 options.IdleTimeout = TimeSpan.FromSeconds(10);
                 options.Cookie.HttpOnly = true;
             });
+            services.ConfigureJwtAuth();
             services.AddControllers()
                // .AddJsonOptions(s => s.JsonSerializerOptions.PropertyNamingPolicy =);
                 .AddNewtonsoftJson(o => o.SerializerSettings.ContractResolver = new DefaultContractResolver())
@@ -97,7 +94,7 @@ namespace ApiService
             });
 
             app.UseRouting();
-
+            app.UseAuthentication();
             app.UseAuthorization();
             app.UseSession();
             app.UseEndpoints(endpoints =>

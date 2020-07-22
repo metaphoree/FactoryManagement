@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using ApiService.Utilities.Auth;
 using CommonUtils;
 using Contracts;
 using Entities.DbModels;
@@ -24,6 +25,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace ApiService.Controllers
 {
+    [FactoryAuthorize]
     [Route("api/business")]
     [ApiController]
     public class BusinessOpController : ControllerBase
@@ -58,8 +60,6 @@ namespace ApiService.Controllers
         {
             return await _businessService.PurchaseServiceWrapper.GetPurchaseInitialData(getDataVM);
         }
-
-
         [HttpPost]
         [Route("purchase/add")]
         public async Task<WrapperPurchaseListVM> AddPurchase([FromBody]PurchaseVM purchase)
@@ -72,6 +72,12 @@ namespace ApiService.Controllers
         public async Task<WrapperPurchaseListVM> GetAllPurchase([FromBody]GetDataListVM purchase)
         {
            return await _serviceWrapper.PurchaseService.GetAllPurchaseAsync(purchase);
+        }
+        [HttpPost]
+        [Route("purchase/delete")]
+        public async Task<WrapperPurchaseListVM> DeletePurchase([FromBody]PurchaseVM purchase)
+        {
+            return await _serviceWrapper.PurchaseService.DeletePurchaseAsync(purchase);
         }
         #endregion
 
@@ -96,7 +102,12 @@ namespace ApiService.Controllers
         {
             return await _serviceWrapper.SalesService.GetAllSalesAsync(purchase);
         }
-
+        [HttpPost]
+        [Route("sales/delete")]
+        public async Task<WrapperSalesListVM> DeleteSales([FromBody]SalesVM sales)
+        {
+            return await _serviceWrapper.SalesService.DeleteSalesAsync(sales);
+        }
         #endregion
 
         #region Payment
@@ -131,7 +142,7 @@ namespace ApiService.Controllers
 
         [HttpPost]
         [Route("pay/init_data")]
-        public async Task<InitialLoadDataVM> StaffInitData([FromBody]GetDataListVM getDataVM)
+        public async Task<InitialLoadDataVM> GetPaymentInitData([FromBody]GetDataListVM getDataVM)
         {
             return await _businessService.PurchaseServiceWrapper.GetPaymentInitialData(getDataVM);
         }
@@ -176,16 +187,15 @@ namespace ApiService.Controllers
         #region Customer
         [HttpPost]
         [Route("supplier/history")]
-        public async Task<WrapperSupplierHistory> SupplierHistory([FromBody]GetDataListHistory vm)
+        public async Task<WrapperSupplierHistory> GetSupplierHistory([FromBody]GetDataListHistory vm)
         {
             return await _serviceWrapper.SupplierService.GetSupplierHistory(vm);
         }
         #endregion
-
         #region Staff
         [HttpPost]
         [Route("staff/history")]
-        public async Task<WrapperStaffHistory> StaffHistory([FromBody]GetDataListHistory vm)
+        public async Task<WrapperStaffHistory> GetStaffHistory([FromBody]GetDataListHistory vm)
         {
             return await _serviceWrapper.StaffService.GetStaffHistory(vm);
         }
@@ -193,7 +203,7 @@ namespace ApiService.Controllers
         #region Supplier
         [HttpPost]
         [Route("customer/history")]
-        public async Task<WrapperCustomerHistory> CustomerHistory([FromBody]GetDataListHistory vm)
+        public async Task<WrapperCustomerHistory> GetCustomerHistory([FromBody]GetDataListHistory vm)
         {
             return await _serviceWrapper.CustomerService.GetCustomerHistory(vm);
         }
@@ -299,11 +309,29 @@ namespace ApiService.Controllers
         #region Change Item Status
         [HttpPost]
         [Route("item/status/change")]
-        public async Task<WrapperStockListVM> AddSalesReturn([FromBody]StockVM sales)
+        public async Task<WrapperStockListVM> ChangeItemStatusInStock([FromBody]StockVM sales)
         {
             return await _serviceWrapper.StockService.ChangeItemStatus(sales);
         }
         #endregion
+
+
+
+        [HttpPost]
+        [Route("staff/getInitData")]
+        public async Task<ActionResult<InitialLoadDataVM>> GetStaffInitData([FromBody]GetDataListVM getDataVM)
+        {
+          return   await _businessService.PurchaseServiceWrapper.GetStaffInitialData(getDataVM);
+        }
+
+
+
+
+
+
+
+
+
 
     }
 }
